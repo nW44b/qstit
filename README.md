@@ -8,5 +8,7 @@ Free software (General Public Licence) developed by [Nova Cinema](http://www.nov
 If you find this project useful, don’t hesitate to contact us and help or support in any way you can (financially, technically...).
 
 *Contact: subtitles (at) nova-cinema.org*
+*Website: [French](http://www.nova-cinema.org/spip.php?rubrique1662) / [English](http://www.nova-cinema.org/spip.php?rubrique1664) *
+
 
  <img src="http://www.nova-cinema.org/IMG/png/qstit2.png" width="800" alt="screenshot"> 
