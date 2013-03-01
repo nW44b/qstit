@@ -1,0 +1,190 @@
+<!--
+  ═══════════════════════════════════════════════════════════════════════════
+    This file is part of QSTit.
+    Feedback, comments and questions are welcome:
+    subtitles@nova-cinema.org
+
+    QSTit is a free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+     If you do, we'd like to hear about it.
+
+    QSTit is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with QSTit. If not, see <http://www.gnu.org/licenses/>
+  ═══════════════════════════════════════════════════════════════════════════
+-->
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+</head>
+<style type="text/css">
+	body	{font-family:trebuchet ms;font-size:14px;background-color:#151515;color:#ffffff;max-width:800px;}
+	table	{margin-left:0px;margin-top:9px;margin-bottom:9px;border:0px;border-collapse:collapse;}
+	tr.c0	{background-color:#151515;}
+	tr.c1	{background-color:#252525;}
+	tr.c2	{background-color:#353535;}
+	td	    {padding-top:0px;padding-bottom:0px;padding-left:3px;padding-right:9px;border:1px;}
+        a	{color:yellow;}
+        blockquote	{color:black;background-color:white;padding:3px;}
+</style>
+<body>
+<p>To report a problem or give us some feedback: subtitles@nova-cinema.org</p>
+<p>
+<br/><u><span style="font-weight:bold;">Menu</span></u>
+<table>
+<tr class="c1"><td><img src="../Imag/QSTit_sett.png" height=16> Settings</td><td>Show 'Settings' window</td><td>[Ctrl+S]</td></tr>
+<tr class="c2"><td><img src="../Imag/QSTit_file.png" height=16> Open</td><td>Open subtitle file<br/> (Supported formats: <a href="#txt">.txt</a>, <a href="#srt">.srt</a>)</td><td>[Ctrl+O]</td></tr>
+<tr class="c1"><td><img src="../Imag/QSTit_help_enab.png" height=16> Help</td><td>Show this window</td><td>[F1]</td></tr>
+<tr class="c2"><td><img src="../Imag/QSTit_exit.png" height=16> Quit</td><td>Quit the program</td><td>[Ctrl+Q]</td></tr>
+</table>
+</p>
+<p>
+<br/>
+<u><span style="font-weight:bold;">Subtitles control</span></u>
+<table>
+<tr class="c2"><td><img src="../Imag/QSTit_upup.png" height=16></td><td>Previous subtitle/empty line</td><td>[&uarr;] or [Numpad 8]</td></tr>
+<tr class="c1"><td><img src="../Imag/QSTit_down.png" height=16></td><td>Next subtitle/empty line<br/>  With .txt files, also works with:</td><td>[&darr;] or [Numpad 2]<br/>[Space bar] or [Numpad 0]</td></tr>
+<tr class="c0"><td>&nbsp;</td><td></td><td></td></tr>
+<tr class="c2"><td><img src="../Imag/QSTit_play.png" height=16></td><td>Timer: Start/Pause</td><td>[Space bar] or [Numpad 0]</td><td>(.srt files only)</td></tr>
+<tr class="c1"><td><img src="../Imag/QSTit_acce.png" height=16></td><td>Timer: Accelerate<br/>(Timer speed goes 0.01 second faster)</td><td>[+] or [P]</td><td>(.srt files only)</td></tr>
+<tr class="c2"><td><img src="../Imag/QSTit_dece.png" height=16></td><td>Timer: Decelerate<br/>(Timer speed goes 0.01 second slower)</td><td>[-] or [M]</td><td>(.srt files only)</td></tr>
+<tr class="c0"><td>&nbsp;</td><td></td><td></td></tr>
+<tr class="c1"><td><img src="../Imag/QSTit_jump.png" height=16></td><td>Jump forward on the timeline</td><td>[&rarr;] or [Numpad 6]</td><td>(.srt files only)</td></tr>
+<tr class="c1"><td></td><td colspan="3">(Between 0.1 and 1 second, jump steps can be set in the settings)</td></tr>
+<tr class="c2"><td><img src="../Imag/QSTit_jump_back.png" height=16></td><td>Jump backwards on the timeline</td><td>[&larr;] or [Numpad 4]</td><td>(.srt files only)</td></tr>
+<tr class="c2"><td></td><td colspan="3">(Between 0.1 and 1 second, steps can be set in the settings)</td></tr>
+</table>
+</p>
+<p>
+<br/><u><span style="font-weight:bold;">Display control</span></u>
+<table>
+<tr class="c2"><td style="valign:center;"><img src="../Imag/QSTit_roll_open.png"> / <img src="../Imag/QSTit_roll_clos.png"></td><td>Hide/Show screen<br/>(When on pause, resuming the timer lifts 'No show')</td><td>[N] or [Numpad .]</td></tr>
+<tr class="c1"><td></td><td>Subtitles position: Move up</td><td>[Page Up] or [Numpad 9]</td></tr>
+<tr class="c2"><td></td><td>Subtitles position: Move down</td><td>[Page Down] or [Numpad 3]</td></tr>
+<tr class="c1"><td></td><td>Subtitles position: Move left</td><td>[Home] or [Numpad 7]</td></tr>
+<tr class="c2"><td></td><td>Subtitles position: Move right</td><td>[End] or [Numpad 1]</td></tr>
+<tr class="c1"><td></td><td colspan="2">→ use [Shift] for faster movements</td></tr>
+</table>
+</p>
+<p>
+<br/><u><span style="font-weight:bold;">Grid</span></u>
+<table>
+<tr class="c2"><td><img src="../Imag/QSTit_info_enab.png" height=16> File Info</td><td>Show 'File info' window</td><td>[Ctrl+I]</td></tr>
+<tr class="c1"><td><img src="../Imag/QSTit_save_enab.png" height=16> Save as...</td><td>Save modified file as...</td><td></td></tr>
+<tr class="c2"><td><img src="../Imag/QSTit_edit_enab.png" height=16> Edit</td><td>Edit selected text/timecode in the grid</td><td>[Ctrl+E]</td></tr>
+<tr class="c1"><td><img src="../Imag/QSTit_undo_enab.png" height=16> Undo</td><td>Undo changes (in reverse chronology)</td><td>[Ctrl+Z]</td></tr>
+<tr class="c2"><td><img src="../Imag/QSTit_goto_enab.png" height=16> Go to...</td><td>Go to a chosen subtitle</td><td>[Ctrl+G]</td></tr>
+<tr class="c1"><td><img src="../Imag/QSTit_find_enab.png" height=16> Find...</td><td>Find text in the file</td><td>[Ctrl+F]</td></tr>
+<tr class="c2"><td><img src="../Imag/QSTit_clea.png" height=16> Clear</td><td>Clear screen and reset file at beginning</td><td>[Ctrl+R]</td></tr>
+<tr class="c1"><td><img src="../Imag/QSTit_link_done.png" height=16> Bind/Unbind</td><td colspan="2">Un(bind) menu bar and grid for custom positioning</td></tr>
+<tr class="c2"><td><img src="../Imag/QSTit_flag.png"> (Leftmost cell)</td><td>Flag current row<br/>(Flags are saved in the log file)</td><td>[!] or [Numpad /]</td></tr>
+</table>
+</p>
+<br/><br/>
+<u><span style="font-weight:bold;">Supported file formats</span></u>
+<p>
+The program can read simple text (.txt) and Subrip (.srt) files with up to four lines of subtitles.<br/>
+Both file types are easily editable in any text editor or word processor.<br/>
+Subrip files include timecodes, the subtitling can therefore be automated.</p>
+<p>Both formats can include the following HTML tags to change the style of the text in between them<br/>(the tags are not displayed on screen but appear in the grid):<br/>
+&lt;i&gt; <i>italic</i> &lt;/i&gt;<br/>
+&lt;b&gt; <b>bold</b> &lt;/b&gt;<br/>
+&lt;u&gt; <u>underline</u> &lt;/u&gt;<br/>
+<p>Everything written between opening ( &lt; ) and closing ( &gt; ) brackets will be considered <br/>meta-information and won't be displayed. <br/>An entire line between brackets will still appear in the grid with other lines of subtitles<br/>but won't appear on the screen. You can therefore use brackets to put comments and cues in your file.</p>
+</p>
+<p>
+<a name="txt">.txt files</a><br/>
+- One line in the file = one row in the grid = one subtitle.<br/>
+- One subtitle can be composed of several lines (up to four, usually two), they are separated by a backslash ( \ ).<br/>
+- Different subtitles can be composed of different numbers of lines.<br/>
+- Subtitles are only separated by a line break.<br/>
+- The program automatically creates "empty" lines between subtitles so that nothing is displayed<br/>
+between two subtitles when there are no dialogues. There is no need to have empty lines in the file (they would be considered as one subtitle and there would therefore be three consecutive "black lines" when browsing through the file).<br/>
+<br/>
+Structure:</p>
+<blockquote>
+Subtitle 1 Line 1\Subtitle 1 Line 2<br/>
+Subtitle 2 Line 1<br/>
+Subtitle 3 Line 1\Subtitle 3 Line 2<br/>
+...
+</blockquote>
+
+Example:<br/>
+<blockquote>
+&lt;i&gt;L'ENTREVUE&lt;/i&gt;\&lt;i&gt;HET SOLLICITATIEGESPREK&lt;/i&gt;<br/>
+J'ai rendez-vous avec M. Ullman.\Ik heb een afspraak met Mr. Ullman.<br/>
+Je suis Jack Torrance.\Mijn naam is Torrance.<br/>
+Première porte à gauche.\Eerste deur links.<br/>
+&lt;i&gt;M. Ullman?&lt;/i&gt;\&lt;i&gt;Mr. Ullman?&lt;/i&gt; <br/>
+Jack Torrance.<br/>
+Oh... Entrez donc.\Kom binnen, Jack.<br/>
+Ma secrétaire, Suzy.\M'n secretaresse, Susie.<br/>
+Du mal à nous trouver?\Lastige reis?<br/>
+...
+</blockquote></p>
+<p>
+<a name="srt">.srt files</a><br/>
+- The structure needs to be respected carefully otherwise the program won't be able to open the file correctly.<br/>
+- Subtitles are numbered in the file but the program recalculates them to avoid mistakes<br/>
+(so a given subtitle line could have a different number in the file and in the program).<br/>
+- One subtitle can be composed of up to four lines, separated only by a line break.<br/>
+- An empty line separates subtitles.<br/>
+- Nothing will be displayed between the end of one subtitle (Time OUT) and the beginning of the next (Time IN).<br/>
+- It is possible to browse through an .srt file as through a .txt file if you don't want to use the automation functionalities:<br/>
+Just leave the timer on pause and use the arrows to browse through the subtitles.<br/>
+<br/><br/>
+Structure:<br/>
+<blockquote>
+1<br/>
+Time IN --> Time OUT<br/>
+Subtitle 1 Line 1<br/>
+Subtitle 1 Line 2<br/>
+<br/>
+2<br/>
+Time IN --> Time OUT<br/>
+Subtitle 2 Line 1<br/>
+<br/>
+3<br/>
+Time IN --> Time OUT<br/>
+Subtitle 3 Line 1<br/>
+Subtitle 3 Line 2<br/>
+...
+</blockquote>
+Example:<br/>
+<blockquote>
+1<br/>
+00:01:10,680 --> 00:01:12,477<br/>
+Soon it's summer holidays!<br/>
+<br/>
+2<br/>
+00:01:12,880 --> 00:01:16,190<br/>
+You're going with your father to your summer house...<br/>
+<br/>
+3<br/>
+00:01:20,040 --> 00:01:24,033<br/>
+I want you to come with me!<br/>
+I'll be bored!<br/>
+<br/>
+4<br/>
+00:01:24,920 --> 00:01:28,595<br/>
+&lt;i&gt;Nevertheless you'll be by the&lt;/i&gt;<br/>
+&lt;i&gt;side of your beloved Mr. Togo!&lt;/i&gt;<br/>
+<br/>
+5<br/>
+00:01:29,000 --> 00:01:32,072<br/>
+That was mean!<br/>
+And you're supposed to be my friend!<br/>
+<br/>
+...
+</blockquote>
+</p>
+<p><b>Icons credit:</b> Axialis Team (with some modifications) - www.axialis.com/free/icons</p>
+</body>
+</html>

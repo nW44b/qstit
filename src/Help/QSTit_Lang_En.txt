@@ -1,0 +1,154 @@
+﻿[English]
+butExit             Exit
+butHelp             Help
+butFile             Open
+butSett             Settings
+butClea             Reset
+labClok             Current time
+butRoll             Hide/Show text
+labTime             Running Time
+butProjUpup         Previous line
+butProjDown         Next line
+butProjPlay         Play/Pause
+butProjDece         Decelerate
+butProjAcce         Accelerate
+butProjBack         Jump backward
+butProjJump         Jump foreward
+diaExit             Exit
+radExitSavN         Don't save settings
+radExitSavP         Save settings as global settings
+radExitSavF         Save settings as settings for this file
+butExitSave         Exit/Save
+butExitCanc         Cancel
+fRowsInit           Line
+diaSett             Settings
+tabSett0            Texts
+tabSett1            General
+tabSett2            Shed
+diaTextColo         Texts color
+diaTextFont         Texts Font
+diaColoOutl         Outline color
+diaRowsBack         Rows background
+butEditSave         Confirm
+butEditCanc         Cancel
+GridTextModiTitl    Text modified
+GridTextModiMess    You changed some text(s).|Do you want to save them ?
+texRowsNumb         Rows
+texRowsLoca         Location
+butLocaUpup         Up
+butLocaLeft         Left
+butLocaCent         Show center
+butLocaRigh         Right
+butLocaDown         Down
+texRowsCent         Center
+texRowsDime         Dimension
+butDimeDown         - Vertical
+butDimeLeft         - Horizontal
+butDimeCent         Show center
+butDimeRigh         + Horizontal
+butDimeUpup         + Vertical
+texRowsSpac         Spacing
+texRowsRota         Rotation
+texRowsBack         Background
+butTextBack         Color
+labTextFont         Texts
+butTextColo         Color
+butFont             Font
+labRowsOutl         Outline
+butRowsOutl         Color
+labTextAliH         Alignment Hor.
+radLeft             left
+radCenH             center
+radRigh             right
+labTextAliV         Alignment Vert.
+radTopy             top
+radCenV             center
+radBott             bottom
+labWindBack         Screen color
+radWindBacB         black
+radWindBacG         gray
+diaGridFont         Grid font
+labGridFont         Grid font
+labGridColo         Grid background
+radGridColo         dark
+labTaskShow         Show Taskbar
+radTaskShow         yes
+radTaskHide         no
+labWorkLang         Language
+radLangOthe         Other
+chkSecoText         Single text line displayed on row 2
+chkSecoItal         Second text line in italic
+labJumpBase         Jump value (1/10 sec.)
+labShedShow         Visible
+labShedFont         Font
+labShedFore         Fore color
+labShedBack         Back color
+labShedHeig         Height
+labShedSpac         Spacing
+labShedRota         Rotation
+labShedTit1         Row 1
+labShedTit2         Row 2
+labShedTit3         Row 3
+labShedTit4         Row 4
+FileProbSettTitl    Settings
+FileProbSettMess    Settings exist for that file.|Do you want to use them ?
+FileProbOpenTitl    Open a S-Title
+FileProbOpenMess    A S-Title is already loaded. Are you sure ?
+diaFile             Open a S-Title
+diaFileFolder       Folder
+diaFileName         File
+diaFileType         Type
+barFileReading      Reading...
+barFileTxt          TXT file
+FileProbWideTitl    File Read
+FileProbWideMess    LINE (%1) TOO WIDE !|Continue anyway...
+FileProbWarnTitl    Open
+FileProbWarnMess    Cannot read file:
+barFileSrt          SRT file
+FileProbCritTitl    Reading...
+FileProbCritMess    Problem encountered, see [Infos]
+FileConfExisTitl    Settings
+FileConfExisMess    Settings exist for that file.|Do you want to use them ?
+diaInfo             Infos
+widInfoName         File name
+widInfoPath         Folder
+widInfoModi         Last modified
+widInfoEnco         Codex
+widInfoCols         Columns
+widInfoRows         Lines
+GridLastItem        End
+widInfoLine         Widest lines (sorted decreasing)
+widInfoProb         Problems (in source read)
+diaHelp             Help
+ResetConfirmTitl    Reset
+ResetConfirmMess    Confirm
+diaGridTitlLine     Lines
+diaGridTitlWidt     Widest
+diaGridTitlEnd      End
+butGridEdit         Edit (a text)
+butEditSave         Save
+butEditCanc         Cancel
+butGridInfo         Infos (about the file)
+butGridSave         Save (change(s) made with Edit)
+butGridUndo         Undo (change(s) made with Edit)
+butGridGoto         Goto (a line)
+butGridGotoSave     Goto
+butGridGotoCanc     Cancel
+butGridFind         Find (a text)
+labGridFind         F3 -> next
+butGridFindSave     Find
+butGridFindCanc     Cancel
+butGridFindEnd      End of search.
+butGridClea         Reset
+butGridColo         Background dark/clear
+msgCleaGridTitl     Reset grid
+msgCleaGridMess     Confirm
+msgCleaAllTitl      Reset all
+msgCleaAllMess      Confirm
+msgFontWideTitl     Font size
+msgFontWideMess     The font will give rows too wide
+msgGridEditMess     No text to edit
+butOkOk             Ok
+butYeYe             Yes
+butNoNo             No
+butLink             Bind/Unbind Menu to Grid

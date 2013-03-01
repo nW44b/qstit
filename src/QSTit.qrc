@@ -1,0 +1,93 @@
+<!--
+    ═══════════════════════════════════════════════════════════════════════════
+    This file is part of QSTit.
+    Feedback, comments and questions are welcome:
+    subtitles@nova-cinema.org
+
+    QSTit is a free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version. If you do, we'd like to hear about it.
+
+    QSTit is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with QSTit. If not, see <http://www.gnu.org/licenses/>
+    ═══════════════════════════════════════════════════════════════════════════
+-->
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>Help/QSTit_Lang_En.txt</file>
+    <file>Help/QSTit_Help_En.htm</file>
+    <file>Imag/QSTit_acce.png</file>
+    <file>Imag/QSTit_base.png</file>
+    <file>Imag/QSTit_butN.png</file>
+    <file>Imag/QSTit_butY.png</file>
+    <file>Imag/QSTit_canc.png</file>
+    <file>Imag/QSTit_cent.png</file>
+    <file>Imag/QSTit_clea.png</file>
+    <file>Imag/QSTit_clos.png</file>
+    <file>Imag/QSTit_clos_over.png</file>
+    <file>Imag/QSTit_colo.png</file>
+    <file>Imag/QSTit_curH.png</file>
+    <file>Imag/QSTit_curV.png</file>
+    <file>Imag/QSTit_dece.png</file>
+    <file>Imag/QSTit_down.png</file>
+    <file>Imag/QSTit_edit.png</file>
+    <file>Imag/QSTit_edit_disa.png</file>
+    <file>Imag/QSTit_edit_enab.png</file>
+    <file>Imag/QSTit_exit.png</file>
+    <file>Imag/QSTit_file.png</file>
+    <file>Imag/QSTit_find_disa.png</file>
+    <file>Imag/QSTit_find_enab.png</file>
+    <file>Imag/QSTit_flag.png</file>
+    <file>Imag/QSTit_font.png</file>
+    <file>Imag/QSTit_goto_disa.png</file>
+    <file>Imag/QSTit_goto_enab.png</file>
+    <file>Imag/QSTit_help_disa.png</file>
+    <file>Imag/QSTit_help_enab.png</file>
+    <file>Imag/QSTit_info_disa.png</file>
+    <file>Imag/QSTit_info_enab.png</file>
+    <file>Imag/QSTit_info_goto.png</file>
+    <file>Imag/QSTit_jump.png</file>
+    <file>Imag/QSTit_jump_back.png</file>
+    <file>Imag/QSTit_link_done.png</file>
+    <file>Imag/QSTit_link_none.png</file>
+    <file>Imag/QSTit_logo.png</file>
+    <file>Imag/QSTit_okok.png</file>
+    <file>Imag/QSTit_paus.png</file>
+    <file>Imag/QSTit_play.png</file>
+    <file>Imag/QSTit_roll_clos.png</file>
+    <file>Imag/QSTit_roll_open.png</file>
+    <file>Imag/QSTit_save_disa.png</file>
+    <file>Imag/QSTit_save_enab.png</file>
+    <file>Imag/QSTit_sett.png</file>
+    <file>Imag/QSTit_size.png</file>
+    <file>Imag/QSTit_size_vert.png</file>
+    <file>Imag/QSTit_undo_disa.png</file>
+    <file>Imag/QSTit_undo_enab.png</file>
+    <file>Imag/QSTit_upup.png</file>
+    <file>Imag/QSTit_xcen.png</file>
+    <file>Imag/QSTit_xdow.png</file>
+    <file>Imag/QSTit_xlef.png</file>
+    <file>Imag/QSTit_xrig.png</file>
+    <file>Imag/QSTit_xupx.png</file>
+    <file>Imag/QSTit_grid_clea.png</file>
+    <file>Imag/QSTit_grid_dark.png</file>
+    <file>Imag/QSTit_scro_down.png</file>
+    <file>Imag/QSTit_scro_left.png</file>
+    <file>Imag/QSTit_scro_righ.png</file>
+    <file>Imag/QSTit_scro_upup.png</file>
+</qresource>
+</RCC>
+<!--
+    ════════════════════════════════════════════════════════════════════════════════
+    Code analysis/programming:  Georges Piedboeuf-Boen  georges.pi.bo@gmail.com
+    Functional analysis:        Laurent Tenzer          lt@nova-cinema.org
+    Project origin:             Cinéma Nova             http://www.nova-cinema.org
+    Made in Brussels            Belgium                 http://www.brussels.be
+    ════════════════════════════════════════════════════════════════════════════════
+-->
