@@ -32,15 +32,14 @@
 #include <QModelIndex>
 #include <QVBoxLayout>
 #include <QPushButton>
-#include <QSlider>
 #include <QKeyEvent>
 #include <QEvent>
-#include <QColorDialog>
 
 #include "QSTit_fadShow.h"
 
 class diaGridC;
 class butBubbC;
+class butSpin;
 class butToolC;
 class butToolX;
 class menuSkin;
@@ -61,12 +60,48 @@ class winMain : public QWidget
     public:
         winMain();
     private:
+        struct objMinMax
+        {
+            int     mini;
+            int     maxi;
+            int     val0;
+            int     valu;
+        } objRowsNumb,objRowsWidt,objRowsHeig,objRowsSpac,objRowsRota,objJumpBase;
+        struct objScreens
+        {
+            int     widt;
+            int     heig;
+            int     midW;
+            int     midH;
+            int     basW;
+            int     basH;
+        } objWind;
+        struct objRows
+        {
+            QString text;
+            bool    show;
+            QFont   font;
+            QColor  colF;
+            QColor  colB;
+            int     x;
+            int     y;
+            int     widt;
+            int     heig;
+            int     spac;
+            int     rota;
+            int     savH;
+            int     savS;
+            int     hori;
+            int     vert;
+        } objRow0,objRow1,objRow2,objRow3,objRow4;
+
         QString     gSystFontFami;
         bool        gExitDial;
         bool        gFileDial;
         bool        gFontDial;
         bool        gColoDial;
         bool        gBackDial;
+        bool        gWindDial;
         bool        gOutlDial;
         bool        gGridDial;
         QWidget     *winWind;
@@ -97,14 +132,12 @@ class winMain : public QWidget
         QString     gColo;
         int         gShed;
 
-        int         gWindWidt;
-        int         gWindHeig;
-
         int         gMenuWidt;
         int         gMenuHeig;
         int         gMenuLefx;
         int         gMenuTopy;
 
+        QString     gWindBack;
         QString     gFileErro;
 
         QString     gExplDisa;
@@ -115,10 +148,6 @@ class winMain : public QWidget
         QString     gExplStyl;
         QString     gSpinStyl;
 
-        int         gRowsHone;
-        int         gRowsWbas;
-        int         gRowsSpac;
-        int         gRowsNumb;
         int         gRowsMaxi;
         QFont       gRowsFont;
         QString     gRowsBack;
@@ -185,6 +214,8 @@ class winMain : public QWidget
         void    fConfConf(QString,QString);
         void    fConfWrit();
         QString fConfWritLine(QString,QString);
+
+        void    fApplInit();
 
         void    fWindCrea();
         void    fWindStyle();
@@ -299,7 +330,42 @@ class winMain : public QWidget
         void    fRowsNumb();
         void    fRowsSeco(int);
         void    fRowsItal(int);
-        void    fRowsTextAlig();
+        void    fRowsHoriLeft();
+        void    fRowsHoriLef0();
+        void    fRowsHoriLef1();
+        void    fRowsHoriLef2();
+        void    fRowsHoriLef3();
+        void    fRowsHoriLef4();
+        void    fRowsHoriCent();
+        void    fRowsHoriCen0();
+        void    fRowsHoriCen1();
+        void    fRowsHoriCen2();
+        void    fRowsHoriCen3();
+        void    fRowsHoriCen4();
+        void    fRowsHoriRigh();
+        void    fRowsHoriRig0();
+        void    fRowsHoriRig1();
+        void    fRowsHoriRig2();
+        void    fRowsHoriRig3();
+        void    fRowsHoriRig4();
+        void    fRowsVertBott();
+        void    fRowsVertBot0();
+        void    fRowsVertBot1();
+        void    fRowsVertBot2();
+        void    fRowsVertBot3();
+        void    fRowsVertBot4();
+        void    fRowsVertCent();
+        void    fRowsVertCen0();
+        void    fRowsVertCen1();
+        void    fRowsVertCen2();
+        void    fRowsVertCen3();
+        void    fRowsVertCen4();
+        void    fRowsVertTopy();
+        void    fRowsVertTop0();
+        void    fRowsVertTop1();
+        void    fRowsVertTop2();
+        void    fRowsVertTop3();
+        void    fRowsVertTop4();
         void    fRowsColo();
         void    fRowsCol1();
         void    fRowsCol2();
@@ -312,6 +378,9 @@ class winMain : public QWidget
         void    fRowsBac2();
         void    fRowsBac3();
         void    fRowsBac4();
+        void    fWindBackDial();
+        void    fWindBackClos();
+        void    fWindBackGet(QColor);
         void    fRowsBackDial();
         void    fBackDialClos();
         void    fRowsOutlDial();
@@ -370,82 +439,62 @@ class winMain : public QWidget
         void    fAutoBack();
         void    fJumpBase(int);
     private:
-        QLabel      *labLogo;
-        diaSkin     *diaHelp;
-        QTextEdit   *texHelp;
-        diaColoSkin *diaColo;
-        diaFontSkin *diaFont;
-        diaFileSkin *diaFile;
+        QLabel          *labLogo;
+        diaSkin         *diaHelp;
+        QTextEdit       *texHelp;
+        diaColoSkin     *diaColo;
+        diaFontSkin     *diaFont;
+        diaFileSkin     *diaFile;
 
-        QTimer      *tmrClok;
-        QTimer      *tmrAuto;
-        QTime       timAuto;
-        QTime       timStar;
-        QTime       timStop;
+        QTimer          *tmrClok;
+        QTimer          *tmrAuto;
+        QTime           timAuto;
+        QTime           timStar;
+        QTime           timStop;
 
-        struct objRows
-        {
-            QString text;
-            bool    show;
-            QFont   font;
-            QColor  colF;
-            QColor  colB;
-            int     x;
-            int     y;
-            int     widt;
-            int     heig;
-            int     spac;
-            int     rota;
-            int     savH;
-            int     savS;
-        } objRow0,objRow1,objRow2,objRow3,objRow4;
-        rowSkin     *fraRows;
-        QLabel      *texRow1;
-        QLabel      *texRow2;
-        QLabel      *texRow3;
-        QLabel      *texRow4;
-        QToolButton *butRowsCent;
+        rowSkin         *fraRows;
+        QLabel          *texRow1;
+        QLabel          *texRow2;
+        QLabel          *texRow3;
+        QLabel          *texRow4;
+        QToolButton     *butRowsCent;
 
-        grpSkin     *grpTextAliH;
-        grpSkin     *grpTextAliV;
+        grpSkin         *grpTextAliH;
+        grpSkin         *grpTextAliV;
 
-        diaGridSkin *diaGrid;
-        diaGridC    *griText;
-        butBubbC    *bubButt;
+        diaGridSkin     *diaGrid;
+        diaGridC        *griText;
+        butBubbC        *bubButt;
 
-        butToolC    *butGridCade;
-        butToolC    *butGridInfo;
-        butToolC    *butGridSave;
-        butToolC    *butGridUndo;
-        butToolC    *butGridGoto;
-        butToolC    *butGridFind;
-        butToolC    *butGridEdit;
-        butToolC    *butGridClea;
-        butToolC    *butGridLink;
-        butToolC    *butRoll;
+        butToolC        *butGridCade;
+        butToolC        *butGridInfo;
+        butToolC        *butGridSave;
+        butToolC        *butGridUndo;
+        butToolC        *butGridGoto;
+        butToolC        *butGridFind;
+        butToolC        *butGridEdit;
+        butToolC        *butGridClea;
+        butToolC        *butGridLink;
+        butToolC        *butRoll;
 
-        QDialog     *diaEdit;
+        QDialog         *diaEdit;
 
-        butToolC    *butExit;
-        butToolC    *butHelp;
-        butToolC    *butFile;
-        butToolC    *butSett;
+        butToolC        *butExit;
+        butToolC        *butHelp;
+        butToolC        *butFile;
+        butToolC        *butSett;
 
-        menuSkin    *fraMenu;
-        QLabel      *labClok;
-        QLabel      *labTime;
-        QLabel      *texPuls,*labPuls;
-        QLabel      *texJump,*labJump;
+        menuSkin        *fraMenu;
+        QLabel          *labClok;
+        QLabel          *labTime;
+        QLabel          *texPuls,*labPuls;
+        QLabel          *texJump,*labJump;
 
         diaSkin         *diaSett;
         QTabWidget      *tabSett;
 
         QWidget         *tabRows;
         QLabel          *texRowsNumb;
-        QRadioButton    *radRow1;
-        QRadioButton    *radRow2;
-        QRadioButton    *radRow3;
-        QRadioButton    *radRow4;
         QLabel          *texRowsLoca;
         butToolX        *butLocaUpup;
         butToolX        *butLocaCent;
@@ -454,44 +503,36 @@ class winMain : public QWidget
         butToolX        *butLocaDown;
         QLabel          *texRowsDime;
         QLabel          *labRowsDimH;
-        QSpinBox        *spiRowsDimH;
+        butSpin         *spiRowsDimH;
         QLabel          *labRowsDimV;
-        QSpinBox        *spiRowsDimV;
-
-        butToolX        *butDimeUpup;
-        butToolX        *butDimeLeft;
-        butToolX        *butDimeRigh;
-        butToolX        *butDimeDown;
+        butSpin         *spiRowsDimV;
         QLabel          *texRowsSpac;
-        QSpinBox        *spiRowsSpac;
-        QLabel          *texRowsRota;
-        QSpinBox        *spiRowsRota;
+        butSpin         *spiRowsSpac;
         QLabel          *texRowsBack;
         QPushButton     *butTextBack;
         QLabel          *labWindBack;
-        QRadioButton    *radWindBacB;
-        QRadioButton    *radWindBacG;
+        QPushButton     *butWindBack;
         QLabel          *labSettLin1;
         QLabel          *labTextFont;
         QPushButton     *butTextColo;
         QPushButton     *butFont;
         QLabel          *labRowsOutl;
-        QSpinBox        *spiRowsOutl;
+        butSpin         *spiRowsOutl;
         QPushButton     *butRowsOutl;
+        QLabel          *texRowsRota;
+        butSpin         *spiRowsRota;
         QLabel          *texRowsHeim;
         QLabel          *texRowsHeiM;
         QLabel          *texRowsWidm;
         QLabel          *texRowsWidM;
         QLabel          *labTextAliH;
         QLabel          *labTextAliV;
-
-        QRadioButton    *radLeft;
-        QRadioButton    *radCenH;
-        QRadioButton    *radRigh;
-        QRadioButton    *radTopy;
-        QRadioButton    *radCenV;
-        QRadioButton    *radBott;
-
+        butToolX        *butHoriLeft;
+        butToolX        *butHoriCent;
+        butToolX        *butHoriRigh;
+        butToolX        *butVertBott;
+        butToolX        *butVertCent;
+        butToolX        *butVertTopy;
         QWidget         *tabGene;
         QLabel          *labWorkLang;
         QRadioButton    *radLangEngl;
@@ -533,6 +574,8 @@ class winMain : public QWidget
         QLabel          *labShedHeig;
         QLabel          *labShedSpac;
         QLabel          *labShedRota;
+        QLabel          *labShedHori;
+        QLabel          *labShedVert;
 
         QLabel          *labShedRow1;
         QLabel          *labShedTit1;
@@ -543,6 +586,12 @@ class winMain : public QWidget
         QSpinBox        *spiShedHei1;
         QSpinBox        *spiShedSpa1;
         QSpinBox        *spiShedRot1;
+        butToolX        *butShedHoL1;
+        butToolX        *butShedHoC1;
+        butToolX        *butShedHoR1;
+        butToolX        *butShedVeT1;
+        butToolX        *butShedVeC1;
+        butToolX        *butShedVeB1;
 
         QLabel          *labShedRow2;
         QLabel          *labShedTit2;
@@ -553,6 +602,12 @@ class winMain : public QWidget
         QSpinBox        *spiShedHei2;
         QSpinBox        *spiShedSpa2;
         QSpinBox        *spiShedRot2;
+        butToolX        *butShedHoL2;
+        butToolX        *butShedHoC2;
+        butToolX        *butShedHoR2;
+        butToolX        *butShedVeT2;
+        butToolX        *butShedVeC2;
+        butToolX        *butShedVeB2;
 
         QLabel          *labShedRow3;
         QLabel          *labShedTit3;
@@ -563,6 +618,12 @@ class winMain : public QWidget
         QSpinBox        *spiShedHei3;
         QSpinBox        *spiShedSpa3;
         QSpinBox        *spiShedRot3;
+        butToolX        *butShedHoL3;
+        butToolX        *butShedHoC3;
+        butToolX        *butShedHoR3;
+        butToolX        *butShedVeT3;
+        butToolX        *butShedVeC3;
+        butToolX        *butShedVeB3;
 
         QLabel          *labShedRow4;
         QLabel          *labShedTit4;
@@ -572,6 +633,27 @@ class winMain : public QWidget
         QPushButton     *butShedBac4;
         QSpinBox        *spiShedHei4;
         QSpinBox        *spiShedRot4;
+        butToolX        *butShedHoL4;
+        butToolX        *butShedHoC4;
+        butToolX        *butShedHoR4;
+        butToolX        *butShedVeT4;
+        butToolX        *butShedVeC4;
+        butToolX        *butShedVeB4;
+
+        QLabel          *labShedRow0;
+        QLabel          *labShedTit0;
+        QPushButton     *butShedFon0;
+        QPushButton     *butShedFor0;
+        QPushButton     *butShedBac0;
+        QSpinBox        *spiShedHei0;
+        QSpinBox        *spiShedSpa0;
+        QSpinBox        *spiShedRot0;
+        butToolX        *butShedHoL0;
+        butToolX        *butShedHoC0;
+        butToolX        *butShedHoR0;
+        butToolX        *butShedVeT0;
+        butToolX        *butShedVeC0;
+        butToolX        *butShedVeB0;
 
         QPushButton     *butEditSave;
         QPushButton     *butEditCanc;

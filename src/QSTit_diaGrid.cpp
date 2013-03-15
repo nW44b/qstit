@@ -17,6 +17,8 @@
     You should have received a copy of the GNU General Public License
     along with QSTit. If not, see <http://www.gnu.org/licenses/>
     ═══════════════════════════════════════════════════════════════════════════
+    Free Icons by Axialis Software - Axialis Team <http://www.axialis.com>
+    ═══════════════════════════════════════════════════════════════════════════
 */
 
 #include "QSTit_diaGrid.h"
@@ -42,7 +44,7 @@ diaGridSkin::diaGridSkin(QWidget *parent,menuSkin *menu,QString pTitl,int pWidt,
 
     this->setStyleSheet(fStylFram());
     this->setMinimumSize(QSize(500,iH));
-    this->setMaximumSize(QSize(iW,iH+164));
+    this->setMaximumSize(QSize(iW,iH+162));
     this->setContentsMargins(0,0,0,0);
     this->setCursor(Qt::ArrowCursor);
     this->setGeometry(iX,iY,iW,iH);
@@ -81,11 +83,7 @@ void diaGridSkin::fGridLink()
 {
     bool bL=!bLink;                                     // must be so due to fMenuMove that may change bLink
     parMen->bLink=bL;
-    if (bL)
-    {
-        fRePosi();
-        fMenuMove();
-    }
+    if (bL) fMenuMove();
     bLink=bL;
 }
 void diaGridSkin::fMenuMove()
@@ -107,31 +105,34 @@ void diaGridSkin::fMenuMove()
 }
 void diaGridSkin::fGridSizeVert(int iD)
 {
-    static int iM=0;
-    if (++iM%6==0)                                      // 6*3=18
+    int jH=iH+iD;
+    if (jH>=this->minimumHeight() && jH<=this->maximumHeight())
     {
-        iM=0;
-        int jH=iH+(iD*18);
-        if (jH>=this->minimumHeight() && jH<=this->maximumHeight())
+        iH=jH;
+        this->resize(iW,iH);
+        if (bLink)
         {
-            iH=jH;
-            this->resize(iW,iH);
-            if (bLink) fRePosi();
-            else
-            {
-                if (iY>iPb-iH) iY=iPb-iH;
-                this->move(iX,iY);
-            }
-            QList<diaGridC *> widg=this->findChildren<diaGridC *>();
-            widg[0]->resize(widg[0]->frameGeometry().width(),iH-33);
-            labSizH->resize(4,iH-4);
-            if (bLink) fMenuMove();
+            iY=fCalcPosY(iH,parMen);
+            bool bLinkSave=bLink;
+            bLink=false;                                // supress link to avoid menu repositioning
+            this->move(iX,iY);
+            bLink=bLinkSave;
         }
+        else
+        {
+            if (iY>iPb-iH) iY=iPb-iH;
+            this->move(iX,iY);
+        }
+        QList<diaGridC *> widg=this->findChildren<diaGridC *>();
+        widg[0]->resize(widg[0]->frameGeometry().width(),iH-33);
+        labSizH->resize(4,iH-4);
+        if (bLink) fMenuMove();
     }
 }
 void diaGridSkin::fGridSizeInit(int pW)
 {
-    iW=pW;
+    if (pW>=this->minimumWidth())iW=pW;
+    else iW=this->minimumWidth();
     this->resize(iW,iH);
     int iw=iW-81;
     QList<diaGridC *> widg=this->findChildren<diaGridC *>();
@@ -194,9 +195,7 @@ void diaGridSkin::mouseMoveEvent(QMouseEvent *e)
 {
     if (bSizV)
     {
-        int iD=iCy-e->globalY();
-        if (iD>0) fGridSizeVert(1);
-        if (iD<0) fGridSizeVert(-1);
+        fGridSizeVert(iCy-e->globalY());
         iCx=e->globalX();
         iCy=e->globalY();
     }
@@ -224,7 +223,7 @@ void diaGridSkin::mouseMoveEvent(QMouseEvent *e)
         emit sMoved();
     }
 }
-void diaGridSkin::moveEvent(QMoveEvent *e)
+void diaGridSkin::moveEvent(QMoveEvent*)
 {
     iX=this->frameGeometry().x();
     iY=this->frameGeometry().y();

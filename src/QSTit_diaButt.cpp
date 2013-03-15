@@ -21,6 +21,26 @@
 
 #include "QSTit_diaButt.h"
 
+butSpin::butSpin(QWidget *wParent,int iX,int iY,int iMin,int iMax,int iStep,int iValu) : QSpinBox(wParent)
+{
+    parWin=wParent;
+    this->setStyleSheet("height:24px;color:#ffffff;border:1px solid #777777;background-color:#eeeeee;color:#000000;");
+    this->move(iX,iY);
+    this->setRange(iMin,iMax);
+    this->setSingleStep(iStep);
+    this->setValue(iValu);
+}
+void butSpin::keyPressEvent(QKeyEvent *e)
+{
+    if (e->key()>=Qt::Key_0 && e->key()<=Qt::Key_9) QSpinBox::keyPressEvent(e);
+    else if (e->key()==Qt::Key_Minus) QSpinBox::keyPressEvent(e);
+    else if (e->key()==Qt::Key_Delete || e->key()==Qt::Key_Backspace) QSpinBox::keyPressEvent(e);
+    else if (e->key()==Qt::Key_Left || e->key()==Qt::Key_Right) QSpinBox::keyPressEvent(e);
+    else QApplication::sendEvent(parWin,new QKeyEvent(QEvent::KeyPress, e->key(),e->modifiers(),"",false,1));
+}
+
+//-------------------------------------------------------------------------------------------------
+
 butToolC::butToolC(QWidget *pPare,QPixmap pIcon,QString pText,bool pAuto) : QToolButton(pPare)
 {
     int iSize;

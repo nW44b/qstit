@@ -25,9 +25,21 @@
 #include <QApplication>
 #include <QToolButton>
 #include <QToolTip>
+#include <QSpinBox>
 #include <QKeyEvent>
 #include <QEvent>
 
+class butSpin : public QSpinBox
+{
+    Q_OBJECT
+
+    public:
+        butSpin(QWidget*,int,int,int,int,int,int);
+    private:
+        QWidget *parWin;
+    protected:
+        virtual void keyPressEvent(QKeyEvent*);
+};
 class butToolC : public QToolButton
 {
     Q_OBJECT

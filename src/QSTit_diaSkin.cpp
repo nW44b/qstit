@@ -17,6 +17,8 @@
     You should have received a copy of the GNU General Public License
     along with QSTit. If not, see <http://www.gnu.org/licenses/>
     ═══════════════════════════════════════════════════════════════════════════
+    Free Icons by Axialis Software - Axialis Team <http://www.axialis.com>
+    ═══════════════════════════════════════════════════════════════════════════
 */
 
 #include "QSTit_diaSkin.h"
@@ -43,6 +45,10 @@ QString fStylTitl()
 QString fStylButt()
 {
     return "height:20px;width:40px;background-color:#202020;color:#ffffff;border:1px solid #202020;border-radius:3px;text-align:left;padding-left:2px;";
+}
+QString fStylClos()
+{
+    return "QToolButton {image:url(:/Imag/QSTit_clos.png);border:none;} QToolButton:hover {image:url(:/Imag/QSTit_clos_over.png);}";
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -181,7 +187,7 @@ diaSkin::diaSkin(QWidget *parent,QFrame *menu,QString pTitl,int pWidt,int pHeig,
     labTitl->move(0,0);
 
     QToolButton *butClos=new QToolButton(this);
-    butClos->setStyleSheet("QToolButton {image:url(:/Imag/QSTit_clos.png);border:none;} QToolButton:hover {image:url(:/Imag/QSTit_clos_over.png);}");
+    butClos->setStyleSheet(fStylClos());
     butClos->setContentsMargins(0,0,0,0);
     butClos->resize(16,16);
     butClos->move(pWidt-22,7);
@@ -271,8 +277,7 @@ barSkin::barSkin(QWidget *parent,QFrame *menu,QString pFile,QString pText,int pW
     this->move(iLefx,iTopy);
 
     QToolButton *butClos=new QToolButton(this);
-    butClos->setIcon(QPixmap(":/Imag/QSTit_clos.png"));
-    butClos->setStyleSheet("border:none;");
+    butClos->setStyleSheet(fStylClos());
     butClos->setContentsMargins(0,0,0,0);
     butClos->resize(16,16);
     butClos->move(pWidt-22,7);
@@ -387,8 +392,7 @@ diaColoSkin::diaColoSkin(QWidget *parent,QFrame *menu,QString pTitl,QString pCol
     labTitl->move(0,0);
 
     QToolButton *butClos=new QToolButton(this);
-    butClos->setIcon(QPixmap(":/Imag/QSTit_clos.png"));
-    butClos->setStyleSheet("border:none;");
+    butClos->setStyleSheet(fStylClos());
     butClos->setContentsMargins(0,0,0,0);
     butClos->resize(16,16);
     butClos->move(pWidt-22,7);
@@ -494,8 +498,7 @@ diaFontSkin::diaFontSkin(QWidget *parent,QFrame *menu,QString pTitl,QFont pFont)
     labTitl->move(0,0);
 
     QToolButton *butClos=new QToolButton(this);
-    butClos->setIcon(QPixmap(":/Imag/QSTit_clos.png"));
-    butClos->setStyleSheet("border:none;");
+    butClos->setStyleSheet(fStylClos());
     butClos->setContentsMargins(0,0,0,0);
     butClos->resize(16,16);
     butClos->move(pWidt-22,7);
@@ -607,15 +610,14 @@ diaFileSkin::diaFileSkin(QWidget *parent,QFrame *menu,QString pTitl,QString pFol
     labTitl->move(0,0);
 
     QToolButton *butClos=new QToolButton(this);
-    butClos->setIcon(QPixmap(":/Imag/QSTit_clos.png"));
-    butClos->setStyleSheet("border:none;");
+    butClos->setStyleSheet(fStylClos());
     butClos->setContentsMargins(0,0,0,0);
     butClos->resize(16,16);
     butClos->move(pWidt-22,7);
     butClos->setAutoRepeat(false);
     connect(butClos,SIGNAL(clicked()),this,SLOT(fGridClos()));
 
-    diaFile=new QFileDialog(this,"","","QSTit (*.srt *.txt)");
+    diaFile=new QFileDialog(this,"","","Supported (*.srt *.txt)");
     diaFile->setWindowFlags(Qt::SubWindow);
     diaFile->setLabelText(QFileDialog::LookIn,pFold);
     diaFile->setLabelText(QFileDialog::FileName,pFile);

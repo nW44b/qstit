@@ -17,6 +17,8 @@
     You should have received a copy of the GNU General Public License
     along with QSTit. If not, see <http://www.gnu.org/licenses/>
     ═══════════════════════════════════════════════════════════════════════════
+    Free Icons by Axialis Software - Axialis Team <http://www.axialis.com>
+    ═══════════════════════════════════════════════════════════════════════════
 -->
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
@@ -49,6 +51,9 @@
     <file>Imag/QSTit_goto_enab.png</file>
     <file>Imag/QSTit_help_disa.png</file>
     <file>Imag/QSTit_help_enab.png</file>
+    <file>Imag/QSTit_hori_cent.png</file>
+    <file>Imag/QSTit_hori_left.png</file>
+    <file>Imag/QSTit_hori_righ.png</file>
     <file>Imag/QSTit_info_disa.png</file>
     <file>Imag/QSTit_info_enab.png</file>
     <file>Imag/QSTit_info_goto.png</file>
@@ -70,6 +75,9 @@
     <file>Imag/QSTit_undo_disa.png</file>
     <file>Imag/QSTit_undo_enab.png</file>
     <file>Imag/QSTit_upup.png</file>
+    <file>Imag/QSTit_vert_bott.png</file>
+    <file>Imag/QSTit_vert_cent.png</file>
+    <file>Imag/QSTit_vert_topy.png</file>
     <file>Imag/QSTit_xcen.png</file>
     <file>Imag/QSTit_xdow.png</file>
     <file>Imag/QSTit_xlef.png</file>
