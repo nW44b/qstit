@@ -66,7 +66,7 @@ class winMain : public QWidget
             int     maxi;
             int     val0;
             int     valu;
-        } objRowsNumb,objRowsWidt,objRowsHeig,objRowsSpac,objRowsRota,objJumpBase;
+        } objRowsNumb,objRowsWidt,objRowsHeig,objRowsSpac,objRowsRota,objRowsOutl,objJumpBase;
         struct objScreens
         {
             int     widt;
@@ -93,6 +93,7 @@ class winMain : public QWidget
             int     savS;
             int     hori;
             int     vert;
+            int     outl;
         } objRow0,objRow1,objRow2,objRow3,objRow4;
 
         QString     gSystFontFami;
@@ -262,6 +263,7 @@ class winMain : public QWidget
         void    fRowsNumbAdap();
 
         void    fSettCrea();
+        void    fSettCreaShed();
 
         void    fGridCrea();
         void    fGridZero();
@@ -385,7 +387,7 @@ class winMain : public QWidget
         void    fBackDialClos();
         void    fRowsOutlDial();
         void    fOutlDialClos();
-        void    fRowsOutlSlid(int);
+        void    fRowsOutlThik(int);
         void    fRowsTextForm();
         void    fRowsTextDraw(int);
         void    fRowsFont();
@@ -402,6 +404,7 @@ class winMain : public QWidget
         void    fShedHeig(int);
         void    fShedSpac(int);
         void    fShedRota(int);
+        void    fShedOutl(int);
 
         void    fSettBase();
         void    fSettShow();
@@ -576,8 +579,9 @@ class winMain : public QWidget
         QLabel          *labShedRota;
         QLabel          *labShedHori;
         QLabel          *labShedVert;
+        QLabel          *labShedOutl;
 
-        QLabel          *labShedRow1;
+        QLabel          *labShedLin1;
         QLabel          *labShedTit1;
         QRadioButton    *radShedSho1;
         QPushButton     *butShedFon1;
@@ -592,8 +596,9 @@ class winMain : public QWidget
         butToolX        *butShedVeT1;
         butToolX        *butShedVeC1;
         butToolX        *butShedVeB1;
+        QSpinBox        *spiShedOut1;
 
-        QLabel          *labShedRow2;
+        QLabel          *labShedLin2;
         QLabel          *labShedTit2;
         QRadioButton    *radShedSho2;
         QPushButton     *butShedFon2;
@@ -608,8 +613,9 @@ class winMain : public QWidget
         butToolX        *butShedVeT2;
         butToolX        *butShedVeC2;
         butToolX        *butShedVeB2;
+        QSpinBox        *spiShedOut2;
 
-        QLabel          *labShedRow3;
+        QLabel          *labShedLin3;
         QLabel          *labShedTit3;
         QRadioButton    *radShedSho3;
         QPushButton     *butShedFon3;
@@ -624,8 +630,9 @@ class winMain : public QWidget
         butToolX        *butShedVeT3;
         butToolX        *butShedVeC3;
         butToolX        *butShedVeB3;
+        QSpinBox        *spiShedOut3;
 
-        QLabel          *labShedRow4;
+        QLabel          *labShedLin4;
         QLabel          *labShedTit4;
         QRadioButton    *radShedSho4;
         QPushButton     *butShedFon4;
@@ -639,8 +646,9 @@ class winMain : public QWidget
         butToolX        *butShedVeT4;
         butToolX        *butShedVeC4;
         butToolX        *butShedVeB4;
+        QSpinBox        *spiShedOut4;
 
-        QLabel          *labShedRow0;
+        QLabel          *labShedLin0;
         QLabel          *labShedTit0;
         QPushButton     *butShedFon0;
         QPushButton     *butShedFor0;
@@ -654,6 +662,7 @@ class winMain : public QWidget
         butToolX        *butShedVeT0;
         butToolX        *butShedVeC0;
         butToolX        *butShedVeB0;
+        QSpinBox        *spiShedOut0;
 
         QPushButton     *butEditSave;
         QPushButton     *butEditCanc;

@@ -73,6 +73,8 @@ diaGridTitlWidt     Widest
 diaHelp             Help
 diaInfo             File Info
 diaRowsBack         Lines background
+diaSaveFileTitl     Save subtitle file
+diaSaveFileExte     Supported (*.srt *.txt)
 diaSett             Settings
 diaTextColo         Subtitle colour
 diaTextFont         Subtitle font

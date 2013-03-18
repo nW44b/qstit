@@ -90,8 +90,9 @@ To report a problem or give us some feedback: subtitles@nova-cinema.org</p>
 <tr class="c2"><td><img src=":/Imag/QSTit_flag.png"> (Leftmost cell)</td><td>Flag current row<br/>(Flags are saved in the log file)</td><td>[!] or [Numpad /]</td></tr>
 </table>
 </p>
-<br/><br/>
-<u><span style="font-weight:bold;">Supported file formats</span></u>
+<p>
+<br/><u><span style="font-weight:bold;">Supported file formats</span></u>
+</p>
 <p>
 The program can read simple text (.txt) and Subrip (.srt) files with up to four lines of subtitles.<br/>
 Both file types are easily editable in any text editor or word processor.<br/>
@@ -108,17 +109,17 @@ Subrip files include timecodes, the subtitling can therefore be automated.</p>
 - One subtitle can be composed of several lines (up to four, usually two), they are separated by a backslash ( \ ).<br/>
 - Different subtitles can be composed of different numbers of lines.<br/>
 - Subtitles are only separated by a line break.<br/>
-- The program automatically creates "empty" lines between subtitles so that nothing is displayed <br/>between two subtitles when there are no dialogues. <br/>There is no need to have empty lines in the file (they would be considered as one subtitle <br/>and there would therefore be three consecutive "empty lines" when browsing through the file).<br/>
-<br/>
-Structure:</p>
+- The program automatically creates "empty" lines between subtitles so that nothing is displayed <br/>between two subtitles when there are no dialogues.<br/>
+There is no need to have empty lines in the file (they would be considered as one subtitle <br/>and there would therefore be three consecutive "empty lines" when browsing through the file).
+</p>
+Structure:
 <blockquote>
 Subtitle 1 Line 1\Subtitle 1 Line 2<br/>
 Subtitle 2 Line 1<br/>
 Subtitle 3 Line 1\Subtitle 3 Line 2<br/>
 ...
 </blockquote>
-
-Example:<br/>
+Example:
 <blockquote>
 &lt;i&gt;L'ENTREVUE&lt;/i&gt;\&lt;i&gt;HET SOLLICITATIEGESPREK&lt;/i&gt;<br/>
 J'ai rendez-vous avec M. Ullman.\Ik heb een afspraak met Mr. Ullman.<br/>
@@ -130,7 +131,7 @@ Oh... Entrez donc.\Kom binnen, Jack.<br/>
 Ma secrétaire, Suzy.\M'n secretaresse, Susie.<br/>
 Du mal à nous trouver?\Lastige reis?<br/>
 ...
-</blockquote></p>
+</blockquote>
 <p>
 <a name="srt">.srt files</a><br/>
 - The structure needs to be respected carefully otherwise the program won't be able to open the file correctly.<br/>
@@ -139,9 +140,10 @@ Du mal à nous trouver?\Lastige reis?<br/>
 - One subtitle can be composed of up to four lines, separated only by a line break.<br/>
 - An empty line separates subtitles.<br/>
 - Nothing will be displayed between the end of one subtitle (Time OUT) and the beginning of the next (Time IN).<br/>
--  If you don't want to use the automation functionalities, it is possible to manually browse through<br/>an .srt file as through a .txt file: Just leave the timer on pause and use the arrows to browse through the subtitles.<br/>
-<br/><br/>
-Structure:<br/>
+- If you don't want to use the automation functionalities, it is possible to manually browse through an .srt file<br/>
+as through a .txt file: Just leave the timer on pause and use the arrows to browse through the subtitles.
+</p>
+Structure:
 <blockquote>
 1<br/>
 Time IN --> Time OUT<br/>
@@ -158,7 +160,7 @@ Subtitle 3 Line 1<br/>
 Subtitle 3 Line 2<br/>
 ...
 </blockquote>
-Example:<br/>
+Example:
 <blockquote>
 1<br/>
 00:01:10,680 --> 00:01:12,477<br/>

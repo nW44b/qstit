@@ -112,29 +112,26 @@ void winMain::fApplInit()
     objWind.basW=objWind.widt-2;
 
     objRowsNumb.mini=1;
-    objRowsNumb.maxi=4;
-    objRowsNumb.val0=4;
-    objRowsNumb.valu=4;
+    objRowsNumb.maxi=objRowsNumb.val0=objRowsNumb.valu=4;
 
     objRowsWidt.mini=100;
-    objRowsWidt.maxi=objWind.basW;
-    objRowsWidt.val0=objWind.basW;
-    objRowsWidt.valu=objWind.basW;
+    objRowsWidt.maxi=objRowsWidt.val0=objRowsWidt.valu=objWind.basW;
 
     objRowsHeig.mini=20;
     objRowsHeig.maxi=100;
-    objRowsHeig.val0=30;
-    objRowsHeig.valu=30;
+    objRowsHeig.val0=objRowsHeig.valu=30;
 
     objRowsSpac.mini=0;
     objRowsSpac.maxi=50;
-    objRowsSpac.val0=0;
-    objRowsSpac.valu=0;
+    objRowsSpac.val0=objRowsSpac.valu=0;
 
     objRowsRota.mini=-300;
     objRowsRota.maxi=300;
-    objRowsRota.val0=0;
-    objRowsRota.valu=0;
+    objRowsRota.val0=objRowsRota.valu=0;
+
+    objRowsOutl.mini=0;
+    objRowsOutl.maxi=10;
+    objRowsOutl.val0=objRowsOutl.valu=0;
 
     this->setGeometry(0,0,objWind.widt,objWind.heig);
     this->setWindowFlags(Qt::FramelessWindowHint);
@@ -505,6 +502,7 @@ void winMain::fRowsCrea()
     objRow0.heig=objRowsHeig.val0;
     objRow0.spac=objRowsSpac.val0;
     objRow0.rota=objRowsRota.val0;
+    objRow0.outl=objRowsOutl.val0;
     objRow0.savH=objRowsHeig.val0;
     objRow0.savS=objRowsSpac.val0;
     objRow0.hori=0;
@@ -563,6 +561,7 @@ void winMain::fRowsBase(int iR,int iY)
     objRowx->heig=objRow0.heig;
     objRowx->spac=0;if (iR<4) objRowx->spac=objRow0.spac;
     objRowx->rota=objRow0.rota;
+    objRowx->outl=objRow0.outl;
     objRowx->savH=objRow0.savH;
     objRowx->savS=0;if (iR<4) objRowx->savS=objRow0.savS;
     objRowx->hori=objRow0.hori;
@@ -584,6 +583,7 @@ void winMain::fRowsAdapt()
     gRowsVcen=fraRows->iH/2;
     fraRows->iX+=gRowsHcenPrev-gRowsHcen;if (fraRows->iX<1) fraRows->iX=1;
     fraRows->iY+=gRowsVcenPrev-gRowsVcen;if (fraRows->iY<1) fraRows->iY=1;
+    butRowsCent->hide();
     gRowsHcenPrev=gRowsHcen;
     gRowsVcenPrev=gRowsVcen;
     fRowsFram();
@@ -596,10 +596,12 @@ void winMain::fRowsStat()
     spiRowsDimH->blockSignals(true);spiRowsDimH->setValue(fraRows->iW);spiRowsDimH->blockSignals(false);
     spiRowsSpac->blockSignals(true);spiRowsSpac->setValue(objRowsSpac.valu);spiRowsSpac->blockSignals(false);
     spiRowsRota->blockSignals(true);spiRowsRota->setValue(objRowsRota.valu);spiRowsRota->blockSignals(false);
+    spiRowsOutl->blockSignals(true);spiRowsOutl->setValue(objRowsOutl.valu);spiRowsOutl->blockSignals(false);
 
     spiShedHei0->blockSignals(true);spiShedHei0->setValue(objRowsHeig.valu);spiShedHei0->blockSignals(false);
     spiShedSpa0->blockSignals(true);spiShedSpa0->setValue(objRowsSpac.valu);spiShedSpa0->blockSignals(false);
     spiShedRot0->blockSignals(true);spiShedRot0->setValue(objRowsRota.valu);spiShedRot0->blockSignals(false);
+    spiShedOut0->blockSignals(true);spiShedOut0->setValue(objRowsOutl.valu);spiShedOut0->blockSignals(false);
 
     spiShedHei1->blockSignals(true);spiShedHei1->setValue(objRow1.heig);spiShedHei1->blockSignals(false);
     spiShedHei2->blockSignals(true);spiShedHei2->setValue(objRow2.heig);spiShedHei2->blockSignals(false);
@@ -614,6 +616,11 @@ void winMain::fRowsStat()
     spiShedRot2->blockSignals(true);spiShedRot2->setValue(objRow2.rota);spiShedRot2->blockSignals(false);
     spiShedRot3->blockSignals(true);spiShedRot3->setValue(objRow3.rota);spiShedRot3->blockSignals(false);
     spiShedRot4->blockSignals(true);spiShedRot4->setValue(objRow4.rota);spiShedRot4->blockSignals(false);
+
+    spiShedOut1->blockSignals(true);spiShedOut1->setValue(objRow1.outl);spiShedOut1->blockSignals(false);
+    spiShedOut2->blockSignals(true);spiShedOut2->setValue(objRow2.outl);spiShedOut2->blockSignals(false);
+    spiShedOut3->blockSignals(true);spiShedOut3->setValue(objRow3.outl);spiShedOut3->blockSignals(false);
+    spiShedOut4->blockSignals(true);spiShedOut4->setValue(objRow4.outl);spiShedOut4->blockSignals(false);
 
     labRowsLoca->setText(QString("Rows location = %1,%2").arg(fraRows->iX).arg(fraRows->iY));
     labRowsSize->setText(QString("Rows size = %1,%2").arg(fraRows->iW).arg(fraRows->iH));
@@ -686,11 +693,10 @@ void winMain::fRowsLocL() {if (fraRows->iX>1) {fraRows->iX--;fRowsFram();}}
 void winMain::fRowsLocLFast() {if (fraRows->iX>1) {fraRows->iX-=5;if (fraRows->iX<1) {fraRows->iX=1;};fRowsFram();}}
 void winMain::fRowsLocC()
 {
-    static bool bShow=false;
     fRowsFramCent();
     butRowsCent->setGeometry(gRowsHcen-8,gRowsVcen-8,16,16);
-    bShow=!bShow;
-    butRowsCent->setVisible(bShow);
+    if (butRowsCent->isHidden()) butRowsCent->show();
+    else butRowsCent->hide();
 }
 void winMain::fRowsLocR() {if (fraRows->iX+fraRows->iW<objWind.widt-1) {fraRows->iX++;fRowsFram();}}
 void winMain::fRowsLocRFast()
@@ -715,18 +721,13 @@ void winMain::fRowsLocDFast()
 void winMain::fRowsDimH(int pH)
 {
     fraRows->iW=pH;
-    objRow1.widt=pH;
-    objRow2.widt=pH;
-    objRow3.widt=pH;
-    objRow4.widt=pH;
+    objRow1.widt=objRow2.widt=objRow3.widt=objRow4.widt=pH;
     fRowsAdapt();
 }
 void winMain::fRowsDimV(int pV)
 {
-    objRow1.heig=pV;objRow1.savH=pV;
-    objRow2.heig=pV;objRow2.savH=pV;
-    objRow3.heig=pV;objRow3.savH=pV;
-    objRow4.heig=pV;objRow4.savH=pV;
+    objRow1.heig=objRow2.heig=objRow3.heig=objRow4.heig=pV;
+    objRow1.savH=objRow2.savH=objRow3.savH=objRow4.savH=pV;
     objRowsHeig.valu=pV;
     fRowsAdapt();
 }
@@ -740,9 +741,9 @@ void winMain::fShedHeig(int)
 }
 void winMain::fRowsSpac(int pS)
 {
-    if (objRow1.show) {objRow1.spac=pS;spiShedSpa1->setValue(pS);objRow1.savS=pS;}
-    if (objRow2.show) {objRow2.spac=pS;spiShedSpa2->setValue(pS);objRow2.savS=pS;}
-    if (objRow3.show) {objRow3.spac=pS;spiShedSpa3->setValue(pS);objRow3.savS=pS;}
+    if (objRow1.show) {objRow1.spac=objRow1.savS=pS;spiShedSpa1->setValue(pS);}
+    if (objRow2.show) {objRow2.spac=objRow2.savS=pS;spiShedSpa2->setValue(pS);}
+    if (objRow3.show) {objRow3.spac=objRow3.savS=pS;spiShedSpa3->setValue(pS);}
     objRowsSpac.valu=pS;
     fRowsAdapt();
 }
@@ -755,10 +756,7 @@ void winMain::fShedSpac(int)
 }
 void winMain::fRowsRota(int pR)
 {
-    objRow1.rota=pR;
-    objRow2.rota=pR;
-    objRow3.rota=pR;
-    objRow4.rota=pR;
+    objRow1.rota=objRow2.rota=objRow3.rota=objRow4.rota=pR;
     objRowsRota.valu=pR;
     fRowsAdapt();
 }
@@ -804,8 +802,8 @@ void winMain::fRowsTextDraw(int iR)
     QTextDocument doc;
     doc.setDocumentMargin(0);
     doc.setPageSize(QSizeF((qreal)texRowx->width(),(qreal)texRowx->height()));
-    doc.setHtml(sStyl+objRowx->text+"</p>");
     doc.setTextWidth((qreal)texRowx->width());
+    doc.setHtml(sStyl+objRowx->text+"</p>");
 
     if (objRowx->vert>0) painter.translate(0,0);
     if (objRowx->vert==0) painter.translate(0,(texRowx->height()/2)-(doc.size().height()/2));
@@ -819,18 +817,18 @@ void winMain::fRowsTextDraw(int iR)
         painter.translate(-texRowx->width()/2,-texRowx->height()/2);
     }
 
-    if (gOutlThik!=0)
+    if (objRowx->outl!=0)
     {
         QTextDocument doc2;
         doc2.setDocumentMargin(0);
         doc2.setPageSize(QSizeF((qreal)texRowx->width(),(qreal)texRowx->height()));
-        doc2.setHtml(sStyl+objRowx->text+"</p>");
         doc2.setTextWidth((qreal)texRowx->width());
+        doc2.setHtml(sStyl+objRowx->text+"</p>");
 
         QPen pen;
         pen.setStyle(Qt::SolidLine);
         pen.setColor(gOutlColo);
-        pen.setWidth(gOutlThik);
+        pen.setWidth(objRowx->outl);
 
         QTextCharFormat format;
         format.setTextOutline(pen);
@@ -842,10 +840,8 @@ void winMain::fRowsTextDraw(int iR)
         QRect rec2=QRect(0,0,texRowx->width(),texRowx->height());
         doc2.drawContents(&painter,rec2);
     }
-
     QRect rect=QRect(0,0,texRowx->width(),texRowx->height());
     doc.drawContents(&painter,rect);
-
     texRowx->setPixmap(pixRows);
 }
 void winMain::fRowsOutlDial()
@@ -863,7 +859,22 @@ void winMain::fRowsOutlGet(QColor cColo)
     fRowsTextForm();
     gOutlDial=false;
 }
-void winMain::fRowsOutlSlid(int pO) {gOutlThik=pO;fRowsTextForm();}
+void winMain::fRowsOutlThik(int pO)
+{
+    objRow1.outl=objRow2.outl=objRow3.outl=objRow4.outl=pO;
+    spiShedOut1->setValue(pO);spiShedOut2->setValue(pO);spiShedOut3->setValue(pO);spiShedOut4->setValue(pO);
+    objRowsOutl.valu=pO;
+    gOutlThik=pO;
+    fRowsAdapt();
+}
+void winMain::fShedOutl(int)
+{
+    objRow1.outl=spiShedOut1->value();
+    objRow2.outl=spiShedOut2->value();
+    objRow3.outl=spiShedOut3->value();
+    objRow4.outl=spiShedOut4->value();
+    fRowsAdapt();
+}
 void winMain::fRowsSeco(int iChck)
 {
     gSecoText=iChck ? true:false;
@@ -1110,12 +1121,7 @@ void winMain::fRowsFontGet(QFont pFont)
     fRowsFontChan();
     gFontDial=false;
 }
-void winMain::fRowsFontChan()
-{
-    fRowsHeigCalc();
-    fRowsWidtCalc();
-    fRowsAdapt();
-}
+void winMain::fRowsFontChan() {fRowsHeigCalc();fRowsWidtCalc();fRowsAdapt();}
 void winMain::fRowsHeigCalc()
 {
     int iHone=(gRowsFont.pointSize()*2)/1.3;
@@ -1169,8 +1175,7 @@ void winMain::fRowsShow(int pShow)
 
 void winMain::fGridCrea()
 {
-    gGridModi=0;
-    gGridInfo=0;
+    gGridModi=gGridInfo=0;
     gGridRowsHeig=18;
     gGridWidt=objWind.widt-2;
     gGridHeig=36+(7*gGridRowsHeig);
@@ -1323,6 +1328,7 @@ void winMain::fGridZero()
         fGridItemSetx("",iGrid,6);
     }
 }
+
 void winMain::fGridTitle()
 {
     QFileInfo fInfo=QFileInfo(gFile);
@@ -1332,9 +1338,11 @@ void winMain::fGridTitle()
     sTitl +=   " )";
 
     //if (gSrtx) sTitl+=  " | "+fL("diaGridTitlEnd")+": "+gSrtxStop.left(8)+" )";
-    //else sTitl +=  " )";
+    //else sTitl +=  " )"; 
+   
     diaGrid->labTitl->setText(sTitl);
 }
+
 void winMain::fGridInit()
 {
     for (int iR=0; iR<99; iR++)
@@ -1352,8 +1360,7 @@ void winMain::fGridInit()
 }
 void winMain::fGridInitCols()
 {
-    int c;
-    int cw;
+    int c,cw;
     int cwTot=142;                              // 30+1 n°ligne,20+1 status,10+1 ascenseur,80+1 boutons
     int cwMax=(objWind.widt-2-cwTot)/objRowsNumb.valu;
 
@@ -1397,15 +1404,13 @@ void winMain::fGridInitRows()
 }
 void winMain::fGridShow(bool bShow)
 {
-    if (bShow)  {gGridShow=true;diaGrid->fRePosi();diaGrid->show();}
-    else        {gGridShow=false;diaGrid->hide();}
+    if (bShow) {gGridShow=true;diaGrid->fRePosi();diaGrid->show();}
+    else {gGridShow=false;diaGrid->hide();}
 }
 QString winMain::fGridTextClean(QString sText)
 {
     QString sT=sText.trimmed();
-    sT.remove("<b>");sT.remove("</b>");
-    sT.remove("<i>");sT.remove("</i>");
-    sT.remove("<u>");sT.remove("</u>");
+    sT.remove("<b>");sT.remove("</b>");sT.remove("<i>");sT.remove("</i>");sT.remove("<u>");sT.remove("</u>");
     return sT;
 }
 void winMain::fGridRows(int r)
@@ -1446,6 +1451,7 @@ void winMain::fGridClic(int iR,int iC)
         if (gPlay) tmrAuto->start();
     }
 }
+
 void winMain::fGridEditButt() {fGridEdit(griText->currentRow(),griText->currentColumn());}
 void winMain::fGridEdit(int iR,int iC)
 {
@@ -1533,8 +1539,7 @@ void winMain::fGridModi()
 {
     if (gGridSave)
     {
-        messSkin cM;
-        if (cM.fMess(this,fraMenu,fL("GridTextModiMess"),fL("butYeYe"),fL("butNoNo"))) fGridSave();
+        messSkin cM;if (cM.fMess(this,fraMenu,fL("GridTextModiMess"),fL("butYeYe"),fL("butNoNo"))) fGridSave();
     }
 }
 void winMain::fGridMarkRows(int iR)
@@ -1564,8 +1569,7 @@ void winMain::fGridMarkRows(int iR)
 }
 void winMain::fGridUndo()
 {
-    if (!gGridEdit) return;
-    if (gGridModi==0) return;
+    if (!gGridEdit || gGridModi==0) return;
 
     int iR=gEditTextRows[gGridModi];
     int iC=gEditTextColu[gGridModi];
@@ -1587,7 +1591,7 @@ void winMain::fGridSave()
 
     QString sFile=gFile;
 
-    sFile=QFileDialog::getSaveFileName(this,"Save subtitle file",sFile,"Supported (*.srt *.txt)");
+    sFile=QFileDialog::getSaveFileName(this,fL("diaSaveFileTitl"),sFile,fL("diaSaveFileExte"));
     if (sFile.isEmpty())
     {
         griText->setFocus();
@@ -1625,8 +1629,7 @@ void winMain::fGridFontSize()
 }
 void winMain::fGridFontGrid()
 {
-    int iR;
-    int iC;
+    int iR,iC;
     int iCmax=3+objRowsNumb.valu;
     QTableWidgetItem *wi;
     QFontMetrics mGrid=QFontMetrics(gGridFont);
@@ -1667,10 +1670,9 @@ void winMain::fSettCrea()
     gSettShow=false;
     gSettWidt=690;
     gSettHeig=315;
-    gSettLefx=0;
-    gSettTopy=0;
+    gSettLefx=gSettTopy=0;
 
-    diaSett=new diaSkin(winWind,fraMenu,fL("butSett"),gSettWidt,gSettHeig,-1,-1);
+    diaSett=new diaSkin(winWind,fraMenu,fL("diaSett"),gSettWidt,gSettHeig,-1,-1);
     connect(diaSett,SIGNAL(sClosed()),this,SLOT(fSettClos()));
 
     tabSett=new QTabWidget(diaSett);
@@ -1726,13 +1728,13 @@ void winMain::fSettCrea()
     labRowsDimH=new QLabel("H.",grpRowsDime);
     labRowsDimH->setMaximumWidth(20);
     labRowsDimH->move(54,7);
-    spiRowsDimH=new butSpin(grpRowsDime,6,7,200,objWind.widt-2,2,objWind.widt-2);
+    spiRowsDimH=new butSpin(grpRowsDime,6,7,objRowsWidt.mini,objRowsWidt.maxi,2,objRowsWidt.maxi);
     connect(spiRowsDimH,SIGNAL(valueChanged(int)),this,SLOT(fRowsDimH(int)));
 
     labRowsDimV=new QLabel("V.",grpRowsDime);
     labRowsDimV->setMaximumWidth(20);
     labRowsDimV->move(54,32);
-    spiRowsDimV=new butSpin(grpRowsDime,6,32,20,100,1,30);
+    spiRowsDimV=new butSpin(grpRowsDime,6,32,objRowsHeig.mini,objRowsHeig.maxi,1,30);
     connect(spiRowsDimV,SIGNAL(valueChanged(int)),this,SLOT(fRowsDimV(int)));
 
     texRowsSpac=new QLabel(fL("texRowsSpac"),tabRows);
@@ -1769,7 +1771,7 @@ void winMain::fSettCrea()
     labTextFont->move(10,120);
     grpSkin *grpTextFont=new grpSkin(tabRows,75,70,10,140);
     butFont=new QPushButton(QPixmap(":/Imag/QSTit_font.png")," "+fL("butFont"),grpTextFont);
-    butFont->move(3,3);
+    butFont->move(3,4);
     connect(butFont,SIGNAL(clicked()),this,SLOT(fRowsFont()));
     butTextColo=new QPushButton(QPixmap(":/Imag/QSTit_colo.png")," "+fL("butTextColo"),grpTextFont);
     butTextColo->move(3,28);
@@ -1779,8 +1781,8 @@ void winMain::fSettCrea()
     labRowsOutl->setMinimumWidth(70);
     labRowsOutl->move(105,120);
     grpSkin *grpRowsOutl=new grpSkin(tabRows,75,70,105,140);
-    spiRowsOutl=new butSpin(grpRowsOutl,6,7,0,10,1,0);
-    connect(spiRowsOutl,SIGNAL(valueChanged(int)),this,SLOT(fRowsOutlSlid(int)));
+    spiRowsOutl=new butSpin(grpRowsOutl,6,7,objRowsOutl.mini,objRowsOutl.maxi,1,objRowsOutl.val0);
+    connect(spiRowsOutl,SIGNAL(valueChanged(int)),this,SLOT(fRowsOutlThik(int)));
     butRowsOutl=new QPushButton(QPixmap(":/Imag/QSTit_colo.png")," "+fL("butRowsOutl"),grpRowsOutl);
     butRowsOutl->move(3,28);
     connect(butRowsOutl,SIGNAL(clicked()),this,SLOT(fRowsOutlDial()));
@@ -1925,403 +1927,7 @@ void winMain::fSettCrea()
 
     tabShed=new QWidget;
     tabShed->setStyleSheet("border:none;background-color:#151515;");
-
-    labRowsLoca=new QLabel(tabShed);
-                labRowsLoca->setMinimumWidth(120);
-                labRowsLoca->setStyleSheet(gExplStyl);
-                labRowsLoca->move(10,10);
-    labRowsSize=new QLabel(tabShed);
-                labRowsSize->setMinimumWidth(120);
-                labRowsSize->setStyleSheet(gExplStyl);
-                labRowsSize->move(10,30);
-    labRowsCent=new QLabel(tabShed);
-                labRowsCent->setMinimumWidth(120);
-                labRowsCent->setStyleSheet(gExplStyl);
-                labRowsCent->move(10,50);
-    labMenuSize=new QLabel(tabShed);
-                labMenuSize->setMinimumWidth(120);
-                labMenuSize->setStyleSheet(gExplStyl);
-                labMenuSize->move(10,70);
-    labMenuLoca=new QLabel(tabShed);
-                labMenuLoca->setMinimumWidth(120);
-                labMenuLoca->setStyleSheet(gExplStyl);
-                labMenuLoca->move(10,90);
-    labScreSize=new QLabel(tabShed);
-                labScreSize->setMinimumWidth(120);
-                labScreSize->setStyleSheet(gExplStyl);
-                labScreSize->move(10,110);
-    labGridCol3=new QLabel(tabShed);
-                labGridCol3->setMinimumWidth(120);
-                labGridCol3->setStyleSheet(gExplStyl);
-                labGridCol3->move(10,130);
-    labGridCol4=new QLabel(tabShed);
-                labGridCol4->setMinimumWidth(120);
-                labGridCol4->setStyleSheet(gExplStyl);
-                labGridCol4->move(10,150);
-    labGridCol5=new QLabel(tabShed);
-                labGridCol5->setMinimumWidth(120);
-                labGridCol5->setStyleSheet(gExplStyl);
-                labGridCol5->move(10,170);
-    labGridCol6=new QLabel(tabShed);
-                labGridCol6->setMinimumWidth(120);
-                labGridCol6->setStyleSheet(gExplStyl);
-                labGridCol6->move(10,190);
-    labShedShow=new QLabel(fL("labShedShow"),tabShed);
-                labShedShow->setGeometry(140,30,92,20);
-                labShedShow->setAlignment(Qt::AlignRight);
-    labShedFont=new QLabel(fL("labShedFont"),tabShed);
-                labShedFont->setGeometry(140,53,92,20);
-                labShedFont->setAlignment(Qt::AlignRight);
-    labShedFore=new QLabel(fL("labShedFore"),tabShed);
-                labShedFore->setGeometry(140,78,92,20);
-                labShedFore->setAlignment(Qt::AlignRight);
-    labShedBack=new QLabel(fL("labShedBack"),tabShed);
-                labShedBack->setGeometry(140,102,92,20);
-                labShedBack->setAlignment(Qt::AlignRight);
-    labShedHeig=new QLabel(fL("labShedHeig"),tabShed);
-                labShedHeig->setGeometry(140,126,92,20);
-                labShedHeig->setAlignment(Qt::AlignRight);
-    labShedSpac=new QLabel(fL("labShedSpac"),tabShed);
-                labShedSpac->setGeometry(140,151,92,20);
-                labShedSpac->setAlignment(Qt::AlignRight);
-    labShedRota=new QLabel(fL("labShedRota"),tabShed);
-                labShedRota->setGeometry(140,176,92,20);
-                labShedRota->setAlignment(Qt::AlignRight);
-    labShedHori=new QLabel(fL("labTextAliH"),tabShed);
-                labShedHori->setGeometry(140,201,92,20);
-                labShedHori->setAlignment(Qt::AlignRight);
-    labShedVert=new QLabel(fL("labTextAliV"),tabShed);
-                labShedVert->setGeometry(140,226,92,20);
-                labShedVert->setAlignment(Qt::AlignRight);
-    labShedRow1=new QLabel(tabShed);
-    labShedRow1->setStyleSheet("background-color:#333333;");
-    labShedRow1->setGeometry(240,10,1,235);
-    labShedTit1=new QLabel(fL("labShedTit1"),tabShed);
-                labShedTit1->setMinimumWidth(80);
-                labShedTit1->move(249,10);
-    radShedSho1=new QRadioButton(tabShed);
-                radShedSho1->move(249,30);
-                radShedSho1->setAutoExclusive(false);
-                radShedSho1->setChecked(objRow1.show);
-                connect(radShedSho1,SIGNAL(clicked()),this,SLOT(fShedNumb()));
-    butShedFon1=new QPushButton(QPixmap(":/Imag/QSTit_font.png"),"",tabShed);
-                butShedFon1->move(249,50);
-                connect(butShedFon1,SIGNAL(clicked()),this,SLOT(fRowsFon1()));
-    butShedFor1=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
-                butShedFor1->move(249,75);
-                connect(butShedFor1,SIGNAL(clicked()),this,SLOT(fRowsCol1()));
-    butShedBac1=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
-                butShedBac1->move(249,99);
-                connect(butShedBac1,SIGNAL(clicked()),this,SLOT(fRowsBac1()));
-    spiShedHei1=new QSpinBox(tabShed);
-                spiShedHei1->move(249,125);
-                spiShedHei1->setStyleSheet(gSpinStyl);
-                spiShedHei1->setRange(0,100);
-                spiShedHei1->setValue(objRow1.heig);
-                connect(spiShedHei1,SIGNAL(valueChanged(int)),this,SLOT(fShedHeig(int)));
-    spiShedSpa1=new QSpinBox(tabShed);
-                spiShedSpa1->move(249,150);
-                spiShedSpa1->setStyleSheet(gSpinStyl);
-                spiShedSpa1->setRange(0,50);
-                spiShedSpa1->setValue(objRow1.spac);
-                connect(spiShedSpa1,SIGNAL(valueChanged(int)),this,SLOT(fShedSpac(int)));
-    spiShedRot1=new QSpinBox(tabShed);
-                spiShedRot1->move(249,175);
-                spiShedRot1->setStyleSheet(gSpinStyl);
-                spiShedRot1->setRange(objRowsRota.mini,objRowsRota.maxi);
-                spiShedRot1->setValue(objRowsRota.val0);
-                connect(spiShedRot1,SIGNAL(valueChanged(int)),this,SLOT(fShedRota(int)));
-    butShedHoL1=new butToolX(tabShed);
-                butShedHoL1->setText(fL("butHoriLeft"));
-                butShedHoL1->setIcon(QPixmap(":/Imag/QSTit_hori_left.png"));
-                butShedHoL1->move(249,201);
-                connect(butShedHoL1,SIGNAL(clicked()),this,SLOT(fRowsHoriLef1()));
-    butShedHoC1=new butToolX(tabShed);
-                butShedHoC1->setText(fL("butHoriCent"));
-                butShedHoC1->setIcon(QPixmap(":/Imag/QSTit_hori_cent.png"));
-                butShedHoC1->move(271,201);
-                connect(butShedHoC1,SIGNAL(clicked()),this,SLOT(fRowsHoriCen1()));
-    butShedHoR1=new butToolX(tabShed);
-                butShedHoR1->setText(fL("butHoriRigh"));
-                butShedHoR1->setIcon(QPixmap(":/Imag/QSTit_hori_righ.png"));
-                butShedHoR1->move(293,201);
-                connect(butShedHoR1,SIGNAL(clicked()),this,SLOT(fRowsHoriRig1()));
-    butShedVeT1=new butToolX(tabShed);
-                butShedVeT1->setText(fL("butVertTopy"));
-                butShedVeT1->setIcon(QPixmap(":/Imag/QSTit_vert_topy.png"));
-                butShedVeT1->move(249,226);
-                connect(butShedVeT1,SIGNAL(clicked()),this,SLOT(fRowsVertTop1()));
-    butShedVeC1=new butToolX(tabShed);
-                butShedVeC1->setText(fL("butVertCent"));
-                butShedVeC1->setIcon(QPixmap(":/Imag/QSTit_vert_cent.png"));
-                butShedVeC1->move(271,226);
-                connect(butShedVeC1,SIGNAL(clicked()),this,SLOT(fRowsVertCen1()));
-    butShedVeB1=new butToolX(tabShed);
-                butShedVeB1->setText(fL("butVertBott"));
-                butShedVeB1->setIcon(QPixmap(":/Imag/QSTit_vert_bott.png"));
-                butShedVeB1->move(293,226);
-                connect(butShedVeB1,SIGNAL(clicked()),this,SLOT(fRowsVertBot1()));
-    labShedRow2=new QLabel(tabShed);
-    labShedRow2->setStyleSheet("background-color:#333333;");
-    labShedRow2->setGeometry(330,10,1,235);
-    labShedTit2=new QLabel(fL("labShedTit2"),tabShed);
-                labShedTit2->setMinimumWidth(80);
-                labShedTit2->move(339,10);
-    radShedSho2=new QRadioButton(tabShed);
-                radShedSho2->move(339,30);
-                radShedSho2->setAutoExclusive(false);
-                radShedSho2->setChecked(objRow2.show);
-                connect(radShedSho2,SIGNAL(clicked()),this,SLOT(fShedNumb()));
-    butShedFon2=new QPushButton(QPixmap(":/Imag/QSTit_font.png"),"",tabShed);
-                butShedFon2->move(339,50);
-                connect(butShedFon2,SIGNAL(clicked()),this,SLOT(fRowsFon2()));
-    butShedFor2=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
-                butShedFor2->move(339,75);
-                connect(butShedFor2,SIGNAL(clicked()),this,SLOT(fRowsCol2()));
-    butShedBac2=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
-                butShedBac2->move(339,99);
-                connect(butShedBac2,SIGNAL(clicked()),this,SLOT(fRowsBac2()));
-    spiShedHei2=new QSpinBox(tabShed);
-                spiShedHei2->move(339,125);
-                spiShedHei2->setStyleSheet(gSpinStyl);
-                spiShedHei2->setRange(0,100);
-                spiShedHei2->setValue(objRow2.heig);
-                connect(spiShedHei2,SIGNAL(valueChanged(int)),this,SLOT(fShedHeig(int)));
-    spiShedSpa2=new QSpinBox(tabShed);
-                spiShedSpa2->move(339,150);
-                spiShedSpa2->setStyleSheet(gSpinStyl);
-                spiShedSpa2->setRange(0,50);
-                spiShedSpa2->setValue(objRow2.spac);
-                connect(spiShedSpa2,SIGNAL(valueChanged(int)),this,SLOT(fShedSpac(int)));
-    spiShedRot2=new QSpinBox(tabShed);
-                spiShedRot2->move(339,175);
-                spiShedRot2->setStyleSheet(gSpinStyl);
-                spiShedRot2->setRange(objRowsRota.mini,objRowsRota.maxi);
-                spiShedRot2->setValue(objRowsRota.val0);
-                connect(spiShedRot2,SIGNAL(valueChanged(int)),this,SLOT(fShedRota(int)));
-    butShedHoL2=new butToolX(tabShed);
-                butShedHoL2->setText(fL("butHoriLeft"));
-                butShedHoL2->setIcon(QPixmap(":/Imag/QSTit_hori_left.png"));
-                butShedHoL2->move(339,201);
-                connect(butShedHoL2,SIGNAL(clicked()),this,SLOT(fRowsHoriLef2()));
-    butShedHoC2=new butToolX(tabShed);
-                butShedHoC2->setText(fL("butHoriCent"));
-                butShedHoC2->setIcon(QPixmap(":/Imag/QSTit_hori_cent.png"));
-                butShedHoC2->move(361,201);
-                connect(butShedHoC2,SIGNAL(clicked()),this,SLOT(fRowsHoriCen2()));
-    butShedHoR2=new butToolX(tabShed);
-                butShedHoR2->setText(fL("butHoriRigh"));
-                butShedHoR2->setIcon(QPixmap(":/Imag/QSTit_hori_righ.png"));
-                butShedHoR2->move(383,201);
-                connect(butShedHoR2,SIGNAL(clicked()),this,SLOT(fRowsHoriRig2()));
-    butShedVeT2=new butToolX(tabShed);
-                butShedVeT2->setText(fL("butVertTopy"));
-                butShedVeT2->setIcon(QPixmap(":/Imag/QSTit_vert_topy.png"));
-                butShedVeT2->move(339,226);
-                connect(butShedVeT2,SIGNAL(clicked()),this,SLOT(fRowsVertTop2()));
-    butShedVeC2=new butToolX(tabShed);
-                butShedVeC2->setText(fL("butVertCent"));
-                butShedVeC2->setIcon(QPixmap(":/Imag/QSTit_vert_cent.png"));
-                butShedVeC2->move(361,226);
-                connect(butShedVeC2,SIGNAL(clicked()),this,SLOT(fRowsVertCen2()));
-    butShedVeB2=new butToolX(tabShed);
-                butShedVeB2->setText(fL("butVertBott"));
-                butShedVeB2->setIcon(QPixmap(":/Imag/QSTit_vert_bott.png"));
-                butShedVeB2->move(383,226);
-                connect(butShedVeB2,SIGNAL(clicked()),this,SLOT(fRowsVertBot2()));
-    labShedRow3=new QLabel(tabShed);
-    labShedRow3->setStyleSheet("background-color:#333333;");
-    labShedRow3->setGeometry(420,10,1,235);
-    labShedTit3=new QLabel(fL("labShedTit3"),tabShed);
-                labShedTit3->setMinimumWidth(80);
-                labShedTit3->move(429,10);
-    radShedSho3=new QRadioButton(tabShed);
-                radShedSho3->move(429,30);
-                radShedSho3->setAutoExclusive(false);
-                radShedSho3->setChecked(objRow3.show);
-                connect(radShedSho3,SIGNAL(clicked()),this,SLOT(fShedNumb()));
-    butShedFon3=new QPushButton(QPixmap(":/Imag/QSTit_font.png"),"",tabShed);
-                butShedFon3->move(429,50);
-                connect(butShedFon3,SIGNAL(clicked()),this,SLOT(fRowsFon3()));
-    butShedFor3=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
-                butShedFor3->move(429,75);
-                connect(butShedFor3,SIGNAL(clicked()),this,SLOT(fRowsCol3()));
-    butShedBac3=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
-                butShedBac3->move(429,99);
-                connect(butShedBac3,SIGNAL(clicked()),this,SLOT(fRowsBac3()));
-    spiShedHei3=new QSpinBox(tabShed);
-                spiShedHei3->move(429,125);
-                spiShedHei3->setStyleSheet(gSpinStyl);
-                spiShedHei3->setRange(0,100);
-                spiShedHei3->setValue(objRow3.heig);
-                connect(spiShedHei3,SIGNAL(valueChanged(int)),this,SLOT(fShedHeig(int)));
-    spiShedSpa3=new QSpinBox(tabShed);
-                spiShedSpa3->move(429,150);
-                spiShedSpa3->setStyleSheet(gSpinStyl);
-                spiShedSpa3->setRange(0,50);
-                spiShedSpa3->setValue(objRow3.spac);
-                connect(spiShedSpa3,SIGNAL(valueChanged(int)),this,SLOT(fShedSpac(int)));
-    spiShedRot3=new QSpinBox(tabShed);
-                spiShedRot3->move(429,175);
-                spiShedRot3->setStyleSheet(gSpinStyl);
-                spiShedRot3->setRange(objRowsRota.mini,objRowsRota.maxi);
-                spiShedRot3->setValue(objRowsRota.val0);
-                connect(spiShedRot3,SIGNAL(valueChanged(int)),this,SLOT(fShedRota(int)));
-    butShedHoL3=new butToolX(tabShed);
-                butShedHoL3->setText(fL("butHoriLeft"));
-                butShedHoL3->setIcon(QPixmap(":/Imag/QSTit_hori_left.png"));
-                butShedHoL3->move(429,201);
-                connect(butShedHoL3,SIGNAL(clicked()),this,SLOT(fRowsHoriLef3()));
-    butShedHoC3=new butToolX(tabShed);
-                butShedHoC3->setText(fL("butHoriCent"));
-                butShedHoC3->setIcon(QPixmap(":/Imag/QSTit_hori_cent.png"));
-                butShedHoC3->move(451,201);
-                connect(butShedHoC3,SIGNAL(clicked()),this,SLOT(fRowsHoriCen3()));
-    butShedHoR3=new butToolX(tabShed);
-                butShedHoR3->setText(fL("butHoriRigh"));
-                butShedHoR3->setIcon(QPixmap(":/Imag/QSTit_hori_righ.png"));
-                butShedHoR3->move(473,201);
-                connect(butShedHoR3,SIGNAL(clicked()),this,SLOT(fRowsHoriRig3()));
-    butShedVeT3=new butToolX(tabShed);
-                butShedVeT3->setText(fL("butVertTopy"));
-                butShedVeT3->setIcon(QPixmap(":/Imag/QSTit_vert_topy.png"));
-                butShedVeT3->move(429,226);
-                connect(butShedVeT3,SIGNAL(clicked()),this,SLOT(fRowsVertTop3()));
-    butShedVeC3=new butToolX(tabShed);
-                butShedVeC3->setText(fL("butVertCent"));
-                butShedVeC3->setIcon(QPixmap(":/Imag/QSTit_vert_cent.png"));
-                butShedVeC3->move(451,226);
-                connect(butShedVeC3,SIGNAL(clicked()),this,SLOT(fRowsVertCen3()));
-    butShedVeB3=new butToolX(tabShed);
-                butShedVeB3->setText(fL("butVertBott"));
-                butShedVeB3->setIcon(QPixmap(":/Imag/QSTit_vert_bott.png"));
-                butShedVeB3->move(473,226);
-                connect(butShedVeB3,SIGNAL(clicked()),this,SLOT(fRowsVertBot3()));
-    labShedRow4=new QLabel(tabShed);
-    labShedRow4->setStyleSheet("background-color:#333333;");
-    labShedRow4->setGeometry(510,10,1,235);
-    labShedTit4=new QLabel(fL("labShedTit4"),tabShed);
-                labShedTit4->setMinimumWidth(80);
-                labShedTit4->move(519,10);
-    radShedSho4=new QRadioButton(tabShed);
-                radShedSho4->move(519,30);
-                radShedSho4->setAutoExclusive(false);
-                radShedSho4->setChecked(objRow4.show);
-                connect(radShedSho4,SIGNAL(clicked()),this,SLOT(fShedNumb()));
-    butShedFon4=new QPushButton(QPixmap(":/Imag/QSTit_font.png"),"",tabShed);
-                butShedFon4->move(519,50);
-                connect(butShedFon4,SIGNAL(clicked()),this,SLOT(fRowsFon4()));
-    butShedFor4=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
-                butShedFor4->move(519,75);
-                connect(butShedFor4,SIGNAL(clicked()),this,SLOT(fRowsCol4()));
-    butShedBac4=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
-                butShedBac4->move(519,99);
-                connect(butShedBac4,SIGNAL(clicked()),this,SLOT(fRowsBac4()));
-    spiShedHei4=new QSpinBox(tabShed);
-                spiShedHei4->move(519,125);
-                spiShedHei4->setStyleSheet(gSpinStyl);
-                spiShedHei4->setRange(0,100);
-                spiShedHei4->setValue(objRow4.heig);
-                connect(spiShedHei4,SIGNAL(valueChanged(int)),this,SLOT(fShedHeig(int)));
-    spiShedRot4=new QSpinBox(tabShed);
-                spiShedRot4->move(519,175);
-                spiShedRot4->setStyleSheet(gSpinStyl);
-                spiShedRot4->setRange(objRowsRota.mini,objRowsRota.maxi);
-                spiShedRot4->setValue(objRowsRota.val0);
-                connect(spiShedRot4,SIGNAL(valueChanged(int)),this,SLOT(fShedRota(int)));
-    butShedHoL4=new butToolX(tabShed);
-                butShedHoL4->setText(fL("butHoriLeft"));
-                butShedHoL4->setIcon(QPixmap(":/Imag/QSTit_hori_left.png"));
-                butShedHoL4->move(519,201);
-                connect(butShedHoL4,SIGNAL(clicked()),this,SLOT(fRowsHoriLef4()));
-    butShedHoC4=new butToolX(tabShed);
-                butShedHoC4->setText(fL("butHoriCent"));
-                butShedHoC4->setIcon(QPixmap(":/Imag/QSTit_hori_cent.png"));
-                butShedHoC4->move(541,201);
-                connect(butShedHoC4,SIGNAL(clicked()),this,SLOT(fRowsHoriCen4()));
-    butShedHoR4=new butToolX(tabShed);
-                butShedHoR4->setText(fL("butHoriRigh"));
-                butShedHoR4->setIcon(QPixmap(":/Imag/QSTit_hori_righ.png"));
-                butShedHoR4->move(563,201);
-                connect(butShedHoR4,SIGNAL(clicked()),this,SLOT(fRowsHoriRig4()));
-    butShedVeT4=new butToolX(tabShed);
-                butShedVeT4->setText(fL("butVertTopy"));
-                butShedVeT4->setIcon(QPixmap(":/Imag/QSTit_vert_topy.png"));
-                butShedVeT4->move(519,226);
-                connect(butShedVeT4,SIGNAL(clicked()),this,SLOT(fRowsVertTop4()));
-    butShedVeC4=new butToolX(tabShed);
-                butShedVeC4->setText(fL("butVertCent"));
-                butShedVeC4->setIcon(QPixmap(":/Imag/QSTit_vert_cent.png"));
-                butShedVeC4->move(541,226);
-                connect(butShedVeC4,SIGNAL(clicked()),this,SLOT(fRowsVertCen4()));
-    butShedVeB4=new butToolX(tabShed);
-                butShedVeB4->setText(fL("butVertBott"));
-                butShedVeB4->setIcon(QPixmap(":/Imag/QSTit_vert_bott.png"));
-                butShedVeB4->move(563,226);
-                connect(butShedVeB4,SIGNAL(clicked()),this,SLOT(fRowsVertBot4()));
-    labShedRow0=new QLabel(tabShed);
-    labShedRow0->setStyleSheet("background-color:#333333;");
-    labShedRow0->setGeometry(600,10,1,235);
-    labShedTit0=new QLabel(fL("labShedTit0"),tabShed);
-                labShedTit0->setMinimumWidth(80);
-                labShedTit0->move(609,10);
-    butShedFon0=new QPushButton(QPixmap(":/Imag/QSTit_font.png"),"",tabShed);
-                butShedFon0->move(609,50);
-                connect(butShedFon0,SIGNAL(clicked()),this,SLOT(fRowsFont()));
-    butShedFor0=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
-                butShedFor0->move(609,75);
-                connect(butShedFor0,SIGNAL(clicked()),this,SLOT(fRowsColo()));
-    butShedBac0=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
-                butShedBac0->move(609,99);
-                connect(butShedBac0,SIGNAL(clicked()),this,SLOT(fRowsBack()));
-    spiShedHei0=new QSpinBox(tabShed);
-                spiShedHei0->move(609,125);
-                spiShedHei0->setStyleSheet(gSpinStyl);
-                spiShedHei0->setRange(0,100);
-                spiShedHei0->setValue(objRow0.heig);
-                connect(spiShedHei0,SIGNAL(valueChanged(int)),this,SLOT(fRowsDimV(int)));
-    spiShedSpa0=new QSpinBox(tabShed);
-                spiShedSpa0->move(609,150);
-                spiShedSpa0->setStyleSheet(gSpinStyl);
-                spiShedSpa0->setRange(0,50);
-                spiShedSpa0->setValue(1);
-                connect(spiShedSpa0,SIGNAL(valueChanged(int)),this,SLOT(fRowsSpac(int)));
-    spiShedRot0=new QSpinBox(tabShed);
-                spiShedRot0->move(609,175);
-                spiShedRot0->setStyleSheet(gSpinStyl);
-                spiShedRot0->setRange(objRowsRota.mini,objRowsRota.maxi);
-                spiShedRot0->setValue(objRowsRota.val0);
-                connect(spiShedRot0,SIGNAL(valueChanged(int)),this,SLOT(fRowsRota(int)));
-    butShedHoL0=new butToolX(tabShed);
-                butShedHoL0->setText(fL("butHoriLeft"));
-                butShedHoL0->setIcon(QPixmap(":/Imag/QSTit_hori_left.png"));
-                butShedHoL0->move(609,201);
-                connect(butShedHoL0,SIGNAL(clicked()),this,SLOT(fRowsHoriLef0()));
-    butShedHoC0=new butToolX(tabShed);
-                butShedHoC0->setText(fL("butHoriCent"));
-                butShedHoC0->setIcon(QPixmap(":/Imag/QSTit_hori_cent.png"));
-                butShedHoC0->move(631,201);
-                connect(butShedHoC0,SIGNAL(clicked()),this,SLOT(fRowsHoriCen0()));
-    butShedHoR0=new butToolX(tabShed);
-                butShedHoR0->setText(fL("butHoriRigh"));
-                butShedHoR0->setIcon(QPixmap(":/Imag/QSTit_hori_righ.png"));
-                butShedHoR0->move(653,201);
-                connect(butShedHoR0,SIGNAL(clicked()),this,SLOT(fRowsHoriRig0()));
-    butShedVeT0=new butToolX(tabShed);
-                butShedVeT0->setText(fL("butVertTopy"));
-                butShedVeT0->setIcon(QPixmap(":/Imag/QSTit_vert_topy.png"));
-                butShedVeT0->move(609,226);
-                connect(butShedVeT0,SIGNAL(clicked()),this,SLOT(fRowsVertTop0()));
-    butShedVeC0=new butToolX(tabShed);
-                butShedVeC0->setText(fL("butVertCent"));
-                butShedVeC0->setIcon(QPixmap(":/Imag/QSTit_vert_cent.png"));
-                butShedVeC0->move(631,226);
-                connect(butShedVeC0,SIGNAL(clicked()),this,SLOT(fRowsVertCen0()));
-    butShedVeB0=new butToolX(tabShed);
-                butShedVeB0->setText(fL("butVertBott"));
-                butShedVeB0->setIcon(QPixmap(":/Imag/QSTit_vert_bott.png"));
-                butShedVeB0->move(653,226);
-                connect(butShedVeB0,SIGNAL(clicked()),this,SLOT(fRowsVertBot0()));
+    fSettCreaShed();
 
     // add pages --------------------------------------------------------------
 
@@ -2329,19 +1935,456 @@ void winMain::fSettCrea()
     tabSett->addTab(tabGene,fL("tabSett1"));
     tabSett->addTab(tabShed,fL("tabSett2"));
 }
+void winMain::fSettCreaShed()
+{
+    int iI[]={28,46,64,82,100,118,136,154,172,190};
+    int iX[]={10,140,249,339,429,519,609};
+    int iY[]={28,48,69,90,113,136,159,182,204,225};
+    int iL[]={600,240,330,420,510};
+
+    labRowsLoca=new QLabel(tabShed);
+                labRowsLoca->setMinimumWidth(120);
+                labRowsLoca->setStyleSheet(gExplStyl);
+                labRowsLoca->move(iX[0],iI[0]);
+    labRowsSize=new QLabel(tabShed);
+                labRowsSize->setMinimumWidth(120);
+                labRowsSize->setStyleSheet(gExplStyl);
+                labRowsSize->move(iX[0],iI[1]);
+    labRowsCent=new QLabel(tabShed);
+                labRowsCent->setMinimumWidth(120);
+                labRowsCent->setStyleSheet(gExplStyl);
+                labRowsCent->move(iX[0],iI[2]);
+    labMenuSize=new QLabel(tabShed);
+                labMenuSize->setMinimumWidth(120);
+                labMenuSize->setStyleSheet(gExplStyl);
+                labMenuSize->move(iX[0],iI[3]);
+    labMenuLoca=new QLabel(tabShed);
+                labMenuLoca->setMinimumWidth(120);
+                labMenuLoca->setStyleSheet(gExplStyl);
+                labMenuLoca->move(iX[0],iI[4]);
+    labScreSize=new QLabel(tabShed);
+                labScreSize->setMinimumWidth(120);
+                labScreSize->setStyleSheet(gExplStyl);
+                labScreSize->move(iX[0],iI[5]);
+    labGridCol3=new QLabel(tabShed);
+                labGridCol3->setMinimumWidth(120);
+                labGridCol3->setStyleSheet(gExplStyl);
+                labGridCol3->move(iX[0],iI[6]);
+    labGridCol4=new QLabel(tabShed);
+                labGridCol4->setMinimumWidth(120);
+                labGridCol4->setStyleSheet(gExplStyl);
+                labGridCol4->move(iX[0],iI[7]);
+    labGridCol5=new QLabel(tabShed);
+                labGridCol5->setMinimumWidth(120);
+                labGridCol5->setStyleSheet(gExplStyl);
+                labGridCol5->move(iX[0],iI[8]);
+    labGridCol6=new QLabel(tabShed);
+                labGridCol6->setMinimumWidth(120);
+                labGridCol6->setStyleSheet(gExplStyl);
+                labGridCol6->move(iX[0],iI[9]);
+
+    labShedShow=new QLabel(fL("labShedShow"),tabShed);
+                labShedShow->setGeometry(iX[1],iY[0],92,20);
+                labShedShow->setAlignment(Qt::AlignRight);
+    labShedFont=new QLabel(fL("labShedFont"),tabShed);
+                labShedFont->setGeometry(iX[1],iY[1]+2,92,20);
+                labShedFont->setAlignment(Qt::AlignRight);
+    labShedFore=new QLabel(fL("labShedFore"),tabShed);
+                labShedFore->setGeometry(iX[1],iY[2]+2,92,20);
+                labShedFore->setAlignment(Qt::AlignRight);
+    labShedBack=new QLabel(fL("labShedBack"),tabShed);
+                labShedBack->setGeometry(iX[1],iY[3]+2,92,20);
+                labShedBack->setAlignment(Qt::AlignRight);
+    labShedHeig=new QLabel(fL("labShedHeig"),tabShed);
+                labShedHeig->setGeometry(iX[1],iY[4]+2,92,20);
+                labShedHeig->setAlignment(Qt::AlignRight);
+    labShedSpac=new QLabel(fL("labShedSpac"),tabShed);
+                labShedSpac->setGeometry(iX[1],iY[5]+2,92,20);
+                labShedSpac->setAlignment(Qt::AlignRight);
+    labShedRota=new QLabel(fL("labShedRota"),tabShed);
+                labShedRota->setGeometry(iX[1],iY[6]+2,92,20);
+                labShedRota->setAlignment(Qt::AlignRight);
+    labShedHori=new QLabel(fL("labTextAliH"),tabShed);
+                labShedHori->setGeometry(iX[1],iY[7]+2,92,20);
+                labShedHori->setAlignment(Qt::AlignRight);
+    labShedVert=new QLabel(fL("labTextAliV"),tabShed);
+                labShedVert->setGeometry(iX[1],iY[8]+2,92,20);
+                labShedVert->setAlignment(Qt::AlignRight);
+    labShedOutl=new QLabel(fL("labRowsOutl"),tabShed);
+                labShedOutl->setGeometry(iX[1],iY[9]+2,92,20);
+                labShedOutl->setAlignment(Qt::AlignRight);
+
+    labShedLin1=new QLabel(tabShed);
+                labShedLin1->setStyleSheet("background-color:#333333;");
+                labShedLin1->setGeometry(iL[1],10,1,235);
+    labShedTit1=new QLabel(fL("labShedTit1"),tabShed);
+                labShedTit1->setMinimumWidth(80);
+                labShedTit1->move(iX[2],10);
+    radShedSho1=new QRadioButton(tabShed);
+                radShedSho1->move(iX[2],iY[0]);
+                radShedSho1->setAutoExclusive(false);
+                radShedSho1->setChecked(objRow1.show);
+                connect(radShedSho1,SIGNAL(clicked()),this,SLOT(fShedNumb()));
+    butShedFon1=new QPushButton(QPixmap(":/Imag/QSTit_font.png"),"",tabShed);
+                butShedFon1->move(iX[2],iY[1]);
+                connect(butShedFon1,SIGNAL(clicked()),this,SLOT(fRowsFon1()));
+    butShedFor1=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
+                butShedFor1->move(iX[2],iY[2]);
+                connect(butShedFor1,SIGNAL(clicked()),this,SLOT(fRowsCol1()));
+    butShedBac1=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
+                butShedBac1->move(iX[2],iY[3]);
+                connect(butShedBac1,SIGNAL(clicked()),this,SLOT(fRowsBac1()));
+    spiShedHei1=new QSpinBox(tabShed);
+                spiShedHei1->move(iX[2],iY[4]);
+                spiShedHei1->setStyleSheet(gSpinStyl);
+                spiShedHei1->setRange(objRowsHeig.mini,objRowsHeig.maxi);
+                spiShedHei1->setValue(objRow1.heig);
+                connect(spiShedHei1,SIGNAL(valueChanged(int)),this,SLOT(fShedHeig(int)));
+    spiShedSpa1=new QSpinBox(tabShed);
+                spiShedSpa1->move(iX[2],iY[5]);
+                spiShedSpa1->setStyleSheet(gSpinStyl);
+                spiShedSpa1->setRange(0,iY[1]);
+                spiShedSpa1->setValue(objRow1.spac);
+                connect(spiShedSpa1,SIGNAL(valueChanged(int)),this,SLOT(fShedSpac(int)));
+    spiShedRot1=new QSpinBox(tabShed);
+                spiShedRot1->move(iX[2],iY[6]);
+                spiShedRot1->setStyleSheet(gSpinStyl);
+                spiShedRot1->setRange(objRowsRota.mini,objRowsRota.maxi);
+                spiShedRot1->setValue(objRowsRota.val0);
+                connect(spiShedRot1,SIGNAL(valueChanged(int)),this,SLOT(fShedRota(int)));
+    butShedHoL1=new butToolX(tabShed);
+                butShedHoL1->setText(fL("butHoriLeft"));
+                butShedHoL1->setIcon(QPixmap(":/Imag/QSTit_hori_left.png"));
+                butShedHoL1->move(iX[2],iY[7]);
+                connect(butShedHoL1,SIGNAL(clicked()),this,SLOT(fRowsHoriLef1()));
+    butShedHoC1=new butToolX(tabShed);
+                butShedHoC1->setText(fL("butHoriCent"));
+                butShedHoC1->setIcon(QPixmap(":/Imag/QSTit_hori_cent.png"));
+                butShedHoC1->move(iX[2]+22,iY[7]);
+                connect(butShedHoC1,SIGNAL(clicked()),this,SLOT(fRowsHoriCen1()));
+    butShedHoR1=new butToolX(tabShed);
+                butShedHoR1->setText(fL("butHoriRigh"));
+                butShedHoR1->setIcon(QPixmap(":/Imag/QSTit_hori_righ.png"));
+                butShedHoR1->move(iX[2]+44,iY[7]);
+                connect(butShedHoR1,SIGNAL(clicked()),this,SLOT(fRowsHoriRig1()));
+    butShedVeT1=new butToolX(tabShed);
+                butShedVeT1->setText(fL("butVertTopy"));
+                butShedVeT1->setIcon(QPixmap(":/Imag/QSTit_vert_topy.png"));
+                butShedVeT1->move(iX[2],iY[8]);
+                connect(butShedVeT1,SIGNAL(clicked()),this,SLOT(fRowsVertTop1()));
+    butShedVeC1=new butToolX(tabShed);
+                butShedVeC1->setText(fL("butVertCent"));
+                butShedVeC1->setIcon(QPixmap(":/Imag/QSTit_vert_cent.png"));
+                butShedVeC1->move(iX[2]+22,iY[8]);
+                connect(butShedVeC1,SIGNAL(clicked()),this,SLOT(fRowsVertCen1()));
+    butShedVeB1=new butToolX(tabShed);
+                butShedVeB1->setText(fL("butVertBott"));
+                butShedVeB1->setIcon(QPixmap(":/Imag/QSTit_vert_bott.png"));
+                butShedVeB1->move(iX[2]+44,iY[8]);
+                connect(butShedVeB1,SIGNAL(clicked()),this,SLOT(fRowsVertBot1()));
+    spiShedOut1=new QSpinBox(tabShed);
+                spiShedOut1->move(iX[2],iY[9]);
+                spiShedOut1->setStyleSheet(gSpinStyl);
+                spiShedOut1->setRange(objRowsOutl.mini,objRowsOutl.maxi);
+                spiShedOut1->setValue(objRow1.outl);
+                connect(spiShedOut1,SIGNAL(valueChanged(int)),this,SLOT(fShedOutl(int)));
+
+    labShedLin2=new QLabel(tabShed);
+                labShedLin2->setStyleSheet("background-color:#333333;");
+                labShedLin2->setGeometry(iL[2],10,1,235);
+    labShedTit2=new QLabel(fL("labShedTit2"),tabShed);
+                labShedTit2->setMinimumWidth(80);
+                labShedTit2->move(iX[3],10);
+    radShedSho2=new QRadioButton(tabShed);
+                radShedSho2->move(iX[3],iY[0]);
+                radShedSho2->setAutoExclusive(false);
+                radShedSho2->setChecked(objRow2.show);
+                connect(radShedSho2,SIGNAL(clicked()),this,SLOT(fShedNumb()));
+    butShedFon2=new QPushButton(QPixmap(":/Imag/QSTit_font.png"),"",tabShed);
+                butShedFon2->move(iX[3],iY[1]);
+                connect(butShedFon2,SIGNAL(clicked()),this,SLOT(fRowsFon2()));
+    butShedFor2=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
+                butShedFor2->move(iX[3],iY[2]);
+                connect(butShedFor2,SIGNAL(clicked()),this,SLOT(fRowsCol2()));
+    butShedBac2=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
+                butShedBac2->move(iX[3],iY[3]);
+                connect(butShedBac2,SIGNAL(clicked()),this,SLOT(fRowsBac2()));
+    spiShedHei2=new QSpinBox(tabShed);
+                spiShedHei2->move(iX[3],iY[4]);
+                spiShedHei2->setStyleSheet(gSpinStyl);
+                spiShedHei2->setRange(objRowsHeig.mini,objRowsHeig.maxi);
+                spiShedHei2->setValue(objRow2.heig);
+                connect(spiShedHei2,SIGNAL(valueChanged(int)),this,SLOT(fShedHeig(int)));
+    spiShedSpa2=new QSpinBox(tabShed);
+                spiShedSpa2->move(iX[3],iY[5]);
+                spiShedSpa2->setStyleSheet(gSpinStyl);
+                spiShedSpa2->setRange(0,iY[1]);
+                spiShedSpa2->setValue(objRow2.spac);
+                connect(spiShedSpa2,SIGNAL(valueChanged(int)),this,SLOT(fShedSpac(int)));
+    spiShedRot2=new QSpinBox(tabShed);
+                spiShedRot2->move(iX[3],iY[6]);
+                spiShedRot2->setStyleSheet(gSpinStyl);
+                spiShedRot2->setRange(objRowsRota.mini,objRowsRota.maxi);
+                spiShedRot2->setValue(objRowsRota.val0);
+                connect(spiShedRot2,SIGNAL(valueChanged(int)),this,SLOT(fShedRota(int)));
+    butShedHoL2=new butToolX(tabShed);
+                butShedHoL2->setText(fL("butHoriLeft"));
+                butShedHoL2->setIcon(QPixmap(":/Imag/QSTit_hori_left.png"));
+                butShedHoL2->move(iX[3],iY[7]);
+                connect(butShedHoL2,SIGNAL(clicked()),this,SLOT(fRowsHoriLef2()));
+    butShedHoC2=new butToolX(tabShed);
+                butShedHoC2->setText(fL("butHoriCent"));
+                butShedHoC2->setIcon(QPixmap(":/Imag/QSTit_hori_cent.png"));
+                butShedHoC2->move(iX[3]+22,iY[7]);
+                connect(butShedHoC2,SIGNAL(clicked()),this,SLOT(fRowsHoriCen2()));
+    butShedHoR2=new butToolX(tabShed);
+                butShedHoR2->setText(fL("butHoriRigh"));
+                butShedHoR2->setIcon(QPixmap(":/Imag/QSTit_hori_righ.png"));
+                butShedHoR2->move(iX[3]+44,iY[7]);
+                connect(butShedHoR2,SIGNAL(clicked()),this,SLOT(fRowsHoriRig2()));
+    butShedVeT2=new butToolX(tabShed);
+                butShedVeT2->setText(fL("butVertTopy"));
+                butShedVeT2->setIcon(QPixmap(":/Imag/QSTit_vert_topy.png"));
+                butShedVeT2->move(iX[3],iY[8]);
+                connect(butShedVeT2,SIGNAL(clicked()),this,SLOT(fRowsVertTop2()));
+    butShedVeC2=new butToolX(tabShed);
+                butShedVeC2->setText(fL("butVertCent"));
+                butShedVeC2->setIcon(QPixmap(":/Imag/QSTit_vert_cent.png"));
+                butShedVeC2->move(iX[3]+22,iY[8]);
+                connect(butShedVeC2,SIGNAL(clicked()),this,SLOT(fRowsVertCen2()));
+    butShedVeB2=new butToolX(tabShed);
+                butShedVeB2->setText(fL("butVertBott"));
+                butShedVeB2->setIcon(QPixmap(":/Imag/QSTit_vert_bott.png"));
+                butShedVeB2->move(iX[3]+44,iY[8]);
+                connect(butShedVeB2,SIGNAL(clicked()),this,SLOT(fRowsVertBot2()));
+    spiShedOut2=new QSpinBox(tabShed);
+                spiShedOut2->move(iX[3],iY[9]);
+                spiShedOut2->setStyleSheet(gSpinStyl);
+                spiShedOut2->setRange(objRowsOutl.mini,objRowsOutl.maxi);
+                spiShedOut2->setValue(objRow2.outl);
+                connect(spiShedOut2,SIGNAL(valueChanged(int)),this,SLOT(fShedOutl(int)));
+
+    labShedLin3=new QLabel(tabShed);
+                labShedLin3->setStyleSheet("background-color:#333333;");
+                labShedLin3->setGeometry(iL[3],10,1,235);
+    labShedTit3=new QLabel(fL("labShedTit3"),tabShed);
+                labShedTit3->setMinimumWidth(80);
+                labShedTit3->move(iX[4],10);
+    radShedSho3=new QRadioButton(tabShed);
+                radShedSho3->move(iX[4],iY[0]);
+                radShedSho3->setAutoExclusive(false);
+                radShedSho3->setChecked(objRow3.show);
+                connect(radShedSho3,SIGNAL(clicked()),this,SLOT(fShedNumb()));
+    butShedFon3=new QPushButton(QPixmap(":/Imag/QSTit_font.png"),"",tabShed);
+                butShedFon3->move(iX[4],iY[1]);
+                connect(butShedFon3,SIGNAL(clicked()),this,SLOT(fRowsFon3()));
+    butShedFor3=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
+                butShedFor3->move(iX[4],iY[2]);
+                connect(butShedFor3,SIGNAL(clicked()),this,SLOT(fRowsCol3()));
+    butShedBac3=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
+                butShedBac3->move(iX[4],iY[3]);
+                connect(butShedBac3,SIGNAL(clicked()),this,SLOT(fRowsBac3()));
+    spiShedHei3=new QSpinBox(tabShed);
+                spiShedHei3->move(iX[4],iY[4]);
+                spiShedHei3->setStyleSheet(gSpinStyl);
+                spiShedHei3->setRange(objRowsHeig.mini,objRowsHeig.maxi);
+                spiShedHei3->setValue(objRow3.heig);
+                connect(spiShedHei3,SIGNAL(valueChanged(int)),this,SLOT(fShedHeig(int)));
+    spiShedSpa3=new QSpinBox(tabShed);
+                spiShedSpa3->move(iX[4],iY[5]);
+                spiShedSpa3->setStyleSheet(gSpinStyl);
+                spiShedSpa3->setRange(0,iY[1]);
+                spiShedSpa3->setValue(objRow3.spac);
+                connect(spiShedSpa3,SIGNAL(valueChanged(int)),this,SLOT(fShedSpac(int)));
+    spiShedRot3=new QSpinBox(tabShed);
+                spiShedRot3->move(iX[4],iY[6]);
+                spiShedRot3->setStyleSheet(gSpinStyl);
+                spiShedRot3->setRange(objRowsRota.mini,objRowsRota.maxi);
+                spiShedRot3->setValue(objRowsRota.val0);
+                connect(spiShedRot3,SIGNAL(valueChanged(int)),this,SLOT(fShedRota(int)));
+    butShedHoL3=new butToolX(tabShed);
+                butShedHoL3->setText(fL("butHoriLeft"));
+                butShedHoL3->setIcon(QPixmap(":/Imag/QSTit_hori_left.png"));
+                butShedHoL3->move(iX[4],iY[7]);
+                connect(butShedHoL3,SIGNAL(clicked()),this,SLOT(fRowsHoriLef3()));
+    butShedHoC3=new butToolX(tabShed);
+                butShedHoC3->setText(fL("butHoriCent"));
+                butShedHoC3->setIcon(QPixmap(":/Imag/QSTit_hori_cent.png"));
+                butShedHoC3->move(iX[4]+22,iY[7]);
+                connect(butShedHoC3,SIGNAL(clicked()),this,SLOT(fRowsHoriCen3()));
+    butShedHoR3=new butToolX(tabShed);
+                butShedHoR3->setText(fL("butHoriRigh"));
+                butShedHoR3->setIcon(QPixmap(":/Imag/QSTit_hori_righ.png"));
+                butShedHoR3->move(iX[4]+44,iY[7]);
+                connect(butShedHoR3,SIGNAL(clicked()),this,SLOT(fRowsHoriRig3()));
+    butShedVeT3=new butToolX(tabShed);
+                butShedVeT3->setText(fL("butVertTopy"));
+                butShedVeT3->setIcon(QPixmap(":/Imag/QSTit_vert_topy.png"));
+                butShedVeT3->move(iX[4],iY[8]);
+                connect(butShedVeT3,SIGNAL(clicked()),this,SLOT(fRowsVertTop3()));
+    butShedVeC3=new butToolX(tabShed);
+                butShedVeC3->setText(fL("butVertCent"));
+                butShedVeC3->setIcon(QPixmap(":/Imag/QSTit_vert_cent.png"));
+                butShedVeC3->move(iX[4]+22,iY[8]);
+                connect(butShedVeC3,SIGNAL(clicked()),this,SLOT(fRowsVertCen3()));
+    butShedVeB3=new butToolX(tabShed);
+                butShedVeB3->setText(fL("butVertBott"));
+                butShedVeB3->setIcon(QPixmap(":/Imag/QSTit_vert_bott.png"));
+                butShedVeB3->move(iX[4]+44,iY[8]);
+                connect(butShedVeB3,SIGNAL(clicked()),this,SLOT(fRowsVertBot3()));
+    spiShedOut3=new QSpinBox(tabShed);
+                spiShedOut3->move(iX[4],iY[9]);
+                spiShedOut3->setStyleSheet(gSpinStyl);
+                spiShedOut3->setRange(objRowsOutl.mini,objRowsOutl.maxi);
+                spiShedOut3->setValue(objRow3.outl);
+                connect(spiShedOut3,SIGNAL(valueChanged(int)),this,SLOT(fShedOutl(int)));
+
+    labShedLin4=new QLabel(tabShed);
+                labShedLin4->setStyleSheet("background-color:#333333;");
+                labShedLin4->setGeometry(iL[4],10,1,235);
+    labShedTit4=new QLabel(fL("labShedTit4"),tabShed);
+                labShedTit4->setMinimumWidth(80);
+                labShedTit4->move(iX[5],10);
+    radShedSho4=new QRadioButton(tabShed);
+                radShedSho4->move(iX[5],iY[0]);
+                radShedSho4->setAutoExclusive(false);
+                radShedSho4->setChecked(objRow4.show);
+                connect(radShedSho4,SIGNAL(clicked()),this,SLOT(fShedNumb()));
+    butShedFon4=new QPushButton(QPixmap(":/Imag/QSTit_font.png"),"",tabShed);
+                butShedFon4->move(iX[5],iY[1]);
+                connect(butShedFon4,SIGNAL(clicked()),this,SLOT(fRowsFon4()));
+    butShedFor4=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
+                butShedFor4->move(iX[5],iY[2]);
+                connect(butShedFor4,SIGNAL(clicked()),this,SLOT(fRowsCol4()));
+    butShedBac4=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
+                butShedBac4->move(iX[5],iY[3]);
+                connect(butShedBac4,SIGNAL(clicked()),this,SLOT(fRowsBac4()));
+    spiShedHei4=new QSpinBox(tabShed);
+                spiShedHei4->move(iX[5],iY[4]);
+                spiShedHei4->setStyleSheet(gSpinStyl);
+                spiShedHei4->setRange(objRowsHeig.mini,objRowsHeig.maxi);
+                spiShedHei4->setValue(objRow4.heig);
+                connect(spiShedHei4,SIGNAL(valueChanged(int)),this,SLOT(fShedHeig(int)));
+    spiShedRot4=new QSpinBox(tabShed);
+                spiShedRot4->move(iX[5],iY[6]);
+                spiShedRot4->setStyleSheet(gSpinStyl);
+                spiShedRot4->setRange(objRowsRota.mini,objRowsRota.maxi);
+                spiShedRot4->setValue(objRowsRota.val0);
+                connect(spiShedRot4,SIGNAL(valueChanged(int)),this,SLOT(fShedRota(int)));
+    butShedHoL4=new butToolX(tabShed);
+                butShedHoL4->setText(fL("butHoriLeft"));
+                butShedHoL4->setIcon(QPixmap(":/Imag/QSTit_hori_left.png"));
+                butShedHoL4->move(iX[5],iY[7]);
+                connect(butShedHoL4,SIGNAL(clicked()),this,SLOT(fRowsHoriLef4()));
+    butShedHoC4=new butToolX(tabShed);
+                butShedHoC4->setText(fL("butHoriCent"));
+                butShedHoC4->setIcon(QPixmap(":/Imag/QSTit_hori_cent.png"));
+                butShedHoC4->move(iX[5]+22,iY[7]);
+                connect(butShedHoC4,SIGNAL(clicked()),this,SLOT(fRowsHoriCen4()));
+    butShedHoR4=new butToolX(tabShed);
+                butShedHoR4->setText(fL("butHoriRigh"));
+                butShedHoR4->setIcon(QPixmap(":/Imag/QSTit_hori_righ.png"));
+                butShedHoR4->move(iX[5]+44,iY[7]);
+                connect(butShedHoR4,SIGNAL(clicked()),this,SLOT(fRowsHoriRig4()));
+    butShedVeT4=new butToolX(tabShed);
+                butShedVeT4->setText(fL("butVertTopy"));
+                butShedVeT4->setIcon(QPixmap(":/Imag/QSTit_vert_topy.png"));
+                butShedVeT4->move(iX[5],iY[8]);
+                connect(butShedVeT4,SIGNAL(clicked()),this,SLOT(fRowsVertTop4()));
+    butShedVeC4=new butToolX(tabShed);
+                butShedVeC4->setText(fL("butVertCent"));
+                butShedVeC4->setIcon(QPixmap(":/Imag/QSTit_vert_cent.png"));
+                butShedVeC4->move(iX[5]+22,iY[8]);
+                connect(butShedVeC4,SIGNAL(clicked()),this,SLOT(fRowsVertCen4()));
+    butShedVeB4=new butToolX(tabShed);
+                butShedVeB4->setText(fL("butVertBott"));
+                butShedVeB4->setIcon(QPixmap(":/Imag/QSTit_vert_bott.png"));
+                butShedVeB4->move(iX[5]+44,iY[8]);
+                connect(butShedVeB4,SIGNAL(clicked()),this,SLOT(fRowsVertBot4()));
+    spiShedOut4=new QSpinBox(tabShed);
+                spiShedOut4->move(iX[5],iY[9]);
+                spiShedOut4->setStyleSheet(gSpinStyl);
+                spiShedOut4->setRange(objRowsOutl.mini,objRowsOutl.maxi);
+                spiShedOut4->setValue(objRow4.outl);
+                connect(spiShedOut4,SIGNAL(valueChanged(int)),this,SLOT(fShedOutl(int)));
+
+    labShedLin0=new QLabel(tabShed);
+                labShedLin0->setStyleSheet("background-color:#333333;");
+                labShedLin0->setGeometry(iL[0],10,1,235);
+    labShedTit0=new QLabel(fL("labShedTit0"),tabShed);
+                labShedTit0->setMinimumWidth(80);
+                labShedTit0->move(iX[6],10);
+    butShedFon0=new QPushButton(QPixmap(":/Imag/QSTit_font.png"),"",tabShed);
+                butShedFon0->move(iX[6],iY[1]);
+                connect(butShedFon0,SIGNAL(clicked()),this,SLOT(fRowsFont()));
+    butShedFor0=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
+                butShedFor0->move(iX[6],iY[2]);
+                connect(butShedFor0,SIGNAL(clicked()),this,SLOT(fRowsColo()));
+    butShedBac0=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
+                butShedBac0->move(iX[6],iY[3]);
+                connect(butShedBac0,SIGNAL(clicked()),this,SLOT(fRowsBack()));
+    spiShedHei0=new QSpinBox(tabShed);
+                spiShedHei0->move(iX[6],iY[4]);
+                spiShedHei0->setStyleSheet(gSpinStyl);
+                spiShedHei0->setRange(objRowsHeig.mini,objRowsHeig.maxi);
+                spiShedHei0->setValue(objRow0.heig);
+                connect(spiShedHei0,SIGNAL(valueChanged(int)),this,SLOT(fRowsDimV(int)));
+    spiShedSpa0=new QSpinBox(tabShed);
+                spiShedSpa0->move(iX[6],iY[5]);
+                spiShedSpa0->setStyleSheet(gSpinStyl);
+                spiShedSpa0->setRange(0,iY[1]);
+                spiShedSpa0->setValue(1);
+                connect(spiShedSpa0,SIGNAL(valueChanged(int)),this,SLOT(fRowsSpac(int)));
+    spiShedRot0=new QSpinBox(tabShed);
+                spiShedRot0->move(iX[6],iY[6]);
+                spiShedRot0->setStyleSheet(gSpinStyl);
+                spiShedRot0->setRange(objRowsRota.mini,objRowsRota.maxi);
+                spiShedRot0->setValue(objRowsRota.val0);
+                connect(spiShedRot0,SIGNAL(valueChanged(int)),this,SLOT(fRowsRota(int)));
+    butShedHoL0=new butToolX(tabShed);
+                butShedHoL0->setText(fL("butHoriLeft"));
+                butShedHoL0->setIcon(QPixmap(":/Imag/QSTit_hori_left.png"));
+                butShedHoL0->move(iX[6],iY[7]);
+                connect(butShedHoL0,SIGNAL(clicked()),this,SLOT(fRowsHoriLef0()));
+    butShedHoC0=new butToolX(tabShed);
+                butShedHoC0->setText(fL("butHoriCent"));
+                butShedHoC0->setIcon(QPixmap(":/Imag/QSTit_hori_cent.png"));
+                butShedHoC0->move(iX[6]+22,iY[7]);
+                connect(butShedHoC0,SIGNAL(clicked()),this,SLOT(fRowsHoriCen0()));
+    butShedHoR0=new butToolX(tabShed);
+                butShedHoR0->setText(fL("butHoriRigh"));
+                butShedHoR0->setIcon(QPixmap(":/Imag/QSTit_hori_righ.png"));
+                butShedHoR0->move(iX[6]+44,iY[7]);
+                connect(butShedHoR0,SIGNAL(clicked()),this,SLOT(fRowsHoriRig0()));
+    butShedVeT0=new butToolX(tabShed);
+                butShedVeT0->setText(fL("butVertTopy"));
+                butShedVeT0->setIcon(QPixmap(":/Imag/QSTit_vert_topy.png"));
+                butShedVeT0->move(iX[6],iY[8]);
+                connect(butShedVeT0,SIGNAL(clicked()),this,SLOT(fRowsVertTop0()));
+    butShedVeC0=new butToolX(tabShed);
+                butShedVeC0->setText(fL("butVertCent"));
+                butShedVeC0->setIcon(QPixmap(":/Imag/QSTit_vert_cent.png"));
+                butShedVeC0->move(iX[6]+22,iY[8]);
+                connect(butShedVeC0,SIGNAL(clicked()),this,SLOT(fRowsVertCen0()));
+    butShedVeB0=new butToolX(tabShed);
+                butShedVeB0->setText(fL("butVertBott"));
+                butShedVeB0->setIcon(QPixmap(":/Imag/QSTit_vert_bott.png"));
+                butShedVeB0->move(iX[6]+44,iY[8]);
+                connect(butShedVeB0,SIGNAL(clicked()),this,SLOT(fRowsVertBot0()));
+    spiShedOut0=new QSpinBox(tabShed);
+                spiShedOut0->move(iX[6],iY[9]);
+                spiShedOut0->setStyleSheet(gSpinStyl);
+                spiShedOut0->setRange(objRowsOutl.mini,objRowsOutl.maxi);
+                spiShedOut0->setValue(objRow0.outl);
+                connect(spiShedOut0,SIGNAL(valueChanged(int)),this,SLOT(fRowsOutlThik(int)));
+}
 void winMain::fSettBase()
 {
     messSkin cM;if (!cM.fMess(this,fraMenu,fL("msgCleaAllMess"),fL("butYeYe"),fL("butNoNo"))) return;
     gLang=0;
-    gWork=false;
-    gManu=false;
-    gAuto=false;
-    gSrtx=false;
-    gPlay=false;
-    gInit=false;
+    gWork=gManu=gAuto=gSrtx=gPlay=gInit=false;
     gPuls=100;
-    gAcce=0;
-    gJump=0;
+    gAcce=gJump=0;
     gJumpBase=500;
     objRowsNumb.valu=4;
     gRowsBack="#000000";
@@ -2351,15 +2394,12 @@ void winMain::fSettBase()
     gOutlColo=QColor("#eeeeee");
     gGridBack="#222222";
     gGridColo="#ffffff";
-    gSecoText=false;
-    gSecoItal=false;
+    gSecoText=gSecoItal=false;
     gGridEdit=true;
     gGridSave=false;
     gGridColoDark=true;
     gOutlThik=0;
-    gExitDial=false;
-    gSettShow=false;
-    gGridShow=false;
+    gExitDial=gSettShow=gGridShow=false;
 
     labTime->setText("00:00:00");
     labPuls->setText("");
@@ -2404,8 +2444,7 @@ void winMain::fSettBase()
     fraMenu->iY=gMenuTopy;
     fraMenu->move(gMenuLefx,gMenuTopy);
 
-    gGridModi=0;
-    gGridInfo=0;
+    gGridModi=gGridInfo=0;
     gGridRowsHeig=18;
     gGridWidt=diaGrid->iW;
     gGridHeig=36+(7*gGridRowsHeig);
@@ -2425,7 +2464,8 @@ void winMain::fSettShow()
     fWindLogoHide();
     if (gFileInfo) {diaInfo->close();gFileInfo=false;}
     if (gExitDial) {fWindExitCanc();}
-    if (diaSett->isHidden())
+    if (!diaSett->isHidden()) {fSettClos();}
+    else
     {
         diaSett->fRePosi();
         gSettShow=true;
@@ -2433,10 +2473,6 @@ void winMain::fSettShow()
         diaSett->raise();
         diaSett->setFocus();
         if (!gWork) fWindBack();
-    }
-    else
-    {
-        fSettClos();
     }
     fRowsInit();
 }
@@ -2459,8 +2495,7 @@ bool winMain::fFileConf()
     oConf.setFileName(sConf);
     if (!oConf.exists()) return false;
     {
-        messSkin cM;
-        if (!cM.fMess(this,fraMenu,fL("FileConfExisMess"),fL("butYeYe"),fL("butNoNo"))) return false;
+        messSkin cM;if (!cM.fMess(this,fraMenu,fL("FileConfExisMess"),fL("butYeYe"),fL("butNoNo"))) return false;
     }
     gConf=sConf;
     return true;
@@ -2475,8 +2510,7 @@ void winMain::fFileDial()
     }
     else if (gGridShow)
     {
-        messSkin cM;
-        if (!cM.fMess(this,fraMenu,fL("FileProbOpenMess"),fL("butYeYe"),fL("butNoNo"))) return;
+        messSkin cM;if (!cM.fMess(this,fraMenu,fL("FileProbOpenMess"),fL("butYeYe"),fL("butNoNo"))) return;
     }
     gFileDial=true;
     diaFile=new diaFileSkin(winWind,fraMenu,fL("diaFile"),fL("diaFileFolder"),fL("diaFileName"),fL("diaFileType"));
@@ -3446,7 +3480,7 @@ void winMain::fLAll()
     butProjAcce->setText(fL("butProjAcce"));
     butProjBack->setText(fL("butProjBack"));
     butProjJump->setText(fL("butProjJump"));
-    diaSett->labTitl->setText(fL("butSett"));
+    diaSett->labTitl->setText(fL("diaSett"));
     butSettBase->setText(fL("butSettBase"));
     tabSett->setTabText(0,fL("tabSett0"));
     tabSett->setTabText(1,fL("tabSett1"));
@@ -3626,14 +3660,6 @@ void winMain::keyPressEvent(QKeyEvent *qe)
             default: {QWidget::keyPressEvent(qe);}
         }
     }
-    else if (qe->modifiers()==Qt::AltModifier)
-    {
-        switch (qe->key())
-        {
-            case Qt::Key_R:         {fClearAll(true);break;}
-            default: {QWidget::keyPressEvent(qe);}
-        }
-    }
     else if (qe->modifiers()==Qt::KeypadModifier)
     {
         switch (qe->key())
@@ -3651,7 +3677,7 @@ void winMain::keyPressEvent(QKeyEvent *qe)
             case Qt::Key_6:         {fAutoJump();break;}
             case Qt::Key_0:         {gAuto ? fAutoStar():fButtNext();break;}
             case Qt::Key_Delete:    {fRowsShow(-1);break;}
-            case Qt::Key_Insert:         {gAuto ? fAutoStar():fButtNext();break;}
+            case Qt::Key_Insert:    {gAuto ? fAutoStar():fButtNext();break;}
             case Qt::Key_PageUp:    {fRowsLocU();break;}
             case Qt::Key_PageDown:  {fRowsLocD();break;}
             case Qt::Key_Home:      {fRowsLocL();break;}
@@ -3660,6 +3686,7 @@ void winMain::keyPressEvent(QKeyEvent *qe)
             case Qt::Key_Down:      {fButtNext();break;}
             case Qt::Key_Left:      {fAutoBack();break;}
             case Qt::Key_Right:     {fAutoJump();break;}
+            case Qt::Key_Slash:     {if (gGridShow) fGridMarkRows(griText->currentRow());break;}
             default: {QWidget::keyPressEvent(qe);}
         }
     }
