@@ -29,18 +29,16 @@ diaGridSkin::diaGridSkin(QWidget *parent,menuSkin *menu,QString pTitl,int pWidt,
 {
     parWin=parent;
     parMen=menu;
-
     iPr=QApplication::desktop()->width()-1;
     iPb=QApplication::desktop()->height()-1;
     iPm=QApplication::desktop()->height()/2;
     sPf=qApp->font().family();
-
     bLink=true;
-
     iW=pWidt;
     iH=pHeig;
     iX=fCalcPosX(iW);
     iY=fCalcPosY(iH,parMen);
+    sStylBord="border:none;background-color:transparent;";
 
     this->setStyleSheet(fStylFram());
     this->setMinimumSize(QSize(500,iH));
@@ -52,23 +50,32 @@ diaGridSkin::diaGridSkin(QWidget *parent,menuSkin *menu,QString pTitl,int pWidt,
 
     labTitl=new QLabel(pTitl,this);
     labTitl->setStyleSheet(fStylTitl());
-    labTitl->resize(iW,30);
-    labTitl->move(0,0);
+    labTitl->setGeometry(0,0,iW,30);
 
-    labSizV=new QLabel("",this);
-    labSizV->setStyleSheet("border:none;font:3px normal;background-color:#151515;color:#151515;");
-    labSizV->setContentsMargins(0,0,0,0);
-    labSizV->setCursor(QPixmap(":/Imag/QSTit_size_vert.png"));
-    labSizV->resize(iW-4,4);
-    labSizV->move(2,1);
-
-    labSizH=new QLabel("",this);
-    labSizH->stackUnder(labTitl);
-    labSizH->setStyleSheet("border:none;font:3px normal;background-color:#151515;color:#151515;");
-    labSizH->setContentsMargins(0,0,0,0);
-    labSizH->setCursor(QPixmap(":/Imag/QSTit_size.png"));
-    labSizH->resize(4,iH-4);
-    labSizH->move(pWidt-5,2);
+    fraSizT=new QFrame(this);
+    fraSizT->setGeometry(0,0,iW,5);
+    fraSizT->raise();
+    fraSizT->setCursor(QPixmap(":/Imag/QSTit_size_vert.png"));
+    fraSizT->setFrameShape(QFrame::NoFrame);
+    fraSizT->setStyleSheet(sStylBord);
+    fraSizL=new QFrame(this);
+    fraSizL->setGeometry(0,0,5,iH);
+    fraSizL->raise();
+    fraSizL->setCursor(QPixmap(":/Imag/QSTit_size.png"));
+    fraSizL->setFrameShape(QFrame::NoFrame);
+    fraSizL->setStyleSheet(sStylBord);
+    fraSizR=new QFrame(this);
+    fraSizR->setGeometry(iW-5,0,5,iH);
+    fraSizR->setCursor(QPixmap(":/Imag/QSTit_size.png"));
+    fraSizR->setFrameShape(QFrame::NoFrame);
+    fraSizR->setWindowOpacity(0);
+    fraSizR->setStyleSheet(sStylBord);
+    fraSizB=new QFrame(this);
+    fraSizB->setGeometry(0,iH-5,iW,5);
+    fraSizB->raise();
+    fraSizB->setCursor(QPixmap(":/Imag/QSTit_size_vert.png"));
+    fraSizB->setFrameShape(QFrame::NoFrame);
+    fraSizB->setStyleSheet(sStylBord);
 }
 void diaGridSkin::fRePosi()
 {
@@ -88,24 +95,40 @@ void diaGridSkin::fGridLink()
 }
 void diaGridSkin::fMenuMove()
 {
-    int mX,mY;
-    if(this->frameGeometry().y()>iPm)
-    {
-        mX=iX+((iW-parMen->frameGeometry().width())/2);
-        mY=iY+this->frameGeometry().height();
-    }
-    else
-    {
-        mX=iX+((iW-parMen->frameGeometry().width())/2);
-        mY=iY-parMen->frameGeometry().height();
-    }
-    parMen->iX=mX;
-    parMen->iY=mY;
-    parMen->move(mX,mY);
+    parMen->iX=iX+((iW-parMen->frameGeometry().width())/2);
+    if(this->frameGeometry().y()>iPm) parMen->iY=iY+this->frameGeometry().height();
+    else parMen->iY=iY-parMen->frameGeometry().height();
+    parMen->move(parMen->iX,parMen->iY);
 }
-void diaGridSkin::fGridSizeVert(int iD)
+void diaGridSkin::fGridSizeInit(int pW)
 {
-    int jH=iH+iD;
+    if (pW>=this->minimumWidth())iW=pW;
+    else iW=this->minimumWidth();
+    this->resize(iW,iH);
+    int iw=iW-81;
+    QList<diaGridC *> widg=this->findChildren<diaGridC *>();
+    widg[0]->resize(iw,iH-33);
+    widg[0]->setColumnWidth(3,iWid3);dPou3=(double)iWid3/iw;
+    widg[0]->setColumnWidth(4,iWid4);dPou4=(double)iWid4/iw;
+    widg[0]->setColumnWidth(5,iWid5);dPou5=(double)iWid5/iw;
+    widg[0]->setColumnWidth(6,iWid6);dPou6=(double)iWid6/iw;
+    fGridSizeBord();
+    QList<butToolC *> butt=this->findChildren<butToolC *>();
+    butt[0]->move(iW-69,butt[0]->frameGeometry().y());
+    butt[1]->move(iW-39,butt[1]->frameGeometry().y());
+    butt[2]->move(iW-69,butt[2]->frameGeometry().y());
+    butt[3]->move(iW-39,butt[3]->frameGeometry().y());
+    butt[4]->move(iW-69,butt[4]->frameGeometry().y());
+    butt[5]->move(iW-39,butt[5]->frameGeometry().y());
+    butt[6]->move(iW-69,butt[6]->frameGeometry().y());
+    butt[7]->move(iW-39,butt[7]->frameGeometry().y());
+    if (bLink) fMenuMove();
+}
+void diaGridSkin::fGridSizeVert(bool pB,int pD)
+{
+    int jH;
+    if (pB) jH=iH-pD;
+    else jH=iH+pD;
     if (jH>=this->minimumHeight() && jH<=this->maximumHeight())
     {
         iH=jH;
@@ -125,41 +148,18 @@ void diaGridSkin::fGridSizeVert(int iD)
         }
         QList<diaGridC *> widg=this->findChildren<diaGridC *>();
         widg[0]->resize(widg[0]->frameGeometry().width(),iH-33);
-        labSizH->resize(4,iH-4);
+        fGridSizeBord();
         if (bLink) fMenuMove();
     }
 }
-void diaGridSkin::fGridSizeInit(int pW)
+void diaGridSkin::fGridSizeHori(bool pL,int pW)
 {
-    if (pW>=this->minimumWidth())iW=pW;
-    else iW=this->minimumWidth();
-    this->resize(iW,iH);
-    int iw=iW-81;
-    QList<diaGridC *> widg=this->findChildren<diaGridC *>();
-    widg[0]->resize(iw,iH-33);
-    widg[0]->setColumnWidth(3,iWid3);dPou3=(double)iWid3/iw;
-    widg[0]->setColumnWidth(4,iWid4);dPou4=(double)iWid4/iw;
-    widg[0]->setColumnWidth(5,iWid5);dPou5=(double)iWid5/iw;
-    widg[0]->setColumnWidth(6,iWid6);dPou6=(double)iWid6/iw;
-    labTitl->resize(iW,30);
-    labSizV->resize(iW-4,4);
-    labSizH->move(iW-5,2);
-    QList<butToolC *> butt=this->findChildren<butToolC *>();
-    butt[0]->move(iW-69,butt[0]->frameGeometry().y());
-    butt[1]->move(iW-39,butt[1]->frameGeometry().y());
-    butt[2]->move(iW-69,butt[2]->frameGeometry().y());
-    butt[3]->move(iW-39,butt[3]->frameGeometry().y());
-    butt[4]->move(iW-69,butt[4]->frameGeometry().y());
-    butt[5]->move(iW-39,butt[5]->frameGeometry().y());
-    butt[6]->move(iW-69,butt[6]->frameGeometry().y());
-    butt[7]->move(iW-39,butt[7]->frameGeometry().y());
-    if (bLink) fMenuMove();
-}
-void diaGridSkin::fGridSizeHori(int pW)
-{
-    int jW=pW-this->frameGeometry().x();
+    int jX,jW;
+    if (pL) {jX=pW;jW=this->frameGeometry().x()-pW+this->frameGeometry().width();}
+    else {jX=this->frameGeometry().x();jW=pW-jX;}
     if (jW>=this->minimumWidth() && jW<=this->maximumWidth())
     {
+        if (pL) {iX=jX;this->move(iX,iY);}
         iW=jW;
         this->resize(iW,iH);
         int iw=iW-81;
@@ -169,9 +169,7 @@ void diaGridSkin::fGridSizeHori(int pW)
         if (nColo>1) widg[0]->setColumnWidth(4,(int)iw*dPou4);
         if (nColo>2) widg[0]->setColumnWidth(5,(int)iw*dPou5);
         if (nColo>3) widg[0]->setColumnWidth(6,(int)iw*dPou6);
-        labTitl->resize(iW,30);
-        labSizV->resize(iW-4,4);
-        labSizH->move(iW-5,2);
+        fGridSizeBord();
         QList<butToolC *> butt=this->findChildren<butToolC *>();
         butt[0]->move(iW-69,butt[0]->frameGeometry().y());
         butt[1]->move(iW-39,butt[1]->frameGeometry().y());
@@ -184,27 +182,29 @@ void diaGridSkin::fGridSizeHori(int pW)
         if (bLink) fMenuMove();
     }
 }
+void diaGridSkin::fGridSizeBord()
+{
+    labTitl->resize(iW,30);
+    fraSizT->resize(iW,5);
+    fraSizL->resize(5,iH);
+    fraSizB->setGeometry(0,iH-5,iW,5);
+    fraSizR->setGeometry(iW-5,0,5,iH);
+}
 void diaGridSkin::mousePressEvent(QMouseEvent *e)
 {
-    bSizV=(e->y()>0 && e->y()<5)?true:false;
-    bSizH=(e->y()>0 && e->x()>iW-5)?true:false;
+    bSizT=(e->y()>=0 && e->y()<=5)?true:false;
+    bSizL=(e->y()>=0 && e->x()<=5)?true:false;
+    bSizB=(e->y()>=iH-5 && e->y()<=iH)?true:false;
+    bSizR=(e->y()>=0 && e->x()>=iW-5)?true:false;
     iCx=e->globalX();
     iCy=e->globalY();
 }
 void diaGridSkin::mouseMoveEvent(QMouseEvent *e)
 {
-    if (bSizV)
-    {
-        fGridSizeVert(iCy-e->globalY());
-        iCx=e->globalX();
-        iCy=e->globalY();
-    }
-    else if (bSizH)
-    {
-        fGridSizeHori(e->globalX());
-        iCx=e->globalX();
-        iCy=e->globalY();
-    }
+    if (bSizT) {fGridSizeVert(false,iCy-e->globalY());iCx=e->globalX();iCy=e->globalY();}
+    else if (bSizL) {fGridSizeHori(true,e->globalX());iCx=e->globalX();iCy=e->globalY();}
+    else if (bSizB) {fGridSizeVert(true,iCy-e->globalY());iCx=e->globalX();iCy=e->globalY();}
+    else if (bSizR) {fGridSizeHori(false,e->globalX());iCx=e->globalX();iCy=e->globalY();}
     else
     {
         int jX=iX+e->globalX()-iCx;

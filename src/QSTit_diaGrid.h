@@ -39,6 +39,7 @@ class diaGridSkin : public QFrame
     public:
         diaGridSkin(QWidget*,menuSkin*,QString,int,int);
         QLabel      *labTitl;
+        QFrame      *fraSizL;
         int         iX,iY,iW,iH;
         bool        bLink;
         int         nColo;
@@ -48,27 +49,25 @@ class diaGridSkin : public QFrame
         void        fRePosi();
         void        fWorkLang(QStringList,QStringList);
         void        fGridSizeInit(int);
-        void        fGridSizeHori(int);
         void        fGridLink();
     private:
         QWidget     *parWin;
         menuSkin    *parMen;
-        int         iCx;
-        int         iCy;
-        int         iPr;
-        int         iPb;
-        int         iPm;
+        int         iCx,iCy;
+        int         iPr,iPb,iPm;
         QString     sPf;
-        QLabel      *labSizV;
-        QLabel      *labSizH;
-        bool        bSizV;
-        bool        bSizH;
-        QStringList gLangCode;
-        QStringList gLangText;
+        QFrame      *fraSizT;
+        QFrame      *fraSizR;
+        QFrame      *fraSizB;
+        bool        bSizT,bSizL,bSizB,bSizR;
+        QString     sStylBord;
+        QStringList gLangCode,gLangText;
 
         void        fMenuMove();
         QString     fL(QString);
-        void        fGridSizeVert(int);
+        void        fGridSizeHori(bool,int);
+        void        fGridSizeVert(bool,int);
+        void        fGridSizeBord();
     signals:
         void sMoved();
     protected:

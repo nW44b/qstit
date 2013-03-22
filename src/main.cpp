@@ -26,6 +26,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    app.setWindowIcon(QPixmap("./Imag/QSTit_icon.png"));
     winMain wMain;
     wMain.show();
     return app.exec();

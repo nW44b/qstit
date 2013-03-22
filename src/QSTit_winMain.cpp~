@@ -1318,14 +1318,10 @@ void winMain::fGridZero()
 void winMain::fGridTitle()
 {
     QFileInfo fInfo=QFileInfo(gFile);
-    QString sTitl=fInfo.fileName()+"   ( ";
-    sTitl+=QString("%1").arg(gRowsMaxi-1) + " " + fL("diaGridTitlLine") + " | ";
+    QString sTitl=fInfo.fileName()+" | ";
+    sTitl+=fL("diaGridTitlLine")+": "+QString("%1").arg(gRowsMaxi-1)+" | ";
     sTitl+=fL("diaGridTitlWidt")+": "+QString("%1").arg(gFileMaxiRows[0]);
-    sTitl +=   " )";
-
-    //if (gSrtx) sTitl+=  " | "+fL("diaGridTitlEnd")+": "+gSrtxStop.left(8)+" )";
-    //else sTitl +=  " )";
-   
+    //if (gSrtx) sTitl+=  " | "+fL("diaGridTitlEnd")+": "+gSrtxStop.left(8);
     diaGrid->labTitl->setText(sTitl);
 }
 void winMain::fGridInit()

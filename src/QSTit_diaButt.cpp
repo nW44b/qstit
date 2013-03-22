@@ -36,21 +36,20 @@ void butSpin::keyPressEvent(QKeyEvent *e)
     else if (e->key()==Qt::Key_Minus) QSpinBox::keyPressEvent(e);
     else if (e->key()==Qt::Key_Delete || e->key()==Qt::Key_Backspace) QSpinBox::keyPressEvent(e);
     else if (e->key()==Qt::Key_Left || e->key()==Qt::Key_Right) QSpinBox::keyPressEvent(e);
-    else QApplication::sendEvent(parWin,new QKeyEvent(QEvent::KeyPress, e->key(),e->modifiers(),"",false,1));
+    else QApplication::sendEvent(parWin,new QKeyEvent(QEvent::KeyPress,e->key(),e->modifiers(),"",false,1));
 }
 
 //-------------------------------------------------------------------------------------------------
 
 butToolC::butToolC(QWidget *pPare,QPixmap pIcon,QString pText,bool pAuto) : QToolButton(pPare)
 {
-    int iSize;
-    int iWidt;
+    int iSize,iWidt;
 
     if (pText.left(1)=="L") iSize=35;
     if (pText.left(1)=="M") iSize=28;
     if (pText.left(1)=="S") iSize=17;
     iWidt=iSize;
-    if (pText.left(1)=="R") {iSize=35; iWidt=65;}
+    if (pText.left(1)=="R") {iSize=35;iWidt=65;}
 
     this->setIcon(pIcon);
     this->setText(pText.mid(1));
@@ -59,11 +58,7 @@ butToolC::butToolC(QWidget *pPare,QPixmap pIcon,QString pText,bool pAuto) : QToo
     this->resize(iWidt,iSize);
     this->setIconSize(QSize(iWidt-3,iSize-3));
     this->setAutoRepeat(pAuto);
-    if (pAuto)
-    {
-        this->setAutoRepeatInterval(50);
-        this->setAutoRepeatDelay(200);
-    }
+    if (pAuto) {this->setAutoRepeatInterval(50);this->setAutoRepeatDelay(200);}
 }
 bool butToolC::event(QEvent *e)
 {
@@ -85,13 +80,11 @@ void butToolC::keyPressEvent(QKeyEvent *e)
         case Qt::Key_Space:
             if (e->modifiers()==Qt::NoModifier)
             {
-                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Down,Qt::NoModifier,"",false,1));
-                break;
+                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Down,Qt::NoModifier,"",false,1));break;
             }
             if (e->modifiers()==Qt::ShiftModifier)
             {
-                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Up,Qt::NoModifier,"",false,1));
-                break;
+                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Up,Qt::NoModifier,"",false,1));break;
             }
         default: QToolButton::keyPressEvent(e);
     }
@@ -129,13 +122,11 @@ void butToolX::keyPressEvent(QKeyEvent *e)
         case Qt::Key_Space:
             if (e->modifiers()==Qt::NoModifier)
             {
-                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Down,Qt::NoModifier,"",false,1));
-                break;
+                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Down,Qt::NoModifier,"",false,1));break;
             }
             if (e->modifiers()==Qt::ShiftModifier)
             {
-                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Up,Qt::NoModifier,"",false,1));
-                break;
+                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Up,Qt::NoModifier,"",false,1));break;
             }
         default: QToolButton::keyPressEvent(e);
     }
@@ -152,11 +143,7 @@ butToolG::butToolG(QWidget *pPare,QPixmap pIcon,int pSize,QString pText,bool pAu
     this->resize(pSize,pSize);
     this->setIconSize(QSize(pSize,pSize));
     this->setAutoRepeat(pAuto);
-    if (pAuto)
-    {
-        this->setAutoRepeatInterval(50);
-        this->setAutoRepeatDelay(200);
-    }
+    if (pAuto) {this->setAutoRepeatInterval(50);this->setAutoRepeatDelay(200);}
 }
 bool butToolG::event(QEvent *e)
 {
@@ -178,13 +165,11 @@ void butToolG::keyPressEvent(QKeyEvent *e)
         case Qt::Key_Space:
             if (e->modifiers()==Qt::NoModifier)
             {
-                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Down,Qt::NoModifier,"",false,1));
-                break;
+                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Down,Qt::NoModifier,"",false,1));break;
             }
             if (e->modifiers()==Qt::ShiftModifier)
             {
-                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Up,Qt::NoModifier,"",false,1));
-                break;
+                QApplication::sendEvent(this,new QKeyEvent(QEvent::KeyPress,Qt::Key_Up,Qt::NoModifier,"",false,1));break;
             }
         default: QToolButton::keyPressEvent(e);
     }
