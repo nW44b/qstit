@@ -24,6 +24,9 @@
 #ifndef H_WINMAIN
 #define H_WINMAIN
 
+#include <iostream>
+#include <fstream>
+
 #include <QtGui>
 #include <QApplication>
 #include <QFile>
@@ -54,6 +57,7 @@ class grpSkin;
 class menuSkin;
 class mesSkin;
 class rowSkin;
+class diaInfoSkin;
 
 class winMain : public QWidget
 {
@@ -74,7 +78,7 @@ class winMain : public QWidget
             bool    show;
             QString text;
             QFont   font;
-            QColor  colB,colF;
+            QColor  colB,colF,colO;
             int     x,y,widt,heig,spac,rota,savH,savS,hori,vert,outl;
         } objRow0,objRow1,objRow2,objRow3,objRow4;
     private:
@@ -83,7 +87,8 @@ class winMain : public QWidget
         bool        gBackDial;
         QString     gClokStyl;
         bool        gColoDial;
-        QString     gConf;
+        bool        gConf;
+        QString     gConfFile;
         int         gEditTextColu[99];
         int         gEditTextLine[99];
         QString     gEditTextNewx[99];
@@ -136,6 +141,7 @@ class winMain : public QWidget
         int         gShed;
         int         gRows;
         QString     gRowsBack;
+        QFrame*     fraRowsCent;
         QString     gRowsColo;
         QFont       gRowsFont;
         int         gRowsHcen;
@@ -145,6 +151,7 @@ class winMain : public QWidget
         int         gRowsVcenPrev;
         bool        gSecoText;
         bool        gSecoItal;
+        bool        gSett;
         int         gSettHeig;
         int         gSettLefx;
         bool        gSettShow;
@@ -180,7 +187,7 @@ class winMain : public QWidget
         void        fClearAll(bool);
         void        fConfConf(QString,QString);
         void        fConfRead();
-        void        fConfWrit();
+        void        fConfWrit(int);
         QString     fConfWritLine(QString,QString);
         bool        fFileConf();
         void        fFileEncoding(QString);
@@ -255,8 +262,11 @@ class winMain : public QWidget
         void        fRowsTextDraw(int);
         void        fRowsTextForm();
         void        fRowsWidtCalc();
+        void        fSettBase();
         void        fSettCrea();
+        void        fSettCreaSave();
         void        fSettCreaShed();
+        void        fSettEnab();
         void        fWindClear();
         void        fWindCrea();
         void        fWindLogo();
@@ -344,6 +354,11 @@ class winMain : public QWidget
         void        fRowsLocL();
         void        fRowsLocR();
         void        fRowsLocU();
+        void        fRowsOut1();
+        void        fRowsOut2();
+        void        fRowsOut3();
+        void        fRowsOut4();
+        void        fRowsOutl();
         void        fRowsOutlDial();
         void        fRowsOutlGet(QColor);
         void        fRowsOutlThik(int);
@@ -367,8 +382,10 @@ class winMain : public QWidget
         void        fRowsVertTop2();
         void        fRowsVertTop3();
         void        fRowsVertTop4();
-        void        fSettBase();
+        void        fSettBaseDial();
         void        fSettClos();
+        void        fSettSaveFile();
+        void        fSettSaveGlob();
         void        fSettShow();
         void        fShedHeig(int);
         void        fShedNumb();
@@ -385,10 +402,12 @@ class winMain : public QWidget
         void        fWindExitDial();
         void        fWindTask();
     private:
+        //barSkin*        barFile;
         QPushButton*    butEditCanc;
         QPushButton*    butEditSave;
         butToolC*       butExit;
-        butToolC*       butExitSave;
+        QPushButton*    butExitCanc;
+        QPushButton*    butExitExit;
         butToolC*       butFile;
         QPushButton*    butFont;
         butToolC*       butGridClea;
@@ -451,6 +470,11 @@ class winMain : public QWidget
         butToolX*       butShedHoR2;
         butToolX*       butShedHoR3;
         butToolX*       butShedHoR4;
+        QPushButton*    butShedOut0;
+        QPushButton*    butShedOut1;
+        QPushButton*    butShedOut2;
+        QPushButton*    butShedOut3;
+        QPushButton*    butShedOut4;
         butToolX*       butShedVeB0;
         butToolX*       butShedVeB1;
         butToolX*       butShedVeB2;
@@ -481,7 +505,7 @@ class winMain : public QWidget
         diaFontSkin*    diaFont;
         diaGridSkin*    diaGrid;
         diaSkin*        diaHelp;
-        diaSkin*        diaInfo;
+        diaInfoSkin*    diaInfo;
         diaSkin*        diaMess;
         diaSkin*        diaSett;
         menuSkin*       fraMenu;
@@ -497,6 +521,7 @@ class winMain : public QWidget
         QLabel*         labGridCol6;
         QLabel*         labGridColo;
         QLabel*         labGridFont;
+        QLabel*         labGridSize;
         QLabel*         labJump;
         QLabel*         labJumpBase;
         QLabel*         labLogo;
@@ -512,10 +537,10 @@ class winMain : public QWidget
         QLabel*         labScreSize;
         QLabel*         labSettLin1;
         QLabel*         labSettLin2;
+        QLabel*         labSettLin4;
         QLabel*         labShedBack;
         QLabel*         labShedDesc;
-        QLabel*         labShedFont;
-        QLabel*         labShedFore;
+        QLabel*         labShedText;
         QLabel*         labShedHeig;
         QLabel*         labShedHori;
         QLabel*         labShedLin0;
@@ -546,9 +571,12 @@ class winMain : public QWidget
         QRadioButton*   radExitSavF;
         QRadioButton*   radExitSavN;
         QRadioButton*   radExitSavP;
-        QRadioButton*   radGridColo;
+        QRadioButton*   radGridDark;
+        QRadioButton*   radGridWhit;
         QRadioButton*   radLangEngl;
         QRadioButton*   radLangOthe;
+        QRadioButton*   radSaveExiF;
+        QRadioButton*   radSaveExiP;
         QRadioButton*   radShedSho1;
         QRadioButton*   radShedSho2;
         QRadioButton*   radShedSho3;
@@ -582,6 +610,7 @@ class winMain : public QWidget
         QSpinBox*       spiShedSpa3;
         QWidget*        tabGene;
         QWidget*        tabRows;
+        QWidget*        tabSave;
         QTabWidget*     tabSett;
         QWidget*        tabShed;
         QTextEdit*      texHelp;
@@ -593,13 +622,13 @@ class winMain : public QWidget
         QLabel*         texRow4;
         QLabel*         texRowsBack;
         QLabel*         texRowsDime;
+        QLabel*         texRowsFram;
         QLabel*         texRowsHeim;
         QLabel*         texRowsHeiM;
         QLabel*         texRowsLoca;
-        QLabel*         texRowsNumb;
         QLabel*         texRowsRota;
         QLabel*         texRowsSpac;
-        QLabel*         texRowsWidm;
+        QLabel*         texRowsText;
         QLabel*         texRowsWidM;
         QTime           timAuto;
         QTime           timStar;

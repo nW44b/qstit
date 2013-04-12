@@ -25,7 +25,7 @@
 
 int fCalcPosX(int iWidt)
 {
-    int iPr=QApplication::desktop()->width()-1;
+    int iPr=QApplication::desktop()->width();
     return (iPr-iWidt)/2;
 }
 int fCalcPosY(int iHeig,QFrame *parMen)
@@ -50,7 +50,15 @@ QString fStylClos()
 {
     return "QToolButton {image:url(:/Imag/QSTit_clos.png);border:none;} QToolButton:hover {image:url(:/Imag/QSTit_clos_over.png);}";
 }
-
+void fWait(int ms)
+{
+    #ifdef Q_OS_WIN
+        Sleep(uint(ms));
+    #else
+        struct timespec ts={ ms/1000,(ms%1000)*1000*1000};
+        nanosleep(&ts,NULL);
+    #endif
+}
 //-------------------------------------------------------------------------------------------------
 
 rowSkin::rowSkin(QWidget *parent,int pWidt,int pHeig) : QFrame(parent)
@@ -71,7 +79,6 @@ rowSkin::rowSkin(QWidget *parent,int pWidt,int pHeig) : QFrame(parent)
     this->setContentsMargins(0,0,0,0);
     this->setCursor(QCursor(QPixmap(":/Imag/QSTit_curH.png"),-1,-1));
     this->setGeometry(iX,iY,iW,iH);
-    this->move(iX,iY);
     this->show();
     this->raise();
 }
@@ -124,8 +131,6 @@ menuSkin::menuSkin(QWidget *parent,int pWidt,int pHeig,int pLefx,int pTopy) : QF
     this->setCursor(Qt::ArrowCursor);
     this->setGeometry(iX,iY,iW,iH);
     this->setFocusPolicy(Qt::NoFocus);                  // important for keyboard events
-    this->move(iX,iY);
-
     this->show();
     this->raise();
 }
@@ -179,7 +184,6 @@ diaSkin::diaSkin(QWidget *parent,QFrame *menu,QString pTitl,int pWidt,int pHeig,
     this->setContentsMargins(0,0,0,0);
     this->setCursor(Qt::ArrowCursor);
     this->setGeometry(iLefx,iTopy,pWidt,pHeig);
-    this->move(iLefx,iTopy);
 
     labTitl = new QLabel(pTitl,this);
     labTitl->setStyleSheet(fStylTitl());
@@ -194,7 +198,7 @@ diaSkin::diaSkin(QWidget *parent,QFrame *menu,QString pTitl,int pWidt,int pHeig,
     butClos->setAutoRepeat(false);
     connect(butClos,SIGNAL(clicked()),this,SLOT(fGridClos()));
 
-    this->setHidden(true);
+    this->hide();
 }
 void diaSkin::fGridClos()
 {
@@ -247,75 +251,6 @@ grpSkin::grpSkin(QWidget *parent,int pWidt,int pHeig,int pLefx,int pTopy) : QFra
     this->setContentsMargins(0,0,0,0);
     this->setCursor(Qt::ArrowCursor);
     this->setGeometry(pLefx,pTopy,pWidt,pHeig);
-    this->move(pLefx,pTopy);
-    this->show();
-}
-
-//-------------------------------------------------------------------------------------------------
-
-barSkin::barSkin(QWidget *parent,QFrame *menu,QString pFile,QString pText,int pWidt,int pHeig,int pLefx,int pTopy,int pLmax) : QDialog(parent)
-{
-    parWin=parent;
-    parMen=menu;
-    int iLefx=pLefx;
-    int iTopy=pTopy;
-    int iWmax=pWidt-20;
-
-    dCf=(double)iWmax/pLmax;
-
-    if (iLefx==-1) iLefx=fCalcPosX(pWidt);
-    if (iTopy==-1) iTopy=fCalcPosY(pHeig,parMen);
-
-    this->setWindowFlags(Qt::FramelessWindowHint|Qt::CustomizeWindowHint|Qt::WindowStaysOnTopHint);
-    this->setWindowModality(Qt::ApplicationModal);
-    this->setStyleSheet(fStylFram());
-    this->setMinimumSize(QSize(pWidt,pHeig));
-    this->setMaximumSize(QSize(pWidt,pHeig));
-    this->setContentsMargins(0,0,0,0);
-    this->setCursor(Qt::ArrowCursor);
-    this->setGeometry(iLefx,iTopy,pWidt,pHeig);
-    this->move(iLefx,iTopy);
-
-    QToolButton *butClos=new QToolButton(this);
-    butClos->setStyleSheet(fStylClos());
-    butClos->setContentsMargins(0,0,0,0);
-    butClos->resize(16,16);
-    butClos->move(pWidt-22,7);
-    butClos->setAutoRepeat(false);
-    connect(butClos,SIGNAL(clicked()),this,SLOT(fGridClos()));
-
-    QFileInfo fInfo=QFileInfo(pFile);
-
-    QLabel *labTitl = new QLabel(fInfo.fileName(),this);
-    labTitl->setStyleSheet(fStylTitl());
-    labTitl->setMinimumSize(pWidt,30);
-    labTitl->move(0,0);
-
-    QLabel *labText = new QLabel(pText,this);
-    labText->setMinimumSize(iWmax,20);
-    labText->setAlignment(Qt::AlignHCenter);
-    labText->setStyleSheet("font:normal;color:#ffffff;border:none;");
-    labText->move(10,40);
-
-    labProg = new QLabel("",this);
-    labProg->setMaximumWidth(iWmax);
-    labProg->setMaximumHeight(10);
-    labProg->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
-    labProg->setStyleSheet("background-color:#0055aa;border-radius:0px;");
-    labProg->move(10,60);
-
-    this->show();
-    this->setFocus();
-}
-void barSkin::fGridClos()
-{
-    emit sClosed();
-    this->close();
-}
-void barSkin::setStep(int pStep)
-{
-    int iStep=pStep*dCf;
-    labProg->resize(iStep,labProg->height());
     this->show();
 }
 
@@ -694,6 +629,124 @@ void diaFileSkin::keyPressEvent(QKeyEvent *qe)
     if (qe->key()==Qt::Key_Escape) fGridClos();
     else {QApplication::sendEvent(parWin,new QKeyEvent(QEvent::KeyPress, qe->key(),qe->modifiers(),"",false,1));}
 }
+
+//-------------------------------------------------------------------------------------------------
+
+diaInfoSkin::diaInfoSkin(QWidget *parent,QFrame *menu,QString pTitl,int pWidt,int pHeig,int pLefx,int pTopy) : QFrame(parent)
+{
+    parWin=parent;
+    parMen=menu;
+
+    iPr=QApplication::desktop()->width()-1;
+    iPb=QApplication::desktop()->height()-1;
+    iPm=QApplication::desktop()->height()/2;
+
+    iW=pWidt;
+    iH=pHeig;
+    iX=pLefx;if (iX==-1) iX=fCalcPosX(iW);
+    iY=pTopy;if (iY==-1) iY=fCalcPosY(iH,parMen);
+
+    sStylBord="border:none;background-color:transparent;";
+
+    this->setStyleSheet(fStylFram());
+    this->setMinimumSize(QSize(iW,(18*7)+36));
+    this->setMaximumSize(QSize(iW,(18*16)+36));
+    this->setContentsMargins(0,0,0,0);
+    this->setCursor(Qt::ArrowCursor);
+    this->setGeometry(iX,iY,iW,iH);
+
+    labTitl = new QLabel(pTitl,this);
+    labTitl->setStyleSheet(fStylTitl());
+    labTitl->setMinimumSize(pWidt,30);
+    labTitl->move(0,0);
+
+    QToolButton *butClos=new QToolButton(this);
+    butClos->setStyleSheet(fStylClos());
+    butClos->setContentsMargins(0,0,0,0);
+    butClos->resize(16,16);
+    butClos->move(pWidt-22,7);
+    butClos->setAutoRepeat(false);
+    connect(butClos,SIGNAL(clicked()),this,SLOT(fGridClos()));
+
+    fraSizT=new QFrame(this);
+    fraSizT->setGeometry(0,0,iW,5);
+    fraSizT->raise();
+    fraSizT->setCursor(QPixmap(":/Imag/QSTit_size_vert.png"));
+    fraSizT->setFrameShape(QFrame::NoFrame);
+    fraSizT->setStyleSheet(sStylBord);
+    fraSizB=new QFrame(this);
+    fraSizB->setGeometry(0,iH-5,iW,5);
+    fraSizB->raise();
+    fraSizB->setCursor(QPixmap(":/Imag/QSTit_size_vert.png"));
+    fraSizB->setFrameShape(QFrame::NoFrame);
+    fraSizB->setStyleSheet(sStylBord);
+
+    this->setHidden(true);
+}
+void diaInfoSkin::fGridClos()
+{
+    emit sClosed();
+    this->close();
+}
+void diaInfoSkin::fRePosi()
+{
+    int iX=fCalcPosX(this->frameGeometry().width());
+    int iY=fCalcPosY(this->frameGeometry().height(),parMen);
+    this->move(iX,iY);
+}
+void diaInfoSkin::fGridSizeVert(bool pB,int pD)
+{
+    int jH;
+    if (pB) jH=iH-pD;
+    else jH=iH+pD;
+    if (jH>=this->minimumHeight() && jH<=this->maximumHeight())
+    {
+        iH=jH;
+        this->resize(iW,iH);
+        if (!pB) iY-=pD;
+        if (iY>iPb-iH) iY=iPb-iH;
+        this->move(iX,iY);
+        QList<QTableWidget *> widg=this->findChildren<QTableWidget *>();
+        widg[0]->resize(widg[0]->frameGeometry().width(),iH-33);
+        fGridSizeBord();
+    }
+}
+void diaInfoSkin::fGridSizeBord()
+{
+    fraSizB->setGeometry(0,iH-5,iW,5);
+}
+void diaInfoSkin::mousePressEvent(QMouseEvent *e)
+{
+    bSizT=(e->y()>=0 && e->y()<=5)?true:false;
+    bSizB=(e->y()>=iH-5 && e->y()<=iH)?true:false;
+    iCx=e->globalX();
+    iCy=e->globalY();
+}
+void diaInfoSkin::mouseMoveEvent(QMouseEvent *e)
+{
+    if (bSizT) {fGridSizeVert(false,iCy-e->globalY());iCx=e->globalX();iCy=e->globalY();}
+    else if (bSizB) {fGridSizeVert(true,iCy-e->globalY());iCx=e->globalX();iCy=e->globalY();}
+    else
+    {
+        int nFx=this->frameGeometry().x()+e->globalX()-iCx;
+        if (nFx<1) nFx=1;
+        if (nFx>iPr-this->frameGeometry().width()) nFx=iPr-this->frameGeometry().width();
+        int nFy=this->frameGeometry().y()+e->globalY()-iCy;
+        if (nFy<1) nFy=1;
+        if (nFy>iPb-this->frameGeometry().height()) nFy=iPb-this->frameGeometry().height();
+        iX=nFx;
+        iY=nFy;
+        this->move(iX,iY);
+        iCx=e->globalX();
+        iCy=e->globalY();
+    }
+}
+void diaInfoSkin::keyPressEvent(QKeyEvent *e)
+{
+    if (e->key()==Qt::Key_Escape) {fGridClos();}
+    else {QApplication::sendEvent(parWin,new QKeyEvent(QEvent::KeyPress, e->key(),e->modifiers(),"",false,1));}
+}
+
 /*
     ════════════════════════════════════════════════════════════════════════════════
     Code analysis/programming:  Georges Piedboeuf-Boen  georges.pi.bo@gmail.com

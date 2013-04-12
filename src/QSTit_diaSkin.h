@@ -26,11 +26,16 @@
 #include <QtGui>
 #include <QFrame>
 
+#ifdef Q_OS_WIN
+#include <windows.h>                                    // for fWait
+#endif
+
 int fCalcPosX(int);
 int fCalcPosY(int,QFrame*);
 QString fStylFram();
 QString fStylTitl();
 QString fStylButt();
+void fWait(int);
 
 class rowSkin : public QFrame
 {
@@ -93,22 +98,6 @@ class grpSkin : public QFrame
     Q_OBJECT
     public:
         grpSkin(QWidget*,int,int,int,int);
-};
-class barSkin : public QDialog
-{
-    Q_OBJECT
-    public:
-        barSkin(QWidget*,QFrame*,QString,QString,int,int,int,int,int);
-        void setStep(int);
-    private:
-        QWidget *parWin;
-        QFrame  *parMen;
-        double  dCf;
-        QLabel  *labProg;
-    private slots:
-        void fGridClos();
-    signals:
-        void sClosed();
 };
 class messSkin
 {
@@ -182,6 +171,34 @@ class diaFileSkin : public QFrame
     signals:
         void sClosed();
         void sFileGet(QString);
+    protected:
+        virtual void mousePressEvent(QMouseEvent*);
+        virtual void mouseMoveEvent(QMouseEvent*);
+        virtual void keyPressEvent(QKeyEvent*);
+};
+class diaInfoSkin : public QFrame
+{
+    Q_OBJECT
+    public:
+        diaInfoSkin(QWidget*,QFrame*,QString,int,int,int,int);
+        QLabel  *labTitl;
+        void fRePosi();
+    private:
+        QWidget     *parWin;
+        QFrame      *parMen;
+        int         iX,iY,iW,iH;
+        int         iCx,iCy;
+        int         iPr,iPb,iPm;
+        QFrame      *fraSizT;
+        QFrame      *fraSizB;
+        bool        bSizT,bSizB;
+        QString     sStylBord;
+        void        fGridSizeVert(bool,int);
+        void        fGridSizeBord();
+    private slots:
+        void fGridClos();
+    signals:
+        void sClosed();
     protected:
         virtual void mousePressEvent(QMouseEvent*);
         virtual void mouseMoveEvent(QMouseEvent*);

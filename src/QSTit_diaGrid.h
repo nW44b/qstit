@@ -48,8 +48,9 @@ class diaGridSkin : public QFrame
 
         void        fRePosi();
         void        fWorkLang(QStringList,QStringList);
-        void        fGridSizeInit(int);
+        void        fGridSizeInit(int,int);
         void        fGridLink();
+        void        fMenuMove();
     private:
         QWidget     *parWin;
         menuSkin    *parMen;
@@ -63,7 +64,6 @@ class diaGridSkin : public QFrame
         QString     sStylBord;
         QStringList gLangCode,gLangText;
 
-        void        fMenuMove();
         QString     fL(QString);
         void        fGridSizeHori(bool,int);
         void        fGridSizeVert(bool,int);

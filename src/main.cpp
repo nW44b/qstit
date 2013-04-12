@@ -22,11 +22,10 @@
 #include <QApplication>
 #include "QSTit_winMain.h"
 
-
-int main(int argc, char *argv[])
+int main(int argc,char *argv[])
 {
     QApplication app(argc, argv);
-    app.setWindowIcon(QPixmap("./Imag/QSTit_icon.png"));
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
     winMain wMain;
     wMain.show();
     return app.exec();

@@ -1,4 +1,4 @@
-﻿[English]
+[English]
 barFileReading      Loading...
 barFileSrt          SubRip file (.srt)
 barFileTxt          Text file (.txt)
@@ -10,9 +10,9 @@ butDimeRigh         + Horizontal
 butDimeUpup         + Vertical
 butEditCanc         Cancel
 butEditSave         Confirm
-butExit             Exit / Save settings [Ctrl+X]
+butExit             Quit / Save settings [Ctrl+Q]
 butExitCanc         Cancel
-butExitSave         Confirm
+butExitExit         Confirm
 butFile             Open [Ctrl+O]
 butFont             Font
 butGridClea         Clear display and reset file at beginning [Ctrl+R]
@@ -61,15 +61,15 @@ butYeYe             Yes
 chkSecoItal         Force italic for bottom lines
 chkSecoText         Display one-line subtitles on bottom line
 diaColoOutl         Outline colour
-diaExit             Exit / Save settings
+diaExit             Quit / Save settings
 diaFile             Open subtitle file...
 diaFileFolder       Folder
 diaFileName         File
 diaFileType         Type
 diaGridFont         Grid font
-diaGridTitlEnd      End
-diaGridTitlLine     Lines
-diaGridTitlWidt     Widest
+diaGridTitlEnd      last
+diaGridTitlLine     subtitles
+diaGridTitlWidt     widest
 diaHelp             Help
 diaInfo             File Info
 diaRowsBack         Lines background
@@ -101,12 +101,12 @@ labGridFont         Grid font
 labJumpBase         Jump steps (1/10 sec.)
 labRowsOutl         Outline
 labShedBack         Background colour
-labShedFont         Font
+labShedText         Text
 labShedFore         Text colour
 labShedHeig         Height
-labShedRota         Rotation
+labShedRota         Rotation (0.1°)
 labShedShow         Visibility
-labShedSpac         Spacing
+labShedSpac         Bottom spacing
 labShedTit0         All lines
 labShedTit1         Line 1
 labShedTit2         Line 2
@@ -118,11 +118,12 @@ labTextAliV         Vert. alignment
 labTextFont         Text
 labTime             Timer
 labWindBack         Screen
-labWorkLang         Interface language
+labWorkLang         Interface lang.
 msgCleaAllMess      Restore default settings?
 msgCleaAllTitl      Reset all
 msgCleaGridMess     Clear display and|reset file at beginning?
 msgCleaGridTitl     Reset grid
+msgConfWriteDone    Settings saved
 msgFontWideMess     Display may be too large for the screen
 msgFontWideTitl     Font size
 msgGridEditMess     Nothing to edit
@@ -132,7 +133,8 @@ radCenV             center
 radExitSavF         Save settings as settings for this file
 radExitSavN         Don't save settings
 radExitSavP         Save settings as global settings
-radGridColo         Dark
+radGridDark         dark
+radGridWhit         white
 radLangOthe         Other
 radLeft             left
 radRigh             right
@@ -146,13 +148,15 @@ ResetConfirmTitl    Reset
 tabSett0            Display
 tabSett1            General
 tabSett2            Advanced
+tabSett3            Save
 texRowsBack         Background
 texRowsCent         Center
 texRowsDime         Size
+texRowsFram         Text frame:
 texRowsLoca         Position
-texRowsNumb         Text blocs:
-texRowsRota         Rotation
+texRowsRota         Rotation (0.1°)
 texRowsSpac         Spacing
+texRowsText         Text:
 widInfoCols         Max. number of lines per subtitle
 widInfoEnco         File encoding
 widInfoLine         Widest lines (in decreasing order)

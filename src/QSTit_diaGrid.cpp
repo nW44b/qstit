@@ -100,8 +100,11 @@ void diaGridSkin::fMenuMove()
     else parMen->iY=iY-parMen->frameGeometry().height();
     parMen->move(parMen->iX,parMen->iY);
 }
-void diaGridSkin::fGridSizeInit(int pW)
+void diaGridSkin::fGridSizeInit(int pW,int pRowsMaxi)
 {
+    if (pRowsMaxi<16) this->setMaximumHeight(36+(pRowsMaxi*18));
+    else this->setMaximumHeight(36+(16*18));
+
     if (pW>=this->minimumWidth())iW=pW;
     else iW=this->minimumWidth();
     this->resize(iW,iH);
@@ -210,12 +213,14 @@ void diaGridSkin::mouseMoveEvent(QMouseEvent *e)
         int jX=iX+e->globalX()-iCx;
         if (jX<1) jX=1;
         if (jX>iPr-iW) jX=iPr-iW;
+        if (bLink && parMen->iX<1) jX=iX+1;
+        if (bLink && parMen->iX>iPr-parMen->iW) jX=iX-1;
+        iX=jX;
         int jY=iY+e->globalY()-iCy;
         if (jY<1) jY=1;
         if (bLink && jY<41) jY=41;
         if (jY>iPb-iH) jY=iPb-iH;
         if (bLink && jY>iPb-iH-40) jY=iPb-iH-40;
-        iX=jX;
         iY=jY;
         this->move(iX,iY);
         iCx=e->globalX();

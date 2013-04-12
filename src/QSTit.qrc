@@ -22,11 +22,11 @@
 -->
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
+    <file>Help/QSTit_Default.cfg</file>
     <file>Help/QSTit_Lang_En.txt</file>
     <file>Help/QSTit_Help_En.htm</file>
     <file>Imag/QSTit_acce.png</file>
     <file>Imag/QSTit_base.png</file>
-    <file>Imag/QSTit_icon.png</file>
     <file>Imag/QSTit_butN.png</file>
     <file>Imag/QSTit_butY.png</file>
     <file>Imag/QSTit_canc.png</file>
@@ -70,7 +70,8 @@
     <file>Imag/QSTit_roll_open.png</file>
     <file>Imag/QSTit_save_disa.png</file>
     <file>Imag/QSTit_save_enab.png</file>
-    <file>Imag/QSTit_sett.png</file>
+    <file>Imag/QSTit_sett_disa.png</file>
+    <file>Imag/QSTit_sett_enab.png</file>
     <file>Imag/QSTit_size.png</file>
     <file>Imag/QSTit_size_vert.png</file>
     <file>Imag/QSTit_undo_disa.png</file>
@@ -90,6 +91,7 @@
     <file>Imag/QSTit_scro_left.png</file>
     <file>Imag/QSTit_scro_righ.png</file>
     <file>Imag/QSTit_scro_upup.png</file>
+    <file>Imag/qstit.svg</file>
 </qresource>
 </RCC>
 <!--

@@ -6,6 +6,7 @@ qrc_*
 Makefile
 .DS_Store
 ._*
+__*
 .Spotlight-V100
 .Trashes
 Thumbs.db
