@@ -1,0 +1,5 @@
+qstit (2.8.1-1) stable; urgency=low
+
+  * Initial debian package release
+
+ -- Laurent Tenzer <subtitles@nova-cinema.org>  Sun, 14 Apr 2013 21:41:52 +0200

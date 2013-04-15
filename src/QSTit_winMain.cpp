@@ -40,7 +40,7 @@ winMain::winMain()
     gJumpBase=500;      // jump base
     gSett=false;
     gSrtx=false;        // true=srt,false=txt
-    gVers="2.8";
+    gVers="2.8.1";
     gWork=false;
 
     gBackDial=false;
@@ -172,7 +172,7 @@ void winMain::fWindStyle()
     sStyl+="QTabBar::tab:hover {border-color:#0055aa;}";
     sStyl+="QTableCornerButton::section {background:#151515;border:none;border-right:1px solid #0055aa;}";
     sStyl+="QHeaderView::section:horizontal {background-color:"+gGridBack+";color:"+gGridBack+";border:none;}";
-    sStyl+="QHeaderView::section:vertical {font:normal 11px "+gSystFontFami+";background:#151515;color:#0055aa;padding-left:1px;border:1px solid #0055aa;border-bottom:0px;border-left:0px;}";
+    sStyl+="QHeaderView::section:vertical {font:normal 11px "+gSystFontFami+";background:#151515;color:#0055aa;padding-left:1px;border:1px solid #0055aa;border-top:0px;border-left:0px;}";
     sStyl+="QToolTip {font:normal 11px "+gSystFontFami+";background-color:#32cd32;color:#000000;border-style:outset;border:1px solid #32cd32;padding:0px;}";
     sStyl+="QScrollBar:vertical {width:10px;background-color:#aaaaaa;margin:10 0 10 0;}";
     sStyl+="QScrollBar::handle:vertical {background-color:#777777;min-height:30px;border-radius:4px;}";
