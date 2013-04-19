@@ -47,7 +47,7 @@ winMain::winMain()
     gJumpBase=200;      // jump base
     gSett=false;
     gSrtx=false;        // true=srt,false=txt
-    gVers="2.8.2";
+    gVers="2.8.3";
     gWork=false;
 
     gBackDial=false;
@@ -179,7 +179,7 @@ void winMain::fWindStyle()
     sStyl+="QTabBar::tab:hover {border-color:#0055aa;}";
     sStyl+="QTableCornerButton::section {background:#151515;border:none;border-right:1px solid #0055aa;}";
     sStyl+="QHeaderView::section:horizontal {background-color:"+gGridBack+";color:"+gGridBack+";border:none;}";
-    sStyl+="QHeaderView::section:vertical {font:normal 11px "+gSystFontFami+";background:#151515;color:#0055aa;padding-left:1px;border:1px solid #0055aa;border-top:0px;border-left:0px;}";
+    sStyl+="QHeaderView::section:vertical {font:normal 11px "+gSystFontFami+";background:#151515;color:#0055aa;padding-left:2px;border:1px solid #0055aa;border-top:0px;border-left:0px;}";
     sStyl+="QToolTip {font:normal 11px "+gSystFontFami+";background-color:#32cd32;color:#000000;border-style:outset;border:1px solid #32cd32;padding:0px;}";
     sStyl+="QScrollBar:vertical {width:10px;background-color:#aaaaaa;margin:10 0 10 0;}";
     sStyl+="QScrollBar::handle:vertical {background-color:#777777;min-height:30px;border-radius:4px;}";
@@ -301,15 +301,15 @@ void winMain::fMenuCrea()
     connect(butExit,SIGNAL(clicked()),this,SLOT(fWindExitDial()));
 
     butHelp=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_help_enab.png"),"M"+fL("butHelp"),false);
-    butHelp->move(fraMenu->iW-77,6);
+    butHelp->move(fraMenu->iW-80,6);
     connect(butHelp,SIGNAL(clicked()),this,SLOT(fHelpDial()));
 
-    butFile=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_file.png"),"L"+fL("butFile"),false);
-    butFile->move(fraMenu->iW-120,3);
+    butFile=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_file.png"),"M"+fL("butFile"),false);
+    butFile->move(fraMenu->iW-120,6);
     connect(butFile,SIGNAL(clicked()),this,SLOT(fFileDial()));
 
-    butSett=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_sett_disa.png"),"L"+fL("butSett"),false);
-    butSett->move(fraMenu->iW-160,3);
+    butSett=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_sett_disa.png"),"M"+fL("butSett"),false);
+    butSett->move(fraMenu->iW-160,6);
     connect(butSett,SIGNAL(clicked()),this,SLOT(fSettShow()));
 
     labClok=new QLabel("00:00:00",fraMenu);
@@ -348,8 +348,8 @@ void winMain::fMenuCrea()
     connect(butProjPlay,SIGNAL(clicked()),this,SLOT(fAutoStar()));
     butProjPlay->hide();
 
-    butProjDece=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_dece.png"),"M"+fL("butProjDece"),true);
-    butProjDece->move(380,8);
+    butProjDece=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_dece.png"),"L"+fL("butProjDece"),true);
+    butProjDece->move(380,3);
     connect(butProjDece,SIGNAL(clicked()),this,SLOT(fAutoDece()));
     butProjDece->hide();
 
@@ -357,22 +357,22 @@ void winMain::fMenuCrea()
     texPuls->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     texPuls->setContentsMargins(0,0,0,0);
     texPuls->setStyleSheet(gExplStyl);
-    texPuls->setGeometry(416,1,28,15);
+    texPuls->setGeometry(416,1,26,15);
     texPuls->hide();
 
     labPuls=new QLabel("",fraMenu);
     labPuls->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     labPuls->setStyleSheet(gPulsStyl);
-    labPuls->setGeometry(416,16,28,20);
+    labPuls->setGeometry(416,16,26,20);
     labPuls->hide();
 
-    butProjAcce=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_acce.png"),"M"+fL("butProjAcce"),true);
-    butProjAcce->move(441,8);
+    butProjAcce=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_acce.png"),"L"+fL("butProjAcce"),true);
+    butProjAcce->move(441,3);
     connect(butProjAcce,SIGNAL(clicked()),this,SLOT(fAutoAcce()));
     butProjAcce->hide();
 
-    butProjBack=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_jump_back.png"),"M"+fL("butProjBack"),false);
-    butProjBack->move(491,8);
+    butProjBack=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_jump_back.png"),"L"+fL("butProjBack"),false);
+    butProjBack->move(491,3);
     connect(butProjBack,SIGNAL(clicked()),this,SLOT(fAutoBack()));
     butProjBack->hide();
 
@@ -380,34 +380,34 @@ void winMain::fMenuCrea()
     texJump->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     texJump->setContentsMargins(0,0,0,0);
     texJump->setStyleSheet(gExplStyl);
-    texJump->setGeometry(528,1,28,15);
+    texJump->setGeometry(528,1,26,15);
     texJump->hide();
 
     labJump=new QLabel("",fraMenu);
     labJump->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     labJump->setStyleSheet(gPulsStyl);
-    labJump->setGeometry(528,16,28,20);
+    labJump->setGeometry(528,16,26,20);
     labJump->hide();
 
-    butProjJump=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_jump.png"),"M"+fL("butProjJump"),false);
-    butProjJump->move(552,8);
+    butProjJump=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_jump.png"),"L"+fL("butProjJump"),false);
+    butProjJump->move(552,3);
     connect(butProjJump,SIGNAL(clicked()),this,SLOT(fAutoJump()));
     butProjJump->hide();
 }
 void winMain::fMenuAdapt(int m)                         // 0=init,1=manu,2=auto
 {
-    if (m==0) fraMenu->iW=222;
-    else if (m==1) fraMenu->iW=360;
-    else if (m==2) fraMenu->iW=707;
+    if (m==0) fraMenu->iW=226;
+    else if (m==1) fraMenu->iW=364;
+    else if (m==2) fraMenu->iW=717;
     fraMenu->resize(fraMenu->iW,fraMenu->iH);
     fraMenu->iX=(objWind.widt-fraMenu->iW)/2;
     fraMenu->move(fraMenu->iX,fraMenu->iY);
 
     int iP=fraMenu->iW;
     iP-=40;butExit->move(iP,6);
-    iP-=37;butHelp->move(iP,6);
-    iP-=43;butFile->move(iP,3);
-    iP-=40;butSett->move(iP,3);
+    iP-=40;butHelp->move(iP,6);
+    iP-=40;butFile->move(iP,6);
+    iP-=40;butSett->move(iP,6);
     iP-=60;labClok->setGeometry(iP,10,54,20);
     if (m==0)
     {
@@ -451,14 +451,14 @@ void winMain::fMenuAdapt(int m)                         // 0=init,1=manu,2=auto
         iP+=40;butProjDown->move(iP,3);butProjDown->show();
         iP+=42;labTime->setGeometry(iP,10,54,20);labTime->show();
         iP+=64;butProjPlay->move(iP,3);butProjPlay->show();
-        iP+=80;butProjDece->move(iP,8);butProjDece->show();
-        iP+=28;texPuls->setGeometry(iP, 1,26,15);texPuls->show();
+        iP+=80;butProjDece->move(iP,3);butProjDece->show();
+        iP+=34;texPuls->setGeometry(iP, 1,26,15);texPuls->show();
                labPuls->setGeometry(iP,16,26,20);labPuls->show();
-        iP+=25;butProjAcce->move(iP,8);butProjAcce->show();
-        iP+=50;butProjBack->move(iP,8);butProjBack->show();
-        iP+=28;texJump->setGeometry(iP, 1,26,15);texJump->show();
+        iP+=25;butProjAcce->move(iP,3);butProjAcce->show();
+        iP+=50;butProjBack->move(iP,3);butProjBack->show();
+        iP+=34;texJump->setGeometry(iP, 1,26,15);texJump->show();
                labJump->setGeometry(iP,16,26,20);labJump->show();
-        iP+=25;butProjJump->move(iP,8);butProjJump->show();
+        iP+=25;butProjJump->move(iP,3);butProjJump->show();
     }
     fRowsStat();
 }
