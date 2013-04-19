@@ -1,3 +1,10 @@
+qstit (2.8.3-1) stable; urgency=low
+
+  * help → png
+  * Grid and menu style sheets
+
+ -- Laurent Tenzer <subtitles@nova-cinema.org>  Fri, 19 Apr 2013 16:10:15 +0200
+
 qstit (2.8.2-1) stable; urgency=low
 
   * Config path for Linux
