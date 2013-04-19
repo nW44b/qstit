@@ -89,6 +89,7 @@ class winMain : public QWidget
         bool        gColoDial;
         bool        gConf;
         QString     gConfFile;
+        QString     gHome;
         int         gEditTextColu[99];
         int         gEditTextLine[99];
         QString     gEditTextNewx[99];

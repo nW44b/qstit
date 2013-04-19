@@ -31,16 +31,23 @@ winMain::winMain()
     gAcce=0;            // accelerator in mls
     gAuto=false;
     gConf=false;
+    #ifdef Q_OS_LINUX
+    gHome = QDir::homePath();
+//   QDir::mkpath(gHome+"/.config/");
+//    gConfFile= gHome+"/.qstit/QSTit.cfg";
+    gConfFile= gHome+"/QSTit.cfg";
+    #else
     gConfFile="./QSTit.cfg";
+    #endif
     gFile="";
     gLang=0;            // 0=english,1=other (from QSTit_Lang.txt)
     gManu=false;
     gPuls=100;          // basic timeout interval in mls (100/1000=0.1 sec)
     gJump=0;            // jump step
-    gJumpBase=500;      // jump base
+    gJumpBase=200;      // jump base
     gSett=false;
     gSrtx=false;        // true=srt,false=txt
-    gVers="2.8.1";
+    gVers="2.8.2";
     gWork=false;
 
     gBackDial=false;
@@ -289,8 +296,8 @@ void winMain::fMenuCrea()
     fraMenu=new menuSkin(winWind,226,40,-1,-1);
     connect(fraMenu,SIGNAL(sMoved()),this,SLOT(fRowsStat()));
 
-    butExit=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_exit.png"),"L"+fL("butExit"),false);
-    butExit->move(fraMenu->iW-40,3);
+    butExit=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_exit.png"),"M"+fL("butExit"),false);
+    butExit->move(fraMenu->iW-40,6);
     connect(butExit,SIGNAL(clicked()),this,SLOT(fWindExitDial()));
 
     butHelp=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_help_enab.png"),"M"+fL("butHelp"),false);
@@ -309,7 +316,7 @@ void winMain::fMenuCrea()
     labClok->setToolTip(fL("labClok"));
     labClok->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     labClok->setStyleSheet(gClokStyl);
-    labClok->setGeometry(fraMenu->iW-220,7,54,20);
+    labClok->setGeometry(fraMenu->iW-220,10,54,20);
     tmrClok=new QTimer(this);
     connect(tmrClok,SIGNAL(timeout()),this,SLOT(fMenuClok()));
     tmrClok->start(1000);
@@ -323,7 +330,7 @@ void winMain::fMenuCrea()
     labTime->setToolTip(fL("labTime"));
     labTime->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     labTime->setStyleSheet(gTimeStyl);
-    labTime->setGeometry(70,7,70,20);
+    labTime->setGeometry(70,10,70,20);
     labTime->hide();
 
     butProjUpup=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_upup.png"),"L"+fL("butProjUpup"),true);
@@ -341,8 +348,8 @@ void winMain::fMenuCrea()
     connect(butProjPlay,SIGNAL(clicked()),this,SLOT(fAutoStar()));
     butProjPlay->hide();
 
-    butProjDece=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_dece.png"),"L"+fL("butProjDece"),true);
-    butProjDece->move(380,3);
+    butProjDece=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_dece.png"),"M"+fL("butProjDece"),true);
+    butProjDece->move(380,8);
     connect(butProjDece,SIGNAL(clicked()),this,SLOT(fAutoDece()));
     butProjDece->hide();
 
@@ -350,22 +357,22 @@ void winMain::fMenuCrea()
     texPuls->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     texPuls->setContentsMargins(0,0,0,0);
     texPuls->setStyleSheet(gExplStyl);
-    texPuls->setGeometry(416,1,26,15);
+    texPuls->setGeometry(416,1,28,15);
     texPuls->hide();
 
     labPuls=new QLabel("",fraMenu);
     labPuls->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     labPuls->setStyleSheet(gPulsStyl);
-    labPuls->setGeometry(416,16,26,20);
+    labPuls->setGeometry(416,16,28,20);
     labPuls->hide();
 
-    butProjAcce=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_acce.png"),"L"+fL("butProjAcce"),true);
-    butProjAcce->move(441,3);
+    butProjAcce=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_acce.png"),"M"+fL("butProjAcce"),true);
+    butProjAcce->move(441,8);
     connect(butProjAcce,SIGNAL(clicked()),this,SLOT(fAutoAcce()));
     butProjAcce->hide();
 
-    butProjBack=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_jump_back.png"),"L"+fL("butProjBack"),false);
-    butProjBack->move(491,3);
+    butProjBack=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_jump_back.png"),"M"+fL("butProjBack"),false);
+    butProjBack->move(491,8);
     connect(butProjBack,SIGNAL(clicked()),this,SLOT(fAutoBack()));
     butProjBack->hide();
 
@@ -373,35 +380,35 @@ void winMain::fMenuCrea()
     texJump->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     texJump->setContentsMargins(0,0,0,0);
     texJump->setStyleSheet(gExplStyl);
-    texJump->setGeometry(528,1,26,15);
+    texJump->setGeometry(528,1,28,15);
     texJump->hide();
 
     labJump=new QLabel("",fraMenu);
     labJump->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     labJump->setStyleSheet(gPulsStyl);
-    labJump->setGeometry(528,16,26,20);
+    labJump->setGeometry(528,16,28,20);
     labJump->hide();
 
-    butProjJump=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_jump.png"),"L"+fL("butProjJump"),false);
-    butProjJump->move(552,3);
+    butProjJump=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_jump.png"),"M"+fL("butProjJump"),false);
+    butProjJump->move(552,8);
     connect(butProjJump,SIGNAL(clicked()),this,SLOT(fAutoJump()));
     butProjJump->hide();
 }
 void winMain::fMenuAdapt(int m)                         // 0=init,1=manu,2=auto
 {
-    if (m==0) fraMenu->iW=226;
-    else if (m==1) fraMenu->iW=364;
-    else if (m==2) fraMenu->iW=717;
+    if (m==0) fraMenu->iW=222;
+    else if (m==1) fraMenu->iW=360;
+    else if (m==2) fraMenu->iW=707;
     fraMenu->resize(fraMenu->iW,fraMenu->iH);
     fraMenu->iX=(objWind.widt-fraMenu->iW)/2;
     fraMenu->move(fraMenu->iX,fraMenu->iY);
 
     int iP=fraMenu->iW;
-    iP-=40;butExit->move(iP,3);
+    iP-=40;butExit->move(iP,6);
     iP-=37;butHelp->move(iP,6);
     iP-=43;butFile->move(iP,3);
     iP-=40;butSett->move(iP,3);
-    iP-=60;labClok->setGeometry(iP,7,54,20);
+    iP-=60;labClok->setGeometry(iP,10,54,20);
     if (m==0)
     {
         butRoll->hide();
@@ -442,16 +449,16 @@ void winMain::fMenuAdapt(int m)                         // 0=init,1=manu,2=auto
         labTime->hide();
         iP+=55;butProjUpup->move(iP,3);butProjUpup->show();
         iP+=40;butProjDown->move(iP,3);butProjDown->show();
-        iP+=42;labTime->setGeometry(iP,7,54,20);labTime->show();
+        iP+=42;labTime->setGeometry(iP,10,54,20);labTime->show();
         iP+=64;butProjPlay->move(iP,3);butProjPlay->show();
-        iP+=80;butProjDece->move(iP,3);butProjDece->show();
-        iP+=34;texPuls->setGeometry(iP, 1,26,15);texPuls->show();
+        iP+=80;butProjDece->move(iP,8);butProjDece->show();
+        iP+=28;texPuls->setGeometry(iP, 1,26,15);texPuls->show();
                labPuls->setGeometry(iP,16,26,20);labPuls->show();
-        iP+=25;butProjAcce->move(iP,3);butProjAcce->show();
-        iP+=50;butProjBack->move(iP,3);butProjBack->show();
-        iP+=34;texJump->setGeometry(iP, 1,26,15);texJump->show();
+        iP+=25;butProjAcce->move(iP,8);butProjAcce->show();
+        iP+=50;butProjBack->move(iP,8);butProjBack->show();
+        iP+=28;texJump->setGeometry(iP, 1,26,15);texJump->show();
                labJump->setGeometry(iP,16,26,20);labJump->show();
-        iP+=25;butProjJump->move(iP,3);butProjJump->show();
+        iP+=25;butProjJump->move(iP,8);butProjJump->show();
     }
     fRowsStat();
 }
@@ -1200,7 +1207,7 @@ void winMain::fGridCrea()
     gGridModi=gGridMark=0;
     gGridRowsHeig=18;
     int gGridWidt=objWind.widt-2;
-    int gGridHeig=36+(7*gGridRowsHeig);
+    int gGridHeig=34+(7*gGridRowsHeig);
 
     diaGrid=new diaGridSkin(winWind,fraMenu,fL("Grid"),gGridWidt,gGridHeig);
     diaGrid->fWorkLang(gLangCode,gLangText);
@@ -1209,7 +1216,7 @@ void winMain::fGridCrea()
     griText=new diaGridC(diaGrid,winWind,fraMenu);
     griText->stackUnder(diaGrid->fraSizL);
     griText->setColumnCount(7);
-    griText->setGeometry(2,31,gGridWidt-81,3+(7*gGridRowsHeig));
+    griText->setGeometry(2,31,gGridWidt-81,2+(7*gGridRowsHeig));
     griText->setSelectionBehavior(QAbstractItemView::SelectRows);
     griText->setSelectionMode(QAbstractItemView::SingleSelection);
     griText->setStyleSheet(gGriCStyl);
@@ -1371,7 +1378,7 @@ void winMain::fGridInit()
         gEditTextOldx[iR]="";
         gEditTextNewx[iR]="";
     }
-    griText->horizontalHeader()->setFixedHeight(3);
+    griText->horizontalHeader()->setFixedHeight(2);
     griText->verticalHeader()->setFixedWidth(31);
     fGridInitCols();
     fGridInitRows();
@@ -2457,7 +2464,7 @@ void winMain::fSettBase()
     gExitDial=gSettShow=gInfoDial=gHelpDial=false;
     gPuls=100;
     gAcce=gJump=0;
-    gJumpBase=500;
+    gJumpBase=200;
     objRowsSpac.valu=objRowsSpac.val0;
     objRowsRota.valu=objRowsRota.val0;
     gSecoText=gSecoItal=false;
