@@ -1,7 +1,6 @@
 *~
 moc_*
 qrc_*
-*.pro
 *.o
 Makefile
 .DS_Store
