@@ -3431,14 +3431,14 @@ void winMain::fHelpDial()
     connect(diaHelp,SIGNAL(sClosed()),this,SLOT(fHelpDialClos()));
 
     texHelp=new QTextEdit("",diaHelp);
-    texHelp->setStyleSheet("QTextEdit {border:none;} QScrollBar:vertical {width:10px;background-color:#252525;margin:10 0 10 0;border:none;}");
+    texHelp->setStyleSheet("QTextEdit {border:none;padding:5px;} QScrollBar:vertical {width:10px;background-color:#252525;margin:10 0 10 0;border:none;}");
     texHelp->setGeometry(3,31,iWidt-5,iHeig-33);
     texHelp->setReadOnly(true);
     texHelp->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     texHelp->setFrameShape(QFrame::NoFrame);
     texHelp->setContentsMargins(1,0,1,0);
     texHelp->setFont(gRowsFont);
-    texHelp->setWordWrapMode(QTextOption::NoWrap);
+    texHelp->setWordWrapMode(QTextOption::WordWrap);
     texHelp->document()->setDocumentMargin(0);
     texHelp->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     texHelp->setHtml(fHelpFileRead());

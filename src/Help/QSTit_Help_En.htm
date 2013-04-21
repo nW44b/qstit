@@ -23,15 +23,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
 <style type="text/css">
-	body	    {font-family:trebuchet ms;font-size:14px;background-color:#151515;color:#ffffff;max-width:800px;padding-left:3px;}
+	body	    {font-family:trebuchet ms;font-size:14px;background-color:#151515;color:#ffffff;max-width:730px;}
 	table	    {margin-left:0px;margin-top:9px;margin-bottom:9px;border:0px;border-collapse:collapse;}
 	tr.c0	    {background-color:#151515;}
 	tr.c1	    {background-color:#252525;}
 	tr.c2	    {background-color:#353535;}
 	td	        {padding-top:0px;padding-bottom:0px;padding-left:2px;padding-right:9px;border:1px;}
     a	        {color:yellow;text-decoration:none;}
-    blockquote  {color:black;background-color:white;padding:3px;max-width:600px;}
-	p           {max-width:720px;}
+    blockquote  {color:black;background-color:white;padding-left:2px;max-width:600px;}
 </style>
 </head>
 <body>
@@ -44,7 +43,7 @@ Icons credit: Nova & Axialis Team (with some modifications) - <a href="www.axial
 <br/><u><span style="font-weight:bold;">Menu</span></u>
 <table>
 <tr class="c1"><td><img src=":/Imag/QSTit_sett_enab.png" height=16> Settings</td><td>Show 'Settings' window</td><td>[Ctrl+S]</td></tr>
-<tr class="c2"><td><img src=":/Imag/QSTit_file.png" height=16> Open</td><td>Open subtitle file<br/>(Supported formats: <a href="#txt">.txt</a>, <a href="#srt">.srt</a>)</td><td>[Ctrl+O]</td></tr>
+<tr class="c2"><td><img src=":/Imag/QSTit_file.png" height=16> Open</td><td>Open subtitle file<br/>(Supported formats: .txt, .srt - see below for details)</td><td>[Ctrl+O]</td></tr>
 <tr class="c1"><td><img src=":/Imag/QSTit_help_enab.png" height=16> Help</td><td>Show this window</td><td>[F1]</td></tr>
 <tr class="c2"><td><img src=":/Imag/QSTit_exit.png" height=16> Quit</td><td>Quit the program</td><td>[Ctrl+Q]</td></tr>
 </table>
@@ -95,6 +94,15 @@ Icons credit: Nova & Axialis Team (with some modifications) - <a href="www.axial
 </table>
 </p>
 <p>
+<br/><u><span style="font-weight:bold;">Settings</span></u>
+</p>
+<p>
+Various display and control settings can be found in the 'Settings' window and can be saved, either as a general configuration that will be used by default or as a specific configuration for the opened subtitle file.<br/>
+General settings are saved in a file named "QSTit.cfg" which will be created in your home folder (Linux) or in the folder where the executable is (Windows).<br/>
+Configurations saved for a specific subtitle file will be named like the file (with a .cfg extension) and placed in the same folder as the subtitle file.<br/><br/>
+It is recommanded to make your settings while displaying one of the the widest lines, which are listed in the title bar and in the 'File info' window.
+</p>
+<p>
 <br/><u><span style="font-weight:bold;">Supported file formats</span></u>
 </p>
 <p>
@@ -105,19 +113,19 @@ Subrip files include timecodes, the subtitling can therefore be automated.</p>
 &lt;i&gt; <i>italic</i> &lt;/i&gt;<br/>
 &lt;b&gt; <b>bold</b> &lt;/b&gt;<br/>
 &lt;u&gt; <u>underline</u> &lt;/u&gt;<br/>
-A tag can start on one line and end on another, wherever in the file (so that whole sections can easily<br/>be turned into italic for instance).<br/>
+A tag can start on one line and end on another, wherever in the file (so that whole sections can easily be turned into italic for instance).<br/>
 The tags are not displayed in the text frame on screen but appear in the grid.</p>
 
-<p>Everything written between opening ( &lt; ) and closing ( &gt; ) brackets will be considered meta-information and<br/> won't be displayed. An entire line between brackets will still appear in the grid with other lines of subtitles<br/>but won't appear on the screen so brackets can be used to put comments and cues in the file.</p>
+<p>Everything written between opening ( &lt; ) and closing ( &gt; ) brackets will be considered meta-information and won't be displayed. An entire line between brackets will still appear in the grid with other lines of subtitles but won't appear on the screen so brackets can be used to put comments and cues in the file.</p>
 <p>
 <br/>
-<span style="font-weight:bold;"><a name="#txt">.txt files</a></span><br/>
+<span style="font-weight:bold;">.txt files</span><br/>
 - One line in the file = one row in the grid = one subtitle.<br/>
 - One subtitle can be composed of several lines (up to four, usually two), they are separated by a backslash ( \ ).<br/>
 - Different subtitles can be composed of different numbers of lines.<br/>
 - Subtitles are only separated by a line break.<br/>
-- The program automatically creates "empty" lines between subtitles so that nothing is displayed <br/>between two subtitles when there are no dialogues.<br/>
-There is no need to have empty lines in the file (they would be considered as one subtitle <br/>and there would therefore be three consecutive "empty lines" when browsing through the file).
+- The program automatically creates "empty" lines between subtitles so that nothing is displayed between two subtitles when there are no dialogues.<br/>
+There is no need to have empty lines in the file (they would be considered as one subtitle and there would therefore be three consecutive "empty lines" when browsing through the file).
 </p>
 <u>Structure:</u>
 <blockquote>
@@ -142,16 +150,14 @@ Du mal à nous trouver?\Lastige reis?<br/>
 </blockquote>
 <p>
 <br/>
-<span style="font-weight:bold;"><a name="#srt">.srt files</a></span><br/>
+<span style="font-weight:bold;">.srt files</span><br/>
 - The structure needs to be respected carefully otherwise Qstit won't be able to open the file correctly.<br/>
-- Subtitles are numbered in the file but Qstit recalculates the line numbers to avoid mistakes<br/>
-(so a given subtitle line could have a different number in the .srt file and when viewed in Qstit).<br/>
+- Subtitles are numbered in the file but Qstit recalculates the line numbers to avoid mistakes (so a given subtitle line could have a different number in the .srt file and when viewed in Qstit).<br/>
 - One subtitle can be composed of up to four lines, separated only by a line break.<br/>
 - Different subtitles can be composed of different numbers of lines.<br/>
 - An empty line separates subtitles.<br/>
 - Nothing will be displayed between the end of one subtitle (Time OUT) and the beginning of the next (Time IN).<br/>
-- If you don't want to use the automation functionalities, it is possible to manually browse through an .srt file<br/>
-as through a .txt file: Just leave the timer on pause and use the down arrow to browse through the subtitles.
+- If you don't want to use the automation functionalities, it is possible to manually browse through an .srt file as through a .txt file: Just leave the timer on pause and use the down arrow to browse through the subtitles.
 </p>
 <u>Structure:</u>
 <blockquote>
