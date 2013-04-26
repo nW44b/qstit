@@ -1,9 +1,17 @@
+qstit (2.8.4-1) stable; urgency=low
+
+    * Disable Interface language changes in Linux to avoid crash
+    * Correct removal of spaces before ;
+    * Grid title
+
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Sat, 27 Apr 2013 00:38:59 +0200
+
 qstit (2.8.3-1) stable; urgency=low
 
   * help → png
   * Grid and menu style sheets
 
- -- Laurent Tenzer <subtitles@nova-cinema.org>  Fri, 19 Apr 2013 16:10:15 +0200
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Fri, 19 Apr 2013 16:10:15 +0200
 
 qstit (2.8.2-1) stable; urgency=low
 
@@ -11,10 +19,10 @@ qstit (2.8.2-1) stable; urgency=low
   * Grid and menu style sheets
   * Jump base → 0.2
 
- -- Laurent Tenzer <subtitles@nova-cinema.org>  Wed, 17 Apr 2013 13:18:31 +0200
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Wed, 17 Apr 2013 13:18:31 +0200
 
 qstit (2.8.1-1) stable; urgency=low
 
   * Initial debian package release
 
- -- Laurent Tenzer <subtitles@nova-cinema.org>  Sun, 14 Apr 2013 21:41:52 +0200
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Sun, 14 Apr 2013 21:41:52 +0200
