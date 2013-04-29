@@ -47,7 +47,7 @@ winMain::winMain()
     gJumpBase=200;      // jump base
     gSett=false;
     gSrtx=false;        // true=srt,false=txt
-    gVers="2.8.4";
+    gVers="2.8.3";
     gWork=false;
 
     gBackDial=false;
@@ -1361,10 +1361,11 @@ void winMain::fGridZero()
 void winMain::fGridTitle()
 {
     QFileInfo fInfo=QFileInfo(gFile);
-    QString sTitl=fInfo.fileName()+"  ·  ";
+    QString sTitl=fInfo.fileName()+"     ( ";
     sTitl+=QString("%1").arg(gRowsMaxi-1) + " " + fL("diaGridTitlLine") + " · ";
     sTitl+=fL("diaGridTitlWidt")+": "+QString("%1").arg(gFileMaxiRows[0]);
     if (gSrtx) sTitl+= " · "+fL("diaGridTitlEnd")+": "+gSrtxStop.left(8);
+    sTitl+= " )";
     diaGrid->labTitl->setText(sTitl);
 }
 void winMain::fGridInit()
@@ -1895,15 +1896,9 @@ void winMain::fSettCrea()
     grpSkin *grpWorkLang=new grpSkin(tabGene,75,40,310,30);
     radLangEngl=new QRadioButton("English",grpWorkLang);
     radLangEngl->move(3,3);
-    #ifdef Q_OS_LINUX
-    radLangEngl->setEnabled(false);
-    #endif
     connect(radLangEngl,SIGNAL(clicked()),this,SLOT(fLAll()));
     radLangOthe=new QRadioButton(fL("radLangOthe"),grpWorkLang);
     radLangOthe->move(3,19);
-    #ifdef Q_OS_LINUX
-    radLangOthe->setEnabled(false);
-    #endif
     connect(radLangOthe,SIGNAL(clicked()),this,SLOT(fLAll()));
 
     oLang.setFileName("./QSTit_Lang.txt");
@@ -2719,6 +2714,7 @@ QString winMain::fFileLineForm(QString sLine)
     sLine.replace("  "," ");
     sLine.replace(" .",".");
     sLine.replace(" :",":");
+    sLine.replace(" ;",";");
     sLine.replace(" ,",",");
     sLine.replace(" !","!");
     sLine.replace(" ?","?");
