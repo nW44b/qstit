@@ -1,0 +1,11 @@
+*~
+moc_*
+qrc_*
+*.o
+Makefile
+.DS_Store
+._*
+__*
+.Spotlight-V100
+.Trashes
+Thumbs.db
