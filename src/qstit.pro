@@ -41,9 +41,6 @@ unix {
     desktop.path = $${DATADIR}/applications
     desktop.files += $${TARGET}.desktop
 
-#    icon48.path = $${DATADIR}/icons/hicolor/48x48/apps
-#    icon48.files += ./Imag/icons/png48/$${TARGET}.png
-
     icon512.path = $${DATADIR}/icons/hicolor/512x512/apps
     icon512.files += ./Imag/$${TARGET}.png
 

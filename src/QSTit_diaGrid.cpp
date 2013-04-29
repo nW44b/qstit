@@ -1,24 +1,26 @@
 /*
-    ═══════════════════════════════════════════════════════════════════════════
-    This file is part of QSTit.
-    Feedback, comments and questions are welcome:
-    subtitles@nova-cinema.org
+    This file is part of Qstit
+   ═════════════════════════════════════════════════════════════════
+    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    Feedback, comments and questions are welcome: subtitles@nova-cinema.org
+   ═════════════════════════════════════════════════════════════════
+    Programming: Georges Piedboeuf-Boen - georges.pi.bo@gmail.com
+   ═════════════════════════════════════════════════════════════════
+    Icons credit: Nova & Axialis Team - http://www.axialis.com/free/icons
+   ═════════════════════════════════════════════════════════════════
+    Qstit is a free software: you can redistribute it and/or modify it under the terms
+    of the GNU General Public License as published by the Free Software Foundation,
+    either version 3 of the License, or (at your option) any later version.
+    If you do, we'd like to hear about it.
 
-    QSTit is a free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version. If you do, we'd like to hear about it.
+    Qstit is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
 
-    QSTit is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with QSTit. If not, see <http://www.gnu.org/licenses/>
-    ═══════════════════════════════════════════════════════════════════════════
-    Free Icons by Axialis Software - Axialis Team <http://www.axialis.com>
-    ═══════════════════════════════════════════════════════════════════════════
+    You should have received a copy of the GNU General Public License along with Qstit.
+    If not, see http://www.gnu.org/licenses
+   ═════════════════════════════════════════════════════════════════
 */
 
 #include "QSTit_diaGrid.h"
@@ -102,8 +104,8 @@ void diaGridSkin::fMenuMove()
 }
 void diaGridSkin::fGridSizeInit(int pW,int pRowsMaxi)
 {
-    if (pRowsMaxi<16) this->setMaximumHeight(36+(pRowsMaxi*18));
-    else this->setMaximumHeight(36+(16*18));
+    if (pRowsMaxi<16) this->setMaximumHeight(34+(pRowsMaxi*18));
+    else this->setMaximumHeight(34+(16*18));
 
     if (pW>=this->minimumWidth())iW=pW;
     else iW=this->minimumWidth();
@@ -313,7 +315,7 @@ void diaGridC::fGridGoto()
     ediGoto->setFocus();
     connect(ediGoto,SIGNAL(returnPressed()),this,SLOT(fGridGotoLine()));
 
-    QLabel *labGoto=new QLabel(QString("1 -> %1").arg(rowCount()-2),diaGoto);
+    QLabel *labGoto=new QLabel(QString("1 → %1").arg(rowCount()-2),diaGoto);
     labGoto->move(10,35);
 
     QPushButton *butGotoSave=new QPushButton(QPixmap(":Imag/QSTit_okok.png"),fL("butGridGotoSave"),diaGoto);
@@ -499,11 +501,3 @@ QString diaGridC::fL(QString sI)
     if (i>-1) sI=gLangText.at(i);
     return sI;
 }
-/*
-    ════════════════════════════════════════════════════════════════════════════════
-    Code analysis/programming:  Georges Piedboeuf-Boen  georges.pi.bo@gmail.com
-    Functional analysis:        Laurent Tenzer          lt@nova-cinema.org
-    Project origin:             Cinéma Nova             http://www.nova-cinema.org
-    Made in Brussels            Belgium                 http://www.brussels.be
-    ════════════════════════════════════════════════════════════════════════════════
-*/

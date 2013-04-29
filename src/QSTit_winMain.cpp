@@ -1,24 +1,26 @@
 /*
-    ═══════════════════════════════════════════════════════════════════════════
-    This file is part of QSTit.
-    Feedback, comments and questions are welcome:
-    subtitles@nova-cinema.org
+    This file is part of Qstit
+   ═════════════════════════════════════════════════════════════════
+    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    Feedback, comments and questions are welcome: subtitles@nova-cinema.org
+   ═════════════════════════════════════════════════════════════════
+    Programming: Georges Piedboeuf-Boen - georges.pi.bo@gmail.com
+   ═════════════════════════════════════════════════════════════════
+    Icons credit: Nova & Axialis Team - http://www.axialis.com/free/icons
+   ═════════════════════════════════════════════════════════════════
+    Qstit is a free software: you can redistribute it and/or modify it under the terms
+    of the GNU General Public License as published by the Free Software Foundation,
+    either version 3 of the License, or (at your option) any later version.
+    If you do, we'd like to hear about it.
 
-    QSTit is a free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version. If you do, we'd like to hear about it.
+    Qstit is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
 
-    QSTit is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with QSTit. If not, see <http://www.gnu.org/licenses/>
-    ═══════════════════════════════════════════════════════════════════════════
-    Free Icons by Axialis Software - Axialis Team <http://www.axialis.com>
-    ═══════════════════════════════════════════════════════════════════════════
+    You should have received a copy of the GNU General Public License along with Qstit.
+    If not, see http://www.gnu.org/licenses
+   ═════════════════════════════════════════════════════════════════
 */
 
 #include "QSTit_winMain.h"
@@ -47,7 +49,7 @@ winMain::winMain()
     gJumpBase=200;      // jump base
     gSett=false;
     gSrtx=false;        // true=srt,false=txt
-    gVers="2.8.3";
+    gVers="2.8.4";
     gWork=false;
 
     gBackDial=false;
@@ -83,10 +85,10 @@ winMain::winMain()
     gRowsFont=QFont(qApp->font().family(),22,QFont::Normal,false);
     gGridFont=QFont(qApp->font().family(),9,QFont::Normal,false);
 
-    gGriCStyl="background-color:#222222;color:#ffffff;selection-background-color:#0055aa;selection-color:#000000;border:none;";
+    gGriCStyl="background-color:#222222;color:#ffffff;selection-background-color:#0055aa;selection-color:#ffffff;border:none;";
     gExplDisa="color:#555555;border:none;";
     gClokStyl="font:normal 11px "+gSystFontFami+";background-color:#000000;color:#ffffff;border:1px solid #000000;border-radius:3px;";
-    gTimeStyl="font:normal 11px "+gSystFontFami+";background-color:#000000;color:#ffffff;border:1px solid #000000;border-radius:3px;";
+    gTimeStyl="font:normal 11px "+gSystFontFami+";background-color:#000000;color:#0055aa;border:1px solid #000000;border-radius:3px;";
     gPulsStyl="font:normal 10px "+gSystFontFami+";background-color:#000000;color:#ffffff;border:1px solid #000000;border-radius:3px;height:20px;width:20px;";
     gExplStyl="font:normal 9px "+gSystFontFami+";color:#555555;border:none;";
     gSpinStyl="height:24px;color:#ffffff;border:1px solid #777777;background-color:#eeeeee;color:#000000;";
@@ -179,7 +181,7 @@ void winMain::fWindStyle()
     sStyl+="QTabBar::tab:hover {border-color:#0055aa;}";
     sStyl+="QTableCornerButton::section {background:#151515;border:none;border-right:1px solid #0055aa;}";
     sStyl+="QHeaderView::section:horizontal {background-color:"+gGridBack+";color:"+gGridBack+";border:none;}";
-    sStyl+="QHeaderView::section:vertical {font:normal 11px "+gSystFontFami+";background:#151515;color:#0055aa;padding-left:2px;border:1px solid #0055aa;border-top:0px;border-left:0px;}";
+    sStyl+="QHeaderView::section:vertical {font:normal 11px "+gSystFontFami+";background:#151515;color:#0055aa;padding-left:1px;border:1px solid #0055aa;border-top:0px;border-left:0px;}";
     sStyl+="QToolTip {font:normal 11px "+gSystFontFami+";background-color:#32cd32;color:#000000;border-style:outset;border:1px solid #32cd32;padding:0px;}";
     sStyl+="QScrollBar:vertical {width:10px;background-color:#aaaaaa;margin:10 0 10 0;}";
     sStyl+="QScrollBar::handle:vertical {background-color:#777777;min-height:30px;border-radius:4px;}";
@@ -195,9 +197,7 @@ void winMain::fWindStyle()
     sStyl+="QScrollBar::sub-line:horizontal {background-image: url(:/Imag/QSTit_scro_left.png);width:12px;subcontrol-position:left;subcontrol-origin:margin;}";
     sStyl+="QScrollBar::add-page:horizontal {background:none;}";
     sStyl+="QScrollBar::sub-page:horizontal {background:none;}";
-//    sStyl+="QProgressBar::chunk:horizontal {background: qlineargradient(x1: 0, y1: 0.5, x2: 1, y2: 0.5, stop: 0 #0055aa, stop: 1 #222222);}";
-    sStyl+="QProgressBar {text-align:center;}";
-    sStyl+="QProgressBar::chunk:horizontal {background-color:#0055aa;}";
+    sStyl+="QProgressBar::chunk:horizontal {background: qlineargradient(x1: 0, y1: 0.5, x2: 1, y2: 0.5, stop: 0 #0055aa, stop: 1 #222222);}";
     qApp->setStyleSheet(sStyl);
 }
 void winMain::fWindBackDial()
@@ -632,9 +632,9 @@ void winMain::fRowsStat()
     spiShedOut3->blockSignals(true);spiShedOut3->setValue(objRow3.outl);spiShedOut3->blockSignals(false);
     spiShedOut4->blockSignals(true);spiShedOut4->setValue(objRow4.outl);spiShedOut4->blockSignals(false);
 
-    labRowsLoca->setText(QString("Rows location = %1,%2").arg(fraRows->iX).arg(fraRows->iY));
-    labRowsSize->setText(QString("Rows size = %1,%2").arg(fraRows->iW).arg(fraRows->iH));
-    labRowsCent->setText(QString("Rows center = %1,%2").arg(fraRows->iX+gRowsHcen).arg(fraRows->iY+gRowsVcen));
+    labRowsLoca->setText(QString("Lines location = %1,%2").arg(fraRows->iX).arg(fraRows->iY));
+    labRowsSize->setText(QString("Lines size = %1,%2").arg(fraRows->iW).arg(fraRows->iH));
+    labRowsCent->setText(QString("Lines center = %1,%2").arg(fraRows->iX+gRowsHcen).arg(fraRows->iY+gRowsVcen));
     labMenuSize->setText(QString("Menu location = %1,%2").arg(fraMenu->frameGeometry().x()).arg(fraMenu->frameGeometry().y()));
     labMenuLoca->setText(QString("Menu size = %1,%2").arg(fraMenu->frameGeometry().width()).arg(fraMenu->frameGeometry().height()));
     labScreSize->setText(QString("Screen size = %1,%2").arg(objWind.widt).arg(objWind.heig));
@@ -1361,11 +1361,11 @@ void winMain::fGridZero()
 void winMain::fGridTitle()
 {
     QFileInfo fInfo=QFileInfo(gFile);
-    QString sTitl=fInfo.fileName()+"     ( ";
-    sTitl+=QString("%1").arg(gRowsMaxi-1) + " " + fL("diaGridTitlLine") + " · ";
+    QString sTitl=fInfo.fileName()+"  ·  ";
+    sTitl+=QString("%1").arg(gRowsMaxi-1) + " " + fL("diaGridTitlLine") + " (";
     sTitl+=fL("diaGridTitlWidt")+": "+QString("%1").arg(gFileMaxiRows[0]);
     if (gSrtx) sTitl+= " · "+fL("diaGridTitlEnd")+": "+gSrtxStop.left(8);
-    sTitl+= " )";
+    sTitl+=")";
     diaGrid->labTitl->setText(sTitl);
 }
 void winMain::fGridInit()
@@ -1861,7 +1861,7 @@ void winMain::fSettCrea()
     butVertBott->move(51,7);
     connect(butVertBott,SIGNAL(clicked()),this,SLOT(fRowsVertBot0()));
 
-    QPushButton *labVers=new QPushButton("    Vers. "+gVers,tabRows);
+    QPushButton *labVers=new QPushButton("Version "+gVers,tabRows);
     labVers->setStyleSheet("color:#0055aa;border:1px solid #0055aa;padding:3px;");
     labVers->move(598,214);
 
@@ -1896,9 +1896,15 @@ void winMain::fSettCrea()
     grpSkin *grpWorkLang=new grpSkin(tabGene,75,40,310,30);
     radLangEngl=new QRadioButton("English",grpWorkLang);
     radLangEngl->move(3,3);
+    #ifdef Q_OS_LINUX
+    radLangEngl->setEnabled(false);
+    #endif
     connect(radLangEngl,SIGNAL(clicked()),this,SLOT(fLAll()));
     radLangOthe=new QRadioButton(fL("radLangOthe"),grpWorkLang);
     radLangOthe->move(3,19);
+    #ifdef Q_OS_LINUX
+    radLangOthe->setEnabled(false);
+    #endif
     connect(radLangOthe,SIGNAL(clicked()),this,SLOT(fLAll()));
 
     oLang.setFileName("./QSTit_Lang.txt");
@@ -2714,7 +2720,6 @@ QString winMain::fFileLineForm(QString sLine)
     sLine.replace("  "," ");
     sLine.replace(" .",".");
     sLine.replace(" :",":");
-    sLine.replace(" ;",";");
     sLine.replace(" ,",",");
     sLine.replace(" !","!");
     sLine.replace(" ?","?");
@@ -2760,7 +2765,7 @@ bool winMain::fFileTextMaxi(int iGrid,int iLeng,int iChar,int iRows,int iLine,in
     {
         if (iLeng>objWind.basW)
         {
-            gFileErro+=QString("|%1 - text too wide").arg(iLine);
+            gFileErro+=QString("|%1 - Line is too wide").arg(iLine);
             messSkin cM;
             if (!cM.fMess(this,fraMenu,fL("FileProbWideMess").arg(iLine),fL("butYeYe"),fL("butNoNo"))) return true;
         }
@@ -2891,7 +2896,7 @@ void winMain::fFileLogx()
 
         for (int iP=1; iP<lProb.count(); iP++)
         {
-            sLine=QString("[Error] line %1\n").arg(lProb[iP]);
+            sLine=QString("[Error] Row %1\n").arg(lProb[iP]);
             if (!fFlogOpen()) return;
             oFlog.write(sLine.toAscii());
         }
@@ -2901,7 +2906,7 @@ void winMain::fFileLogx()
     {
         if (griText->item(iR,0)->text()=="I")
         {
-            sLine=QString("[Marked] Row %1 Col 1 : ").arg(griText->verticalHeaderItem(iR)->text().toInt());
+            sLine=QString("[Flag] Row %1 Col 1 : ").arg(griText->verticalHeaderItem(iR)->text().toInt());
             sLine+=QString("Text ["+griText->item(iR,3)->text()+"...]\n");
             if (!fFlogOpen()) return;
             oFlog.write(sLine.toAscii());
@@ -2915,9 +2920,9 @@ void winMain::fFileLogx()
                     iC=gEditTextColu[r];
                     if (!gSrtx) iC-=2;
 
-                    sLine=QString("[Edited] Row %1 Col %2 : ").arg(gEditTextLine[r]).arg(iC);
-                    sLine+=QString("Old ["+gEditTextOldx[r]+"]");
-                    sLine+=QString(" -> New ["+gEditTextNewx[r]+"]\n");
+                    sLine=QString("[Edit] Row %1 Col %2 : ").arg(gEditTextLine[r]).arg(iC);
+                    sLine+=QString("["+gEditTextOldx[r]+"]");
+                    sLine+=QString("→ ["+gEditTextNewx[r]+"]\n");
                     if (!fFlogOpen()) return;
                     oFlog.write(sLine.toAscii());
                 }
@@ -3140,14 +3145,14 @@ int winMain::fFileSrtxVeriNumb(int iRows,QString sText,int iLine)
 
     if (sText.length()<1)
     {
-        gFileErro+=QString("|%1 (file %2) - Number,unexpected empty line").arg(iLine).arg(iRows);
-        gFileErro+=QString("|%1 (file %2) - STOPPED BEFORE FILE END").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Subtitle number · unexpected empty line").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - STOPPED BEFORE END OF FILE").arg(iLine).arg(iRows);
         return -1;
     }
     if (!sText.at(0).isDigit())
     {
-        gFileErro+=QString("|%1 (file %2) - Number,expected: %1").arg(iLine).arg(iRows);
-        gFileErro+=QString("|%1 (file %2) - STOPPED BEFORE FILE END").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Subtitle number · expected: %1").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - STOPPED BEFORE END OF FILE").arg(iLine).arg(iRows);
         return -1;
     }
     int iTemp=sText.toInt(&bOk,10);
@@ -3155,7 +3160,7 @@ int winMain::fFileSrtxVeriNumb(int iRows,QString sText,int iLine)
     else iLine++;
     if (iLine!=iTemp)
     {
-        gFileErro+=QString("|%1 (file %2) - Number,read: %3,expected: %1").arg(iLine).arg(iRows).arg(iTemp);
+        gFileErro+=QString("|%1 (file line %2) - Subtitle number · read: %3, expected: %1").arg(iLine).arg(iRows).arg(iTemp);
         iLine=iTemp;
     }
     return iLine;
@@ -3169,54 +3174,54 @@ bool winMain::fFileSrtxVeriHour(int iRows,QString sText,int iLine)
 
     if (sText.length()<1)
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,unexpected empty line").arg(iLine).arg(iRows);
-        gFileErro+=QString("|%1 (file %2) - STOPPED BEFORE FILE END").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · unexpected empty line").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - STOPPED BEFORE END OF FILE").arg(iLine).arg(iRows);
         return false;
     }
     if (sText.length() != 29)
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,bad length (less or more than 29 char.)").arg(iLine).arg(iRows);
-        gFileErro+=QString("|%1 (file %2) - STOPPED BEFORE FILE END").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · wrong length (should be 29 char.)").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - STOPPED BEFORE END OF FILE").arg(iLine).arg(iRows);
         return false;
     }
     if (!sText.at(0).isDigit() || !sText.at(1).isDigit() || !sText.at(17).isDigit() || !sText.at(18).isDigit())
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,bad hours format").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · wrong hours format").arg(iLine).arg(iRows);
         return true;
     }
     if (sText.at(2) != ':' || sText.at(19) != ':')
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,bad time separator,':' expected").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · wrong separator, expected ':'").arg(iLine).arg(iRows);
         return true;
     }
     if (!sText.at(3).isDigit() || !sText.at(4).isDigit() || !sText.at(20).isDigit() || !sText.at(21).isDigit())
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,bad minutes format").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · wrong minutes format").arg(iLine).arg(iRows);
         return true;
     }
     if (sText.at(5) != ':' || sText.at(22) != ':')
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,bad time separator,':' expected").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · wrong separator, expected ':'").arg(iLine).arg(iRows);
         return true;
     }
     if (!sText.at(6).isDigit() || !sText.at(7).isDigit() || !sText.at(23).isDigit() || !sText.at(24).isDigit())
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,bad seconds format").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · wrong seconds format").arg(iLine).arg(iRows);
         return true;
     }
     if (sText.at(8) != ',' || sText.at(25) != ',')
     {
-        gFileErro+=QString("|%1 - Hours,bad time separator,',' expected").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 - Timecode · wrong separator, expected ','").arg(iLine).arg(iRows);
         return true;
     }
     if (!sText.at(9).isDigit() || !sText.at(10).isDigit() || !sText.at(11).isDigit() || !sText.at(26).isDigit() || !sText.at(27).isDigit() || !sText.at(28).isDigit())
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,bad milliseconds format").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · wrong milliseconds format").arg(iLine).arg(iRows);
         return true;
     }
     if (sText.mid(12,5)!=" --> ")
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,bad start/end separator,' --> ' expected").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · wrong 'time in' - 'time out' separator, expected ' --> '").arg(iLine).arg(iRows);
         return true;
     }
     QString sStar=sText.mid(0,2)+sText.mid(3,2)+sText.mid(6,2)+sText.mid(9,3);
@@ -3225,12 +3230,12 @@ bool winMain::fFileSrtxVeriHour(int iRows,QString sText,int iLine)
     int iStop=sStop.toInt(&bOk,10);
     if (iStar>=iStop)
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,start >= end").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · time in >= time out").arg(iLine).arg(iRows);
         return true;
     }
     if (iStar<iPrev)
     {
-        gFileErro+=QString("|%1 (file %2) - Hours,start %3 < previous %4").arg(iLine).arg(iRows).arg(iStar).arg(iPrev);
+        gFileErro+=QString("|%1 (file line %2) - Timecode · time in < previous time out").arg(iLine).arg(iRows);
         return true;
     }
     iPrev=iStop;
@@ -3240,20 +3245,20 @@ bool winMain::fFileSrtxVeriText(int iRows,QString sText,int iLine)
 {
     if (sText.length()<1)
     {
-        gFileErro+=QString("|%1 (file %2) - Text,unexpected empty line").arg(iLine).arg(iRows);
-        gFileErro+=QString("|%1 (file %2) - STOPPED BEFORE FILE END").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Text line · unexpected empty line").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - STOPPED BEFORE END OF FILE").arg(iLine).arg(iRows);
         return false;
     }
     if (sText.length()>99)
     {
-        gFileErro+=QString("|%1 (file %2) - Text,line length > 99 char.").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Text line · line length > 99 char.").arg(iLine).arg(iRows);
         return true;
     }
     for (int i=0; i<sText.length(); i++)
     {
         if (!sText.at(i).isPrint())
         {
-            gFileErro+=QString("|%1 (file %2) - Text,non-printable (at %3)").arg(iLine).arg(iRows).arg(i+1);
+            gFileErro+=QString("|%1 (file line %2) - Text line · non-printable character (at %3)").arg(iLine).arg(iRows).arg(i+1);
             return true;
         }
     }
@@ -3263,8 +3268,8 @@ bool winMain::fFileSrtxVeriBlan(int iRows,QString sText,int iLine)
 {
     if (sText.length()>0)
     {
-        gFileErro+=QString("|%1 (file %2) - Line break not found,empty line expected").arg(iLine).arg(iRows);
-        gFileErro+=QString("|%1 (file %2) - STOPPED BEFORE FILE END").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - Line break not found, empty line expected").arg(iLine).arg(iRows);
+        gFileErro+=QString("|%1 (file line %2) - STOPPED BEFORE END OF FILE").arg(iLine).arg(iRows);
         return false;
     }
     return true;
@@ -3327,7 +3332,7 @@ void winMain::fFileInfoDial()
     griInfo->setItem(iL,1,new QTableWidgetItem(fInfo.absolutePath()));
     iL++;
     griInfo->setItem(iL,0,new QTableWidgetItem(fL("widInfoModi")));
-    griInfo->setItem(iL,1,new QTableWidgetItem(fInfo.lastModified().toString("dd/MM/yyyy   hh:mm")));
+    griInfo->setItem(iL,1,new QTableWidgetItem(fInfo.lastModified().toString("dd/MM/yyyy, hh:mm")));
     iL++;
     griInfo->setItem(iL,0,new QTableWidgetItem(fL("widInfoEnco")));
     griInfo->setItem(iL,1,new QTableWidgetItem(gFileEnco ? "ANSI":"UTF8"));
@@ -3427,7 +3432,7 @@ void winMain::fHelpDial()
     int iWidt=740;
     int iHeig=700;
 
-    diaHelp=new diaSkin(winWind,fraMenu,fL("diaHelp")+" | vers. "+gVers,iWidt,iHeig,1,1);
+    diaHelp=new diaSkin(winWind,fraMenu,fL("diaHelp"),iWidt,iHeig,1,1);
     connect(diaHelp,SIGNAL(sClosed()),this,SLOT(fHelpDialClos()));
 
     texHelp=new QTextEdit("",diaHelp);
@@ -3915,7 +3920,7 @@ void winMain::fConfWrit(int pT)
     sText+=fConfWritLine(QString("Menu-Y=%1").arg(fraMenu->iY),                                 "menu top");
     sText+=fConfWritLine(QString("Menu-W=%1").arg(fraMenu->iW),                                 "menu width");
     sText+=fConfWritLine(QString("Menu-H=%1").arg(fraMenu->iH),                                 "menu height");
-    sText+=fConfWritLine(QString("Row1BackColo=%1").arg(objRow1.colB.name()),                   "row1 backcolor");
+    sText+=fConfWritLine(QString("Row1BackColo=%1").arg(objRow1.colB.name()),                   "line 1 backcolour");
     sText+=fConfWritLine(QString("Row1FontItal=%1").arg(objRow1.font.italic() ? "true":"false"),"     font italic");
     sText+=fConfWritLine(QString("Row1FontName=%1").arg(objRow1.font.family()),                 "     font");
     sText+=fConfWritLine(QString("Row1FontSize=%1").arg(objRow1.font.pointSize()),              "     font size");
@@ -3926,12 +3931,12 @@ void winMain::fConfWrit(int pT)
     sText+=fConfWritLine(QString("Row1Rota=%1").arg(objRow1.rota),                              "     rotation");
     sText+=fConfWritLine(QString("Row1Show=%1").arg(objRow1.show ? "true":"false"),             "     shown");
     sText+=fConfWritLine(QString("Row1Spac=%1").arg(objRow1.spac),                              "     spacing");
-    sText+=fConfWritLine(QString("Row1TextColo=%1").arg(objRow1.colF.name()),                   "     text color");
+    sText+=fConfWritLine(QString("Row1TextColo=%1").arg(objRow1.colF.name()),                   "     text colour");
     sText+=fConfWritLine(QString("Row1Vert=%1").arg(objRow1.vert),                              "     alignment vert. (top=1,center=0,bottom=-1)");
     sText+=fConfWritLine(QString("Row1Widt=%1").arg(objRow1.widt),                              "     width");
     sText+=fConfWritLine(QString("Row1-X=%1").arg(objRow1.x),                                   "     left (always 0)");
     sText+=fConfWritLine(QString("Row1-Y=%1").arg(objRow1.y),                                   "     top");
-    sText+=fConfWritLine(QString("Row2BackColo=%1").arg(objRow2.colB.name()),                   "row2 backcolor");
+    sText+=fConfWritLine(QString("Row2BackColo=%1").arg(objRow2.colB.name()),                   "line 2 backcolour");
     sText+=fConfWritLine(QString("Row2FontItal=%1").arg(objRow2.font.italic() ? "true":"false"),"     font italic");
     sText+=fConfWritLine(QString("Row2FontName=%1").arg(objRow2.font.family()),                 "     font");
     sText+=fConfWritLine(QString("Row2FontSize=%1").arg(objRow2.font.pointSize()),              "     font size");
@@ -3942,12 +3947,12 @@ void winMain::fConfWrit(int pT)
     sText+=fConfWritLine(QString("Row2Rota=%1").arg(objRow2.rota),                              "     rotation");
     sText+=fConfWritLine(QString("Row2Show=%1").arg(objRow2.show ? "true":"false"),             "     shown");
     sText+=fConfWritLine(QString("Row2Spac=%1").arg(objRow2.spac),                              "     spacing");
-    sText+=fConfWritLine(QString("Row2TextColo=%1").arg(objRow2.colF.name()),                   "     text color");
+    sText+=fConfWritLine(QString("Row2TextColo=%1").arg(objRow2.colF.name()),                   "     text colour");
     sText+=fConfWritLine(QString("Row2Vert=%1").arg(objRow2.vert),                              "     alignment vert. (top=1,center=0,bottom=-1)");
     sText+=fConfWritLine(QString("Row2Widt=%1").arg(objRow2.widt),                              "     width");
     sText+=fConfWritLine(QString("Row2-X=%1").arg(objRow2.x),                                   "     left (always 0)");
     sText+=fConfWritLine(QString("Row2-Y=%1").arg(objRow2.y),                                   "     top");
-    sText+=fConfWritLine(QString("Row3BackColo=%1").arg(objRow3.colB.name()),                   "row3 backcolor");
+    sText+=fConfWritLine(QString("Row3BackColo=%1").arg(objRow3.colB.name()),                   "line 3 backcolour");
     sText+=fConfWritLine(QString("Row3FontItal=%1").arg(objRow3.font.italic() ? "true":"false"),"     font italic");
     sText+=fConfWritLine(QString("Row3FontName=%1").arg(objRow3.font.family()),                 "     font");
     sText+=fConfWritLine(QString("Row3FontSize=%1").arg(objRow3.font.pointSize()),              "     font size");
@@ -3958,12 +3963,12 @@ void winMain::fConfWrit(int pT)
     sText+=fConfWritLine(QString("Row3Rota=%1").arg(objRow3.rota),                              "     rotation");
     sText+=fConfWritLine(QString("Row3Show=%1").arg(objRow3.show ? "true":"false"),             "     shown");
     sText+=fConfWritLine(QString("Row3Spac=%1").arg(objRow3.spac),                              "     spacing");
-    sText+=fConfWritLine(QString("Row3TextColo=%1").arg(objRow3.colF.name()),                   "     text color");
+    sText+=fConfWritLine(QString("Row3TextColo=%1").arg(objRow3.colF.name()),                   "     text colour");
     sText+=fConfWritLine(QString("Row3Vert=%1").arg(objRow3.vert),                              "     alignment vert. (top=1,center=0,bottom=-1)");
     sText+=fConfWritLine(QString("Row3Widt=%1").arg(objRow3.widt),                              "     width");
     sText+=fConfWritLine(QString("Row3-X=%1").arg(objRow3.x),                                   "     left (always 0)");
     sText+=fConfWritLine(QString("Row3-Y=%1").arg(objRow3.y),                                   "     top");
-    sText+=fConfWritLine(QString("Row4BackColo=%1").arg(objRow4.colB.name()),                   "row4 backcolor");
+    sText+=fConfWritLine(QString("Row4BackColo=%1").arg(objRow4.colB.name()),                   "line 4 backcolour");
     sText+=fConfWritLine(QString("Row4FontItal=%1").arg(objRow4.font.italic() ? "true":"false"),"     font italic");
     sText+=fConfWritLine(QString("Row4FontName=%1").arg(objRow4.font.family()),                 "     font");
     sText+=fConfWritLine(QString("Row4FontSize=%1").arg(objRow4.font.pointSize()),              "     font size");
@@ -3973,21 +3978,21 @@ void winMain::fConfWrit(int pT)
     sText+=fConfWritLine(QString("Row4Outl=%1").arg(objRow4.outl),                              "     outline thickness");
     sText+=fConfWritLine(QString("Row4Rota=%1").arg(objRow4.rota),                              "     rotation");
     sText+=fConfWritLine(QString("Row4Show=%1").arg(objRow4.show ? "true":"false"),             "     shown");
-    sText+=fConfWritLine(QString("Row4TextColo=%1").arg(objRow4.colF.name()),                   "     text color");
+    sText+=fConfWritLine(QString("Row4TextColo=%1").arg(objRow4.colF.name()),                   "     text colour");
     sText+=fConfWritLine(QString("Row4Vert=%1").arg(objRow4.vert),                              "     alignment vert. (top=1,center=0,bottom=-1)");
     sText+=fConfWritLine(QString("Row4Widt=%1").arg(objRow4.widt),                              "     width");
     sText+=fConfWritLine(QString("Row4-X=%1").arg(objRow4.x),                                   "     left (always 0)");
     sText+=fConfWritLine(QString("Row4-Y=%1").arg(objRow4.y),                                   "     top");
-    sText+=fConfWritLine(QString("RowsHone=%1").arg(objRowsHeig.valu),                          "height of one row");
-    sText+=fConfWritLine(QString("RowsNumb=%1").arg(objRowsNumb.valu),                          "number of rows (min=1,max=4)");
-    sText+=fConfWritLine(QString("RowsSpac=%1").arg(objRowsSpac.valu),                          "space between rows");
-    sText+=fConfWritLine(QString("Rows-X=%1").arg(fraRows->iX),                                 "rows frame left");
-    sText+=fConfWritLine(QString("Rows-Y=%1").arg(fraRows->iY),                                 "rows frame top");
-    sText+=fConfWritLine(QString("Rows-W=%1").arg(fraRows->iW),                                 "rows frame width");
-    sText+=fConfWritLine(QString("Rows-H=%1").arg(fraRows->iH),                                 "rows frame height");
-    sText+=fConfWritLine(QString("TextOutlColo=%1").arg(gOutlColo.name()),                      "text outline color");
+    sText+=fConfWritLine(QString("RowsHone=%1").arg(objRowsHeig.valu),                          "height of one line");
+    sText+=fConfWritLine(QString("RowsNumb=%1").arg(objRowsNumb.valu),                          "number of lines (min=1,max=4)");
+    sText+=fConfWritLine(QString("RowsSpac=%1").arg(objRowsSpac.valu),                          "space between lines");
+    sText+=fConfWritLine(QString("Rows-X=%1").arg(fraRows->iX),                                 "display frame left");
+    sText+=fConfWritLine(QString("Rows-Y=%1").arg(fraRows->iY),                                 "display frame top");
+    sText+=fConfWritLine(QString("Rows-W=%1").arg(fraRows->iW),                                 "display frame width");
+    sText+=fConfWritLine(QString("Rows-H=%1").arg(fraRows->iH),                                 "display frame height");
+    sText+=fConfWritLine(QString("TextOutlColo=%1").arg(gOutlColo.name()),                      "text outline colour");
     sText+=fConfWritLine(QString("TextSecoItal=%1").arg(gSecoItal ? "true":"false"),            "Second text line in italic");
-    sText+=fConfWritLine(QString("TextSecoText=%1").arg(gSecoText ? "true":"false"),            "Single text line displayed on row 2");
+    sText+=fConfWritLine(QString("TextSecoText=%1").arg(gSecoText ? "true":"false"),            "Single text line displayed on bottom line");
 
     oConf.write(sText.toUtf8());
     oConf.close();
@@ -4193,11 +4198,3 @@ void winMain::fAutoDece() {if (gAcce>-50) gAcce-=1;fAutoAcceShow();}
 void winMain::fJumpBase(int iJ) {gJumpBase=iJ*100;}
 void winMain::fAutoJump() {if (gPlay) gJump=gJumpBase;}
 void winMain::fAutoBack() {if (gPlay) gJump=-1*gJumpBase;}
-/*
-    ════════════════════════════════════════════════════════════════════════════════
-    Code analysis/programming:  Georges Piedboeuf-Boen  georges.pi.bo@gmail.com
-    Functional analysis:        Laurent Tenzer          lt@nova-cinema.org
-    Project origin:             Cinéma Nova             http://www.nova-cinema.org
-    Made in Brussels            Belgium                 http://www.brussels.be
-    ════════════════════════════════════════════════════════════════════════════════
-*/

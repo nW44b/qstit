@@ -10,7 +10,7 @@ butDimeRigh         + Horizontal
 butDimeUpup         + Vertical
 butEditCanc         Cancel
 butEditSave         Confirm
-butExit             Quit / Save settings [Ctrl+Q]
+butExit             Quit [Ctrl+Q]
 butExitCanc         Cancel
 butExitExit         Confirm
 butFile             Open [Ctrl+O]
@@ -25,7 +25,7 @@ butGridFindSave     Find...
 butGridGoto         Go to... [Ctrl+G]
 butGridGotoCanc     Cancel
 butGridGotoSave     Go to...
-butGridInfo         File Info [Ctrl+I]
+butGridInfo         File info [Ctrl+I]
 butGridSave         Save modified file as...
 butGridUndo         Undo changes (in reverse chronology) [Ctrl+Z]
 butHelp             Help [F1]
@@ -45,12 +45,12 @@ butProjBack         Jump backward [←]
 butProjDece         Decrease timer speed [-] or [M]
 butProjDown         Next subtitle / empty line [↓]
 butProjJump         Jump forward [→]
-butProjPlay         Start / Pause timer [Space]
+butProjPlay         Start / Pause timer [Space bar]
 butProjUpup         Previous subtitle / empty line [↑]
 butRoll             Hide / Show display [N]
 butRowsOutl         Colour
 butSett             Settings [Ctrl+S]
-butSettBase         Restore default settings
+butSettBase         Reset default settings
 butTextBack         Colour
 butTextColo         Colour
 butVertBott         Bottom
@@ -58,8 +58,8 @@ butVertCent         Center
 butVertTopy         Top
 butWindBack         Colour
 butYeYe             Yes
-chkSecoItal         Force italic for bottom lines
-chkSecoText         Display one-line subtitles on bottom line
+chkSecoItal         Force italic for second lines
+chkSecoText         Display text on bottom lines when not all lines are used
 diaColoOutl         Outline colour
 diaExit             Quit / Save settings
 diaFile             Open subtitle file...
@@ -71,7 +71,7 @@ diaGridTitlEnd      last
 diaGridTitlLine     subtitles
 diaGridTitlWidt     widest
 diaHelp             Help
-diaInfo             File Info
+diaInfo             File info
 diaRowsBack         Lines background
 diaSaveFileTitl     Save subtitle file
 diaSaveFileExte     Supported (*.srt *.txt)
@@ -80,18 +80,18 @@ diaTextColo         Subtitle colour
 diaTextFont         Subtitle font
 FileConfExisMess    Settings found for this file.|Do you want to use them?
 FileConfExisTitl    Settings
-FileProbCritMess    Problem encountered, see File Info
+FileProbCritMess    Problem encountered, see 'File info'.
 FileProbCritTitl    Loading...
-FileProbOpenMess    This will close the current file.|Are you sure?
+FileProbOpenMess    Are you sure you want|to close the current file?
 FileProbOpenTitl    Open subtitle file...
 FileProbSettMess    Settings found for this file.|Do you want to use them?
 FileProbSettTitl    Settings
 FileProbWarnMess    Cannot read file:
 FileProbWarnTitl    Open
-FileProbWideMess    LINE (%1) TOO WIDE !|Continue anyway...
+FileProbWideMess    Line (%1) is too wide!|Continue anyway...
 FileProbWideTitl    File Read
 fRowsInit           Line
-GridLastItem        End
+GridLastItem        Last timecode
 GridTextModiMess    The subtitle file has been edited.|Do you want to save changes?
 GridTextModiTitl    This line has been modified.
 labClok             Current time
@@ -119,20 +119,20 @@ labTextFont         Text
 labTime             Timer
 labWindBack         Screen
 labWorkLang         Interface lang.
-msgCleaAllMess      Restore default settings?
+msgCleaAllMess      Erase default settings and|restore factory default?
 msgCleaAllTitl      Reset all
 msgCleaGridMess     Clear display and|reset file at beginning?
 msgCleaGridTitl     Reset grid
-msgConfWriteDone    Settings saved
-msgFontWideMess     Display may be too large for the screen
+msgConfWriteDone    Settings saved.
+msgFontWideMess     Display may be too large for the screen.
 msgFontWideTitl     Font size
-msgGridEditMess     Nothing to edit
+msgGridEditMess     Nothing to edit.
 radBott             bottom
 radCenH             center
 radCenV             center
 radExitSavF         Save settings as settings for this file
 radExitSavN         Don't save settings
-radExitSavP         Save settings as global settings
+radExitSavP         Save settings as default settings
 radGridDark         dark
 radGridWhit         white
 radLangOthe         Other
@@ -163,5 +163,5 @@ widInfoLine         Widest lines (in decreasing order)
 widInfoModi         Last modified
 widInfoName         File name
 widInfoPath         Path
-widInfoProb         Problems (in source read)
+widInfoProb         Problems found in subtitle file
 widInfoRows         Number of subtitles
