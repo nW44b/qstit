@@ -1,0 +1,653 @@
+/*
+    ═══════════════════════════════════════════════════════════════════════════
+    This file is part of QSTit.
+    Feedback, comments and questions are welcome:
+    subtitles@nova-cinema.org
+
+    QSTit is a free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version. If you do, we'd like to hear about it.
+
+    QSTit is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with QSTit. If not, see <http://www.gnu.org/licenses/>
+    ═══════════════════════════════════════════════════════════════════════════
+    Free Icons by Axialis Software - Axialis Team <http://www.axialis.com>
+    ═══════════════════════════════════════════════════════════════════════════
+*/
+
+#ifndef H_WINMAIN
+#define H_WINMAIN
+
+#include <iostream>
+#include <fstream>
+
+#include <QtGui>
+#include <QApplication>
+#include <QFile>
+#include <QString>
+#include <QTableWidget>
+#include <QHeaderView>
+#include <QAbstractItemView>
+#include <QModelIndex>
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QKeyEvent>
+#include <QEvent>
+
+#include "QSTit_fadShow.h"
+
+class barSkin;
+class butBubbC;
+class butSpin;
+class butToolC;
+class butToolX;
+class diaColoSkin;
+class diaFileSkin;
+class diaFontSkin;
+class diaGridC;
+class diaGridSkin;
+class diaSkin;
+class grpSkin;
+class menuSkin;
+class mesSkin;
+class rowSkin;
+class diaInfoSkin;
+
+class winMain : public QWidget
+{
+    Q_OBJECT
+    public:
+        winMain();
+    private:
+        struct objMinMax
+        {
+            int     mini,maxi,val0,valu;
+        } objRowsNumb,objRowsWidt,objRowsHeig,objRowsSpac,objRowsRota,objRowsOutl,objJumpBase;
+        struct objScreens
+        {
+            int     widt,heig,midW,midH,basW,basH;
+        } objWind;
+        struct objRows
+        {
+            bool    show;
+            QString text;
+            QFont   font;
+            QColor  colB,colF,colO;
+            int     x,y,widt,heig,spac,rota,savH,savS,hori,vert,outl;
+        } objRow0,objRow1,objRow2,objRow3,objRow4;
+    private:
+        int         gAcce;
+        bool        gAuto;
+        bool        gBackDial;
+        QString     gClokStyl;
+        bool        gColoDial;
+        bool        gConf;
+        QString     gConfFile;
+        QString     gHome;
+        int         gEditTextColu[99];
+        int         gEditTextLine[99];
+        QString     gEditTextNewx[99];
+        QString     gEditTextOldx[99];
+        int         gEditTextRows[99];
+        QColor      gErroBack;
+        QColor      gErroColo;
+        bool        gExitDial;
+        QString     gExplDisa;
+        QString     gExplStyl;
+        QString     gFile;
+        bool        gFileDial;
+        bool        gFileEnco;
+        QString     gFileErro;
+        bool        gInfoDial;
+        int         gFileMaxiChar[9];
+        int         gFileMaxiColo[9];
+        int         gFileMaxiColu[4];
+        int         gFileMaxiGrid[9];
+        int         gFileMaxiLeng[9];
+        int         gFileMaxiLine[9];
+        int         gFileMaxiRows[9];
+        bool        gFontDial;
+        QString     gGridBack;
+        QString     gGridColo;
+        bool        gGridColoDark;
+        QString     gGriCStyl;
+        bool        gGridDial;
+        bool        gGridEdit;
+        bool        gGridEditSave;
+        QFont       gGridFont;
+        int         gGridMark;
+        int         gGridModi;
+        int         gGridRowsHeig;
+        bool        gGridSave;
+        bool        gGridShow;
+        bool        gHelpDial;
+        bool        gInit;
+        int         gJump;
+        int         gJumpBase;
+        int         gLang;
+        QStringList gLangCode;
+        QStringList gLangText;
+        bool        gManu;
+        QColor      gOutlColo;
+        bool        gOutlDial;
+        bool        gPlay;
+        int         gPuls;
+        QString     gPulsStyl;
+        int         gShed;
+        int         gRows;
+        QString     gRowsBack;
+        QFrame*     fraRowsCent;
+        QString     gRowsColo;
+        QFont       gRowsFont;
+        int         gRowsHcen;
+        int         gRowsHcenPrev;
+        int         gRowsMaxi;
+        int         gRowsVcen;
+        int         gRowsVcenPrev;
+        bool        gSecoText;
+        bool        gSecoItal;
+        bool        gSett;
+        int         gSettHeig;
+        int         gSettLefx;
+        bool        gSettShow;
+        int         gSettTopy;
+        int         gSettWidt;
+        bool        gShow;
+        bool        gShowButt;
+        QString     gSpinStyl;
+        bool        gSrtx;
+        QString     gSrtxStop;
+        QString     gSystFontFami;
+        QString     gTimeStyl;
+        QString     gVers;
+        QString     gWindBack;
+        bool        gWindDial;
+        bool        gWork;
+        QFile       oConf;
+        QFile       oFile;
+        QFile       oFlog;
+        QFile       oHelp;
+        QFile       oLang;
+        QWidget     *winWind;
+    private:
+        void        fApplInit();
+        void        fAutoAcceShow();
+        void        fAutoGridShow();
+        void        fAutoInit();
+        void        fAutoJumpBack();
+        void        fAutoPaus();
+        void        fAutoStarInit();
+        QTime       fAutoTimeConv(QString);
+        void        fAutoTimeInit();
+        void        fClearAll(bool);
+        void        fConfConf(QString,QString);
+        void        fConfRead();
+        void        fConfWrit(int);
+        QString     fConfWritLine(QString,QString);
+        bool        fFileConf();
+        void        fFileEncoding(QString);
+        QString     fFileLineForm(QString);
+        void        fFileLogx();
+        void        fFileRead();
+        void        fFileReadSrtx();
+        int         fFileSize(QString);
+        bool        fFileSrtxVeriBlan(int,QString,int);
+        bool        fFileSrtxVeriHour(int,QString,int);
+        int         fFileSrtxVeriNumb(int,QString,int);
+        bool        fFileSrtxVeriText(int,QString,int);
+        bool        fFileTextMaxi(int,int,int,int,int,int);
+        void        fFileWrit(QString);
+        void        fFileWritSrtx(QString);
+        bool        fFlogOpen();
+        void        fGridColo();
+        void        fGridCrea();
+        void        fGridEditDisa();
+        void        fGridEditEnab();
+        void        fGridEditMemo(int,int,QString);
+        void        fGridFocus();
+        void        fGridFontSize();
+        void        fGridInit();
+        void        fGridInitCols();
+        void        fGridInitRows();
+        void        fGridItemSetx(QString,int,int);
+        void        fGridMarkRows(int);
+        void        fGridModi();
+        void        fGridRows(int);
+        void        fGridSaveIcon();
+        void        fGridShow(bool);
+        QString     fGridTextClean(QString);
+        void        fGridTitle();
+        void        fGridZero();
+        QString     fHelpFileRead();
+        QString     fL(QString);
+        void        fLangFileRead();
+        void        fManuInit();
+        void        fMenuAdapt(int);
+        void        fMenuClear();
+        void        fMenuCrea();
+        void        fRowsAdapt();
+        void        fRowsBackDial();
+        void        fRowsBase(int,int);
+        void        fRowsChck();
+        void        fRowsClear();
+        void        fRowsColoDial();
+        void        fRowsCrea();
+        void        fRowsFontChan();
+        void        fRowsFontDial();
+        void        fRowsFram();
+        void        fRowsFramCent();
+        void        fRowsFramHeig();
+        void        fRowsFramInit();
+        void        fRowsFramPosi();
+        void        fRowsHeigCalc();
+        void        fRowsHoriCent();
+        void        fRowsHoriLeft();
+        void        fRowsHoriRigh();
+        void        fRowsInit();
+        void        fRowsShow(int);
+        void        fRowsLocDFast();
+        void        fRowsLocLFast();
+        void        fRowsLocRFast();
+        void        fRowsLocUFast();
+        void        fRowsNumb();
+        void        fRowsNumbAdap();
+        void        fRowsVertBott();
+        void        fRowsVertCent();
+        void        fRowsVertTopy();
+        void        fRowsTextDraw(int);
+        void        fRowsTextForm();
+        void        fRowsWidtCalc();
+        void        fSettBase();
+        void        fSettCrea();
+        void        fSettCreaSave();
+        void        fSettCreaShed();
+        void        fSettEnab();
+        void        fWindClear();
+        void        fWindCrea();
+        void        fWindLogo();
+        void        fWindLogoFade();
+        void        fWindLogoHide();
+        void        fWindStyle();
+    private slots:
+        void        fAutoAcce();
+        void        fAutoBack();
+        void        fAutoClok();
+        void        fAutoDece();
+        void        fAutoJump();
+        void        fAutoStar();
+        void        fBackDialClos();
+        void        fButtNext();
+        void        fButtPrev();
+        void        fClearGrid();
+        void        fColoDialClos();
+        void        fHelpDial();
+        void        fHelpDialClos();
+        void        fFileDial();
+        void        fFileDialCanc();
+        void        fFileDialRepo(QString);
+        void        fFileInfoDial();
+        void        fFileInfoClos();
+        void        fFileInfoGoto(int,int);
+        void        fFontDialClos();
+        void        fGridChan(int,int,int,int);
+        void        fGridClic(int,int);
+        void        fGridColoTogg();
+        void        fGridEdit(int,int);
+        void        fGridEditButt();
+        void        fGridEditCanc();
+        void        fGridEditSave();
+        void        fGridFind();
+        void        fGridFontClos();
+        void        fGridFontDial();
+        void        fGridFontGet(QFont);
+        void        fGridGoto();
+        void        fGridLink();
+        void        fGridSave();
+        void        fGridUndo();
+        void        fJumpBase(int);
+        void        fLAll();
+        void        fMenuClok();
+        void        fOutlDialClos();
+        void        fRowsBac1();
+        void        fRowsBac2();
+        void        fRowsBac3();
+        void        fRowsBac4();
+        void        fRowsBack();
+        void        fRowsBackGet(QColor);
+        void        fRowsCol1();
+        void        fRowsCol2();
+        void        fRowsCol3();
+        void        fRowsCol4();
+        void        fRowsColo();
+        void        fRowsColoGet(QColor);
+        void        fRowsDimH(int);
+        void        fRowsDimV(int);
+        void        fRowsFon1();
+        void        fRowsFon2();
+        void        fRowsFon3();
+        void        fRowsFon4();
+        void        fRowsFont();
+        void        fRowsFontGet(QFont);
+        void        fRowsHoriCen0();
+        void        fRowsHoriCen1();
+        void        fRowsHoriCen2();
+        void        fRowsHoriCen3();
+        void        fRowsHoriCen4();
+        void        fRowsHoriLef0();
+        void        fRowsHoriLef1();
+        void        fRowsHoriLef2();
+        void        fRowsHoriLef3();
+        void        fRowsHoriLef4();
+        void        fRowsHoriRig0();
+        void        fRowsHoriRig1();
+        void        fRowsHoriRig2();
+        void        fRowsHoriRig3();
+        void        fRowsHoriRig4();
+        void        fRowsItal(int);
+        void        fRowsLocC();
+        void        fRowsLocD();
+        void        fRowsLocL();
+        void        fRowsLocR();
+        void        fRowsLocU();
+        void        fRowsOut1();
+        void        fRowsOut2();
+        void        fRowsOut3();
+        void        fRowsOut4();
+        void        fRowsOutl();
+        void        fRowsOutlDial();
+        void        fRowsOutlGet(QColor);
+        void        fRowsOutlThik(int);
+        void        fRowsRota(int);
+        void        fRowsSeco(int);
+        void        fRowsShowSlot();
+        void        fRowsSpac(int);
+        void        fRowsStat();
+        void        fRowsVertBot0();
+        void        fRowsVertBot1();
+        void        fRowsVertBot2();
+        void        fRowsVertBot3();
+        void        fRowsVertBot4();
+        void        fRowsVertCen0();
+        void        fRowsVertCen1();
+        void        fRowsVertCen2();
+        void        fRowsVertCen3();
+        void        fRowsVertCen4();
+        void        fRowsVertTop0();
+        void        fRowsVertTop1();
+        void        fRowsVertTop2();
+        void        fRowsVertTop3();
+        void        fRowsVertTop4();
+        void        fSettBaseDial();
+        void        fSettClos();
+        void        fSettSaveFile();
+        void        fSettSaveGlob();
+        void        fSettShow();
+        void        fShedHeig(int);
+        void        fShedNumb();
+        void        fShedOutl(int);
+        void        fShedRota(int);
+        void        fShedSpac(int);
+        void        fWindBack();
+        void        fWindBackDial();
+        void        fWindBackClos();
+        void        fWindBackGet(QColor);
+        void        fWindExit();
+        void        fWindExitCanc();
+        void        fWindExitClos();
+        void        fWindExitDial();
+        void        fWindTask();
+    private:
+        //barSkin*        barFile;
+        QPushButton*    butEditCanc;
+        QPushButton*    butEditSave;
+        butToolC*       butExit;
+        QPushButton*    butExitCanc;
+        QPushButton*    butExitExit;
+        butToolC*       butFile;
+        QPushButton*    butFont;
+        butToolC*       butGridClea;
+        butToolC*       butGridEdit;
+        butToolC*       butGridFind;
+        QPushButton*    butGridFont;
+        butToolC*       butGridGoto;
+        butToolC*       butGridInfo;
+        butToolC*       butGridLink;
+        butToolC*       butGridSave;
+        butToolC*       butGridUndo;
+        butToolC*       butHelp;
+        butToolX*       butHoriCent;
+        butToolX*       butHoriLeft;
+        butToolX*       butHoriRigh;
+        butToolX*       butLocaCent;
+        butToolX*       butLocaDown;
+        butToolX*       butLocaLeft;
+        butToolX*       butLocaRigh;
+        butToolX*       butLocaUpup;
+        butToolC*       butProjAcce;
+        butToolC*       butProjBack;
+        butToolC*       butProjDece;
+        butToolC*       butProjDown;
+        butToolC*       butProjJump;
+        butToolC*       butProjPlay;
+        butToolC*       butProjUpup;
+        butToolC*       butRoll;
+        QToolButton*    butRowsCent;
+        QPushButton*    butRowsOutl;
+        butToolC*       butSett;
+        QPushButton*    butSettBase;
+        QPushButton*    butShedBac0;
+        QPushButton*    butShedBac1;
+        QPushButton*    butShedBac2;
+        QPushButton*    butShedBac3;
+        QPushButton*    butShedBac4;
+        QPushButton*    butShedFon0;
+        QPushButton*    butShedFon1;
+        QPushButton*    butShedFon2;
+        QPushButton*    butShedFon3;
+        QPushButton*    butShedFon4;
+        QPushButton*    butShedFor0;
+        QPushButton*    butShedFor1;
+        QPushButton*    butShedFor2;
+        QPushButton*    butShedFor3;
+        QPushButton*    butShedFor4;
+        butToolX*       butShedHoC0;
+        butToolX*       butShedHoC1;
+        butToolX*       butShedHoC2;
+        butToolX*       butShedHoC3;
+        butToolX*       butShedHoC4;
+        butToolX*       butShedHoL0;
+        butToolX*       butShedHoL1;
+        butToolX*       butShedHoL2;
+        butToolX*       butShedHoL3;
+        butToolX*       butShedHoL4;
+        butToolX*       butShedHoR0;
+        butToolX*       butShedHoR1;
+        butToolX*       butShedHoR2;
+        butToolX*       butShedHoR3;
+        butToolX*       butShedHoR4;
+        QPushButton*    butShedOut0;
+        QPushButton*    butShedOut1;
+        QPushButton*    butShedOut2;
+        QPushButton*    butShedOut3;
+        QPushButton*    butShedOut4;
+        butToolX*       butShedVeB0;
+        butToolX*       butShedVeB1;
+        butToolX*       butShedVeB2;
+        butToolX*       butShedVeB3;
+        butToolX*       butShedVeB4;
+        butToolX*       butShedVeC0;
+        butToolX*       butShedVeC1;
+        butToolX*       butShedVeC2;
+        butToolX*       butShedVeC3;
+        butToolX*       butShedVeC4;
+        butToolX*       butShedVeT0;
+        butToolX*       butShedVeT1;
+        butToolX*       butShedVeT2;
+        butToolX*       butShedVeT3;
+        butToolX*       butShedVeT4;
+        QPushButton*    butTextBack;
+        QPushButton*    butTextColo;
+        butToolX*       butVertBott;
+        butToolX*       butVertCent;
+        butToolX*       butVertTopy;
+        QPushButton*    butWindBack;
+        QCheckBox*      chkSecoItal;
+        QCheckBox*      chkSecoText;
+        diaColoSkin*    diaColo;
+        QDialog*        diaEdit;
+        diaSkin*        diaExit;
+        diaFileSkin*    diaFile;
+        diaFontSkin*    diaFont;
+        diaGridSkin*    diaGrid;
+        diaSkin*        diaHelp;
+        diaInfoSkin*    diaInfo;
+        diaSkin*        diaMess;
+        diaSkin*        diaSett;
+        menuSkin*       fraMenu;
+        rowSkin*        fraRows;
+        QTableWidget*   griInfo;
+        diaGridC*       griText;
+        grpSkin*        grpTextAliH;
+        grpSkin*        grpTextAliV;
+        QLabel*         labClok;
+        QLabel*         labGridCol3;
+        QLabel*         labGridCol4;
+        QLabel*         labGridCol5;
+        QLabel*         labGridCol6;
+        QLabel*         labGridColo;
+        QLabel*         labGridFont;
+        QLabel*         labGridSize;
+        QLabel*         labJump;
+        QLabel*         labJumpBase;
+        QLabel*         labLogo;
+        QLabel*         labMenuLoca;
+        QLabel*         labMenuSize;
+        QLabel*         labPuls;
+        QLabel*         labRowsCent;
+        QLabel*         labRowsDimH;
+        QLabel*         labRowsDimV;
+        QLabel*         labRowsLoca;
+        QLabel*         labRowsOutl;
+        QLabel*         labRowsSize;
+        QLabel*         labScreSize;
+        QLabel*         labSettLin1;
+        QLabel*         labSettLin2;
+        QLabel*         labSettLin4;
+        QLabel*         labShedBack;
+        QLabel*         labShedDesc;
+        QLabel*         labShedText;
+        QLabel*         labShedHeig;
+        QLabel*         labShedHori;
+        QLabel*         labShedLin0;
+        QLabel*         labShedLin1;
+        QLabel*         labShedLin2;
+        QLabel*         labShedLin3;
+        QLabel*         labShedLin4;
+        QLabel*         labShedOutl;
+        QLabel*         labShedPosX;
+        QLabel*         labShedPosY;
+        QLabel*         labShedRota;
+        QLabel*         labShedShow;
+        QLabel*         labShedSpac;
+        QLabel*         labShedTit0;
+        QLabel*         labShedTit1;
+        QLabel*         labShedTit2;
+        QLabel*         labShedTit3;
+        QLabel*         labShedTit4;
+        QLabel*         labShedVert;
+        QLabel*         labShedWidt;
+        QLabel*         labTaskShow;
+        QLabel*         labTextAliH;
+        QLabel*         labTextAliV;
+        QLabel*         labTextFont;
+        QLabel*         labTime;
+        QLabel*         labWindBack;
+        QLabel*         labWorkLang;
+        QRadioButton*   radExitSavF;
+        QRadioButton*   radExitSavN;
+        QRadioButton*   radExitSavP;
+        QRadioButton*   radGridDark;
+        QRadioButton*   radGridWhit;
+        QRadioButton*   radLangEngl;
+        QRadioButton*   radLangOthe;
+        QRadioButton*   radSaveExiF;
+        QRadioButton*   radSaveExiP;
+        QRadioButton*   radShedSho1;
+        QRadioButton*   radShedSho2;
+        QRadioButton*   radShedSho3;
+        QRadioButton*   radShedSho4;
+        QRadioButton*   radTaskHide;
+        QRadioButton*   radTaskShow;
+        QSpinBox*       spiJumpBase;
+        butSpin*        spiRowsDimH;
+        butSpin*        spiRowsDimV;
+        butSpin*        spiRowsOutl;
+        butSpin*        spiRowsRota;
+        butSpin*        spiRowsSpac;
+        QSpinBox*       spiShedHei0;
+        QSpinBox*       spiShedHei1;
+        QSpinBox*       spiShedHei2;
+        QSpinBox*       spiShedHei3;
+        QSpinBox*       spiShedHei4;
+        QSpinBox*       spiShedOut0;
+        QSpinBox*       spiShedOut1;
+        QSpinBox*       spiShedOut2;
+        QSpinBox*       spiShedOut3;
+        QSpinBox*       spiShedOut4;
+        QSpinBox*       spiShedRot0;
+        QSpinBox*       spiShedRot1;
+        QSpinBox*       spiShedRot2;
+        QSpinBox*       spiShedRot3;
+        QSpinBox*       spiShedRot4;
+        QSpinBox*       spiShedSpa0;
+        QSpinBox*       spiShedSpa1;
+        QSpinBox*       spiShedSpa2;
+        QSpinBox*       spiShedSpa3;
+        QWidget*        tabGene;
+        QWidget*        tabRows;
+        QWidget*        tabSave;
+        QTabWidget*     tabSett;
+        QWidget*        tabShed;
+        QTextEdit*      texHelp;
+        QLabel*         texJump;
+        QLabel*         texPuls;
+        QLabel*         texRow1;
+        QLabel*         texRow2;
+        QLabel*         texRow3;
+        QLabel*         texRow4;
+        QLabel*         texRowsBack;
+        QLabel*         texRowsDime;
+        QLabel*         texRowsFram;
+        QLabel*         texRowsHeim;
+        QLabel*         texRowsHeiM;
+        QLabel*         texRowsLoca;
+        QLabel*         texRowsRota;
+        QLabel*         texRowsSpac;
+        QLabel*         texRowsText;
+        QLabel*         texRowsWidM;
+        QTime           timAuto;
+        QTime           timStar;
+        QTime           timStop;
+        QTimer*         tmrClok;
+        QTimer*         tmrAuto;
+    private:
+        QPointer<FaderWidget> faderWidget;
+    protected:
+        virtual void keyPressEvent(QKeyEvent *qe);
+};
+
+#endif
+/*
+    ════════════════════════════════════════════════════════════════════════════════
+    Code analysis/programming:  Georges Piedboeuf-Boen  georges.pi.bo@gmail.com
+    Functional analysis:        Laurent Tenzer          lt@nova-cinema.org
+    Project origin:             Cinéma Nova             http://www.nova-cinema.org
+    Made in Brussels            Belgium                 http://www.brussels.be
+    ════════════════════════════════════════════════════════════════════════════════
+*/

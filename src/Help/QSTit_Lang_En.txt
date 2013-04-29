@@ -1,0 +1,167 @@
+[English]
+barFileReading      Loading...
+barFileSrt          SubRip file (.srt)
+barFileTxt          Text file (.txt)
+butClea             Clear display and reset file at beginning [Ctrl+R]
+butDimeCent         Show center
+butDimeDown         - Vertical
+butDimeLeft         - Horizontal
+butDimeRigh         + Horizontal
+butDimeUpup         + Vertical
+butEditCanc         Cancel
+butEditSave         Confirm
+butExit             Quit / Save settings [Ctrl+Q]
+butExitCanc         Cancel
+butExitExit         Confirm
+butFile             Open [Ctrl+O]
+butFont             Font
+butGridClea         Clear display and reset file at beginning [Ctrl+R]
+butGridColo         Grid colour
+butGridEdit         Edit text / timecode [Ctrl+E]
+butGridFind         Find... [Ctrl+F]
+butGridFindCanc     Cancel
+butGridFindEnd      End of file reached.
+butGridFindSave     Find...
+butGridGoto         Go to... [Ctrl+G]
+butGridGotoCanc     Cancel
+butGridGotoSave     Go to...
+butGridInfo         File Info [Ctrl+I]
+butGridSave         Save modified file as...
+butGridUndo         Undo changes (in reverse chronology) [Ctrl+Z]
+butHelp             Help [F1]
+butHoriCent         Center
+butHoriLeft         Left
+butHoriRigh         Right
+butLink             (Un)bind menu bar and grid
+butLocaCent         Show center
+butLocaDown         Down
+butLocaLeft         Left
+butLocaRigh         Right
+butLocaUpup         Up
+butNoNo             No
+butOkOk             OK
+butProjAcce         Increase timer speed [+] or [P]
+butProjBack         Jump backward [←]
+butProjDece         Decrease timer speed [-] or [M]
+butProjDown         Next subtitle / empty line [↓]
+butProjJump         Jump forward [→]
+butProjPlay         Start / Pause timer [Space]
+butProjUpup         Previous subtitle / empty line [↑]
+butRoll             Hide / Show display [N]
+butRowsOutl         Colour
+butSett             Settings [Ctrl+S]
+butSettBase         Restore default settings
+butTextBack         Colour
+butTextColo         Colour
+butVertBott         Bottom
+butVertCent         Center
+butVertTopy         Top
+butWindBack         Colour
+butYeYe             Yes
+chkSecoItal         Force italic for bottom lines
+chkSecoText         Display one-line subtitles on bottom line
+diaColoOutl         Outline colour
+diaExit             Quit / Save settings
+diaFile             Open subtitle file...
+diaFileFolder       Folder
+diaFileName         File
+diaFileType         Type
+diaGridFont         Grid font
+diaGridTitlEnd      last
+diaGridTitlLine     subtitles
+diaGridTitlWidt     widest
+diaHelp             Help
+diaInfo             File Info
+diaRowsBack         Lines background
+diaSaveFileTitl     Save subtitle file
+diaSaveFileExte     Supported (*.srt *.txt)
+diaSett             Settings
+diaTextColo         Subtitle colour
+diaTextFont         Subtitle font
+FileConfExisMess    Settings found for this file.|Do you want to use them?
+FileConfExisTitl    Settings
+FileProbCritMess    Problem encountered, see File Info
+FileProbCritTitl    Loading...
+FileProbOpenMess    This will close the current file.|Are you sure?
+FileProbOpenTitl    Open subtitle file...
+FileProbSettMess    Settings found for this file.|Do you want to use them?
+FileProbSettTitl    Settings
+FileProbWarnMess    Cannot read file:
+FileProbWarnTitl    Open
+FileProbWideMess    LINE (%1) TOO WIDE !|Continue anyway...
+FileProbWideTitl    File Read
+fRowsInit           Line
+GridLastItem        End
+GridTextModiMess    The subtitle file has been edited.|Do you want to save changes?
+GridTextModiTitl    This line has been modified.
+labClok             Current time
+labGridColo         Grid style
+labGridFind         F3 → next
+labGridFont         Grid font
+labJumpBase         Jump steps (1/10 sec.)
+labRowsOutl         Outline
+labShedBack         Background colour
+labShedText         Text
+labShedFore         Text colour
+labShedHeig         Height
+labShedRota         Rotation (0.1°)
+labShedShow         Visibility
+labShedSpac         Bottom spacing
+labShedTit0         All lines
+labShedTit1         Line 1
+labShedTit2         Line 2
+labShedTit3         Line 3
+labShedTit4         Line 4
+labTaskShow         Show Taskbar
+labTextAliH         Horiz. alignment
+labTextAliV         Vert. alignment
+labTextFont         Text
+labTime             Timer
+labWindBack         Screen
+labWorkLang         Interface lang.
+msgCleaAllMess      Restore default settings?
+msgCleaAllTitl      Reset all
+msgCleaGridMess     Clear display and|reset file at beginning?
+msgCleaGridTitl     Reset grid
+msgConfWriteDone    Settings saved
+msgFontWideMess     Display may be too large for the screen
+msgFontWideTitl     Font size
+msgGridEditMess     Nothing to edit
+radBott             bottom
+radCenH             center
+radCenV             center
+radExitSavF         Save settings as settings for this file
+radExitSavN         Don't save settings
+radExitSavP         Save settings as global settings
+radGridDark         dark
+radGridWhit         white
+radLangOthe         Other
+radLeft             left
+radRigh             right
+radTaskHide         no
+radTaskShow         yes
+radTopy             top
+radWindBacB         black
+radWindBacG         gray
+ResetConfirmMess    Clear display and|reset file at beginning?
+ResetConfirmTitl    Reset
+tabSett0            Display
+tabSett1            General
+tabSett2            Advanced
+tabSett3            Save
+texRowsBack         Background
+texRowsCent         Center
+texRowsDime         Size
+texRowsFram         Text frame:
+texRowsLoca         Position
+texRowsRota         Rotation (0.1°)
+texRowsSpac         Spacing
+texRowsText         Text:
+widInfoCols         Max. number of lines per subtitle
+widInfoEnco         File encoding
+widInfoLine         Widest lines (in decreasing order)
+widInfoModi         Last modified
+widInfoName         File name
+widInfoPath         Path
+widInfoProb         Problems (in source read)
+widInfoRows         Number of subtitles
