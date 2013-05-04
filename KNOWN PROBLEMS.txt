@@ -1,0 +1,34 @@
+Qstit 2.8.5
++++++++++
+
+There are small things that need to be corrected, changed or added but which aren't really problematic.
+However, the problems listed below may cause you some trouble using Qstit, so please make sure you are aware of them:
+
+SETTINGS:
+----------------
+- The settings saved as default aren't currently loaded correctly, please use file-specific settings only.
+
+- Make sure you test the saved settings, some things like outline colour don't get saved.
+
+- If you have a file opened and open a second one, settings won't load correctly. It is advised to close the program and restart it to open a second file.
+
+- Qstit crashes if you try to open a file with an older version of the settings.
+
+- 'Restore factory settings' button is buggy, don't use it!
+
+- When you change the font of the subtitles, it doesn't always calculate the needed width correctly. The display frame may be too narrow. You will need to make sure it's OK by trying to display the widest lines. If the frame is too narrow, use the size settings to make it bigger (turning the screen in another colour makes it easier to see).
+
+
+OTHER:
+------------
+- Qstit can read file encoded in UTF-8 and ANSI (ISO-8859-1), however sometimes it doesn't detect the encoding correctly. If you have weird characters, convert your file to proper UTF-8 using another program.
+
+- After having displayed certain windows like 'File info' or 'Help', the keyboard focus isn't placed on the controls.
+You need to click on the control bar or the grid to make the keyboard shortcuts work again.
+
+- In the 'File info' window, the text can be edited, which shouldn't be possible. On Linux, it makes the program crash.
+
+
+UBUNTU SPECIFIC:
+-------------------------------
+The fullscreen is currently not working properly under Unity, the default desktop environment of Ubuntu. You can use alternative desktop environments such as Gnome-shell, LXDE (default in Lubuntu) or Cinnamon (default in Linux Mint) that can be easily installed on Ubuntu, you will then be able to switch from one to the other when logging in. KDE and others may also work fine, but we haven’t tested them yet.

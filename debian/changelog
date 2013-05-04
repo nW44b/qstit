@@ -2,20 +2,20 @@ qstit (2.8.5-1) stable; urgency=low
 
   * Small style changes
 
- -- Laurent Tenzer <subtitles@nova-cinema.org>  Sat, 04 May 2013 16:00:18 +0200
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Sat, 04 May 2013 16:00:18 +0200
 
 qstit (2.8.4-1) stable; urgency=low
 
   * Styles
 
- -- Laurent Tenzer <subtitles@nova-cinema.org>  Sat, 04 May 2013 15:59:28 +0200
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Sat, 04 May 2013 15:59:28 +0200
 
 qstit (2.8.3-1) stable; urgency=low
 
   * help → png
   * Grid and menu style sheets
 
- -- Laurent Tenzer <subtitles@nova-cinema.org>  Fri, 19 Apr 2013 16:10:15 +0200
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Fri, 19 Apr 2013 16:10:15 +0200
 
 qstit (2.8.2-1) stable; urgency=low
 
@@ -23,10 +23,10 @@ qstit (2.8.2-1) stable; urgency=low
   * Grid and menu style sheets
   * Jump base → 0.2
 
- -- Laurent Tenzer <subtitles@nova-cinema.org>  Wed, 17 Apr 2013 13:18:31 +0200
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Wed, 17 Apr 2013 13:18:31 +0200
 
 qstit (2.8.1-1) stable; urgency=low
 
   * Initial debian package release
 
- -- Laurent Tenzer <subtitles@nova-cinema.org>  Sun, 14 Apr 2013 21:41:52 +0200
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Sun, 14 Apr 2013 21:41:52 +0200

@@ -51,6 +51,3 @@ unix {
 macx {
     RC_FILE = ./Imag/$${TARGET}.icns
 }
-
-VERSION = 2.8.5
-DEFINES += VERSION=\\\"$$VERSION\\\"
