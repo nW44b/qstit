@@ -1,47 +1,51 @@
 <!--
     This file is part of Qstit
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
     Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
     Feedback, comments and questions are welcome: subtitles@nova-cinema.org
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
+    Conception: Georges Piedboeuf-Boen & Laurent Tenzer
     Programming: Georges Piedboeuf-Boen - georges.pi.bo@gmail.com
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
     Icons credit: Nova & Axialis Team - http://www.axialis.com/free/icons
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
     Qstit is a free software: you can redistribute it and/or modify it under the terms
     of the GNU General Public License as published by the Free Software Foundation,
     either version 3 of the License, or (at your option) any later version.
     If you do, we'd like to hear about it.
 
     Qstit is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-    without even the implied warranty of MERCHANTABILITY or
-    FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU General Public License for more details.
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+    PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License along with Qstit.
     If not, see http://www.gnu.org/licenses
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
 <style type="text/css">
-	body	      {font-family:trebuchet ms;font-size:13px;background-color:#151515;color:#ffffff;padding-right:17px;max-width:725px;}
-	table	      {margin-left:0px;margin-top:9px;margin-bottom:9px;border:0px;border-collapse:collapse;}
-	tr.c0	      {background-color:#151515;}
-	tr.c1	      {background-color:#252525;}
-	tr.c2	      {background-color:#353535;}
-	td	              {padding-top:0px;padding-bottom:0px;padding-left:2px;padding-right:9px;border:1px;}
-        a	              {color:yellow;text-decoration:none;}
+	body		{font-family:trebuchet ms;font-size:13px;background-color:#151515;color:#ffffff;max-width:725px;}
+	table		{margin-left:0px;margin-top:9px;margin-bottom:9px;border:0px;border-collapse:collapse;}
+	tr.c0		{background-color:#151515;}
+	tr.c1		{background-color:#252525;}
+	tr.c2		{background-color:#353535;}
+	td			{padding-top:0px;padding-bottom:0px;padding-left:2px;padding-right:9px;border:1px;}
+        a			{color:yellow;text-decoration:none;}
+	p			{margin-right:15px;}
         blockquote  {color:black;background-color:white;padding:2px;max-width:500px;}
 </style>
 </head>
 <body>
 <table>
-<tr><td><img src=":/Imag/qstit.png" height=64></td><td><span style="font-weight:bold;">Qstit</span> is developed by Nova Cinema, Brussels - <a href="www.nova-cinema.org">www.nova-cinema.org</a><br/>
+<tr><td><img src=":/Imag/qstit.png" height=64></td><td><b>Qstit</b> is developed by Nova Cinema, Brussels - <a href="www.nova-cinema.org">www.nova-cinema.org</a><br/>
 <b>Contact:</b> <a href="mailto:subtitles@nova-cinema.org";>subtitles@nova-cinema.org</a><br/>
 <span style="font-size:13px;">Released under the GNU General Public License (GPL) - <a href="www.gnu.org/licenses">www.gnu.org/licenses</a><br/>
 Icons credit: Nova & Axialis Team (with some modifications) - <a href="www.axialis.com/free/icons">www.axialis.com/free/icons</a></span></td></tr></table>
+<p><b>Qstit</b> runs in fullscreen. When running with an opened subtitle file, it is composed of a <b>display</b> (the text frame with subtitles to be projected), a <b>menu bar</b> (with the control buttons) and a <b>grid</b> (the list of subtitles), all of which can be moved around on the screen.<br/>
+A projection set-up has to be found so that only the subtitle display is visible to the public.
+</p>
 <p>
 <u><span style="font-weight:bold;color:#0055aa;">Menu:</span></u>
 <table>
@@ -102,13 +106,13 @@ Default settings are saved in a file named "QSTit.cfg" which will be created in 
 Configurations saved for a specific subtitle file will be named like the file (with a .cfg extension) and placed in the same folder as the subtitle file.<br/><br/>
 It is recommended to test your settings while displaying one of the the widest lines, which are listed in the title bar and in the 'File info' window.
 </p>
-<p>
+<p><br/>
 <u><span style="font-weight:bold;color:#0055aa;">Supported file formats:</span></u>
 </p>
-<p>Qstit can read simple text (.txt) and SubRip (.srt) files with up to four lines of subtitles.<br/>
+<p><b>Qstit</b> can read simple text (.txt) and SubRip (.srt) files with up to four lines of subtitles.<br/>
 Both file types are easily editable in any text editor or word processor.<br/>
 SubRip files include timecodes, the subtitling can therefore be automated.</p>
-<p>For both file types, the structure (detailed below) needs to be respected carefully otherwise Qstit won't be able to open them correctly.<br/>
+<p>For both file types, the structure (detailed below) needs to be respected carefully otherwise <b>Qstit</b> won't be able to open them correctly.<br/>
 If errors are found when opening the file, a message is displayed. The errors encountered are listed in the 'File info' window and also saved in a log file in the same folder as the subtitle file (the log file is also created if subtitles are flagged or if modifications have been made using the 'Edit' functionality).</p>
 <p>Both formats can include the following HTML tags to change the style of the text in between them:<br/>
 &lt;i&gt; <i>italic</i> &lt;/i&gt;<br/>
@@ -152,7 +156,7 @@ There is no need to have empty lines in the file (they would be considered as on
 <p>
 <br/>
 <span style="font-weight:bold;">SubRip (.srt) files:</span><br/>
-- Subtitles are numbered in the file but Qstit recalculates the line numbers to avoid mistakes (so a given subtitle line could have a different number in the .srt file and when viewed in Qstit).<br/>
+- Subtitles are numbered in the file but <b>Qstit</b> recalculates the line numbers to avoid mistakes (so a given subtitle line could have a different number in the .srt file and when viewed in <b>Qstit</b>).<br/>
 - One subtitle can be composed of up to four lines, separated only by a line break.<br/>
 - Different subtitles can be composed of different numbers of lines.<br/>
 - An empty line separates subtitles.<br/>
