@@ -1,26 +1,26 @@
 <!--
     This file is part of Qstit
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
     Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
     Feedback, comments and questions are welcome: subtitles@nova-cinema.org
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
+    Conception: Georges Piedboeuf-Boen & Laurent Tenzer
     Programming: Georges Piedboeuf-Boen - georges.pi.bo@gmail.com
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
     Icons credit: Nova & Axialis Team - http://www.axialis.com/free/icons
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
     Qstit is a free software: you can redistribute it and/or modify it under the terms
     of the GNU General Public License as published by the Free Software Foundation,
     either version 3 of the License, or (at your option) any later version.
     If you do, we'd like to hear about it.
 
     Qstit is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-    without even the implied warranty of MERCHANTABILITY or
-    FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU General Public License for more details.
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+    PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License along with Qstit.
     If not, see http://www.gnu.org/licenses
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
 -->
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
@@ -91,5 +91,11 @@
     <file>Imag/QSTit_scro_righ.png</file>
     <file>Imag/QSTit_scro_upup.png</file>
     <file>Imag/qstit.png</file>
+    <file>Imag/checkbox_checked.png</file>
+    <file>Imag/checkbox_unchecked.png</file>
+    <file>Imag/spinbox_up.png</file>
+    <file>Imag/spinbox_up_disabled.png</file>
+    <file>Imag/spinbox_down.png</file>
+    <file>Imag/spinbox_down_disabled.png</file>
 </qresource>
 </RCC>

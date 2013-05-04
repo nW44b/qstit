@@ -1,26 +1,26 @@
 /*
     This file is part of Qstit
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
     Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
     Feedback, comments and questions are welcome: subtitles@nova-cinema.org
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
+    Conception: Georges Piedboeuf-Boen & Laurent Tenzer
     Programming: Georges Piedboeuf-Boen - georges.pi.bo@gmail.com
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
     Icons credit: Nova & Axialis Team - http://www.axialis.com/free/icons
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
     Qstit is a free software: you can redistribute it and/or modify it under the terms
     of the GNU General Public License as published by the Free Software Foundation,
     either version 3 of the License, or (at your option) any later version.
     If you do, we'd like to hear about it.
 
     Qstit is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-    without even the implied warranty of MERCHANTABILITY or
-    FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU General Public License for more details.
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+    PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License along with Qstit.
     If not, see http://www.gnu.org/licenses
-   ═════════════════════════════════════════════════════════════════
+   ══════════════════════════════════════════════════════════════
 */
 
 #include "QSTit_winMain.h"
@@ -35,8 +35,8 @@ winMain::winMain()
     gConf=false;
     #ifdef Q_OS_LINUX
     gHome = QDir::homePath();
-//   QDir::mkpath(gHome+"/.config/");
-//    gConfFile= gHome+"/.qstit/QSTit.cfg";
+//   QDir::mkpath(gHome+"/.qstit/"); → marche pas
+//    gConfFile= gHome+"/.qstit/QSTit.cfg"; → marche comme répertoire n'existe pas
     gConfFile= gHome+"/QSTit.cfg";
     #else
     gConfFile="./QSTit.cfg";
@@ -49,7 +49,7 @@ winMain::winMain()
     gJumpBase=200;      // jump base
     gSett=false;
     gSrtx=false;        // true=srt,false=txt
-    gVers="2.8.4";
+    gVers="2.8.5";
     gWork=false;
 
     gBackDial=false;
@@ -87,11 +87,11 @@ winMain::winMain()
 
     gGriCStyl="background-color:#222222;color:#ffffff;selection-background-color:#0055aa;selection-color:#ffffff;border:none;";
     gExplDisa="color:#555555;border:none;";
-    gClokStyl="font:normal 11px "+gSystFontFami+";background-color:#000000;color:#ffffff;border:1px solid #000000;border-radius:3px;";
-    gTimeStyl="font:normal 11px "+gSystFontFami+";background-color:#000000;color:#0055aa;border:1px solid #000000;border-radius:3px;";
+    gClokStyl="font:normal 11px "+gSystFontFami+";background-color:#000000;color:#555555;border:1px solid #000000;border-radius:3px;";
+    gTimeStyl="font:normal 11px "+gSystFontFami+";background-color:#000000;color:#ffffff;border:1px solid #000000;border-radius:3px;";
     gPulsStyl="font:normal 10px "+gSystFontFami+";background-color:#000000;color:#ffffff;border:1px solid #000000;border-radius:3px;height:20px;width:20px;";
     gExplStyl="font:normal 9px "+gSystFontFami+";color:#555555;border:none;";
-    gSpinStyl="height:24px;color:#ffffff;border:1px solid #777777;background-color:#eeeeee;color:#000000;";
+    gSpinStyl="height:24px;border:1px solid #777777;background-color:#eeeeee;color:#000000;";
 
     fApplInit();
     fWindStyle();
@@ -198,6 +198,24 @@ void winMain::fWindStyle()
     sStyl+="QScrollBar::add-page:horizontal {background:none;}";
     sStyl+="QScrollBar::sub-page:horizontal {background:none;}";
     sStyl+="QProgressBar::chunk:horizontal {background: qlineargradient(x1: 0, y1: 0.5, x2: 1, y2: 0.5, stop: 0 #0055aa, stop: 1 #222222);}";
+
+    sStyl+="QCheckBox {spacing: 2px;}";
+    sStyl+="QCheckBox::indicator {width: 16px;height: 16px;}";
+     sStyl+="QCheckBox::indicator:unchecked {image: url(:/Imag/checkbox_unchecked.png);}";
+     sStyl+="QCheckBox::indicator:checked {image: url(:/Imag/checkbox_checked.png);}";
+
+     sStyl+="QSpinBox::up-button {width:10px; height:8px; subcontrol-origin: border; subcontrol-position: top right; background-color:#eeeeee; border: 1px solid #777777;border-top-right-radius: 2px;}";
+     sStyl+="QSpinBox::up-button:hover {background-color:#cbcbcb;}";
+    sStyl+="QSpinBox::up-button:pressed {background-color:#eeeeee;}";
+     sStyl+="QSpinBox::up-arrow {width:9px; image: url(:/Imag/spinbox_up.png);}";
+     sStyl+="QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off {image: url(:/Imag/spinbox_up_disabled.png);}";
+
+     sStyl+="QSpinBox::down-button {width:10px; height:8px; subcontrol-origin: border; subcontrol-position: bottom right; background-color:#eeeeee; border: 1px solid #777777;border-bottom-right-radius: 2px;}";
+     sStyl+="QSpinBox::down-button:hover {background-color:#cbcbcb;}";
+     sStyl+="QSpinBox::down-button:pressed {background-color:#eeeeee;}";
+     sStyl+="QSpinBox::down-arrow {width:9px; image: url(:/Imag/spinbox_down.png);}";
+     sStyl+="QSpinBox::down-arrow:disabled, QSpinBox::down-arrow:off {image: url(:/Imag/spinbox_down_disabled.png);}";
+
     qApp->setStyleSheet(sStyl);
 }
 void winMain::fWindBackDial()
@@ -1264,7 +1282,7 @@ void winMain::fGridLink()
 }
 void winMain::fGridColo()
 {
-    QString sSele="selection-background-color:#0055aa;selection-color:#000000;border:none;";
+    QString sSele="selection-background-color:#0055aa;selection-color:#ffffff;border:none;";
 
     if (!gGridColoDark) {gGridBack="#222222";gGridColo="#ffffff";gGridColoDark=true;}
     else                {gGridBack="#ffffff";gGridColo="#000000";gGridColoDark=false;}
@@ -1379,14 +1397,14 @@ void winMain::fGridInit()
         gEditTextNewx[iR]="";
     }
     griText->horizontalHeader()->setFixedHeight(2);
-    griText->verticalHeader()->setFixedWidth(31);
+    griText->verticalHeader()->setFixedWidth(34);
     fGridInitCols();
     fGridInitRows();
 }
 void winMain::fGridInitCols()
 {
     int c,cw;
-    int cwTot=142;                              // 30+1 n°ligne,20+1 status,10+1 ascenseur,80+1 boutons
+    int cwTot=145;                              // 33+1 n°ligne,20+1 status,10+1 ascenseur,80+1 boutons
     int cwMax=(objWind.widt-2-cwTot)/objRowsNumb.valu;
 
     for (c=0; c<7; c++) {griText->setColumnWidth(c,0);}
@@ -1862,7 +1880,7 @@ void winMain::fSettCrea()
     connect(butVertBott,SIGNAL(clicked()),this,SLOT(fRowsVertBot0()));
 
     QPushButton *labVers=new QPushButton("Version "+gVers,tabRows);
-    labVers->setStyleSheet("color:#0055aa;border:1px solid #0055aa;padding:3px;");
+    labVers->setStyleSheet("color:#0055aa;border:1px solid #0055aa;padding:2px;");
     labVers->move(598,214);
 
     // page 2 - general -------------------------------------------------------
@@ -1935,22 +1953,22 @@ void winMain::fSettCrea()
 
     chkSecoText=new QCheckBox(fL("chkSecoText"),tabGene);
     chkSecoText->setMinimumWidth(200);
-    chkSecoText->move(10,120);
+    chkSecoText->move(10,150);
     connect(chkSecoText,SIGNAL(stateChanged(int)),this,SLOT(fRowsSeco(int)));
 
     chkSecoItal=new QCheckBox(fL("chkSecoItal"),tabGene);
     chkSecoItal->setMinimumWidth(200);
-    chkSecoItal->move(10,140);
+    chkSecoItal->move(10,170);
     connect(chkSecoItal,SIGNAL(stateChanged(int)),this,SLOT(fRowsItal(int)));
 
     labJumpBase=new QLabel(fL("labJumpBase"),tabGene);
     labJumpBase->setMinimumWidth(140);
-    labJumpBase->move(357,120);
+    labJumpBase->move(50,125);
     spiJumpBase=new QSpinBox(tabGene);
     spiJumpBase->setStyleSheet(gSpinStyl);
     spiJumpBase->setRange(1,10);
     spiJumpBase->setValue(gJumpBase/100);
-    spiJumpBase->move(310,120);
+    spiJumpBase->move(10,120);
     connect(spiJumpBase,SIGNAL(valueChanged(int)),this,SLOT(fJumpBase(int)));
 
     // page 3 - shed ----------------------------------------------------------
@@ -1974,13 +1992,13 @@ void winMain::fSettCrea()
 }
 void winMain::fSettCreaSave()
 {
-    QString sStyl="color:#ffffff;border:none;width:180px;";
+    QString sStyl="color:#ffffff;border:none;width:200px;";
 
     labSettLin4=new QLabel(tabSave);
     labSettLin4->setStyleSheet("background-color:#333333;");
     labSettLin4->setGeometry(10,110,665,1);
 
-    grpSkin *grpSettSave=new grpSkin(tabSave,205,70,10,10);
+    grpSkin *grpSettSave=new grpSkin(tabSave,230,70,10,10);
     radSaveExiP=new QRadioButton(fL("radExitSavP"),grpSettSave);
     radSaveExiP->setStyleSheet(sStyl);
     radSaveExiP->move(3,4);
@@ -3432,7 +3450,7 @@ void winMain::fHelpDial()
     int iWidt=740;
     int iHeig=700;
 
-    diaHelp=new diaSkin(winWind,fraMenu,fL("diaHelp"),iWidt,iHeig,1,1);
+    diaHelp=new diaSkin(winWind,fraMenu,fL("diaHelp")+"  ·  Qstit "+gVers,iWidt,iHeig,1,1);
     connect(diaHelp,SIGNAL(sClosed()),this,SLOT(fHelpDialClos()));
 
     texHelp=new QTextEdit("",diaHelp);

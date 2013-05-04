@@ -50,7 +50,7 @@ butProjUpup         Previous subtitle / empty line [↑]
 butRoll             Hide / Show display [N]
 butRowsOutl         Colour
 butSett             Settings [Ctrl+S]
-butSettBase         Reset default settings
+butSettBase         Restore factory settings
 butTextBack         Colour
 butTextColo         Colour
 butVertBott         Bottom
@@ -78,6 +78,7 @@ diaSaveFileExte     Supported (*.srt *.txt)
 diaSett             Settings
 diaTextColo         Subtitle colour
 diaTextFont         Subtitle font
+diaWindBack         Screen colour
 FileConfExisMess    Settings found for this file.|Do you want to use them?
 FileConfExisTitl    Settings
 FileProbCritMess    Problem encountered, see 'File info'.
@@ -119,7 +120,7 @@ labTextFont         Text
 labTime             Timer
 labWindBack         Screen
 labWorkLang         Interface lang.
-msgCleaAllMess      Erase default settings and|restore factory default?
+msgCleaAllMess      Reset current settings|to factory default?
 msgCleaAllTitl      Reset all
 msgCleaGridMess     Clear display and|reset file at beginning?
 msgCleaGridTitl     Reset grid
