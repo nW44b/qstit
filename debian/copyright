@@ -1,10 +1,8 @@
 Qstit
 
-Homepage:
-https://github.com/nova-cinema/qstit
+Homepage: https://github.com/nova-cinema/qstit
 
-Copyright:
-2009-2013 Nova Cinema · Georges Piedboeuf-Boen · Laurent Tenzer
+Copyright: 2009-2013 Nova Cinema · Georges Piedboeuf-Boen · Laurent Tenzer
 
 License: GNU GPL
  This package is free software; you can redistribute it and/or modify
@@ -18,5 +16,6 @@ License: GNU GPL
  .
  You should have received a copy of the GNU General Public License
  along with this program. If not, see <http://www.gnu.org/licenses/>
-.
-Or see `/usr/share/common-licenses/GPL`
+ .
+ Or see the file
+ `/usr/share/common-licenses/GPL`
