@@ -8,10 +8,10 @@ If you just want to use the program, easier methods are available for Linux and 
 [English] http://www.nova-cinema.org/spip.php?rubrique1664
 
 
-******
+*******
  Linux
-******
-[Tested on Debian, Ubuntu and derivatives like Lubuntu, Xubuntu, Linux Mint...]
+*******
+[Tested on Ubuntu and derivatives like Lubuntu, Xubuntu, Linux Mint...]
 
 - Install the packages "libqt4-dev" (that includes the needed Qt libraries) and "build-essential", by typing the following command in a terminal:
 $	sudo apt-get install libqt4-dev build-essential
@@ -24,6 +24,7 @@ An executable file named "qstit" is created. Double-click it to start the progra
 $	sudo make install
 To display the application icon correctly, you will also need to update the icon cache:
 $	gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor/
+(for Ubuntu at least)
 
 
 *********
@@ -56,7 +57,7 @@ set QMAKESPEC=win32-g++
 qmake
 mingw32-make
 
-echo - Finished -
+echo - Done -
 pause
 
 #########################################

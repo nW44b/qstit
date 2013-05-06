@@ -1,7 +1,7 @@
 Qstit
-====
+=====
 
-**A simple program for film theatres and festivals to project extra subtitles on a dedicated screen or on top of the image.**
+**A simple program for film theatres and festivals to project extra subtitles on a dedicated screen or directly on the film image.**
 
 Free software (General Public Licence) developed by [Nova Cinema](http://www.nova-cinema.org) to project subtitles on top of the image or on another screen (this is called "soft-titling", "surtitling" or "supertitling"). It can also be useful for various types of events and in many contexts.
 Qstit can read plain text files (.txt) or SubRip files (.srt) with timecodes.
