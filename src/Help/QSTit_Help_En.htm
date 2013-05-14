@@ -121,7 +121,7 @@ If errors are found when opening the file, a message is displayed. The errors en
 A tag can start on one line and end on another, wherever in the file (so that whole sections can easily be turned into italic for instance).<br/>
 The tags are not displayed in the text frame on screen but appear in the grid.</p>
 
-<p>Everything written between opening ( &lt; ) and closing ( &gt; ) brackets will be considered meta-information and won't be displayed. An entire line between brackets will still appear in the grid with other lines of subtitles but won't appear on the screen so brackets can be used to put comments and cues in the file.</p>
+<p>Everything written between opening ( &lt; ) and closing ( &gt; ) brackets will be considered meta-information and won't be displayed. An entire line between brackets will still appear in the grid with other lines of subtitles but won't appear on the display so brackets can be used to put comments and cues in the file.</p>
 <p>
 <br/>
 <span style="font-weight:bold;">Text (.txt) files:</span><br/>
@@ -160,9 +160,11 @@ There is no need to have empty lines in the file (they would be considered as on
 - One subtitle can be composed of up to four lines, separated only by a line break.<br/>
 - Different subtitles can be composed of different numbers of lines.<br/>
 - An empty line separates subtitles.<br/>
+- To create an empty line within one subtitle, you can use an opening bracket ( &lt; ) that won't be displayed (as explained above and as shown in the example below).<br/>
 - Nothing will be displayed between the end of one subtitle (Time OUT) and the beginning of the next (Time IN).<br/>
-- If you don't want to use the automation functionalities, it is possible to manually browse through an .srt file as through a .txt file: Just leave the timer on pause and use the down arrow to browse through the subtitles.
+- If you don't want to use the automation functionalities, it is possible to manually browse through a .srt file as through a .txt file: Just leave the timer on pause and use the down arrow to browse through the subtitles.
 </p>
+
 <u>Structure:</u>
 <blockquote>
 &nbsp; 1<br/>
@@ -178,6 +180,7 @@ There is no need to have empty lines in the file (they would be considered as on
 &nbsp; Time IN --> Time OUT<br/>
 &nbsp; Subtitle 3 Line 1<br/>
 &nbsp; Subtitle 3 Line 2<br/>
+<br/>
 &nbsp; ...
 </blockquote>
 <u>Example:</u>
@@ -188,6 +191,7 @@ There is no need to have empty lines in the file (they would be considered as on
 <br/>
 &nbsp; 2<br/>
 &nbsp; 00:01:12,880 --> 00:01:16,190<br/>
+&nbsp; &lt;<br/>
 &nbsp; You're going with your father to your summer house...<br/>
 <br/>
 &nbsp; 3<br/>
