@@ -2,7 +2,8 @@
 barFileReading      Loading...
 barFileSrt          SubRip file (.srt)
 barFileTxt          Text file (.txt)
-butClea             Clear display and reset file at beginning [Ctrl+R]
+butClea             Clear display and reset file at beginning [Ctrl+C]
+butConfOkok         Confirm
 butDimeCent         Show center
 butDimeDown         - Vertical
 butDimeLeft         - Horizontal
@@ -15,7 +16,7 @@ butExitCanc         Cancel
 butExitExit         Confirm
 butFile             Open [Ctrl+O]
 butFont             Font
-butGridClea         Clear display and reset file at beginning [Ctrl+R]
+butGridClea         Clear display and reset file at beginning [Ctrl+C]
 butGridColo         Grid colour
 butGridEdit         Edit text / timecode [Ctrl+E]
 butGridFind         Find... [Ctrl+F]
@@ -40,17 +41,23 @@ butLocaRigh         Right
 butLocaUpup         Up
 butNoNo             No
 butOkOk             OK
-butProjAcce         Increase timer speed [+] or [P]
+butProjAcce         Increase timer speed by 1% [+] or [P]
 butProjBack         Jump backward [←]
-butProjDece         Decrease timer speed [-] or [M]
-butProjDown         Next subtitle / empty line [↓]
+butProjDece         Decrease timer speed by 1%  [-] or [M]
+butProjDown         Next title / empty line [↓]
 butProjJump         Jump forward [→]
 butProjPlay         Start / Pause timer [Space bar]
-butProjUpup         Previous subtitle / empty line [↑]
-butRoll             Hide / Show display [N]
+butProjUpup         Previous title / empty line [↑]
+butRoll             Hide / Show display [X]
 butRowsOutl         Colour
 butSett             Settings [Ctrl+S]
-butSettBase         Restore factory settings
+butSettLoaB         Load default settings
+butSettLoaF         Load settings saved for this file
+butSettLoaG         Load general settings
+butSettSavF         Save current settings as settings for this file
+butSettSavG         Save current settings as general settings
+butSettSavN         Cancel
+butSettSavY         Confirm
 butTextBack         Colour
 butTextColo         Colour
 butVertBott         Bottom
@@ -61,30 +68,31 @@ butYeYe             Yes
 chkSecoItal         Force italic for second lines
 chkSecoText         Display text on bottom lines when not all lines are used
 diaColoOutl         Outline colour
+diaConf             Which settings do you want to use?
 diaExit             Quit / Save settings
-diaFile             Open subtitle file...
+diaFile             Open title file...
 diaFileFolder       Folder
 diaFileName         File
 diaFileType         Type
 diaGridFont         Grid font
 diaGridTitlEnd      last
-diaGridTitlLine     subtitles
+diaGridTitlLine     titles
 diaGridTitlWidt     widest
 diaHelp             Help
 diaInfo             File info
 diaRowsBack         Lines background
-diaSaveFileTitl     Save subtitle file
+diaSaveFileTitl     Save title file
 diaSaveFileExte     Supported (*.srt *.txt)
 diaSett             Settings
-diaTextColo         Subtitle colour
-diaTextFont         Subtitle font
+diaTextColo         Title colour
+diaTextFont         Title font
 diaWindBack         Screen colour
 FileConfExisMess    Settings found for this file.|Do you want to use them?
 FileConfExisTitl    Settings
 FileProbCritMess    Problem encountered, see 'File info'.
 FileProbCritTitl    Loading...
 FileProbOpenMess    Are you sure you want|to close the current file?
-FileProbOpenTitl    Open subtitle file...
+FileProbOpenTitl    Open title file...
 FileProbSettMess    Settings found for this file.|Do you want to use them?
 FileProbSettTitl    Settings
 FileProbWarnMess    Cannot read file:
@@ -93,19 +101,18 @@ FileProbWideMess    Line (%1) is too wide!|Continue anyway...
 FileProbWideTitl    File Read
 fRowsInit           Line
 GridLastItem        Last timecode
-GridTextModiMess    The subtitle file has been edited.|Do you want to save changes?
+GridTextModiMess    The title file has been edited.|Save changes?
 GridTextModiTitl    This line has been modified.
 labClok             Current time
 labGridColo         Grid style
 labGridFind         F3 → next
 labGridFont         Grid font
-labJumpBase         Jump steps (1/10 sec.)
+labJumpBase         Jump steps
 labRowsOutl         Outline
-labShedBack         Background colour
+labShedBack         Background
 labShedText         Text
-labShedFore         Text colour
 labShedHeig         Height
-labShedRota         Rotation (0.1°)
+labShedRota         Rotation
 labShedShow         Visibility
 labShedSpac         Bottom spacing
 labShedTit0         All lines
@@ -120,25 +127,33 @@ labTextFont         Text
 labTime             Timer
 labWindBack         Screen
 labWorkLang         Interface lang.
-msgCleaAllMess      Reset current settings|to factory default?
+msgCleaAllMess      Reset current settings to default?
 msgCleaAllTitl      Reset all
-msgCleaGridMess     Clear display and|reset file at beginning?
+msgCleaGridMess     Clear display and reset file at beginning?
 msgCleaGridTitl     Reset grid
 msgConfWriteDone    Settings saved.
 msgFontWideMess     Display may be too large for the screen.
 msgFontWideTitl     Font size
 msgGridEditMess     Nothing to edit.
+msgSettBaseMess     Current settings will be lost.
+msgSettFileMess     Current settings will be lost.
+msgSettGeneMess     Current settings will be lost.
 radBott             bottom
 radCenH             center
 radCenV             center
+radConfCurr         Current settings
+radConfDefa         Default settings
+radConfFile         Settings saved for this file
+radConfGene         General settings
 radExitSavF         Save settings as settings for this file
-radExitSavN         Don't save settings
-radExitSavP         Save settings as default settings
+radExitSavN         Don't save current settings
+radExitSavG         Save settings as general settings
 radGridDark         dark
 radGridWhit         white
 radLangOthe         Other
 radLeft             left
 radRigh             right
+radShedStat         show stats
 radTaskHide         no
 radTaskShow         yes
 radTopy             top
@@ -147,22 +162,24 @@ radWindBacG         gray
 ResetConfirmMess    Clear display and|reset file at beginning?
 ResetConfirmTitl    Reset
 tabSett0            Display
-tabSett1            General
-tabSett2            Advanced
-tabSett3            Save
+tabSett1            Advanced
+tabSett2            General
+tabSett3            Save / Load
+texJump             Jump
+texPuls             Speed
 texRowsBack         Background
 texRowsCent         Center
 texRowsDime         Size
 texRowsFram         Text frame:
 texRowsLoca         Position
-texRowsRota         Rotation (0.1°)
+texRowsRota         Rotation
 texRowsSpac         Spacing
 texRowsText         Text:
-widInfoCols         Max. number of lines per subtitle
+widInfoCols         Max. number of lines per title
 widInfoEnco         File encoding
 widInfoLine         Widest lines (in decreasing order)
 widInfoModi         Last modified
 widInfoName         File name
 widInfoPath         Path
-widInfoProb         Problems found in subtitle file
-widInfoRows         Number of subtitles
+widInfoProb         Problems found in title file
+widInfoRows         Number of titles

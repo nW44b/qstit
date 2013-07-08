@@ -1,14 +1,12 @@
 <!--
-    This file is part of Qstit
-   ══════════════════════════════════════════════════════════════
-    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    This file is part of Qstit - http://subtitles.nova-cinema.org
     Feedback, comments and questions are welcome: subtitles@nova-cinema.org
-   ══════════════════════════════════════════════════════════════
-    Conception: Georges Piedboeuf-Boen & Laurent Tenzer
+   ════════════════════════════════════════════════════════════════════════════════════
+    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    Conception: Laurent Tenzer
     Programming: Georges Piedboeuf-Boen - georges.pi.bo@gmail.com
-   ══════════════════════════════════════════════════════════════
     Icons credit: Nova & Axialis Team - http://www.axialis.com/free/icons
-   ══════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════════════
     Qstit is a free software: you can redistribute it and/or modify it under the terms
     of the GNU General Public License as published by the Free Software Foundation,
     either version 3 of the License, or (at your option) any later version.
@@ -20,7 +18,7 @@
 
     You should have received a copy of the GNU General Public License along with Qstit.
     If not, see http://www.gnu.org/licenses
-   ══════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════════════
 -->
 <html>
 <head>
@@ -32,38 +30,42 @@
 	tr.c1		{background-color:#252525;}
 	tr.c2		{background-color:#353535;}
 	td			{padding-top:0px;padding-bottom:0px;padding-left:2px;padding-right:9px;border:1px;}
-        a			{color:yellow;text-decoration:none;}
+        a			{color:#0055aa;text-decoration:none;}
 	p			{margin-right:15px;}
         blockquote  {color:black;background-color:white;padding:2px;max-width:500px;}
 </style>
 </head>
 <body>
 <table>
-<tr><td><img src=":/Imag/qstit.png" height=64></td><td><b>Qstit</b> is developed by Nova Cinema, Brussels - <a href="www.nova-cinema.org">www.nova-cinema.org</a><br/>
+<tr><td><img src=":/Imag/qstit.png" height=64></td><td><b>Qstit</b> is developed by Nova Cinema, Brussels - <a href="subtitles.nova-cinema.org">http://subtitles.nova-cinema.org</a><br/>
 <b>Contact:</b> <a href="mailto:subtitles@nova-cinema.org";>subtitles@nova-cinema.org</a><br/>
 <span style="font-size:13px;">Released under the GNU General Public License (GPL) - <a href="www.gnu.org/licenses">www.gnu.org/licenses</a><br/>
 Icons credit: Nova & Axialis Team (with some modifications) - <a href="www.axialis.com/free/icons">www.axialis.com/free/icons</a></span></td></tr></table>
-<p><b>Qstit</b> runs in fullscreen. When running with an opened subtitle file, it is composed of a <b>display</b> (the text frame with subtitles to be projected), a <b>menu bar</b> (with the control buttons) and a <b>grid</b> (the list of subtitles), all of which can be moved around on the screen.<br/>
-A projection set-up has to be found so that only the subtitle display is visible to the public.
-</p>
+
+<p><b>Qstit</b> is composed of a <b>display</b> (the textframe with titles to be projected), a <b>control bar</b> (with the buttons) and a <b>grid</b> (the list of titles), all of which can be moved around on the <b>fullscreen background</b> depending on the desired set-up.</p>
+<p>When a projector is plugged to the computer, it is considered as a second monitor. If the computer is set to have the same image on both screens, you will need to hide the controls from the public, the title display is the only part they need to see. Use a cover (a piece of cardboard in front of the projector can do the trick), aim the projector to hit the screen with only the top part of the image (where the display will be placed), or select only this part of the signal using a video-mixer.<br/>You can also configure your computer display to have two separate screens. In that case you need to have the controls on your screen and only the display and the fullscreen background on the projector. This can already work but it can be a bit tricky as <b>Qstit</b> doesn't fully support the detection of multiple screens yet.</p>
+
+<p><u><span style="font-weight:bold;color:#0055aa;text-decoration:none;">Controls:</span></u>
+<p><b>Qstit</b> can be controlled with the mouse and / or keyboard. The controls and keyboard shortcuts are detailed below.<br/>
+It is possible to fully control <b>Qstit</b> with just a numeric keypad (or "numpad"). An external keypad can therefore be used as a remote control.</p>
 <p>
-<u><span style="font-weight:bold;color:#0055aa;">Menu:</span></u>
+<u><span style="text-decoration:none;">Menu:</span></u>
 <table>
 <tr class="c1"><td><img src=":/Imag/QSTit_sett_enab.png" height=16> Settings</td><td>Show 'Settings' window</td><td>[Ctrl+S]</td></tr>
-<tr class="c2"><td><img src=":/Imag/QSTit_file.png" height=16> Open</td><td>Open subtitle file<br/>(Supported formats: .txt, .srt - see below for details)</td><td>[Ctrl+O]</td></tr>
+<tr class="c2"><td><img src=":/Imag/QSTit_file.png" height=16> Open</td><td>Open title file<br/>(Supported formats: .txt, .srt - see below for details)</td><td>[Ctrl+O]</td></tr>
 <tr class="c1"><td><img src=":/Imag/QSTit_help_enab.png" height=16> Help</td><td>Show this window</td><td>[F1]</td></tr>
 <tr class="c2"><td><img src=":/Imag/QSTit_exit.png" height=16> Quit</td><td>Quit the program</td><td>[Ctrl+Q]</td></tr>
 </table>
 </p>
 <p>
-<u><span style="font-weight:bold;color:#0055aa;">Subtitles control:</span></u>
+<u><span style="text-decoration:none;">Titles control:</span></u>
 <table>
-<tr class="c2"><td><img src=":/Imag/QSTit_upup.png" height=16></td><td>Previous subtitle/empty line</td><td>[&uarr;] or [Numpad 8]</td></tr>
-<tr class="c1"><td><img src=":/Imag/QSTit_down.png" height=16></td><td>Next subtitle/empty line<br/>  With .txt files, also works with:</td><td>[&darr;] or [Numpad 2]<br/>[Space bar] or [Numpad 0]</td></tr>
+<tr class="c2"><td><img src=":/Imag/QSTit_upup.png" height=16></td><td>Previous title / empty line</td><td>[&uarr;] or [Numpad 8]</td></tr>
+<tr class="c1"><td><img src=":/Imag/QSTit_down.png" height=16></td><td>Next title / empty line<br/>  With .txt files, also works with:</td><td>[&darr;] or [Numpad 2]<br/>[Space bar] or [Numpad 0]</td></tr>
 <tr class="c0"><td>&nbsp;</td><td></td><td></td></tr>
-<tr class="c2"><td><img src=":/Imag/QSTit_play.png" height=16></td><td>Start/Pause timer</td><td>[Space bar] or [Numpad 0]</td><td>(.srt files only)</td></tr>
-<tr class="c1"><td><img src=":/Imag/QSTit_acce.png" height=16></td><td>Increase timer speed<br/>(Timer goes 0.01 second faster)</td><td>[+] or [P]</td><td>(.srt files only)</td></tr>
-<tr class="c2"><td><img src=":/Imag/QSTit_dece.png" height=16></td><td>Decrease timer speed<br/>(Timer goes 0.01 second slower)</td><td>[-] or [M]</td><td>(.srt files only)</td></tr>
+<tr class="c2"><td><img src=":/Imag/QSTit_play.png" height=16></td><td>Start / Pause timer</td><td>[Space bar] or [Numpad 0]</td><td>(.srt files only)</td></tr>
+<tr class="c1"><td><img src=":/Imag/QSTit_acce.png" height=16></td><td>Increase timer speed by 1%</td><td>[+] or [P]</td><td>(.srt files only)</td></tr>
+<tr class="c2"><td><img src=":/Imag/QSTit_dece.png" height=16></td><td>Decrease timer speed by 1%</td><td>[-] or [M]</td><td>(.srt files only)</td></tr>
 <tr class="c0"><td>&nbsp;</td><td></td><td></td></tr>
 <tr class="c1"><td rowspan="2"><img src=":/Imag/QSTit_jump.png" height=16></td><td>Jump forward on the timeline</td><td>[&rarr;] or [Numpad 6]</td><td rowspan="2">(.srt files only)</td></tr>
 <tr class="c1"><td colspan="2">(Jump steps can be set in the settings, between 0.1 and 1 second)</td></tr>
@@ -72,9 +74,9 @@ A projection set-up has to be found so that only the subtitle display is visible
 </table>
 </p>
 <p>
-<u><span style="font-weight:bold;color:#0055aa;">Display control:</span></u>
+<u><span style="text-decoration:none;">Display control:</span></u>
 <table>
-<tr class="c2"><td style="valign:center;"><img src=":/Imag/QSTit_roll_open.png"> / <img src=":/Imag/QSTit_roll_clos.png"></td><td>Hide/Show subtitle display<br/>(When on pause, resuming the timer lifts 'No show')</td><td>[N] or [Numpad .]</td></tr>
+<tr class="c2"><td style="valign:center;"><img src=":/Imag/QSTit_roll_open.png"> / <img src=":/Imag/QSTit_roll_clos.png"></td><td>Hide / Show title display<br/>(When on pause, restarting makes the display appear)</td><td>[X] or [Numpad .]</td></tr>
 <tr class="c1"><td></td><td>Move display up</td><td>[Page Up] or [Numpad 9]</td></tr>
 <tr class="c2"><td></td><td>Move display down</td><td>[Page Down] or [Numpad 3]</td></tr>
 <tr class="c1"><td></td><td>Move display left</td><td>[Home] or [Numpad 7]</td></tr>
@@ -84,60 +86,54 @@ A projection set-up has to be found so that only the subtitle display is visible
 </table>
 </p>
 <p>
-<u><span style="font-weight:bold;color:#0055aa;">Grid:</span></u>
+<u><span style="text-decoration:none;">Grid:</span></u>
 <table>
 <tr class="c2"><td><img src=":/Imag/QSTit_info_enab.png" height=16> File info</td><td>Show 'File info' window</td><td>[Ctrl+I]</td></tr>
 <tr class="c1"><td><img src=":/Imag/QSTit_save_enab.png" height=16> Save as...</td><td>Save modified file as...</td><td></td></tr>
-<tr class="c2"><td><img src=":/Imag/QSTit_edit_enab.png" height=16> Edit</td><td>Edit selected text/timecode in the grid<br/>(Edits are also listed in the log file)</td><td>[Ctrl+E]</td></tr>
+<tr class="c2"><td><img src=":/Imag/QSTit_edit_enab.png" height=16> Edit</td><td>Edit selected text / timecode in the grid<br/>(Edits are indicated in the grid and listed in the log file)</td><td>[Ctrl+E]</td></tr>
 <tr class="c1"><td><img src=":/Imag/QSTit_undo_enab.png" height=16> Undo</td><td>Undo changes (in reverse chronology)</td><td>[Ctrl+Z]</td></tr>
-<tr class="c2"><td><img src=":/Imag/QSTit_goto_enab.png" height=16> Go to...</td><td>Go to a chosen subtitle</td><td>[Ctrl+G]</td></tr>
+<tr class="c2"><td><img src=":/Imag/QSTit_goto_enab.png" height=16> Go to...</td><td>Go to a chosen title</td><td>[Ctrl+G]</td></tr>
 <tr class="c1"><td><img src=":/Imag/QSTit_find_enab.png" height=16> Find...</td><td>Find text in the file</td><td>[Ctrl+F]</td></tr>
-<tr class="c2"><td><img src=":/Imag/QSTit_clea.png" height=16> Clear</td><td>Clear display and reset file at beginning</td><td>[Ctrl+R]</td></tr>
+<tr class="c2"><td><img src=":/Imag/QSTit_clea.png" height=16> Clear</td><td>Clear display and reset file at beginning</td><td>[Ctrl+C]</td></tr>
 <tr class="c1"><td><img src=":/Imag/QSTit_link_none.png" height=16> Bind/Unbind</td><td>(Un)bind menu bar and grid for custom positioning</td><td></td></tr>
-<tr class="c2"><td><img src=":/Imag/QSTit_flag.png"> (Leftmost cell)</td><td>Flag current row<br/>(Flags are saved in the log file)</td><td>[!] or [Numpad /]</td></tr>
+<tr class="c2"><td><img src=":/Imag/QSTit_flag.png"> (Leftmost cell)</td><td>Flag current row to indicate a cue, a mistake, ...<br/>(Flags are saved in the log file)</td><td>[!] or [Numpad /]</td></tr>
 </table>
 </p>
 <p>
-<u><span style="font-weight:bold;color:#0055aa;">Settings:</span></u>
+<u><span style="font-weight:bold;color:#0055aa;text-decoration:none;">Settings:</span></u>
+</p>
+<p>Various display and control settings can be adjusted in the 'Settings' window. The display can be adapted line per line or all lines together. Note that you can make a line "<b>invisible</b>" using the advanced settings. The full text will still appear in the grid for your control but it won't be displayed. It can be useful if the titles are one language on Line 1 and another on Line 2, for instance, and you only need to project one of the two but want to keep the translation in the file.<br/>
+<br/>Settings can be saved for later use with the current file or as general settings for all files.<br/><b>Settings saved for a specific file</b> will be named like it (with a .cfg extension) and placed in the same folder as the subtitle file. <b>General settings</b> are saved in a file named "qstit.cfg" which will be created in your "home" or "user" folder, depending on your system (in a ".qstit" subfolder). There are also <b>default settings</b> built in the program that can be restored to replace your configurations, if needed. If you don't need the settings anymore, you can just delete the .cfg files.<br/><br/>
+When opening a new file, you can choose which settings to use. Once a file is opened, you can always load preset settings using the designated functions in the 'Save / Load' tab.<br/><br/>
+It is recommended to test your settings while displaying one of the the widest lines, which are listed in the title bar and in the 'File info' window.<br/>
 </p>
 <p>
-Various display and control settings can be found in the 'Settings' window and can be saved, either as a configuration that will be used by default for all files or as a specific configuration for the current subtitle file.<br/>
-Default settings are saved in a file named "QSTit.cfg" which will be created in your home folder (Linux) or in the folder where the executable is (Windows).<br/>
-Configurations saved for a specific subtitle file will be named like the file (with a .cfg extension) and placed in the same folder as the subtitle file.<br/><br/>
-It is recommended to test your settings while displaying one of the the widest lines, which are listed in the title bar and in the 'File info' window.
-</p>
-<p><br/>
-<u><span style="font-weight:bold;color:#0055aa;">Supported file formats:</span></u>
-</p>
-<p><b>Qstit</b> can read simple text (.txt) and SubRip (.srt) files with up to four lines of subtitles.<br/>
-Both file types are easily editable in any text editor or word processor.<br/>
-SubRip files include timecodes, the subtitling can therefore be automated.</p>
-<p>For both file types, the structure (detailed below) needs to be respected carefully otherwise <b>Qstit</b> won't be able to open them correctly.<br/>
-If errors are found when opening the file, a message is displayed. The errors encountered are listed in the 'File info' window and also saved in a log file in the same folder as the subtitle file (the log file is also created if subtitles are flagged or if modifications have been made using the 'Edit' functionality).</p>
+<u><span style="font-weight:bold;color:#0055aa;text-decoration:none;">Supported file formats:</span></u></p>
+<p><b>Qstit</b> can read simple text (.txt) and SubRip (.srt) files with up to four lines of titles. Srt files are common and many softwares can convert other subtitle file formats to the SubRip format.<br/>
+Both file types are easily editable in any text editor or word processor. <b>Qstit</b> provides support for UTF-8 encoding which makes it possible to display all sorts of characters in all languages.<br/>
+SubRip files include timecodes, the subtitling can therefore be automated (but also controlled manually if needed).</p>
+<p>For both file types, the structure (detailed below) needs to be respected carefully otherwise <b>Qstit</b> won't be able to open them correctly. If errors are found when opening the file, a message is displayed. The errors encountered are listed in the 'File info' window and also saved in a log file in the same folder as the title file (the <b>log file</b> is also created if titles are flagged or if modifications have been made using the 'Edit' functionality).</p>
 <p>Both formats can include the following HTML tags to change the style of the text in between them:<br/>
 &lt;i&gt; <i>italic</i> &lt;/i&gt;<br/>
 &lt;b&gt; <b>bold</b> &lt;/b&gt;<br/>
 &lt;u&gt; <u>underline</u> &lt;/u&gt;<br/>
-A tag can start on one line and end on another, wherever in the file (so that whole sections can easily be turned into italic for instance).<br/>
-The tags are not displayed in the text frame on screen but appear in the grid.</p>
+A tag can start on one line and end on another, wherever in the file. Whole sections can easily be turned into italic, for instance. The tags themselves are not displayed but appear in the grid.</p>
 
-<p>Everything written between opening ( &lt; ) and closing ( &gt; ) brackets will be considered meta-information and won't be displayed. An entire line between brackets will still appear in the grid with other lines of subtitles but won't appear on the display so brackets can be used to put comments and cues in the file.</p>
-<p>
-<br/>
-<span style="font-weight:bold;">Text (.txt) files:</span><br/>
-- One line in the file = one row in the grid = one subtitle.<br/>
-- One subtitle can be composed of several lines (up to four, usually two), they are separated by a backslash ( \ ).<br/>
-- Different subtitles can be composed of different numbers of lines.<br/>
-- Subtitles are only separated by a line break.<br/>
-- The program automatically creates "empty" lines between subtitles so that nothing is displayed between two subtitles when there are no dialogues.<br/>
-There is no need to have empty lines in the file (they would be considered as one subtitle and there would therefore be three consecutive "empty lines" when browsing through the file).
-</p>
+<p>Everything written between an opening (&lt;) and a closing (&gt;) bracket (or a line break) will be considered as a tag and won't be displayed. An entire line between brackets will still appear in the grid like a normal title but won't appear on the display. Brackets can thus be used to put comments and cues in the file.</p>
+<p><br/>
+<span style="font-weight:bold;font-size:1.1em;">Text (.txt) files:</span><br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> One line in the file = one row in the grid = one title.<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> One title can be composed of several lines (up to four, usually two), they are separated by a backslash ( \ ).<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> Different titles can be composed of different numbers of lines.<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> Titles are only separated by a line break.<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> <b>Qstit</b> automatically creates "empty" lines between titles so that nothing is displayed between two titles when there are no dialogues. There is no need to have empty lines in the file, they would be considered as one title, even if there isn't any text. There would therefore be three consecutive "empty lines" when browsing through the file.</p>
+
 <u>Structure:</u>
 <blockquote>
-&nbsp; Subtitle 1 Line 1\Subtitle 1 Line 2<br/>
-&nbsp; Subtitle 2 Line 1<br/>
-&nbsp; Subtitle 3, Line 1\Subtitle 3, Line 2\Subtitle 3, Line 3<br/>
-&nbsp; Subtitle 4, Line 1\Subtitle 4, Line 2<br/>
+&nbsp; Title 1 Line 1\Title 1 Line 2<br/>
+&nbsp; Title 2 Line 1<br/>
+&nbsp; Title 3, Line 1\Title 3, Line 2\Title 3, Line 3<br/>
+&nbsp; Title 4, Line 1\Title 4, Line 2<br/>
 &nbsp; ...
 </blockquote>
 <u>Example:</u>
@@ -153,33 +149,32 @@ There is no need to have empty lines in the file (they would be considered as on
 &nbsp; Du mal à nous trouver?\Lastige reis?<br/>
 &nbsp; ...
 </blockquote>
-<p>
-<br/>
-<span style="font-weight:bold;">SubRip (.srt) files:</span><br/>
-- Subtitles are numbered in the file but <b>Qstit</b> recalculates the line numbers to avoid mistakes (so a given subtitle line could have a different number in the .srt file and when viewed in <b>Qstit</b>).<br/>
-- One subtitle can be composed of up to four lines, separated only by a line break.<br/>
-- Different subtitles can be composed of different numbers of lines.<br/>
-- An empty line separates subtitles.<br/>
-- To create an empty line within one subtitle, you can use an opening bracket ( &lt; ) that won't be displayed (as explained above and as shown in the example below).<br/>
-- Nothing will be displayed between the end of one subtitle (Time OUT) and the beginning of the next (Time IN).<br/>
-- If you don't want to use the automation functionalities, it is possible to manually browse through a .srt file as through a .txt file: Just leave the timer on pause and use the down arrow to browse through the subtitles.
-</p>
+
+<p><br/>
+<span style="font-weight:bold;font-size:1.1em;">SubRip (.srt) files:</span><br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> Titles are numbered in the file but <b>Qstit</b> recalculates the line numbers to avoid mistakes (a given title line could then have a different number in the .srt file and when viewed in <b>Qstit</b>).<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> One title can be composed of up to four lines, separated only by a line break.<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> Different titles can be composed of different numbers of lines.<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> An empty line separates titles.<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> To create an empty line within one title, you can use an opening bracket (&lt;) that won't be displayed (as explained above and as shown in the example below).<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> Nothing will be displayed between the end of one title (Time OUT) and the beginning of the next (Time IN).<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> If you don't want to use the automation functionalities, it is possible to manually browse through a .srt file as through a .txt file: just leave the timer on pause and use the down arrow to browse through the titles.</p>
 
 <u>Structure:</u>
 <blockquote>
 &nbsp; 1<br/>
 &nbsp; Time IN --> Time OUT<br/>
-&nbsp; Subtitle 1 Line 1<br/>
-&nbsp; Subtitle 1 Line 2<br/>
+&nbsp; Title 1 Line 1<br/>
+&nbsp; Title 1 Line 2<br/>
 <br/>
 &nbsp; 2<br/>
 &nbsp; Time IN --> Time OUT<br/>
-&nbsp; Subtitle 2 Line 1<br/>
+&nbsp; Title 2 Line 1<br/>
 <br/>
 &nbsp; 3<br/>
 &nbsp; Time IN --> Time OUT<br/>
-&nbsp; Subtitle 3 Line 1<br/>
-&nbsp; Subtitle 3 Line 2<br/>
+&nbsp; Title 3 Line 1<br/>
+&nbsp; Title 3 Line 2<br/>
 <br/>
 &nbsp; ...
 </blockquote>

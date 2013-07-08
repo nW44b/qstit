@@ -1,14 +1,12 @@
 /*
-    This file is part of Qstit
-   ══════════════════════════════════════════════════════════════
-    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    This file is part of Qstit - http://subtitles.nova-cinema.org
     Feedback, comments and questions are welcome: subtitles@nova-cinema.org
-   ══════════════════════════════════════════════════════════════
-    Conception: Georges Piedboeuf-Boen & Laurent Tenzer
+   ════════════════════════════════════════════════════════════════════════════════════
+    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    Conception: Laurent Tenzer
     Programming: Georges Piedboeuf-Boen - georges.pi.bo@gmail.com
-   ══════════════════════════════════════════════════════════════
     Icons credit: Nova & Axialis Team - http://www.axialis.com/free/icons
-   ══════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════════════
     Qstit is a free software: you can redistribute it and/or modify it under the terms
     of the GNU General Public License as published by the Free Software Foundation,
     either version 3 of the License, or (at your option) any later version.
@@ -20,7 +18,7 @@
 
     You should have received a copy of the GNU General Public License along with Qstit.
     If not, see http://www.gnu.org/licenses
-   ══════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════════════
 */
 
 #include <QtGui>

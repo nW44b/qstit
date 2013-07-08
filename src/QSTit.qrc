@@ -1,14 +1,12 @@
 <!--
-    This file is part of Qstit
-   ══════════════════════════════════════════════════════════════
-    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    This file is part of Qstit - http://subtitles.nova-cinema.org
     Feedback, comments and questions are welcome: subtitles@nova-cinema.org
-   ══════════════════════════════════════════════════════════════
-    Conception: Georges Piedboeuf-Boen & Laurent Tenzer
+   ════════════════════════════════════════════════════════════════════════════════════
+    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    Conception: Laurent Tenzer
     Programming: Georges Piedboeuf-Boen - georges.pi.bo@gmail.com
-   ══════════════════════════════════════════════════════════════
     Icons credit: Nova & Axialis Team - http://www.axialis.com/free/icons
-   ══════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════════════
     Qstit is a free software: you can redistribute it and/or modify it under the terms
     of the GNU General Public License as published by the Free Software Foundation,
     either version 3 of the License, or (at your option) any later version.
@@ -20,7 +18,7 @@
 
     You should have received a copy of the GNU General Public License along with Qstit.
     If not, see http://www.gnu.org/licenses
-   ══════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════════════
 -->
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
@@ -33,6 +31,8 @@
     <file>Imag/QSTit_butY.png</file>
     <file>Imag/QSTit_canc.png</file>
     <file>Imag/QSTit_cent.png</file>
+    <file>Imag/QSTit_chck_chck.png</file>
+    <file>Imag/QSTit_chck_unch.png</file>
     <file>Imag/QSTit_clea.png</file>
     <file>Imag/QSTit_clos.png</file>
     <file>Imag/QSTit_clos_over.png</file>
@@ -49,6 +49,7 @@
     <file>Imag/QSTit_find_disa.png</file>
     <file>Imag/QSTit_find_enab.png</file>
     <file>Imag/QSTit_flag.png</file>
+    <file>Imag/QSTit_flag2.png</file>
     <file>Imag/QSTit_font.png</file>
     <file>Imag/QSTit_goto_disa.png</file>
     <file>Imag/QSTit_goto_enab.png</file>
@@ -74,8 +75,14 @@
     <file>Imag/QSTit_save_enab.png</file>
     <file>Imag/QSTit_sett_disa.png</file>
     <file>Imag/QSTit_sett_enab.png</file>
+    <file>Imag/QSTit_sett_load.png</file>
+    <file>Imag/QSTit_sett_save.png</file>
     <file>Imag/QSTit_size.png</file>
     <file>Imag/QSTit_size_vert.png</file>
+    <file>Imag/QSTit_spin_upup.png</file>
+    <file>Imag/QSTit_spin_upup_disa.png</file>
+    <file>Imag/QSTit_spin_down.png</file>
+    <file>Imag/QSTit_spin_down_disa.png</file>
     <file>Imag/QSTit_undo_disa.png</file>
     <file>Imag/QSTit_undo_enab.png</file>
     <file>Imag/QSTit_upup.png</file>
@@ -91,11 +98,5 @@
     <file>Imag/QSTit_scro_righ.png</file>
     <file>Imag/QSTit_scro_upup.png</file>
     <file>Imag/qstit.png</file>
-    <file>Imag/checkbox_checked.png</file>
-    <file>Imag/checkbox_unchecked.png</file>
-    <file>Imag/spinbox_up.png</file>
-    <file>Imag/spinbox_up_disabled.png</file>
-    <file>Imag/spinbox_down.png</file>
-    <file>Imag/spinbox_down_disabled.png</file>
 </qresource>
 </RCC>

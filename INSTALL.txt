@@ -3,9 +3,8 @@ INSTALLATION INSTRUCTIONS
 +++++++++++++++++++++++++
 
 These are instructions for compiling Qstit from the source code.
-If you just want to use the program, easier methods are available for Linux and Windows, please see our webpage:
-[French] http://www.nova-cinema.org/spip.php?rubrique1662
-[English] http://www.nova-cinema.org/spip.php?rubrique1664
+If you just want to use the program, easier methods are available, please see our webpage:
+http://subtitles.nova-cinema.org
 
 
 *******

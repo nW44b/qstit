@@ -1,14 +1,12 @@
 /*
-    This file is part of Qstit
-   ══════════════════════════════════════════════════════════════
-    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    This file is part of Qstit - http://subtitles.nova-cinema.org
     Feedback, comments and questions are welcome: subtitles@nova-cinema.org
-   ══════════════════════════════════════════════════════════════
-    Conception: Georges Piedboeuf-Boen & Laurent Tenzer
+   ════════════════════════════════════════════════════════════════════════════════════
+    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    Conception: Laurent Tenzer
     Programming: Georges Piedboeuf-Boen - georges.pi.bo@gmail.com
-   ══════════════════════════════════════════════════════════════
     Icons credit: Nova & Axialis Team - http://www.axialis.com/free/icons
-   ══════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════════════
     Qstit is a free software: you can redistribute it and/or modify it under the terms
     of the GNU General Public License as published by the Free Software Foundation,
     either version 3 of the License, or (at your option) any later version.
@@ -20,7 +18,7 @@
 
     You should have received a copy of the GNU General Public License along with Qstit.
     If not, see http://www.gnu.org/licenses
-   ══════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════════════
 */
 
 #include "QSTit_diaGrid.h"
@@ -98,7 +96,7 @@ void diaGridSkin::fGridLink()
 void diaGridSkin::fMenuMove()
 {
     parMen->iX=iX+((iW-parMen->frameGeometry().width())/2);
-    if(this->frameGeometry().y()>iPm) parMen->iY=iY+this->frameGeometry().height();
+    if(this->frameGeometry().y()+(iH/2)>iPm) parMen->iY=iY+this->frameGeometry().height();
     else parMen->iY=iY-parMen->frameGeometry().height();
     parMen->move(parMen->iX,parMen->iY);
 }
@@ -109,7 +107,8 @@ void diaGridSkin::fGridSizeInit(int pW,int pRowsMaxi)
 
     if (pW>=this->minimumWidth())iW=pW;
     else iW=this->minimumWidth();
-    this->resize(iW,iH);
+    if (iX+iW>iPr) iX=(iPr-iW)/2;
+    this->setGeometry(iX,iY,iW,iH);
     int iw=iW-81;
     QList<diaGridC *> widg=this->findChildren<diaGridC *>();
     widg[0]->resize(iw,iH-33);
@@ -302,10 +301,13 @@ void diaGridC::fGridGoto()
     diaGoto->setMaximumSize(iWidt,iHeig);
     diaGoto->move(iLefx,iTopy);
 
-    QString sStyl="QDialog {font:normal 11px "+sPf+";background-color:#32cd32;color:#000000;border:none}";
+    QString sStyl="QDialog {font:normal 11px "+sPf+";background-color:#33ff33;color:#000000;border:none}";
     sStyl+="QLineEdit {background-color:#ffffff;color:#000000;border:1px solid #202020;font:11px normal courier new;}";
-    sStyl+="QLabel {background-color:#32cd32;color:#202020;border:none;text-align:left;}";
-    sStyl+="QPushButton {background-color:#202020;color:#ffffff;border:none;text-align:left;padding-left:2px;}";
+    sStyl+="QLabel {background-color:#33ff33;color:#202020;border:none;text-align:left;}";
+    sStyl+="QPushButton {font:normal 11px "+sPf+";min-height:20px;max-height:20px;min-width:70px;max-width:90px;background-color:#202020;color:#ffffff;border:1px solid #555555;border-radius:3px;text-align:left;padding-left:2px;}";
+    sStyl+="QPushButton:hover {border-color:#cccccc;}";
+
+
     diaGoto->setStyleSheet(sStyl);
 
     ediGoto=new QLineEdit(diaGoto);
@@ -379,10 +381,11 @@ void diaGridC::fGridFind()
     diaFind->setMaximumSize(iWidt,iHeig);
     diaFind->move(iLefx,iTopy);
 
-    QString sStyl="QDialog {font:normal 11px "+sPf+";background-color:#32cd32;color:#000000;border:none}";
+    QString sStyl="QDialog {font:normal 11px "+sPf+";background-color:#33ff33;color:#000000;border:none}";
     sStyl+="QLineEdit {background-color:#ffffff;color:#000000;border:1px solid #202020;}";
-    sStyl+="QLabel {background-color:#32cd32;color:#202020;border:none;text-align:left;}";
-    sStyl+="QPushButton {background-color:#202020;color:#ffffff;border:none;text-align:left;padding-left:2px;}";
+    sStyl+="QLabel {background-color:#33ff33;color:#202020;border:none;text-align:left;}";
+    sStyl+="QPushButton {font:normal 11px "+sPf+";min-height:20px;max-height:20px;min-width:70px;max-width:90px;background-color:#202020;color:#ffffff;border:1px solid #555555;border-radius:3px;text-align:left;padding-left:2px;}";
+    sStyl+="QPushButton:hover {border-color:#cccccc;}";
     diaFind->setStyleSheet(sStyl);
 
     ediFind=new QLineEdit(diaFind);

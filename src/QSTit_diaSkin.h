@@ -1,14 +1,12 @@
 /*
-    This file is part of Qstit
-   ══════════════════════════════════════════════════════════════
-    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    This file is part of Qstit - http://subtitles.nova-cinema.org
     Feedback, comments and questions are welcome: subtitles@nova-cinema.org
-   ══════════════════════════════════════════════════════════════
-    Conception: Georges Piedboeuf-Boen & Laurent Tenzer
+   ════════════════════════════════════════════════════════════════════════════════════
+    Qstit is developed by Nova Cinema, Brussels - http://www.nova-cinema.org
+    Conception: Laurent Tenzer
     Programming: Georges Piedboeuf-Boen - georges.pi.bo@gmail.com
-   ══════════════════════════════════════════════════════════════
     Icons credit: Nova & Axialis Team - http://www.axialis.com/free/icons
-   ══════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════════════
     Qstit is a free software: you can redistribute it and/or modify it under the terms
     of the GNU General Public License as published by the Free Software Foundation,
     either version 3 of the License, or (at your option) any later version.
@@ -20,7 +18,7 @@
 
     You should have received a copy of the GNU General Public License along with Qstit.
     If not, see http://www.gnu.org/licenses
-   ══════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════════════
 */
 
 #ifndef H_WINSKIN
@@ -30,16 +28,11 @@
 #include <QtGui>
 #include <QFrame>
 
-#ifdef Q_OS_WIN
-#include <windows.h>                                    // for fWait
-#endif
-
 int fCalcPosX(int);
 int fCalcPosY(int,QFrame*);
 QString fStylFram();
 QString fStylTitl();
 QString fStylButt();
-void fWait(int);
 
 class rowSkin : public QFrame
 {
@@ -103,16 +96,59 @@ class grpSkin : public QFrame
     public:
         grpSkin(QWidget*,int,int,int,int);
 };
-class messSkin
+class diaExitSkin : public QDialog
 {
+    Q_OBJECT
     public:
-        bool fMess(QWidget*,QFrame*,QString,QString,QString);
+        diaExitSkin(QWidget*,QFrame*,QString,int,int,int,int);
+        QLabel  *labTitl;
+        void fRePosi();
     private:
         QWidget *parWin;
         QFrame  *parMen;
-        QMessageBox messBox;
-        QPushButton *bY;
-        QPushButton *bN;
+        int     iCx,iCy;
+        int     iPr,iPb,iPm;
+    private slots:
+        void fGridClos();
+    signals:
+        void sClosed();
+    protected:
+        virtual void mousePressEvent(QMouseEvent*);
+        virtual void mouseMoveEvent(QMouseEvent*);
+        virtual void keyPressEvent(QKeyEvent*);
+};
+class diaConfSkin : public QDialog
+{
+    Q_OBJECT
+    public:
+        diaConfSkin(QWidget*,QFrame*,QString,int,int,int,int);
+        QLabel  *labTitl;
+        void fRePosi();
+    private:
+        QWidget *parWin;
+        QFrame  *parMen;
+        int     iCx,iCy;
+        int     iPr,iPb,iPm;
+    protected:
+        virtual void mousePressEvent(QMouseEvent*);
+        virtual void mouseMoveEvent(QMouseEvent*);
+        virtual void keyPressEvent(QKeyEvent*);
+};
+class messSkin : public QDialog
+{
+    Q_OBJECT
+    public:
+        bool fMess(QWidget*,QFrame*,QString,QString,QString);
+        bool bOk;
+    private:
+        QWidget*        parWin;
+        QFrame*         parMen;
+        QLabel*         labMess;
+        QPushButton*    bY;
+        QPushButton*    bN;
+    private slots:
+        void fButY();
+        void fButN();
 };
 class diaColoSkin : public QFrame
 {
@@ -185,16 +221,44 @@ class diaInfoSkin : public QFrame
     Q_OBJECT
     public:
         diaInfoSkin(QWidget*,QFrame*,QString,int,int,int,int);
-        QLabel  *labTitl;
+        QLabel*     labTitl;
+        QFrame*     fraSizB;
         void fRePosi();
     private:
-        QWidget     *parWin;
-        QFrame      *parMen;
+        QWidget*    parWin;
+        QFrame*     parMen;
         int         iX,iY,iW,iH;
         int         iCx,iCy;
         int         iPr,iPb,iPm;
-        QFrame      *fraSizT;
-        QFrame      *fraSizB;
+        QFrame*     fraSizT;
+        bool        bSizT,bSizB;
+        QString     sStylBord;
+        void        fGridSizeVert(bool,int);
+        void        fGridSizeBord();
+    private slots:
+        void fGridClos();
+    signals:
+        void sClosed();
+    protected:
+        virtual void mousePressEvent(QMouseEvent*);
+        virtual void mouseMoveEvent(QMouseEvent*);
+        virtual void keyPressEvent(QKeyEvent*);
+};
+class diaHelpSkin : public QFrame
+{
+    Q_OBJECT
+    public:
+        diaHelpSkin(QWidget*,QFrame*,QString,int,int,int,int);
+        QLabel*     labTitl;
+        QFrame*     fraSizB;
+        void fRePosi();
+    private:
+        QWidget*    parWin;
+        QFrame*     parMen;
+        int         iX,iY,iW,iH;
+        int         iCx,iCy;
+        int         iPr,iPb,iPm;
+        QFrame*     fraSizT;
         bool        bSizT,bSizB;
         QString     sStylBord;
         void        fGridSizeVert(bool,int);

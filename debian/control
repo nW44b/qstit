@@ -2,7 +2,7 @@ Source: qstit
 Section: video
 Priority: optional
 Maintainer: Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>
-Homepage: https://github.com/nova-cinema/qstit
+Homepage: http://subtitles.nova-cinema.org
 Build-Depends: debhelper (>> 3.0.0), libqt4-dev
 Standards-Version: 3.9.3
 
@@ -10,6 +10,6 @@ Package: qstit
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Project extra subtitles (.txt, .srt).
- Qstit is a subtitle prompter made for cinemas, festivals, theatres
- and can be used in a variety of contexts to add subtitles
+ Qstit is a title prompter made for cinemas, festivals, theatres
+ and can be used in a variety of contexts to add subtitles or surtitles
  to a film projection or event.

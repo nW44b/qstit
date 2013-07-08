@@ -1,3 +1,10 @@
+qstit (2.9.0-1) stable; urgency=low
+
+  * Settings system rewritten
+  * various corrections
+
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Sun, 16 June 2013 11:45:40 +0200
+
 qstit (2.8.6-1) stable; urgency=low
 
   * Updated Debian package info
