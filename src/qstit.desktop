@@ -1,12 +1,12 @@
 [Desktop Entry]
 Name=Qstit
-GenericName=Subtitle prompter
-Comment=Project extra subtitles over live film projection or event
-Keywords=nova;sous-titres;
+GenericName=Surtitling software
+Comment=Project and manipulate extra subtitles live
+Keywords=nova;sous-titres;surtitres;supertitles;
 Exec=qstit
 Terminal=false
 Type=Application
 StartupNotify=true
 MimeType=text/x-srt;text/plain;application/x-subrip;
 Icon=qstit
-Categories=AudioVideo;AudioVideoEditing;Player;Qt;Education;Languages;
+Categories=AudioVideo;AudioVideoEditing;Player;

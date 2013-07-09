@@ -96,7 +96,7 @@ It is possible to fully control <b>Qstit</b> with just a numeric keypad (or "num
 <tr class="c1"><td><img src=":/Imag/QSTit_find_enab.png" height=16> Find...</td><td>Find text in the file</td><td>[Ctrl+F]</td></tr>
 <tr class="c2"><td><img src=":/Imag/QSTit_clea.png" height=16> Clear</td><td>Clear display and reset file at beginning</td><td>[Ctrl+C]</td></tr>
 <tr class="c1"><td><img src=":/Imag/QSTit_link_none.png" height=16> Bind/Unbind</td><td>(Un)bind menu bar and grid for custom positioning</td><td></td></tr>
-<tr class="c2"><td><img src=":/Imag/QSTit_flag.png"> (Leftmost cell)</td><td>Flag current row to indicate a cue, a mistake, ...<br/>(Flags are saved in the log file)</td><td>[!] or [Numpad /]</td></tr>
+<tr class="c2"><td><img src=":/Imag/QSTit_flag.png"> (Leftmost cell)</td><td>Flag current row to indicate a cue, a mistake, etc.<br/>(Flags are saved in the log file)</td><td>[!] or [Numpad /]</td></tr>
 </table>
 </p>
 <p>
@@ -109,7 +109,7 @@ It is recommended to test your settings while displaying one of the the widest l
 </p>
 <p>
 <u><span style="font-weight:bold;color:#0055aa;text-decoration:none;">Supported file formats:</span></u></p>
-<p><b>Qstit</b> can read simple text (.txt) and SubRip (.srt) files with up to four lines of titles. Srt files are common and many softwares can convert other subtitle file formats to the SubRip format.<br/>
+<p><b>Qstit</b> can read simple text (.txt) and SubRip (.srt) files with up to four lines per title. Srt files are common and many softwares can convert other subtitle file formats to the SubRip format.<br/>
 Both file types are easily editable in any text editor or word processor. <b>Qstit</b> provides support for UTF-8 encoding which makes it possible to display all sorts of characters in all languages.<br/>
 SubRip files include timecodes, the subtitling can therefore be automated (but also controlled manually if needed).</p>
 <p>For both file types, the structure (detailed below) needs to be respected carefully otherwise <b>Qstit</b> won't be able to open them correctly. If errors are found when opening the file, a message is displayed. The errors encountered are listed in the 'File info' window and also saved in a log file in the same folder as the title file (the <b>log file</b> is also created if titles are flagged or if modifications have been made using the 'Edit' functionality).</p>
@@ -123,11 +123,11 @@ A tag can start on one line and end on another, wherever in the file. Whole sect
 <p><br/>
 <span style="font-weight:bold;font-size:1.1em;">Text (.txt) files:</span><br/>
 <span style="color:#0055AA;font-weight:bold;">·</span> One line in the file = one row in the grid = one title.<br/>
-<span style="color:#0055AA;font-weight:bold;">·</span> One title can be composed of several lines (up to four, usually two), they are separated by a backslash ( \ ).<br/>
+<span style="color:#0055AA;font-weight:bold;">·</span> One title can be composed of several lines (up to four, usually two), they are separated by a backslash (\).<br/>
 <span style="color:#0055AA;font-weight:bold;">·</span> Different titles can be composed of different numbers of lines.<br/>
 <span style="color:#0055AA;font-weight:bold;">·</span> Titles are only separated by a line break.<br/>
 <span style="color:#0055AA;font-weight:bold;">·</span> <b>Qstit</b> automatically creates "empty" lines between titles so that nothing is displayed between two titles when there are no dialogues. There is no need to have empty lines in the file, they would be considered as one title, even if there isn't any text. There would therefore be three consecutive "empty lines" when browsing through the file.</p>
-
+<br/>
 <u>Structure:</u>
 <blockquote>
 &nbsp; Title 1 Line 1\Title 1 Line 2<br/>
@@ -159,7 +159,7 @@ A tag can start on one line and end on another, wherever in the file. Whole sect
 <span style="color:#0055AA;font-weight:bold;">·</span> To create an empty line within one title, you can use an opening bracket (&lt;) that won't be displayed (as explained above and as shown in the example below).<br/>
 <span style="color:#0055AA;font-weight:bold;">·</span> Nothing will be displayed between the end of one title (Time OUT) and the beginning of the next (Time IN).<br/>
 <span style="color:#0055AA;font-weight:bold;">·</span> If you don't want to use the automation functionalities, it is possible to manually browse through a .srt file as through a .txt file: just leave the timer on pause and use the down arrow to browse through the titles.</p>
-
+<br/>
 <u>Structure:</u>
 <blockquote>
 &nbsp; 1<br/>
