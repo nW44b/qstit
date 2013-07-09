@@ -3401,7 +3401,7 @@ void winMain::fFileInfoDial()
     griInfo->setItem(iL,1,new QTableWidgetItem(fInfo.absolutePath()));
     iL++;
     griInfo->setItem(iL,0,new QTableWidgetItem(fL("widInfoModi")));
-    griInfo->setItem(iL,1,new QTableWidgetItem(fInfo.lastModified().toString("dd/MM/yyyy, hh:mm")));
+    griInfo->setItem(iL,1,new QTableWidgetItem(fInfo.lastModified().toString("yyyy-MM-dd, hh:mm")));
     iL++;
     griInfo->setItem(iL,0,new QTableWidgetItem(fL("widInfoEnco")));
     griInfo->setItem(iL,1,new QTableWidgetItem(gFileEnco?"ANSI":"UTF8"));

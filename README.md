@@ -10,4 +10,4 @@ The projection can be automated with SubRip files, Qstit can adapt the projectio
 *See website for more details and installation instructions:*
 http://subtitles.nova-cinema.org
 
- <img style="text-align:center;" src="http://subtitles.nova-cinema.org/images/logo.png" alt="logo"> 
+ <img src="http://subtitles.nova-cinema.org/images/logo.png" alt="logo"> 
