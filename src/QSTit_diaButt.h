@@ -24,6 +24,8 @@
 #ifndef H_TOOLBUTT
 #define H_TOOLBUTT
 
+#include <Qt>
+#include <QtGui>
 #include <QApplication>
 #include <QToolButton>
 #include <QToolTip>

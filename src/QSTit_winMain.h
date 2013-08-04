@@ -89,11 +89,13 @@ class winMain : public QWidget
             double  rota;
         } objRow0,objRow1,objRow2,objRow3,objRow4;
     private:
+        bool        g1rst;
         int         gAcce;
         bool        gAuto;
         bool        gBackDial;
         QString     gClokStyl;
         bool        gColoDial;
+        QString     gColoGray;
         int         gConf;
         bool        gConfDial;
         QString     gConfFile;
@@ -124,6 +126,7 @@ class winMain : public QWidget
         QString     gGridBack;
         QString     gGridColo;
         bool        gGridColoDark;
+        int         gGridCols;
         bool        gGridDial;
         bool        gGridEdit;
         bool        gGridEditSave;
@@ -136,6 +139,7 @@ class winMain : public QWidget
         QString     gGridSele;
         bool        gGridShow;
         bool        gHelpDial;
+        QString     gHideStyl;
         QString     gHome;
         bool        gInit;
         int         gJump;
@@ -175,9 +179,12 @@ class winMain : public QWidget
         bool        gSrtx;
         QString     gSrtxStop;
         QString     gSystFontFami;
+        QString     gTestStyl;
         bool        gTest;
+        QString     gTestFramStyl;
         QString     gTimeStyl;
         QString     gVers;
+        bool        gWarn;
         QString     gWindBack;
         bool        gWindDial;
         bool        gWork;
@@ -186,6 +193,7 @@ class winMain : public QWidget
         QFile       oFlog;
         QFile       oHelp;
         QFile       oLang;
+        QMainWindow *winFram;
         QWidget     *winWind;
     private:
         void        fApplInit();
@@ -204,6 +212,7 @@ class winMain : public QWidget
         void        fConfSprd();
         void        fConfWrit();
         QString     fConfWritLine(QString,QString);
+        QString     fConfWritRowx(int);
         void        fFileConf();
         void        fFileEncoding(QString);
         QString     fFileLineForm(QString);
@@ -284,6 +293,7 @@ class winMain : public QWidget
         void        fSettCreaSave();
         void        fSettCreaShed();
         void        fSettEnab();
+        void        fTestCard(bool);
         void        fTestShow();
         void        fWindClear();
         void        fWindCrea();
@@ -417,6 +427,7 @@ class winMain : public QWidget
         void        fShedRota(double);
         void        fShedSpac(int);
         void        fShedStatShow();
+        void        fTestTogg();
         void        fWindBack();
         void        fWindBackDial();
         void        fWindBackClos();
@@ -519,6 +530,10 @@ class winMain : public QWidget
         butToolX*       butShedVeT2;
         butToolX*       butShedVeT3;
         butToolX*       butShedVeT4;
+        QPushButton*    butTestCard;
+        QPushButton*    butTestGrid;
+        QPushButton*    butTestMenu;
+        QPushButton*    butTestRows;
         QPushButton*    butTextBack;
         QPushButton*    butTextColo;
         butToolX*       butVertBott;
@@ -542,6 +557,11 @@ class winMain : public QWidget
         diaSkin*        diaSett;
         menuSkin*       fraMenu;
         rowSkin*        fraRows;
+        QFrame*         fraShedHid1;
+        QFrame*         fraShedHid2;
+        QFrame*         fraShedHid3;
+        QFrame*         fraShedHid4;
+        QFrame*         fraTestRows;
         QTableWidget*   griInfo;
         diaGridC*       griText;
         grpSkin*        grpTextAliH;
@@ -595,6 +615,8 @@ class winMain : public QWidget
         QLabel*         labShedVert;
         QLabel*         labShedWidt;
         QLabel*         labTaskShow;
+        QLabel*         labTestHori[99];
+        QLabel*         labTestVert[99];
         QLabel*         labTextAliH;
         QLabel*         labTextAliV;
         QLabel*         labTextFont;

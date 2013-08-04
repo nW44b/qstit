@@ -67,7 +67,7 @@ rowSkin::rowSkin(QWidget *parent,int pWidt,int pHeig) : QFrame(parent)
     iPm=QApplication::desktop()->height()/2;
 
     this->setStyleSheet("border:none;border-radius:0px;");
-    this->setFrameShape(QFrame::NoFrame);
+    //this->setFrameShape(QFrame::NoFrame);
     this->setContentsMargins(0,0,0,0);
     this->setCursor(QCursor(QPixmap(":/Imag/QSTit_curH.png"),-1,-1));
     this->setGeometry(iX,iY,iW,iH);
@@ -929,6 +929,7 @@ void diaInfoSkin::fGridSizeVert(bool pB,int pD)
         this->resize(iW,iH);
         if (!pB) iY-=pD;
         if (iY>iPb-iH) iY=iPb-iH;
+        if (iY<1) iY=1;
         this->move(iX,iY);
         QList<QTableWidget *> widg=this->findChildren<QTableWidget *>();
         widg[0]->resize(widg[0]->frameGeometry().width(),iH-33);
@@ -1029,12 +1030,6 @@ void diaHelpSkin::fGridClos()
     emit sClosed();
     this->close();
 }
-void diaHelpSkin::fRePosi()
-{
-    int iX=fCalcPosX(this->frameGeometry().width());
-    int iY=fCalcPosY(this->frameGeometry().height(),parMen);
-    this->move(iX,iY);
-}
 void diaHelpSkin::fGridSizeVert(bool pB,int pD)
 {
     int jH;
@@ -1046,6 +1041,7 @@ void diaHelpSkin::fGridSizeVert(bool pB,int pD)
         this->resize(iW,iH);
         if (!pB) iY-=pD;
         if (iY>iPb-iH) iY=iPb-iH;
+        if (iY<1) iY=1;
         this->move(iX,iY);
         QList<QTextEdit *> widg=this->findChildren<QTextEdit *>();
         widg[0]->resize(widg[0]->frameGeometry().width(),iH-33);
@@ -1054,7 +1050,7 @@ void diaHelpSkin::fGridSizeVert(bool pB,int pD)
 }
 void diaHelpSkin::fGridSizeBord()
 {
-    fraSizB->setGeometry(0,iH-5,iW,5);
+    fraSizB->setGeometry(0,iH-5,iW,5);fraSizB->raise();
 }
 void diaHelpSkin::mousePressEvent(QMouseEvent *e)
 {

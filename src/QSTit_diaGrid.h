@@ -50,7 +50,7 @@ class diaGridSkin : public QFrame
 
         void        fRePosi();
         void        fWorkLang(QStringList,QStringList);
-        void        fGridSizeInit(int,int);
+        void        fGridSizeInit(int,int,int);
         void        fGridLink();
         void        fMenuMove();
     private:

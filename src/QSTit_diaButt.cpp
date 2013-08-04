@@ -32,6 +32,7 @@ butDspi::butDspi(QWidget *wParent,int iX,int iY,double dMin,double dMax,double d
     this->setRange(dMin,dMax);
     this->setSingleStep(dStep);
     this->setValue(dValu);
+    this->show();
 }
 void butDspi::keyPressEvent(QKeyEvent *e)
 {
@@ -48,18 +49,20 @@ butSpin::butSpin(QWidget *wParent,int iX,int iY,int iMin,int iMax,int iStep,int 
 {
     parWin=wParent;
     this->setStyleSheet("background-color:#ffffff;color:#000000;border:1px solid #777777;");
+    this->setFocusPolicy(Qt::StrongFocus);
     this->move(iX,iY);
     this->setRange(iMin,iMax);
     this->setSingleStep(iStep);
     this->setValue(iValu);
+    this->show();
 }
 void butSpin::keyPressEvent(QKeyEvent *e)
 {
-    if (e->key()>=Qt::Key_0 && e->key()<=Qt::Key_9) QSpinBox::keyPressEvent(e);
-    else if (e->key()==Qt::Key_Minus) QSpinBox::keyPressEvent(e);
-    else if (e->key()==Qt::Key_Delete || e->key()==Qt::Key_Backspace) QSpinBox::keyPressEvent(e);
-    else if (e->key()==Qt::Key_Left || e->key()==Qt::Key_Right) QSpinBox::keyPressEvent(e);
-    else QApplication::sendEvent(parWin,new QKeyEvent(QEvent::KeyPress,e->key(),e->modifiers(),"",false,1));
+    if (e->key()>=Qt::Key_0 && e->key()<=Qt::Key_9) {QSpinBox::keyPressEvent(e);e->accept();return;}
+    else if (e->key()==Qt::Key_Minus) {QSpinBox::keyPressEvent(e);e->accept();return;}
+    else if (e->key()==Qt::Key_Delete || e->key()==Qt::Key_Backspace) {QSpinBox::keyPressEvent(e);e->accept();return;}
+    else if (e->key()==Qt::Key_Left || e->key()==Qt::Key_Right) {QSpinBox::keyPressEvent(e);e->accept();return;}
+    else {QApplication::sendEvent(parWin,new QKeyEvent(QEvent::KeyPress,e->key(),e->modifiers(),"",false,1));}
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -82,6 +85,7 @@ butToolC::butToolC(QWidget *pPare,QPixmap pIcon,QString pText,bool pAuto) : QToo
     this->setIconSize(QSize(iWidt-3,iSize-3));
     this->setAutoRepeat(pAuto);
     if (pAuto) {this->setAutoRepeatInterval(50);this->setAutoRepeatDelay(200);}
+    this->show();
 }
 bool butToolC::event(QEvent *e)
 {
@@ -124,6 +128,7 @@ butToolX::butToolX(QWidget *wParent) : QToolButton(wParent)
     this->setAutoRepeat(true);
     this->setAutoRepeatInterval(50);
     this->setAutoRepeatDelay(200);
+    this->show();
 }
 bool butToolX::event(QEvent *e)
 {

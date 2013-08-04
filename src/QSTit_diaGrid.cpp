@@ -100,14 +100,14 @@ void diaGridSkin::fMenuMove()
     else parMen->iY=iY-parMen->frameGeometry().height();
     parMen->move(parMen->iX,parMen->iY);
 }
-void diaGridSkin::fGridSizeInit(int pW,int pRowsMaxi)
+void diaGridSkin::fGridSizeInit(int pW,int pRowsMaxi,int pConf)
 {
     if (pRowsMaxi<16) this->setMaximumHeight(34+(pRowsMaxi*18));
     else this->setMaximumHeight(34+(16*18));
 
     if (pW>=this->minimumWidth())iW=pW;
     else iW=this->minimumWidth();
-    if (iX+iW>iPr) iX=(iPr-iW)/2;
+    if (pConf<=1 || iX+iW>iPr) iX=(iPr-iW)/2;
     this->setGeometry(iX,iY,iW,iH);
     int iw=iW-81;
     QList<diaGridC *> widg=this->findChildren<diaGridC *>();
@@ -126,7 +126,7 @@ void diaGridSkin::fGridSizeInit(int pW,int pRowsMaxi)
     butt[5]->move(iW-39,butt[5]->frameGeometry().y());
     butt[6]->move(iW-69,butt[6]->frameGeometry().y());
     butt[7]->move(iW-39,butt[7]->frameGeometry().y());
-    if (bLink) fMenuMove();
+    if (pConf<=1 && bLink) fMenuMove();
 }
 void diaGridSkin::fGridSizeVert(bool pB,int pD)
 {
@@ -154,6 +154,7 @@ void diaGridSkin::fGridSizeVert(bool pB,int pD)
         widg[0]->resize(widg[0]->frameGeometry().width(),iH-33);
         fGridSizeBord();
         if (bLink) fMenuMove();
+        emit sMoved();
     }
 }
 void diaGridSkin::fGridSizeHori(bool pL,int pW)
@@ -184,6 +185,7 @@ void diaGridSkin::fGridSizeHori(bool pL,int pW)
         butt[6]->move(iW-69,butt[6]->frameGeometry().y());
         butt[7]->move(iW-39,butt[7]->frameGeometry().y());
         if (bLink) fMenuMove();
+        emit sMoved();
     }
 }
 void diaGridSkin::fGridSizeBord()

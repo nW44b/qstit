@@ -8,8 +8,7 @@ MOC_DIR = ./tmp
 OBJECTS_DIR = ./tmp
 
 # Input
-HEADERS += main.h \
-           QSTit_diaButt.h \
+HEADERS += QSTit_diaButt.h \
            QSTit_diaGrid.h \
            QSTit_diaSkin.h \
            QSTit_fadShow.h \

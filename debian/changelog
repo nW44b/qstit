@@ -1,6 +1,18 @@
+qstit (2.9.2-1) stable; urgency=low
+
+  * Corrected subtitle frame size calculation for Mac
+  * Help window resize
+  * Disable unexisting lines in the settings
+  * Clarify visibility setting for the lines
+  * Added test screen for calibration and debug
+  * Various fixes
+
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Tue, 30 July 2013 18:39:25 +0200
+
 qstit (2.9.1-1) stable; urgency=low
 
   * Help file modified
+  * Date format for 'file info' window
 
  -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Tue, 09 July 2013 11:39:25 +0200
 

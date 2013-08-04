@@ -9,7 +9,7 @@ Standards-Version: 3.9.3
 Package: qstit
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Project extra subtitles (.txt, .srt).
+Description: Surtitling / subtitling software (.txt, .srt).
  Qstit is a title prompter made for cinemas, festivals, theatres
- and can be used in a variety of contexts to add subtitles or surtitles
- to a film projection or event.
+ and can be used in a variety of contexts to project and manipulate
+ extra subtitles or surtitles over a film or during a show.

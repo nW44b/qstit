@@ -251,7 +251,6 @@ class diaHelpSkin : public QFrame
         diaHelpSkin(QWidget*,QFrame*,QString,int,int,int,int);
         QLabel*     labTitl;
         QFrame*     fraSizB;
-        void fRePosi();
     private:
         QWidget*    parWin;
         QFrame*     parMen;

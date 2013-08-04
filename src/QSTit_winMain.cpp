@@ -28,9 +28,11 @@
 
 winMain::winMain()
 {
+    g1rst=true;
     gAcce=0;                                            // accelerator in mls
     gAuto=false;
     gConf=0;
+    gGridCols=4;
     gHome = QDir().homePath()+"/.qstit";
     if (!QDir(gHome).exists()) QDir().mkdir(gHome);
     gHome+="/";
@@ -44,7 +46,7 @@ winMain::winMain()
     gShedStat=false;
     gSrtx=false;                                        // true=srt,false=txt
     gTest=false;
-    gVers="2.9.1";
+    gVers="2.9.2";
     gWork=false;
 
     gBackDial=false;
@@ -71,6 +73,7 @@ winMain::winMain()
     gSettGene=false;
     gSettFile=false;
 
+    gColoGray="#444444";
     gWindBack="#000000";
     gRowsBack="#000000";
     gRowsColo="#ffffff";
@@ -109,6 +112,7 @@ void winMain::fApplInit()
     objWind.midW=objWind.widt/2;
     objWind.midH=objWind.heig/2;
     objWind.basW=objWind.widt-2;
+    objWind.basH=objWind.heig-2;
 
     objRowsNumb.mini=1;
     objRowsNumb.maxi=objRowsNumb.val0=objRowsNumb.valu=4;
@@ -143,21 +147,32 @@ void winMain::fApplInit()
 
 void winMain::fWindCrea()
 {
-    winWind=new QWidget(this,Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint|Qt::X11BypassWindowManagerHint);
-    winWind->showFullScreen();
-    this->setFixedSize(objWind.widt,objWind.heig);
+    winFram=new QMainWindow(this);
+    winFram->setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint|Qt::X11BypassWindowManagerHint);
+    winFram->setGeometry(0,0,objWind.widt,objWind.heig);
+    winFram->showFullScreen();
+
+    winWind=new QWidget(winFram);
     winWind->setGeometry(0,0,objWind.widt,objWind.heig);
     winWind->setContentsMargins(0,0,0,0);
     winWind->setCursor(QCursor(QPixmap(":/Imag/QSTit_curV.png"),-1,-1));
+    winWind->setFocus();
+
+    winFram->setCentralWidget(winWind);
+
+    fTestCard(true);
 }
 void winMain::fWindStyle()
 {
     gGriCStyl="background-color:#222222;color:#ffffff;selection-background-color:#0055aa;selection-color:#ffffff;border:none;";
     gExplDisa="color:#555555;border:none;";
-    gClokStyl="font:normal 11px "+gSystFontFami+";background-color:#000000;color:#555555;border:1px solid #000000;border-radius:3px;";
+    gClokStyl="font:normal 11px "+gSystFontFami+";background-color:#000000;color:#555555;border:none;";
+    gTestStyl="font:normal 9px "+gSystFontFami+";background-color:#ff0000;color:#ffffff;border:none;border-radius:0px;";
+    gTestFramStyl="background-color:transparent;color:transparent;border:1px solid #ff0000;border-radius:0px;";
     gTimeStyl="font:normal 11px "+gSystFontFami+";background-color:#000000;color:#ffffff;border:1px solid #000000;border-radius:3px;";
     gPulsStyl="font:normal 10px "+gSystFontFami+";background-color:#000000;color:#ffffff;border:1px solid #000000;border-radius:3px;height:20px;width:20px;";
     gExplStyl="font:normal 9px "+gSystFontFami+";color:#555555;border:none;";
+    gHideStyl="background-color:#222222;color:#ffffff;border:1px solid #222222;border-radius:3px;";
 
     QString sStyl="* {background-color:#000000;color:#ffffff;border:none;}";
     sStyl+="QLabel {font:normal 11px "+gSystFontFami+";background-color:#151515;border:none;}";
@@ -324,6 +339,13 @@ void winMain::fMenuCrea()
     fraMenu=new menuSkin(winWind,226,40,-1,-1);
     connect(fraMenu,SIGNAL(sMoved()),this,SLOT(fRowsStat()));
 
+    butTestMenu=new QPushButton("x-y",fraMenu);
+    butTestMenu->setGeometry(0,0,60,30);
+    butTestMenu->setStyleSheet(gTestStyl);
+    butTestMenu->setCursor(Qt::ArrowCursor);
+    butTestMenu->hide();
+    connect(butTestMenu,SIGNAL(clicked()),this,SLOT(fTestTogg()));
+
     butExit=new butToolC(fraMenu,QPixmap(":/Imag/QSTit_exit.png"),"M"+fL("butExit"),false);
     butExit->move(fraMenu->iW-40,6);
     connect(butExit,SIGNAL(clicked()),this,SLOT(fWindExitDial()));
@@ -345,6 +367,7 @@ void winMain::fMenuCrea()
     labClok->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     labClok->setStyleSheet(gClokStyl);
     labClok->setGeometry(fraMenu->iW-220,10,54,20);
+    labClok->show();
     tmrClok=new QTimer(this);
     connect(tmrClok,SIGNAL(timeout()),this,SLOT(fMenuClok()));
     tmrClok->start(1000);
@@ -445,6 +468,7 @@ void winMain::fMenuAdapt(int m)                         // 0=init,1=manu,2=auto
     }
     if (m!=0)
     {
+        fraMenu->bLink=diaGrid->bLink;
         iP+=10;butRoll->move(iP,3);butRoll->show();iP+=butRoll->frameGeometry().width();
         iP+=15;butProjUpup->move(iP,3);butProjUpup->show();iP+=butProjUpup->frameGeometry().width();
         iP+=10;butProjDown->move(iP,3);butProjDown->show();iP+=butProjDown->frameGeometry().width();
@@ -479,8 +503,8 @@ void winMain::fMenuAdapt(int m)                         // 0=init,1=manu,2=auto
     iP+=10;butExit->move(iP,6);iP+=butExit->frameGeometry().width();
     fraMenu->iW=iP+10;
     fraMenu->resize(fraMenu->iW,fraMenu->iH);
-    fraMenu->iX=(objWind.widt-fraMenu->iW)/2;
-    fraMenu->move(fraMenu->iX,fraMenu->iY);
+    if (gConf<=1) {fraMenu->iX=(objWind.widt-fraMenu->iW)/2;
+                   fraMenu->move(fraMenu->iX,fraMenu->iY);}
     if (m!=0) fRowsStat();
 }
 void winMain::fMenuClok()
@@ -548,21 +572,34 @@ void winMain::fRowsCrea()
     fraRows->stackUnder(fraMenu);
     connect(fraRows,SIGNAL(sMoved()),this,SLOT(fRowsStatMove()));
 
+    butTestRows=new QPushButton("x-y-w-h",fraRows);
+    butTestRows->setGeometry(0,0,60,30);
+    butTestRows->setStyleSheet(gTestStyl);
+    butTestRows->setCursor(Qt::ArrowCursor);
+    butTestRows->hide();
+    connect(butTestRows,SIGNAL(clicked()),this,SLOT(fTestTogg()));
+
+    fraTestRows=new QFrame(winWind);
+    fraTestRows->setGeometry(0,0,60,30);
+    fraTestRows->setStyleSheet(gTestFramStyl);
+    fraTestRows->stackUnder(fraRows);
+    fraTestRows->hide();
+
     texRow1=new QLabel(fraRows);
-    texRow1->setGeometry(0,0,objRow1.widt,objRow1.heig);
-    texRow1->move(objRow1.x,objRow1.y);
+    texRow1->setGeometry(objRow1.x,objRow1.y,objRow1.widt,objRow1.heig);
+    texRow1->setStyleSheet("border:none;");
 
     texRow2=new QLabel(fraRows);
-    texRow2->setGeometry(0,0,objRow2.widt,objRow2.heig);
-    texRow2->move(objRow2.x,objRow2.y);
+    texRow2->setGeometry(objRow2.x,objRow2.y,objRow2.widt,objRow2.heig);
+    texRow2->setStyleSheet("border:none;");
 
     texRow3=new QLabel(fraRows);
-    texRow3->setGeometry(0,0,objRow3.widt,objRow3.heig);
-    texRow3->move(objRow3.x,objRow3.y);
+    texRow3->setGeometry(objRow3.x,objRow3.y,objRow3.widt,objRow3.heig);
+    texRow3->setStyleSheet("border:none;");
 
     texRow4=new QLabel(fraRows);
-    texRow4->setGeometry(0,0,objRow4.widt,objRow4.heig);
-    texRow4->move(objRow4.x,objRow4.y);
+    texRow4->setGeometry(objRow4.x,objRow4.y,objRow4.widt,objRow4.heig);
+    texRow4->setStyleSheet("border:none;");
 
     gRowsHcen=objWind.midW;
     gRowsVcen=61;
@@ -621,6 +658,7 @@ void winMain::fRowsStatMove() {butRowsCent->hide();fRowsStat();}
 void winMain::fRowsStat()
 {
     fRowsFramCent();
+    fTestShow();
 
     spiRowsDimH->blockSignals(true);spiRowsDimH->setValue(fraRows->iW);spiRowsDimH->blockSignals(false);
     spiRowsDimV->blockSignals(true);spiRowsDimV->setValue(objRow0.heig);spiRowsDimV->blockSignals(false);
@@ -699,28 +737,25 @@ void winMain::fRowsChck()
 void winMain::fRowsInit()
 {
     butRowsCent->hide();
-    if (!gSettShow && !gGridShow)
+
+    if (!gGridShow)
     {
-        fRowsClear();
-        fRowsFram();
-        fRowsTextForm();
-        fRowsShow(1);
-    }
-    if (gSettShow && !gGridShow)
-    {
-        QString s1=fL("fRowsInit")+" 1 - "+fL("fRowsInit")+" 1";
-        QString s2=fL("fRowsInit")+" 2 - "+fL("fRowsInit")+" 2";
-        QString s3=fL("fRowsInit")+" 3 - "+fL("fRowsInit")+" 3";
-        QString s4=fL("fRowsInit")+" 4 - "+fL("fRowsInit")+" 4";
+        if (!gSettShow) {fRowsClear();}
+        else
+        {
+            QString s1=fL("fRowsInit")+" 1 - "+fL("fRowsInit")+" 1";
+            QString s2=fL("fRowsInit")+" 2 - "+fL("fRowsInit")+" 2";
+            QString s3=fL("fRowsInit")+" 3 - "+fL("fRowsInit")+" 3";
+            QString s4=fL("fRowsInit")+" 4 - "+fL("fRowsInit")+" 4";
 
-        if (gSecoText) s2=fL("fRowsInit")+" 2 / "+fL("fRowsInit")+" 1";
-        if (gSecoItal) s2="<i>"+s2+"</i>";
+            if (gSecoText) s2=fL("fRowsInit")+" 2 / "+fL("fRowsInit")+" 1";
+            if (gSecoItal) s2="<i>"+s2+"</i>";
 
-        objRow1.text=s1;
-        objRow2.text=s2;
-        objRow3.text=s3;
-        objRow4.text=s4;
-
+            objRow1.text=s1;
+            objRow2.text=s2;
+            objRow3.text=s3;
+            objRow4.text=s4;
+        }
         fRowsFram();
         fRowsTextForm();
         fRowsShow(1);
@@ -853,7 +888,7 @@ void winMain::fRowsTextDraw(int iR)
         case 3: {texRowx=texRow3;objRowx=&objRow3;break;}
         case 4: {texRowx=texRow4;objRowx=&objRow4;}
     }
-    QString sStyl=QString("<body bgcolor=transparent><style>p{");
+    QString sStyl=QString("<body><style>body{border:none;background-color:transparent;}p{border:none;");
     sStyl+=QString("color:%1;").arg(objRowx->colF.name());
     sStyl+=QString("font-family:%1;").arg(objRowx->font.family());
     sStyl+=QString("font-size:%1px;").arg(objRowx->font.pointSize());
@@ -1124,10 +1159,10 @@ void winMain::fRowsVertTopy()
 }
 void winMain::fRowsNumb()
 {
-    objRow1.show=true;
-    objRow2.show=objRowsNumb.valu>=2?true:false;
-    objRow3.show=objRowsNumb.valu>=3?true:false;
-    objRow4.show=objRowsNumb.valu>=4?true:false;
+    objRow1.show=gGridCols>=1?true:false;
+    objRow2.show=gGridCols>=2?true:false;
+    objRow3.show=gGridCols>=3?true:false;
+    objRow4.show=gGridCols>=4?true:false;
     fRowsNumbAdap();
     if (gGridShow) fGridInit();
 }
@@ -1137,14 +1172,17 @@ void winMain::fShedNumb()
     objRow2.show=radShedSho2->isChecked();
     objRow3.show=radShedSho3->isChecked();
     objRow4.show=radShedSho4->isChecked();
-    fRowsNumbAdap();
     if (gGridShow) fGridInit();
+    fRowsNumbAdap();
 }
 void winMain::fRowsNumbAdap()
 {
+    int iX[]={10,140,249,339,429,519,609};
+    int iY[]={28,48,48,70,94,118,142,167,189,212,212};
+
     radShedSho1->blockSignals(true);radShedSho1->setChecked(objRow1.show);radShedSho1->blockSignals(false);
     texRow1->setVisible(objRow1.show);
-    if (objRow1.show) {objRowsNumb.valu=1;objRow1.heig=objRow0.heig;objRow1.spac=objRow1.savS;}
+    if (objRow1.show) {objRowsNumb.valu=1;if (objRow1.heig<objRow0.heig) objRow1.heig=objRow0.heig;objRow1.spac=objRow1.savS;}
     else
     {
         if (objRow1.heig!=0) {objRow1.savH=objRow1.heig;objRow1.savS=objRow1.spac;}
@@ -1152,10 +1190,16 @@ void winMain::fRowsNumbAdap()
     }
     spiShedHei1->blockSignals(true);spiShedHei1->setValue(objRow1.heig);spiShedHei1->blockSignals(false);
     spiShedSpa1->blockSignals(true);spiShedSpa1->setValue(objRow1.spac);spiShedSpa1->blockSignals(false);
+    fraShedHid1->setVisible(!objRow1.show);
+    if (!objRow1.show)
+    {
+        if (gGridCols>=1) fraShedHid1->setGeometry(iX[2],iY[1],73,185);
+        else fraShedHid1->setGeometry(iX[2],iY[0],73,205);
+    }
 
     radShedSho2->blockSignals(true);radShedSho2->setChecked(objRow2.show);radShedSho2->blockSignals(false);
     texRow2->setVisible(objRow2.show);
-    if (objRow2.show) {objRowsNumb.valu=2;objRow2.heig=objRow0.heig;objRow2.spac=objRow2.savS;}
+    if (objRow2.show) {objRowsNumb.valu=2;if (objRow2.heig<objRow0.heig) objRow2.heig=objRow0.heig;objRow2.spac=objRow2.savS;}
     else
     {
         if (objRow2.heig!=0) {objRow2.savH=objRow2.heig;objRow2.savS=objRow2.spac;}
@@ -1163,10 +1207,16 @@ void winMain::fRowsNumbAdap()
     }
     spiShedHei2->blockSignals(true);spiShedHei2->setValue(objRow2.heig);spiShedHei2->blockSignals(false);
     spiShedSpa2->blockSignals(true);spiShedSpa2->setValue(objRow2.spac);spiShedSpa2->blockSignals(false);
+    fraShedHid2->setVisible(!objRow2.show);
+    if (!objRow2.show)
+    {
+        if (gGridCols>=2) fraShedHid2->setGeometry(iX[3],iY[1],73,185);
+        else fraShedHid2->setGeometry(iX[3],iY[0],73,205);
+    }
 
     radShedSho3->blockSignals(true);radShedSho3->setChecked(objRow3.show);radShedSho3->blockSignals(false);
     texRow3->setVisible(objRow3.show);
-    if (objRow3.show) {objRowsNumb.valu=3;objRow3.heig=objRow0.heig;objRow3.spac=objRow3.savS;}
+    if (objRow3.show) {objRowsNumb.valu=3;if (objRow3.heig<objRow0.heig) objRow3.heig=objRow0.heig;objRow3.spac=objRow3.savS;}
     else
     {
         if (objRow3.heig!=0) {objRow3.savH=objRow3.heig;objRow3.savS=objRow3.spac;}
@@ -1174,17 +1224,29 @@ void winMain::fRowsNumbAdap()
     }
     spiShedHei3->blockSignals(true);spiShedHei3->setValue(objRow3.heig);spiShedHei3->blockSignals(false);
     spiShedSpa3->blockSignals(true);spiShedSpa3->setValue(objRow3.spac);spiShedSpa3->blockSignals(false);
+    fraShedHid3->setVisible(!objRow3.show);
+    if (!objRow3.show)
+    {
+        if (gGridCols>=3) fraShedHid3->setGeometry(iX[4],iY[1],73,185);
+        else fraShedHid3->setGeometry(iX[4],iY[0],73,205);
+    }
 
     radShedSho4->blockSignals(true);radShedSho4->setChecked(objRow4.show);radShedSho4->blockSignals(false);
     texRow4->setVisible(objRow4.show);
-    if (objRow4.show) {objRowsNumb.valu=4;objRow4.heig=objRow0.heig;}
+    if (objRow4.show) {objRowsNumb.valu=4;if (objRow4.heig<objRow0.heig) objRow4.heig=objRow0.heig;}
     else
     {
         if (objRow4.heig!=0) {objRow4.savH=objRow4.heig;}
         objRow4.heig=0;
     }
     spiShedHei4->blockSignals(true);spiShedHei4->setValue(objRow4.heig);spiShedHei4->blockSignals(false);
-
+    fraShedHid4->setVisible(!objRow4.show);
+    if (!objRow4.show)
+    {
+        if (gGridCols>=4) fraShedHid4->setGeometry(iX[5],iY[1],73,185);
+        else fraShedHid4->setGeometry(iX[5],iY[0],73,205);
+    }
+    fGridInitRows();
     fRowsAdapt();
 }
 void winMain::fRowsFont() {gShed=0;fRowsFontDial();}
@@ -1246,12 +1308,16 @@ void winMain::fRowsWidtCalc()
     for (iM=0; iM<9; iM++)
     {
         sT=fGridTextClean(griText->item(gFileMaxiRows[iM],gFileMaxiColo[iM])->text());
+        #ifdef Q_OS_MAC
+        gFileMaxiLeng[iM]=mRows.width(sT);
+        #else
         gFileMaxiLeng[iM]=mRows.width(sT)/1.25;
+        #endif
     }
     iW=gFileMaxiLeng[0];
     if (iW%2!=0) iW+=1;
     if (iW<objRowsWidt.mini) {iW=objRowsWidt.mini;}
-    if (iW>objWind.basW) {iW=objWind.basW;messSkin cM;cM.fMess(this,fraMenu,fL("msgFontWideMess"),fL("butOkOk"),"");}
+    if (iW>objWind.basW && !gWarn) {iW=objWind.basW;messSkin cM;cM.fMess(this,fraMenu,fL("msgFontWideMess"),fL("butOkOk"),"");}
     fraRows->iW=iW;
     objRow0.widt=fraRows->iW;
     objRow1.widt=fraRows->iW;
@@ -1284,6 +1350,13 @@ void winMain::fGridCrea()
     diaGrid=new diaGridSkin(winWind,fraMenu,fL("Grid"),gGridWidt,gGridHeig);
     diaGrid->fWorkLang(gLangCode,gLangText);
     connect(diaGrid,SIGNAL(sMoved()),this,SLOT(fRowsStat()));
+
+    butTestGrid=new QPushButton("x-y",diaGrid);
+    butTestGrid->setGeometry(0,0,60,30);
+    butTestGrid->setStyleSheet(gTestStyl);
+    butTestGrid->setCursor(Qt::ArrowCursor);
+    butTestGrid->hide();
+    connect(butTestGrid,SIGNAL(clicked()),this,SLOT(fTestTogg()));
 
     griText=new diaGridC(diaGrid,winWind,fraMenu);
     griText->stackUnder(diaGrid->fraSizL);
@@ -1498,7 +1571,7 @@ void winMain::fGridInitCols()
         }
     }
     diaGrid->nColo=objRowsNumb.valu;
-    diaGrid->fGridSizeInit(cwTot,griText->rowCount());
+    diaGrid->fGridSizeInit(cwTot,griText->rowCount(),gConf);
     fRowsStat();
 }
 void winMain::fGridInitRows()
@@ -1506,14 +1579,25 @@ void winMain::fGridInitRows()
     for (int iR=0; iR<griText->rowCount(); iR++)
     {
         griText->setRowHeight(iR,gGridRowsHeig);
-        for (int iC=0; iC<7; iC++) {griText->item(iR,iC)->setBackground(QBrush(QColor(gGridBack)));}
+        for (int iC=0; iC<7; iC++)
+        {
+            griText->item(iR,iC)->setBackground(QBrush(QColor(gGridBack)));
+            griText->item(iR,iC)->setForeground(QBrush(QColor(gGridColo)));
+            if (iC==3 && !objRow1.show) griText->item(iR,iC)->setForeground(QBrush(QColor(gColoGray)));
+            if (iC==4 && !objRow2.show) griText->item(iR,iC)->setForeground(QBrush(QColor(gColoGray)));
+            if (iC==5 && !objRow3.show) griText->item(iR,iC)->setForeground(QBrush(QColor(gColoGray)));
+            if (iC==6 && !objRow4.show) griText->item(iR,iC)->setForeground(QBrush(QColor(gColoGray)));
+        }
         griText->setVerticalHeaderItem(iR,new QTableWidgetItem(QString("%1").arg(iR)));
     }
 }
 void winMain::fGridShow(bool bShow)
 {
-    if (bShow) {gGridShow=true;diaGrid->fRePosi();diaGrid->show();}
+    bool bL=diaGrid->bLink;
+    diaGrid->bLink=false;
+    if (bShow) {gGridShow=true;if (gConf<=1) diaGrid->fRePosi();diaGrid->show();}
     else {gGridShow=false;diaGrid->hide();}
+    diaGrid->bLink=bL;
 }
 QString winMain::fGridTextClean(QString sText)
 {
@@ -1528,14 +1612,10 @@ void winMain::fGridRows(int pR)
 
     for (int iC=0; iC<7; iC++) {griText->item(gGridNext,iC)->setBackground(QBrush(QColor(gGridBack)));}
 
-    if (objRowsNumb.valu>1)
+    if (gGridCols>1)
     {
         st2=griText->item(pR,4)->text();
-        if (gSecoText && st2.isEmpty())
-        {
-            st2=st1;
-            st1="";
-        }
+        if (gSecoText && st2.isEmpty()) {st2=st1;st1="";}
         if (gSecoItal)
         {
             if (st2.indexOf("<i>")==-1) {st2="<i>"+st2+"</i>";}
@@ -1543,9 +1623,9 @@ void winMain::fGridRows(int pR)
         }
     }
     objRow1.text=st1;
-    if (objRowsNumb.valu>1) objRow2.text=st2;
-    if (objRowsNumb.valu>2) objRow3.text=griText->item(pR,5)->text();
-    if (objRowsNumb.valu>3) objRow4.text=griText->item(pR,6)->text();
+    if (gGridCols>1) objRow2.text=st2;
+    if (gGridCols>2) objRow3.text=griText->item(pR,5)->text();
+    if (gGridCols>3) objRow4.text=griText->item(pR,6)->text();
     fRowsTextForm();
 }
 void winMain::fGridChan(int iR,int iC,int,int) {griText->setCurrentCell(iR,iC);fGridRows(iR);}
@@ -1876,11 +1956,14 @@ void winMain::fSettCrea()
 
     labWindBack=new QLabel(fL("labWindBack"),tabRows);
     labWindBack->setMinimumWidth(70);
-    labWindBack->move(600,10);
-    grpSkin *grpWindBack=new grpSkin(tabRows,75,40,600,30);
+    labWindBack->move(595,10);
+    grpSkin *grpWindBack=new grpSkin(tabRows,80,70,595,30);
     butWindBack=new QPushButton(QPixmap(":/Imag/QSTit_colo.png")," "+fL("butWindBack"),grpWindBack);
     butWindBack->move(3,3);
     connect(butWindBack,SIGNAL(clicked()),this,SLOT(fWindBackDial()));
+    butTestCard=new QPushButton(QPixmap(":/Imag/QSTit_test.png")," "+fL("butTestCard"),grpWindBack);
+    butTestCard->move(3,28);
+    connect(butTestCard,SIGNAL(clicked()),this,SLOT(fTestTogg()));
 
     // page 1 - texts - texts -------------------------------------------------
 
@@ -2114,12 +2197,14 @@ void winMain::fSettCreaSave()
     butSettLoaG->setStyleSheet(gSettGene?sStyl:sStyd);
     butSettLoaG->move(3,5);
     connect(butSettLoaG,SIGNAL(clicked()),this,SLOT(fSettGeneDial()));
+
     butSettLoaF=new QPushButton(QPixmap(":/Imag/QSTit_sett_load.png")," "+fL("butSettLoaF"),grpSettLoad);
     butSettLoaF->setMinimumWidth(280);
     butSettLoaF->setEnabled(gSettFile);
     butSettLoaF->setStyleSheet(gSettFile?sStyl:sStyd);
     butSettLoaF->move(3,30);
     connect(butSettLoaF,SIGNAL(clicked()),this,SLOT(fSettFileDial()));
+
     butSettLoaB=new QPushButton(QPixmap(":/Imag/QSTit_base.png")," "+fL("butSettLoaB"),grpSettLoad);
     butSettLoaB->setMinimumWidth(280);
     butSettLoaB->setStyleSheet(sStyl);
@@ -2277,6 +2362,10 @@ void winMain::fSettCreaShed()
     butShedOut1=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
                 butShedOut1->move(iX[2]+42,iY[9]);
                 connect(butShedOut1,SIGNAL(clicked()),this,SLOT(fRowsOut1()));
+    fraShedHid1=new QFrame(tabShed);
+                fraShedHid1->setStyleSheet(gHideStyl);
+                fraShedHid1->setGeometry(iX[2],iY[0],73,205);
+                fraShedHid1->hide();
 
     labShedLin2=new QLabel(tabShed);
                 labShedLin2->setStyleSheet("background-color:#333333;");
@@ -2340,6 +2429,10 @@ void winMain::fSettCreaShed()
     butShedOut2=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
                 butShedOut2->move(iX[3]+42,iY[9]);
                 connect(butShedOut2,SIGNAL(clicked()),this,SLOT(fRowsOut2()));
+    fraShedHid2=new QFrame(tabShed);
+                fraShedHid2->setStyleSheet(gHideStyl);
+                fraShedHid2->setGeometry(iX[3],iY[0],73,205);
+                fraShedHid2->hide();
 
     labShedLin3=new QLabel(tabShed);
                 labShedLin3->setStyleSheet("background-color:#333333;");
@@ -2403,6 +2496,10 @@ void winMain::fSettCreaShed()
     butShedOut3=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
                 butShedOut3->move(iX[4]+42,iY[9]);
                 connect(butShedOut3,SIGNAL(clicked()),this,SLOT(fRowsOut3()));
+    fraShedHid3=new QFrame(tabShed);
+                fraShedHid3->setStyleSheet(gHideStyl);
+                fraShedHid3->setGeometry(iX[4],iY[0],73,205);
+                fraShedHid3->hide();
 
     labShedLin4=new QLabel(tabShed);
                 labShedLin4->setStyleSheet("background-color:#333333;");
@@ -2464,6 +2561,10 @@ void winMain::fSettCreaShed()
     butShedOut4=new QPushButton(QPixmap(":/Imag/QSTit_colo.png"),"",tabShed);
                 butShedOut4->move(iX[5]+42,iY[9]);
                 connect(butShedOut4,SIGNAL(clicked()),this,SLOT(fRowsOut4()));
+    fraShedHid4=new QFrame(tabShed);
+                fraShedHid4->setStyleSheet(gHideStyl);
+                fraShedHid4->setGeometry(iX[5],iY[0],73,205);
+                fraShedHid4->hide();
 
     labShedLin0=new QLabel(tabShed);
                 labShedLin0->setStyleSheet("background-color:#333333;");
@@ -2616,18 +2717,7 @@ void winMain::fSettSaveGene() {gConf=1;fConfWrit();}
 // file functions
 //=================================================================================================
 
-void winMain::fFileConf()
-{
-    /*
-    QString sConf=gFile.mid(0,gFile.size()-4)+QString(".cfg");
-    oConf.setFileName(sConf);
-    if (!oConf.exists()) return;
-    messSkin cM;if (!cM.fMess(this,fraMenu,fL("FileConfExisMess"),fL("butYeYe"),fL("butNoNo"))) return;
-    gConf=2;
-    fConfRead();
-    */
-    fConfDial();
-}
+void winMain::fFileConf() {fConfDial();}
 void winMain::fFileDial()
 {
     if (gFileDial) {diaFile->close();gFileDial=false;return;}
@@ -2645,9 +2735,10 @@ void winMain::fFileDial()
     connect(diaFile,SIGNAL(sFileGet(QString)),SLOT(fFileDialRepo(QString)));
     connect(diaFile,SIGNAL(sClosed()),SLOT(fFileDialCanc()));
 }
-void winMain::fFileDialCanc() {gFileDial=false;gFile="";fraMenu->setFocus();}
+void winMain::fFileDialCanc() {gFileDial=false;fraMenu->setFocus();}
 void winMain::fFileDialRepo(QString sRepo)
 {
+    g1rst=false;
     gFileDial=false;
     gFile=sRepo;
     fraMenu->setFocus();
@@ -2655,9 +2746,9 @@ void winMain::fFileDialRepo(QString sRepo)
     else
     {
         fClearAll(false);
-        fFileConf();
         if (QFileInfo(gFile).suffix().toLower()==QString("srt")) gSrtx=true;
         else gSrtx=false;
+        fFileConf();
         fSettAdapt();
         if (gSrtx) fFileReadSrtx();
         else fFileRead();
@@ -2693,6 +2784,7 @@ void winMain::fFileRead()
     fGridShow(false);
     fGridZero();
     gFileErro="";
+    gWarn=false;
 
     fFileTextMaxi(-1,0,0,0,0,0);
 
@@ -2743,15 +2835,19 @@ void winMain::fFileRead()
 
     gRowsMaxi=griText->rowCount()-1;
     objRowsNumb.valu=iColo;
+    gGridCols=iColo;
     fRowsChck();
     fRowsNumb();
     fRowsFramInit();
-    fRowsFontChan();
+    if (gConf<=1) fRowsFontChan();
+
     fGridInit();
     fGridTitle();
     fGridShow(true);
     fSettEnab();
     fManuInit();
+
+    if (gWarn) {gWarn=false;messSkin cM;cM.fMess(this,fraMenu,fL("FileProbCritMess"),fL("butOkOk"),"");}
 }
 int winMain::fFileSize(QString sFile)
 {
@@ -2790,14 +2886,6 @@ QString winMain::fFileLineForm(QString sLine)
     sLine=sLine.trimmed();
     sLine.replace(QChar(9)," ");
     sLine.replace("  "," ");
-/*
-    sLine.replace(" .",".");
-    sLine.replace(" :",":");
-    sLine.replace(" ;",";");
-    sLine.replace(" ,",",");
-    sLine.replace(" !","!");
-    sLine.replace(" ?","?");
-*/
     sLine.replace("( ","(");
     sLine.replace(" )",")");
     sLine.replace("[ ","[");
@@ -2838,12 +2926,16 @@ bool winMain::fFileTextMaxi(int iGrid,int iLeng,int iChar,int iRows,int iLine,in
     }
     else
     {
+        #ifdef Q_OS_MAC
+        iLeng/=1;
+        #else
         iLeng/=1.25;
+        #endif
+
         if (iLeng>objWind.basW)
         {
             gFileErro+=QString("|%1 - Line is too wide").arg(iLine);
-            messSkin cM;
-            if (!cM.fMess(this,fraMenu,fL("FileProbWideMess").arg(iLine),fL("butYeYe"),fL("butNoNo"))) return true;
+            gWarn=true;
         }
         if (iGrid>gFileMaxiColu[iC-3])
         {
@@ -3049,6 +3141,7 @@ void winMain::fFileReadSrtx()
     fGridZero();
     gFileErro="";
     gSrtxStop="";
+    gWarn=false;
 
     fFileTextMaxi(-1,0,0,0,0,0);
 
@@ -3192,6 +3285,7 @@ void winMain::fFileReadSrtx()
 
     gRowsMaxi=griText->rowCount()-1;
     objRowsNumb.valu=iColo;
+    gGridCols=iColo;
     fRowsChck();
     fRowsNumb();
     fRowsFramInit();
@@ -3202,7 +3296,7 @@ void winMain::fFileReadSrtx()
     fSettEnab();
     fAutoInit();
 
-    if (!bOk) {messSkin cM;cM.fMess(this,fraMenu,fL("FileProbCritMess"),fL("butOkOk"),"");}
+    if (!bOk || gWarn) {gWarn=false;messSkin cM;cM.fMess(this,fraMenu,fL("FileProbCritMess"),fL("butOkOk"),"");}
 }
 
 int winMain::fFileSrtxVeriNumb(int iRows,QString sText,int iLine)
@@ -3228,6 +3322,7 @@ int winMain::fFileSrtxVeriNumb(int iRows,QString sText,int iLine)
     {
         gFileErro+=QString("|%1 (file line %2) - Title number · read: %3, expected: %1").arg(iLine).arg(iRows).arg(iTemp);
         iLine=iTemp;
+        gWarn=true;
     }
     return iLine;
 }
@@ -3253,41 +3348,49 @@ bool winMain::fFileSrtxVeriHour(int iRows,QString sText,int iLine)
     if (!sText.at(0).isDigit() || !sText.at(1).isDigit() || !sText.at(17).isDigit() || !sText.at(18).isDigit())
     {
         gFileErro+=QString("|%1 (file line %2) - Timecode · wrong hours format").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     if (sText.at(2) != ':' || sText.at(19) != ':')
     {
         gFileErro+=QString("|%1 (file line %2) - Timecode · wrong separator, expected ':'").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     if (!sText.at(3).isDigit() || !sText.at(4).isDigit() || !sText.at(20).isDigit() || !sText.at(21).isDigit())
     {
         gFileErro+=QString("|%1 (file line %2) - Timecode · wrong minutes format").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     if (sText.at(5) != ':' || sText.at(22) != ':')
     {
         gFileErro+=QString("|%1 (file line %2) - Timecode · wrong separator, expected ':'").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     if (!sText.at(6).isDigit() || !sText.at(7).isDigit() || !sText.at(23).isDigit() || !sText.at(24).isDigit())
     {
         gFileErro+=QString("|%1 (file line %2) - Timecode · wrong seconds format").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     if (sText.at(8) != ',' || sText.at(25) != ',')
     {
         gFileErro+=QString("|%1 - Timecode · wrong separator, expected ','").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     if (!sText.at(9).isDigit() || !sText.at(10).isDigit() || !sText.at(11).isDigit() || !sText.at(26).isDigit() || !sText.at(27).isDigit() || !sText.at(28).isDigit())
     {
         gFileErro+=QString("|%1 (file line %2) - Timecode · wrong milliseconds format").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     if (sText.mid(12,5)!=" --> ")
     {
         gFileErro+=QString("|%1 (file line %2) - Timecode · wrong 'time in' - 'time out' separator, expected ' --> '").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     QString sStar=sText.mid(0,2)+sText.mid(3,2)+sText.mid(6,2)+sText.mid(9,3);
@@ -3297,11 +3400,13 @@ bool winMain::fFileSrtxVeriHour(int iRows,QString sText,int iLine)
     if (iStar>=iStop)
     {
         gFileErro+=QString("|%1 (file line %2) - Timecode · time in >= time out").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     if (iStar<iPrev)
     {
         gFileErro+=QString("|%1 (file line %2) - Timecode · time in < previous time out").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     iPrev=iStop;
@@ -3318,6 +3423,7 @@ bool winMain::fFileSrtxVeriText(int iRows,QString sText,int iLine)
     if (sText.length()>99)
     {
         gFileErro+=QString("|%1 (file line %2) - Text line · line length > 99 char.").arg(iLine).arg(iRows);
+        gWarn=true;
         return true;
     }
     for (int iC=0; iC<sText.length(); iC++)
@@ -3325,6 +3431,7 @@ bool winMain::fFileSrtxVeriText(int iRows,QString sText,int iLine)
         if (!sText.at(iC).isPrint())
         {
             gFileErro+=QString("|%1 (file line %2) - Text line · non-printable character (at %3)").arg(iLine).arg(iRows).arg(iC+1);
+            gWarn=true;
             return true;
         }
     }
@@ -3407,7 +3514,7 @@ void winMain::fFileInfoDial()
     griInfo->setItem(iL,1,new QTableWidgetItem(gFileEnco?"ANSI":"UTF8"));
     iL++;
     griInfo->setItem(iL,0,new QTableWidgetItem(fL("widInfoCols")));
-    griInfo->setItem(iL,1,new QTableWidgetItem(QString("%1").arg(objRowsNumb.valu)));
+    griInfo->setItem(iL,1,new QTableWidgetItem(QString("%1").arg(gGridCols)));
     iL++;
     griInfo->setItem(iL,0,new QTableWidgetItem(fL("widInfoRows")));
     griInfo->setItem(iL,1,new QTableWidgetItem(QString("%1").arg(gRowsMaxi-1)));
@@ -3532,6 +3639,7 @@ void winMain::fHelpDial()
     texHelp->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     texHelp->setHtml(fHelpFileRead());
 
+    diaHelp->fraSizB->raise();
     diaHelp->show();
     diaHelp->setFocus();
 }
@@ -3635,6 +3743,7 @@ void winMain::fLAll()
     butShedVeB0->setText(fL("butVertBott"));
     butShedVeC0->setText(fL("butVertCent"));
     butShedVeT0->setText(fL("butVertTopy"));
+    butTestCard->setText(fL("butTestCard"));
     butTextColo->setText(fL("butTextColo"));
     butTextBack->setText(fL("butTextBack"));
     butVertBott->setText(fL("butVertBott"));
@@ -3747,6 +3856,7 @@ void winMain::fClearGrid()
     labTime->setText("00:00:00");
     labJump->setText("");
     if (gGridShow) griText->setCurrentCell(0,1);
+    if (gTest) fTestTogg();
 }
 void winMain::keyPressEvent(QKeyEvent *qe)
 {
@@ -3794,7 +3904,7 @@ void winMain::keyPressEvent(QKeyEvent *qe)
             case Qt::Key_C:         {fClearGrid();break;}
             case Qt::Key_I:         {fFileInfoDial();break;}
             case Qt::Key_E:         {fGridEditButt();break;}
-            case Qt::Key_T:         {fTestShow();break;}
+            case Qt::Key_T:         {fTestTogg();break;}
             case Qt::Key_Z:         {fGridUndo();break;}
             case Qt::Key_Up:        {fRowsLocU();break;}
             case Qt::Key_Down:      {fRowsLocD();break;}
@@ -3844,10 +3954,68 @@ void winMain::keyPressEvent(QKeyEvent *qe)
         }
     }
 }
+void winMain::fTestCard(bool bCrea)
+{
+    static int iH,iV;
+    int i,iS,jS,iM;
+
+    if (bCrea)
+    {
+        if (objWind.heig%10==0) iS=20;
+        else if (objWind.heig%8==0) iS=16;
+        iM=iH=1+objWind.heig/iS;
+        for (i=0;i<iM;i++)
+        {
+            jS=i*iS;if (i==iM-1) jS--;
+            labTestHori[i]=new QLabel(winWind);
+            labTestHori[i]->setGeometry(0,jS,objWind.widt,1);
+            if (i!=iM/2) labTestHori[i]->setStyleSheet("background-color:#444444;");
+            else labTestHori[i]->setStyleSheet("background-color:#888888;");
+            labTestHori[i]->hide();
+        }
+        if (objWind.widt%10==0) iS=20;
+        else if (objWind.widt%8==0) iS=16;
+        iM=iV=1+objWind.widt/iS;
+        for (i=0;i<iM;i++)
+        {
+            jS=i*iS;if (i==iM-1) jS--;
+            labTestVert[i]=new QLabel(winWind);
+            labTestVert[i]->setGeometry(jS,0,1,objWind.heig);
+            if (i!=iM/2) labTestVert[i]->setStyleSheet("background-color:#444444;");
+            else labTestVert[i]->setStyleSheet("background-color:#888888;");
+            labTestVert[i]->hide();
+        }
+    }
+    else
+    {
+        for (i=0;i<iH;i++) {labTestHori[i]->setVisible(gTest);}
+        for (i=0;i<iV;i++) {labTestVert[i]->setVisible(gTest);}
+    }
+}
+void winMain::fTestTogg()
+{
+    gTest=!gTest;
+    butTestGrid->setVisible(gTest);
+    butTestMenu->setVisible(gTest);
+    fraTestRows->setVisible(gTest);
+    butTestRows->setVisible(gTest);
+    fTestShow();
+}
 void winMain::fTestShow()
 {
-        QString sM=QString("Menu location: %1,%2").arg(fraMenu->iX).arg(fraMenu->iY);
-        QMessageBox::information(this,"Test",sM);
+    fTestCard(false);
+    if (gTest)
+    {
+        butTestGrid->setText(QString("x:%1 y:%2\nw:%3 h:%4").arg(diaGrid->iX).arg(diaGrid->iY).arg(diaGrid->iW).arg(diaGrid->iH));
+        butTestGrid->raise();
+
+        butTestMenu->setText(QString("x:%1 y:%2\nw:%3 h:%4").arg(fraMenu->iX).arg(fraMenu->iY).arg(fraMenu->iW).arg(fraMenu->iH));
+        butTestMenu->raise();
+
+        fraTestRows->setGeometry(fraRows->iX-1,fraRows->iY-1,fraRows->iW+2,fraRows->iH+2);
+        butTestRows->setText(QString("x:%1 y:%2\nw:%3 h:%4").arg(fraRows->iX).arg(fraRows->iY).arg(fraRows->iW).arg(fraRows->iH));
+        butTestRows->raise();
+    }
 }
 
 //=================================================================================================
@@ -3875,6 +4043,7 @@ void winMain::fConfConf(QString pVari,QString pValu)
     if (pVari=="MenuLink")
     {
         diaGrid->bLink=bV;
+        if (!g1rst) fraMenu->bLink=bV;
         if (bV) butGridLink->setIcon(QPixmap(":/Imag/QSTit_link_none.png"));
         else butGridLink->setIcon(QPixmap(":/Imag/QSTit_link_done.png"));
         return;
@@ -3886,8 +4055,12 @@ void winMain::fConfConf(QString pVari,QString pValu)
     if (pVari=="GridFontFami")  {if (sV=="?") sV=gSystFontFami;gGridFont.setFamily(sV);return;}
     if (pVari=="GridFontSize")  {gGridFont.setPointSize(iV);return;}
     if (pVari=="Menu-H")        {fraMenu->iH=iV;return;}
-    if (pVari=="Menu-W")        {fraMenu->iW=iV;return;}
-    if (pVari=="Menu-X")        {if (iV<0) iV=(objWind.widt-fraMenu->iW)/2;fraMenu->iX=iV;return;}
+    if (pVari=="Menu-W")        {if (!gWork && gConf<=1) fMenuAdapt(0);
+                                 else if (gWork && gConf==1 && !gSrtx) fMenuAdapt(1);
+                                 else if (gWork && gConf==1 && gSrtx) fMenuAdapt(2);
+                                 else fraMenu->iW=iV;return;}
+    if (pVari=="Menu-X")        {if (iV<0 || gConf<=1) iV=(objWind.widt-fraMenu->iW)/2;
+                                 fraMenu->iX=iV;return;}
     if (pVari=="Menu-Y")        {if (iV<0) iV=objWind.heig-fraMenu->iH;fraMenu->iY=iV;return;}
     if (pVari=="RowsNumb")      {if (iV<objRowsNumb.mini || iV>objRowsNumb.maxi) iV=objRowsNumb.val0;objRowsNumb.valu=iV;return;}
     if (pVari=="RowsSpac")      {if (iV<objRowsSpac.mini || iV>objRowsSpac.maxi) iV=objRowsSpac.val0;objRowsSpac.valu=iV;return;}
@@ -4075,73 +4248,10 @@ void winMain::fConfWrit()
     sText+=fConfWritLine(QString("Row0Widt=%1").arg(objRow0.widt),                              "     width");
     sText+=fConfWritLine(QString("Row0-X=%1").arg(objRow0.x),                                   "     left (always 0)");
     sText+=fConfWritLine(QString("Row0-Y=%1").arg(objRow0.y),                                   "     top");
-    sText+=fConfWritLine(QString("Row1BackColo=%1").arg(objRow1.colB.name()),                   "line 1 background color");
-    sText+=fConfWritLine(QString("Row1FontItal=%1").arg(objRow1.font.italic()?"true":"false"),  "     font italic");
-    sText+=fConfWritLine(QString("Row1FontName=%1").arg(objRow1.font.family()),                 "     font");
-    sText+=fConfWritLine(QString("Row1FontSize=%1").arg(objRow1.font.pointSize()),              "     font size");
-    sText+=fConfWritLine(QString("Row1FontWeig=%1").arg(objRow1.font.weight()),                 "     font weight");
-    sText+=fConfWritLine(QString("Row1Heig=%1").arg(objRow1.heig),                              "     height");
-    sText+=fConfWritLine(QString("Row1Hori=%1").arg(objRow1.hori),                              "     alignment hori. (left=-1,center=0,right=1)");
-    sText+=fConfWritLine(QString("Row1Outl=%1").arg(objRow1.outl),                              "     outline thickness");
-    sText+=fConfWritLine(QString("Row1OutlColo=%1").arg(objRow1.colO.name()),                   "     outline color");
-    sText+=fConfWritLine(QString("Row1Rota=%1").arg(objRow1.rota),                              "     rotation");
-    sText+=fConfWritLine(QString("Row1Show=%1").arg(objRow1.show?"true":"false"),               "     shown");
-    sText+=fConfWritLine(QString("Row1Spac=%1").arg(objRow1.spac),                              "     spacing");
-    sText+=fConfWritLine(QString("Row1TextColo=%1").arg(objRow1.colF.name()),                   "     text colour");
-    sText+=fConfWritLine(QString("Row1Vert=%1").arg(objRow1.vert),                              "     alignment vert. (top=1,center=0,bottom=-1)");
-    sText+=fConfWritLine(QString("Row1Widt=%1").arg(objRow1.widt),                              "     width");
-    sText+=fConfWritLine(QString("Row1-X=%1").arg(objRow1.x),                                   "     left (always 0)");
-    sText+=fConfWritLine(QString("Row1-Y=%1").arg(objRow1.y),                                   "     top");
-    sText+=fConfWritLine(QString("Row2BackColo=%1").arg(objRow2.colB.name()),                   "line 2 background color");
-    sText+=fConfWritLine(QString("Row2FontItal=%1").arg(objRow2.font.italic()?"true":"false"),  "     font italic");
-    sText+=fConfWritLine(QString("Row2FontName=%1").arg(objRow2.font.family()),                 "     font");
-    sText+=fConfWritLine(QString("Row2FontSize=%1").arg(objRow2.font.pointSize()),              "     font size");
-    sText+=fConfWritLine(QString("Row2FontWeig=%1").arg(objRow2.font.weight()),                 "     font weight");
-    sText+=fConfWritLine(QString("Row2Heig=%1").arg(objRow2.heig),                              "     height");
-    sText+=fConfWritLine(QString("Row2Hori=%1").arg(objRow2.hori),                              "     alignment hori. (left=-1,center=0,right=1)");
-    sText+=fConfWritLine(QString("Row2Outl=%1").arg(objRow2.outl),                              "     outline thickness");
-    sText+=fConfWritLine(QString("Row2OutlColo=%1").arg(objRow2.colO.name()),                   "     outline color");
-    sText+=fConfWritLine(QString("Row2Rota=%1").arg(objRow2.rota),                              "     rotation");
-    sText+=fConfWritLine(QString("Row2Show=%1").arg(objRow2.show?"true":"false"),               "     shown");
-    sText+=fConfWritLine(QString("Row2Spac=%1").arg(objRow2.spac),                              "     spacing");
-    sText+=fConfWritLine(QString("Row2TextColo=%1").arg(objRow2.colF.name()),                   "     text colour");
-    sText+=fConfWritLine(QString("Row2Vert=%1").arg(objRow2.vert),                              "     alignment vert. (top=1,center=0,bottom=-1)");
-    sText+=fConfWritLine(QString("Row2Widt=%1").arg(objRow2.widt),                              "     width");
-    sText+=fConfWritLine(QString("Row2-X=%1").arg(objRow2.x),                                   "     left (always 0)");
-    sText+=fConfWritLine(QString("Row2-Y=%1").arg(objRow2.y),                                   "     top");
-    sText+=fConfWritLine(QString("Row3BackColo=%1").arg(objRow3.colB.name()),                   "line 3 background color");
-    sText+=fConfWritLine(QString("Row3FontItal=%1").arg(objRow3.font.italic()?"true":"false"),  "     font italic");
-    sText+=fConfWritLine(QString("Row3FontName=%1").arg(objRow3.font.family()),                 "     font");
-    sText+=fConfWritLine(QString("Row3FontSize=%1").arg(objRow3.font.pointSize()),              "     font size");
-    sText+=fConfWritLine(QString("Row3FontWeig=%1").arg(objRow3.font.weight()),                 "     font weight");
-    sText+=fConfWritLine(QString("Row3Heig=%1").arg(objRow3.heig),                              "     height");
-    sText+=fConfWritLine(QString("Row3Hori=%1").arg(objRow3.hori),                              "     alignment hori. (left=-1,center=0,right=1)");
-    sText+=fConfWritLine(QString("Row3Outl=%1").arg(objRow3.outl),                              "     outline thickness");
-    sText+=fConfWritLine(QString("Row3OutlColo=%1").arg(objRow3.colO.name()),                   "     outline color");
-    sText+=fConfWritLine(QString("Row3Rota=%1").arg(objRow3.rota),                              "     rotation");
-    sText+=fConfWritLine(QString("Row3Show=%1").arg(objRow3.show ? "true":"false"),             "     shown");
-    sText+=fConfWritLine(QString("Row3Spac=%1").arg(objRow3.spac),                              "     spacing");
-    sText+=fConfWritLine(QString("Row3TextColo=%1").arg(objRow3.colF.name()),                   "     text colour");
-    sText+=fConfWritLine(QString("Row3Vert=%1").arg(objRow3.vert),                              "     alignment vert. (top=1,center=0,bottom=-1)");
-    sText+=fConfWritLine(QString("Row3Widt=%1").arg(objRow3.widt),                              "     width");
-    sText+=fConfWritLine(QString("Row3-X=%1").arg(objRow3.x),                                   "     left (always 0)");
-    sText+=fConfWritLine(QString("Row3-Y=%1").arg(objRow3.y),                                   "     top");
-    sText+=fConfWritLine(QString("Row4BackColo=%1").arg(objRow4.colB.name()),                   "line 4 background color");
-    sText+=fConfWritLine(QString("Row4FontItal=%1").arg(objRow4.font.italic()?"true":"false"),  "     font italic");
-    sText+=fConfWritLine(QString("Row4FontName=%1").arg(objRow4.font.family()),                 "     font");
-    sText+=fConfWritLine(QString("Row4FontSize=%1").arg(objRow4.font.pointSize()),              "     font size");
-    sText+=fConfWritLine(QString("Row4FontWeig=%1").arg(objRow4.font.weight()),                 "     font weight");
-    sText+=fConfWritLine(QString("Row4Heig=%1").arg(objRow4.heig),                              "     height");
-    sText+=fConfWritLine(QString("Row4Hori=%1").arg(objRow4.hori),                              "     alignment hori. (left=-1,center=0,right=1)");
-    sText+=fConfWritLine(QString("Row4Outl=%1").arg(objRow4.outl),                              "     outline thickness");
-    sText+=fConfWritLine(QString("Row4OutlColo=%1").arg(objRow4.colO.name()),                   "     outline color");
-    sText+=fConfWritLine(QString("Row4Rota=%1").arg(objRow4.rota),                              "     rotation");
-    sText+=fConfWritLine(QString("Row4Show=%1").arg(objRow4.show?"true":"false"),               "     shown");
-    sText+=fConfWritLine(QString("Row4TextColo=%1").arg(objRow4.colF.name()),                   "     text colour");
-    sText+=fConfWritLine(QString("Row4Vert=%1").arg(objRow4.vert),                              "     alignment vert. (top=1,center=0,bottom=-1)");
-    sText+=fConfWritLine(QString("Row4Widt=%1").arg(objRow4.widt),                              "     width");
-    sText+=fConfWritLine(QString("Row4-X=%1").arg(objRow4.x),                                   "     left (always 0)");
-    sText+=fConfWritLine(QString("Row4-Y=%1").arg(objRow4.y),                                   "     top");
+    sText+=fConfWritRowx(1);
+    sText+=fConfWritRowx(2);
+    sText+=fConfWritRowx(3);
+    sText+=fConfWritRowx(4);
     sText+=fConfWritLine(QString("RowsHone=%1").arg(objRowsHeig.valu),                          "height of one line");
     sText+=fConfWritLine(QString("RowsNumb=%1").arg(objRowsNumb.valu),                          "number of lines (min=1,max=4)");
     sText+=fConfWritLine(QString("RowsSpac=%1").arg(objRowsSpac.valu),                          "space between lines");
@@ -4157,6 +4267,36 @@ void winMain::fConfWrit()
     oConf.close();
 
     messSkin cM;cM.fMess(this,fraMenu,fL("msgConfWriteDone"),fL("butOkOk"),"");
+}
+QString winMain::fConfWritRowx(int iR)
+{
+    QString    sT="";
+    QString    sR=QString("%1").arg(iR);
+    objRows*   objRowx=&objRow1;
+    if (iR==2) objRowx=&objRow2;
+    if (iR==3) objRowx=&objRow3;
+    if (iR==4) objRowx=&objRow4;
+    if (gGridCols<iR) objRowx=&objRow0;
+
+    sT+=fConfWritLine(QString("Row"+sR+"BackColo=%1").arg(objRowx->colB.name()),                    "line "+sR+" background color");
+    sT+=fConfWritLine(QString("Row"+sR+"FontItal=%1").arg(objRowx->font.italic()?"true":"false"),   "     font italic");
+    sT+=fConfWritLine(QString("Row"+sR+"FontName=%1").arg(objRowx->font.family()),                  "     font");
+    sT+=fConfWritLine(QString("Row"+sR+"FontSize=%1").arg(objRowx->font.pointSize()),               "     font size");
+    sT+=fConfWritLine(QString("Row"+sR+"FontWeig=%1").arg(objRowx->font.weight()),                  "     font weight");
+    sT+=fConfWritLine(QString("Row"+sR+"Heig=%1").arg(objRowx->heig),                               "     height");
+    sT+=fConfWritLine(QString("Row"+sR+"Hori=%1").arg(objRowx->hori),                               "     alignment hori. (left=-1,center=0,right=1)");
+    sT+=fConfWritLine(QString("Row"+sR+"Outl=%1").arg(objRowx->outl),                               "     outline thickness");
+    sT+=fConfWritLine(QString("Row"+sR+"OutlColo=%1").arg(objRowx->colO.name()),                    "     outline color");
+    sT+=fConfWritLine(QString("Row"+sR+"Rota=%1").arg(objRowx->rota),                               "     rotation");
+    sT+=fConfWritLine(QString("Row"+sR+"Show=%1").arg(objRowx->show?"true":"false"),                "     shown");
+    sT+=fConfWritLine(QString("Row"+sR+"Spac=%1").arg(objRowx->spac),                               "     spacing");
+    sT+=fConfWritLine(QString("Row"+sR+"TextColo=%1").arg(objRowx->colF.name()),                    "     text colour");
+    sT+=fConfWritLine(QString("Row"+sR+"Vert=%1").arg(objRowx->vert),                               "     alignment vert. (top=1,center=0,bottom=-1)");
+    sT+=fConfWritLine(QString("Row"+sR+"Widt=%1").arg(objRowx->widt),                               "     width");
+    sT+=fConfWritLine(QString("Row"+sR+"-X=%1").arg(objRowx->x),                                    "     left (always 0)");
+    sT+=fConfWritLine(QString("Row"+sR+"-Y=%1").arg(objRowx->y),                                    "     top");
+
+    return sT;
 }
 QString winMain::fConfWritLine(QString sText,QString sComm)
 {

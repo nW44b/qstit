@@ -58,6 +58,7 @@ butSettSavF         Save current settings as settings for this file
 butSettSavG         Save current settings as general settings
 butSettSavN         Cancel
 butSettSavY         Confirm
+butTestCard         Test card
 butTextBack         Colour
 butTextColo         Colour
 butVertBott         Bottom
@@ -95,7 +96,7 @@ FileProbOpenMess    Are you sure you want|to close the current file?
 FileProbOpenTitl    Open title file...
 FileProbSettMess    Settings found for this file.|Do you want to use them?
 FileProbSettTitl    Settings
-FileProbWarnMess    Cannot read file:
+FileProbWarnMess    Can't read file:
 FileProbWarnTitl    Open
 FileProbWideMess    Line (%1) is too wide!|Continue anyway...
 FileProbWideTitl    File Read

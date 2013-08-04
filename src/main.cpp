@@ -30,6 +30,7 @@ int main(int argc,char *argv[])
     QApplication app(argc, argv);
     QApplication::setStyle(new QCleanlooksStyle);
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+
     winMain wMain;
     wMain.show();
     return app.exec();
