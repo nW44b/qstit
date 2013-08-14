@@ -46,7 +46,7 @@ winMain::winMain()
     gShedStat=false;
     gSrtx=false;                                        // true=srt,false=txt
     gTest=false;
-    gVers="2.9.2";
+    gVers="2.9.3";
     gWork=false;
 
     gBackDial=false;
@@ -1309,7 +1309,7 @@ void winMain::fRowsWidtCalc()
     {
         sT=fGridTextClean(griText->item(gFileMaxiRows[iM],gFileMaxiColo[iM])->text());
         #ifdef Q_OS_MAC
-        gFileMaxiLeng[iM]=mRows.width(sT);
+        gFileMaxiLeng[iM]=mRows.width(sT)*1.05;
         #else
         gFileMaxiLeng[iM]=mRows.width(sT)/1.25;
         #endif
