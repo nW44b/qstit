@@ -1,16 +1,17 @@
-Qstit 2.9.3
+Qstit 2.9.4
 +++++++++++
 There are small things that need to be corrected, changed or added but which aren't really problematic.
 However, the problems listed below may cause you some trouble using Qstit, so please make sure you are aware of them:
 
 - The timer for SRT files seems to run too slow under Windows (not Mac or Linux). It can easily but overridden by increasing the speed (1.09 seems about right).
 
+- Qstit reserves space for 4 lines of text when opening a new file, even if there are less than 4 lines, which can cause the saved position of the display to be slightly different than the one actually saved. Just make sure the vertical position is correct and use Page Up/Down to adjust it.
+
 - Qstit can crash if you try to open a file with an older version of the settings. If you have downloaded a new version of the program, delete your old settings files to make sure you won't encounter this problem.
 
 - Qstit can read file encoded in UTF-8 and ANSI (ISO-8859-1). However in some cases it may not detect the encoding correctly and you might see weird characters. If so, convert your file to proper UTF-8 using another program then open it again in Qstit.
 
-- After having displayed certain windows like 'Help', the keyboard focus isn't placed on the controls.
-You need to click on the control bar or the grid to make the keyboard shortcuts work again.
+- After having displayed certain windows like 'Help', the keyboard focus isn't placed on the controls. You need to click on the control bar or the grid to make the keyboard shortcuts work again.
 
 
 UBUNTU / MAC SPECIFIC:

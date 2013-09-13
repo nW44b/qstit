@@ -46,7 +46,7 @@ winMain::winMain()
     gShedStat=false;
     gSrtx=false;                                        // true=srt,false=txt
     gTest=false;
-    gVers="2.9.3";
+    gVers="2.9.4";
     gWork=false;
 
     gBackDial=false;
@@ -1311,7 +1311,7 @@ void winMain::fRowsWidtCalc()
         #ifdef Q_OS_MAC
         gFileMaxiLeng[iM]=mRows.width(sT)*1.05;
         #else
-        gFileMaxiLeng[iM]=mRows.width(sT)/1.25;
+        gFileMaxiLeng[iM]=mRows.width(sT)/1.1;
         #endif
     }
     iW=gFileMaxiLeng[0];
