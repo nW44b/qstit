@@ -1,3 +1,10 @@
+qstit (2.9.4-1) stable; urgency=low
+
+  * Small correction for the subtitle frame size calculation on Windows/Linux
+  * No other changes, same as 2.9.3 for Mac
+
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Tue, 10 September 2013 10:19:12 +0200
+
 qstit (2.9.3-1) stable; urgency=low
 
   * Small correction for the subtitle frame size calculation on Mac
