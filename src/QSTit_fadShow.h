@@ -26,9 +26,6 @@
 
 #include <QWidget>
 
-
-class QTimer;
-
 class FaderWidget : public QWidget
 {
     Q_OBJECT

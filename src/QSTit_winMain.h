@@ -40,6 +40,8 @@
 #include <QPushButton>
 #include <QKeyEvent>
 #include <QEvent>
+#include <QTime>
+#include <QTimer>
 
 #include "QSTit_fadShow.h"
 
@@ -691,6 +693,7 @@ class winMain : public QWidget
         QTime           timAuto;
         QTime           timStar;
         QTime           timStop;
+        QTime           timSystPuls;
         QTimer*         tmrClok;
         QTimer*         tmrAuto;
     private:

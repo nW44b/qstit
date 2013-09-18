@@ -1,11 +1,7 @@
-Qstit 2.9.4
+Qstit 2.9.5
 +++++++++++
 There are small things that need to be corrected, changed or added but which aren't really problematic.
 However, the problems listed below may cause you some trouble using Qstit, so please make sure you are aware of them:
-
-- The timer for SRT files seems to run too slow under Windows (not Mac or Linux). It can easily but overridden by increasing the speed (1.09 seems about right).
-
-- Qstit reserves space for 4 lines of text when opening a new file, even if there are less than 4 lines, which can cause the saved position of the display to be slightly different than the one actually saved. Just make sure the vertical position is correct and use Page Up/Down to adjust it.
 
 - Qstit can crash if you try to open a file with an older version of the settings. If you have downloaded a new version of the program, delete your old settings files to make sure you won't encounter this problem.
 
@@ -16,6 +12,7 @@ However, the problems listed below may cause you some trouble using Qstit, so pl
 
 UBUNTU / MAC SPECIFIC:
 ----------------------
+[This is currently being addressed and will work fine in the upcoming version 3]
 
 Running in fullscreen currently doesn't work properly on MacOSX and Ubuntu running with Unity (the default desktop environment): the system bar stays on top of the screen (the same goes for the launcher on the left if it isn't set to auto-hide).
 You'll have to find a way to hide it when projecting.

@@ -46,7 +46,7 @@ winMain::winMain()
     gShedStat=false;
     gSrtx=false;                                        // true=srt,false=txt
     gTest=false;
-    gVers="2.9.4";
+    gVers="2.9.5";
     gWork=false;
 
     gBackDial=false;
@@ -769,20 +769,26 @@ void winMain::fRowsFramCent()
 }
 void winMain::fRowsFramInit()
 {
-    fraRows->iW=gFileMaxiLeng[0];
-    fraRows->iH=objRow4.y+objRow4.heig-objRow1.x;
-    fraRows->iX=gRowsHcen-(fraRows->iW/2);
-    fraRows->iY=gRowsVcen-(fraRows->iH/2);
-    fRowsFramPosi();
+    if (gConf==0)
+    {
+        fraRows->iW=gFileMaxiLeng[0];
+        fraRows->iH=objRow4.y+objRow4.heig-objRow1.x;
+        fraRows->iX=gRowsHcen-(fraRows->iW/2);
+        fraRows->iY=gRowsVcen-(fraRows->iH/2);
+        fRowsFramPosi();
+    }
 }
 void winMain::fRowsFramPosi()
 {
-    fraRows->iX=gRowsHcen-(fraRows->iW/2);
-    if (fraRows->iX<1) {fraRows->iX=1;fRowsFramCent();}
-    if (fraRows->iX+fraRows->iW>=objWind.widt) {fraRows->iX=objWind.widt-fraRows->iW-1;fRowsFramCent();}
-    fraRows->iY=gRowsVcen-(fraRows->iH/2);
-    if (fraRows->iY<1) {fraRows->iY=1;fRowsFramCent();}
-    if (fraRows->iY+fraRows->iH>=objWind.heig) {fraRows->iY=objWind.heig-fraRows->iH-1;fRowsFramCent();}
+    if (gConf==0)
+    {
+        fraRows->iX=gRowsHcen-(fraRows->iW/2);
+        if (fraRows->iX<1) {fraRows->iX=1;fRowsFramCent();}
+        if (fraRows->iX+fraRows->iW>=objWind.widt) {fraRows->iX=objWind.widt-fraRows->iW-1;fRowsFramCent();}
+        fraRows->iY=gRowsVcen-(fraRows->iH/2);
+        if (fraRows->iY<1) {fraRows->iY=1;fRowsFramCent();}
+        if (fraRows->iY+fraRows->iH>=objWind.heig) {fraRows->iY=objWind.heig-fraRows->iH-1;fRowsFramCent();}
+    }
     fRowsFramCent();
     fRowsFram();
 }
@@ -2840,7 +2846,6 @@ void winMain::fFileRead()
     fRowsNumb();
     fRowsFramInit();
     if (gConf<=1) fRowsFontChan();
-
     fGridInit();
     fGridTitle();
     fGridShow(true);
@@ -2927,9 +2932,9 @@ bool winMain::fFileTextMaxi(int iGrid,int iLeng,int iChar,int iRows,int iLine,in
     else
     {
         #ifdef Q_OS_MAC
-        iLeng/=1;
+        iLeng*=1.05;
         #else
-        iLeng/=1.25;
+        iLeng/=1.1;
         #endif
 
         if (iLeng>objWind.basW)
@@ -3289,7 +3294,7 @@ void winMain::fFileReadSrtx()
     fRowsChck();
     fRowsNumb();
     fRowsFramInit();
-    fRowsFontChan();
+    if (gConf<=1) fRowsFontChan();
     fGridInit();
     fGridTitle();
     fGridShow(true);
@@ -4069,7 +4074,6 @@ void winMain::fConfConf(QString pVari,QString pValu)
     if (pVari=="Rows-W")        {if (iV<objRowsWidt.mini || iV>objRowsWidt.maxi) iV=objRowsWidt.val0;fraRows->iW=iV;return;}
     if (pVari=="Rows-X")        {fraRows->iX=iV;return;}
     if (pVari=="Rows-Y")        {fraRows->iY=iV;return;}
-
     if (pVari=="Row0Show")      {objRow0.show=bV;return;}
     if (pVari=="Row0Spac")      {if (iV<objRowsSpac.mini || iV>objRowsSpac.maxi) iV=objRowsSpac.val0;objRow0.spac=iV;objRow0.savS=iV;return;}
     if (pVari=="Row0Heig")      {if (iV<objRowsHeig.mini || iV>objRowsHeig.maxi) iV=objRowsHeig.val0;objRow0.heig=iV;objRow0.savH=iV;return;}
@@ -4486,6 +4490,7 @@ void winMain::fAutoStar()
     if (!gInit)
     {
         fAutoStarInit();
+        timSystPuls.start();
         tmrAuto=new QTimer(this);
         connect(tmrAuto,SIGNAL(timeout()),this,SLOT(fAutoClok()));
         tmrAuto->start(gPuls);
@@ -4522,8 +4527,8 @@ QTime winMain::fAutoTimeConv(QString sT)
 void winMain::fAutoClok()
 {
     static int iJumpShow=0;
-    int iBeat=gPuls+gAcce;
     double dJump=gJumpBase;
+    int iBeat=timSystPuls.restart()+gAcce;
 
     timAuto=timAuto.addMSecs(iBeat+gJump);
     labTime->setText(timAuto.toString("hh:mm:ss"));

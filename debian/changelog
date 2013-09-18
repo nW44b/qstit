@@ -1,3 +1,10 @@
+qstit (2.9.5-1) stable; urgency=low
+
+  * Changes in the timer for more accurate timing (particularly notable on Windows)
+  * Correction of the positioning based on saved settings for files with less than 4 lines
+
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Tue, 17 September 2013 14:28:05 +0200
+
 qstit (2.9.4-1) stable; urgency=low
 
   * Small correction for the subtitle frame size calculation on Windows/Linux
