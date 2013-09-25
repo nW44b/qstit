@@ -1,4 +1,4 @@
-Qstit 2.9.5
+Qstit 2.9.6
 +++++++++++
 There are small things that need to be corrected, changed or added but which aren't really problematic.
 However, the problems listed below may cause you some trouble using Qstit, so please make sure you are aware of them:

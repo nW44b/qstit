@@ -1,3 +1,9 @@
+qstit (2.9.6-1) stable; urgency=low
+
+  * Fixes bug in the previous version when resuming the timer.
+
+ -- Laurent Tenzer (Qstit) <subtitles@nova-cinema.org>  Tue, 24 September 2013 14:28:05 +0200
+
 qstit (2.9.5-1) stable; urgency=low
 
   * Changes in the timer for more accurate timing (particularly notable on Windows)

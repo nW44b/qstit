@@ -46,7 +46,7 @@ winMain::winMain()
     gShedStat=false;
     gSrtx=false;                                        // true=srt,false=txt
     gTest=false;
-    gVers="2.9.5";
+    gVers="2.9.6";
     gWork=false;
 
     gBackDial=false;
@@ -4498,6 +4498,7 @@ void winMain::fAutoStar()
     }
     else
     {
+        timSystPuls.start();
         tmrAuto->start();
     }
 }
